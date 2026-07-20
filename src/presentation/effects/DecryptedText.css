@@ -1,0 +1,45 @@
+.decrypted-text {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.decrypted-text__visual {
+  display: inline-flex;
+}
+
+.decrypted-text__character {
+  display: inline-grid;
+}
+
+.decrypted-text__character::before,
+.decrypted-text__glyph {
+  grid-area: 1 / 1;
+}
+
+.decrypted-text__character::before {
+  content: attr(data-original-character);
+  visibility: hidden;
+}
+
+.decrypted-text__glyph {
+  min-width: 0;
+  text-align: center;
+}
+
+.decrypted-text__character--encrypted {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+.home-hero__decrypted-name {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decrypted-text__character--encrypted {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    opacity: 1;
+  }
+}

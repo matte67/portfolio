@@ -1,0 +1,30 @@
+.gradual-blur {
+  isolation: isolate;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gradual-blur__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.gradual-blur__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .gradual-blur__layer {
+    background: color-mix(in srgb, var(--color-bg) 52%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradual-blur {
+    transition: none !important;
+  }
+}

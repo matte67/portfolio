@@ -1,0 +1,9 @@
+node_modules/
+dist/
+test-results/
+tmp/
+.DS_Store
+*.tsbuildinfo
+.env
+tina/__generated__/
+public/admin/

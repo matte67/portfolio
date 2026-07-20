@@ -1,0 +1,104 @@
+---
+locale: en
+translationKey: dormant-access-control-unit
+publicationStatus: published
+publishedAt: '2026-07-17'
+updatedAt: '2026-07-20'
+slug: dormant-access-control-unit
+index: '05'
+title: Dormant Access Control Unit
+shortTitle: Access Control
+subtitle: An interrupt-driven embedded access controller that wakes only when someone approaches.
+summary: 'A modular AVR access-control prototype combining proximity activation, Morse-code authentication, relay-based unlocking, alarms, and low-power sleep without delay-based control flow.'
+year: 2024—25
+status: Prototype
+disciplines:
+  - Embedded systems
+  - Event-driven design
+  - Power optimisation
+role: Embedded system design & development
+team: Independent project
+duration: Academic prototype
+technologies:
+  - C
+  - AVR
+  - Arduino Nano
+  - HC-SR04
+  - Wokwi
+chip: /media/access-control/showcase.avif
+hero:
+  src: /media/access-control/showcase.avif
+  alt: 'Dormant Access Control Unit architecture connecting proximity sensing, an AVR controller, Morse input, display, relay, and alarm.'
+  position: center
+metrics:
+  - value: 30 cm
+    label: Wake distance
+    context: The controller becomes active only when the ultrasonic sensor detects a nearby user.
+  - value: '6'
+    label: Interrupt sources
+    context: 'Watchdog, external interrupts, and three timers coordinate sensing, input, display, and timeouts.'
+  - value: '0'
+    label: Blocking delays
+    context: The operating flow is event-driven so sensing and user feedback remain responsive.
+links:
+  - label: Normal simulation
+    href: 'https://wokwi.com/projects/408737880547079169'
+    kind: demo
+  - label: Debug simulation
+    href: 'https://wokwi.com/projects/421052364059217921'
+    kind: demo
+  - label: Documentation
+    href: 'https://docs.google.com/document/d/1UHxso-cX7cJiFWlDNlBvoOX_gzhk8qu8950fqoEQPIY/edit?tab=t.0#heading=h.aczyuw2yex2w'
+    kind: external
+featured: true
+order: 5
+seo:
+  title: Access Control
+  description: 'An interrupt-driven AVR access controller combining proximity sensing, Morse authentication, alarms, and low-power sleep.'
+---
+
+## The problem
+
+An access controller should react immediately when needed without keeping every peripheral active continuously. It must coordinate proximity sensing, authentication, display feedback, door control, failed attempts, and alarms while remaining predictable on resource-constrained hardware.
+
+This prototype keeps the controller dormant until the Watchdog Timer requests a proximity measurement. Detection within 30 centimetres wakes the interaction flow and presents a Morse-code challenge through a single push button.
+
+## Operating flow
+
+1. The unit remains in low-power sleep mode.
+2. The Watchdog Timer periodically activates the HC-SR04 sensor.
+3. A nearby user wakes the system and the display shows `CIAO` (hello).
+4. Short and long button presses are translated into Morse dots and dashes.
+5. A valid code displays `Ent` and activates the door relay.
+6. Invalid attempts display `Er n`; repeated failures flash `8888` and activate the buzzer.
+7. Completion or timeout returns the controller to sleep.
+
+## Modular architecture
+
+The implementation separates the ultrasonic sensor, seven-segment display, Morse input handler, access-control rules, alarm management, and sleep manager. Each module owns one hardware or behavioural responsibility, reducing coupling between timing logic and domain decisions.
+
+Interrupts replace blocking waits throughout the flow:
+
+* Watchdog Timer schedules proximity checks.
+* `INT0` captures the ultrasonic echo for distance measurement.
+* `INT1` captures Morse-code button input.
+* `Timer0` generates the trigger signal.
+* `Timer1` multiplexes the four-digit display.
+* `Timer2` manages press durations and interaction timeouts.
+
+## Timing model
+
+* Button debounce: 10–50 ms.
+* Morse dot: 100–300 ms.
+* Morse dash: 300–900 ms.
+* Input timeout: approximately 6 seconds.
+* Display refresh: at least 40 Hz.
+* Alarm buzzer: approximately 750 Hz.
+
+## Trade-offs
+
+The HC-SR04 provides explicit distance thresholds but requires more active measurement than a PIR sensor. A four-digit display communicates system state more clearly than LEDs, while adding multiplexing and timer complexity. Morse input keeps the hardware minimal, but requires careful timing boundaries and more user learning than a keypad.
+
+## Outcome
+
+Two Wokwi configurations expose the normal interaction and a debug-oriented mode. The project demonstrates modular embedded design, hardware-software coordination, interrupt management, and low-power control logic. Its efficiency claim is architectural rather than a measured battery-life result; physical power profiling would be the next validation step.

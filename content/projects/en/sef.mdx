@@ -1,0 +1,178 @@
+---
+locale: "en"
+translationKey: "sef"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "sef"
+index: "01"
+title: "Signal Extraction Framework"
+shortTitle: "SEF"
+subtitle: "A modular Python framework for turning video streams into inspectable signals."
+summary: "SEF coordinates acquisition, processing, signal extraction, analysis, and visualisation through replaceable components—without coupling the core to OpenCV, YOLO, Streamlit, or any single execution strategy."
+year: "2025—26"
+status: "Research"
+disciplines:
+  - "Software architecture"
+  - "Computer vision"
+  - "Developer tooling"
+role: "Lead architecture, core, runtime & interfaces"
+team: "Alejandro Innocenzi · Matteo Vittori"
+duration: "Bachelor thesis · A.A. 2025/26"
+technologies:
+  - "Python"
+  - "OpenCV"
+  - "NumPy"
+  - "YOLO Pose"
+  - "Streamlit"
+  - "PyYAML"
+  - "PyTest"
+chip: "/media/sef/showcase.avif"
+hero:
+  src: "/media/sef/showcase.avif"
+  alt: "Six-stage SEF execution pipeline from builder to outputs, with monitoring connected to the runner."
+  position: "center"
+metrics:
+  - value: "1.01×"
+    label: "Streaming overhead"
+    context: "Relative to the direct reference loop in the presentation benchmark."
+  - value: "39.8 MiB"
+    label: "Streaming peak memory"
+    context: "Compared with 154.7 MiB for the direct reference loop."
+  - value: "3"
+    label: "Access modes"
+    context: "Python API, CLI, and SEF Studio converge on one core."
+links:
+  - label: "Thesis"
+    href: "/thesis"
+    kind: "document"
+  - label: "Presentation"
+    href: "/documents/sef-presentation.pdf"
+    kind: "document"
+  - label: "Repository"
+    href: "https://github.com/matte67/SEF"
+    kind: "code"
+  - label: "Documentation"
+    href: "https://matte67.github.io/SEF/"
+    kind: "external"
+featured: true
+order: 1
+seo:
+  title: "SEF"
+  description: "A modular Python framework for inspectable video analysis through replaceable components and a framework-independent core."
+---
+
+## The problem
+
+Video-analysis experiments often begin as focused scripts and gradually absorb acquisition, tracking, metrics, visualisation, configuration, and output logic. That works for one experiment; it becomes expensive when an algorithm changes or a result must be reproduced.
+
+SEF treats this as an architectural problem. Its goal is not to replace specialised computer-vision libraries, but to give them explicit boundaries and a shared execution model.
+
+<PipelineExplorer />
+
+## A stable core, replaceable edges
+
+The core owns contracts, typed artifacts, runtime planning, events, plugin registration, errors, and outputs. OpenCV, Matplotlib, YOLO, ArUco, Streamlit, and other concrete tools remain adapters. Dependencies point inward so presentation and infrastructure can evolve without rewriting the rules at the centre.
+
+Matteo led the framework architecture and implemented the core, runtime, CLI, user interfaces, and documentation. Alejandro focused primarily on the concrete computer-vision plugins. This division made the central contracts and their adapter implementations evolve as two explicit parts of the same system.
+
+<ProjectFigure
+  src="/media/sef/architecture.avif"
+  alt="SEF architecture diagram showing the core separated from adapters and dependencies pointing inward."
+  caption="The thesis applies an inward dependency rule: stable contracts in the core, specialised libraries at the edge."
+  wide={true}
+/>
+
+## One model, three access points
+
+API, CLI, and SEF Studio expose the same internal concepts. A pipeline can be composed in Python, described declaratively in YAML or JSON, or configured visually without duplicating orchestration logic.
+
+<AccessPoints />
+
+<ProjectFigure
+  src="/media/sef/studio.avif"
+  alt="SEF Studio interface showing video input, pipeline stage controls, runtime choices, and output settings."
+  caption="SEF Studio makes the architecture inspectable through a Streamlit interface while keeping execution in the shared core."
+  wide={true}
+/>
+
+## Runtime decisions
+
+Each stage declares capabilities. The planner can preserve a batch workflow, produce progressive streaming results, or materialise only where a stage requires the complete sequence. This keeps one public model while allowing different memory and latency profiles.
+
+### Important trade-offs
+
+- Explicit contracts introduce a small abstraction cost, but isolate algorithms and make replacement safer.
+- Streaming reduces memory pressure, while some global algorithms still require materialisation.
+- A registry improves extension and declarative configuration, but naming and versioning become part of the public design.
+- UI-agnostic outputs increase reuse, while the presentation layer must interpret richer artifact metadata.
+
+<BenchmarkPanel />
+
+## Validation across computer-vision tasks
+
+The architecture was exercised beyond one algorithm: object tracking, optical flow, motion magnification, ArUco displacement, pose estimation, gesture classification, and visual artifact generation.
+
+<UseCaseList />
+
+<ProjectFigure
+  src="/media/sef/use-cases.avif"
+  alt="Three SEF use cases: vehicle tracking, motion magnification, and pose estimation."
+  caption="Different algorithms validate the generality of the pipeline model rather than optimising for one demonstration."
+  wide={true}
+/>
+
+## Results and lessons
+
+The reference benchmark reported streaming execution at 1.01× the direct loop while reducing peak memory from 154.7 MiB to 39.8 MiB. More importantly, the same architecture supported batch, streaming, configurable components, progressive events, and multiple presentation layers.
+
+The published benchmark suite uses synthetic NumPy frames, ten measured repetitions after warm-up, and the median result on a MacBook with an Apple M2 processor and 8 GB of memory. Raw data and reproducible benchmark commands are kept with the source repository.
+
+SEF currently targets Python 3.11 or newer and has been tested on macOS and Windows. It remains experimental and pre-1.0 while its public API is hardened for a stable release. The project is seeking real adopters, particularly around ENEA’s motion-magnification use case for monitoring structures and historic monuments.
+
+The software is licensed under Apache 2.0 with the Commons Clause License Condition v1.0, which excludes selling products or services whose value derives substantially from SEF’s functionality.
+
+## Declarative pipeline example
+
+The same runtime can be configured without embedding orchestration in application code. This example extracts dense optical flow and generates a vector field and magnitude heatmap.
+
+```json
+{
+  "schema_version": "1.0",
+  "pipeline": {
+    "frame_extractor": {
+      "name": "opencv_buffered",
+      "params": {
+        "path": "/your/path/to/video.mp4",
+        "config": { "max_frames": null, "stride": 1 }
+      }
+    },
+    "frame_processors": [],
+    "signal_extractor": {
+      "name": "opencv_dense_optical_flow",
+      "params": { "cell_size": 16 }
+    },
+    "signal_cleaners": [],
+    "analyzers": [
+      {
+        "name": "dense_optical_flow_vector_field",
+        "params": { "config": { "sample_index": -1, "normalize": false } }
+      }
+    ],
+    "visualizers": [
+      {
+        "name": "optical_flow_vector_field",
+        "params": { "config": { "color_by_magnitude": true } },
+        "result_indices": [0]
+      },
+      {
+        "name": "optical_flow_heatmap",
+        "params": { "config": { "mode": "magnitude", "cmap": "viridis" } },
+        "result_indices": [0]
+      }
+    ]
+  }
+}
+```
+
+The strongest lesson is that the useful abstraction is not a new vision algorithm. It is the explicit infrastructure that lets different algorithms coexist, remain inspectable, and evolve independently.

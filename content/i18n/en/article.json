@@ -1,0 +1,11 @@
+{
+  "articles": "Articles",
+  "published": "Published",
+  "updated": "Updated",
+  "topics": "Topics",
+  "loadingContent": "Loading article…",
+  "notFoundMetaTitle": "Article not found",
+  "notFoundEyebrow": "404 · Article",
+  "notFoundTitle": "This article is not available.",
+  "returnArticles": "Return to articles"
+}

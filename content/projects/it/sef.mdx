@@ -1,0 +1,178 @@
+---
+locale: "it"
+translationKey: "sef"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "sef"
+index: "01"
+title: "Signal Extraction Framework"
+shortTitle: "SEF"
+subtitle: "Un framework Python modulare che trasforma flussi video in segnali analizzabili."
+summary: "SEF coordina acquisizione, elaborazione, estrazione dei segnali, analisi e visualizzazione attraverso componenti sostituibili, senza legare il core a OpenCV, YOLO, Streamlit o a una singola strategia di esecuzione."
+year: "2025—26"
+status: "Research"
+disciplines:
+  - "Architettura software"
+  - "Computer vision"
+  - "Strumenti per sviluppatori"
+role: "Architettura, core, runtime e interfacce"
+team: "Alejandro Innocenzi · Matteo Vittori"
+duration: "Tesi di laurea · A.A. 2025/26"
+technologies:
+  - "Python"
+  - "OpenCV"
+  - "NumPy"
+  - "YOLO Pose"
+  - "Streamlit"
+  - "PyYAML"
+  - "PyTest"
+chip: "/media/sef/showcase.avif"
+hero:
+  src: "/media/sef/showcase.avif"
+  alt: "Pipeline di esecuzione SEF in sei fasi, dal builder agli output, con il monitoraggio collegato al runner."
+  position: "center"
+metrics:
+  - value: "1,01×"
+    label: "Overhead in streaming"
+    context: "Rapporto rispetto al ciclo diretto di riferimento nel benchmark della presentazione."
+  - value: "39,8 MiB"
+    label: "Picco di memoria in streaming"
+    context: "A fronte di 154,7 MiB misurati per il ciclo diretto di riferimento."
+  - value: "3"
+    label: "Modalità di accesso"
+    context: "API Python, CLI e SEF Studio convergono sullo stesso core."
+links:
+  - label: "Tesi"
+    href: "/thesis"
+    kind: "document"
+  - label: "Presentazione"
+    href: "/documents/sef-presentation.pdf"
+    kind: "document"
+  - label: "Repository"
+    href: "https://github.com/matte67/SEF"
+    kind: "code"
+  - label: "Documentazione"
+    href: "https://matte67.github.io/SEF/"
+    kind: "external"
+featured: true
+order: 1
+seo:
+  title: "SEF"
+  description: "Un framework Python modulare per analizzare flussi video tramite componenti sostituibili e un core indipendente dalle librerie."
+---
+
+## Il problema
+
+Gli esperimenti di analisi video spesso nascono come script circoscritti e finiscono per inglobare acquisizione, tracking, metriche, visualizzazione, configurazione e logica di output. Questo approccio può bastare per un singolo esperimento, ma diventa costoso quando cambia un algoritmo o bisogna riprodurre un risultato.
+
+SEF affronta il problema dal punto di vista architetturale. Non vuole sostituire le librerie specializzate di computer vision, ma offrire loro confini espliciti e un modello di esecuzione condiviso.
+
+<PipelineExplorer />
+
+## Un core stabile, estremità sostituibili
+
+Il core definisce contratti, artefatti tipizzati, pianificazione del runtime, eventi, registrazione dei plugin, errori e output. OpenCV, Matplotlib, YOLO, ArUco, Streamlit e gli altri strumenti concreti restano adapter. Le dipendenze puntano verso l’interno, così presentation e infrastructure possono evolvere senza riscrivere le regole centrali.
+
+Matteo ha guidato l’architettura del framework e implementato core, runtime, CLI, interfacce utente e documentazione. Alejandro si è concentrato soprattutto sui plugin concreti di computer vision. Questa divisione ha permesso di far evolvere i contratti centrali e le rispettive implementazioni come due parti esplicite dello stesso sistema.
+
+<ProjectFigure
+  src="/media/sef/architecture.avif"
+  alt="Diagramma dell'architettura SEF con il core separato dagli adapter e le dipendenze rivolte verso l'interno."
+  caption="La tesi applica una regola di dipendenza verso l'interno: contratti stabili nel core, librerie specializzate ai margini."
+  wide={true}
+/>
+
+## Un modello, tre punti di accesso
+
+API, CLI e SEF Studio espongono gli stessi concetti interni. Una pipeline può essere composta in Python, descritta in modo dichiarativo con YAML o JSON oppure configurata visivamente, senza duplicare la logica di orchestrazione.
+
+<AccessPoints />
+
+<ProjectFigure
+  src="/media/sef/studio.avif"
+  alt="Interfaccia di SEF Studio con input video, controlli delle fasi della pipeline, opzioni di runtime e impostazioni degli output."
+  caption="SEF Studio rende l'architettura esplorabile tramite un'interfaccia Streamlit, mantenendo l'esecuzione nel core condiviso."
+  wide={true}
+/>
+
+## Decisioni di runtime
+
+Ogni fase dichiara le proprie capacità. Il planner può preservare un flusso batch, produrre risultati progressivi in streaming oppure materializzare i dati soltanto quando una fase richiede la sequenza completa. Il modello pubblico resta unico, pur supportando profili diversi di memoria e latenza.
+
+### Compromessi principali
+
+- I contratti espliciti introducono un piccolo costo di astrazione, ma isolano gli algoritmi e ne rendono più sicura la sostituzione.
+- Lo streaming riduce la pressione sulla memoria, mentre alcuni algoritmi globali richiedono comunque la materializzazione.
+- Un registry semplifica estensione e configurazione dichiarativa, ma nomi e versioni diventano parte dell’interfaccia pubblica.
+- Output indipendenti dalla UI aumentano il riuso, richiedendo alla presentation di interpretare metadati più ricchi.
+
+<BenchmarkPanel />
+
+## Validazione su più attività di computer vision
+
+L’architettura è stata applicata a problemi diversi: object tracking, optical flow, motion magnification, spostamento tramite ArUco, stima della posa, classificazione dei gesti e generazione di artefatti visivi.
+
+<UseCaseList />
+
+<ProjectFigure
+  src="/media/sef/use-cases.avif"
+  alt="Tre casi d'uso di SEF: tracking di veicoli, amplificazione del movimento e stima della posa."
+  caption="Algoritmi differenti verificano la generalità del modello di pipeline, invece di ottimizzarlo per una sola dimostrazione."
+  wide={true}
+/>
+
+## Risultati e lezioni apprese
+
+Nel benchmark di riferimento, l’esecuzione in streaming ha richiesto 1,01 volte il tempo del ciclo diretto, riducendo al contempo il picco di memoria da 154,7 MiB a 39,8 MiB. Il risultato più importante è però architetturale: lo stesso modello supporta batch, streaming, componenti configurabili, eventi progressivi e più livelli di presentazione.
+
+La suite pubblicata usa frame NumPy sintetici, dieci ripetizioni misurate dopo il warm-up e il valore mediano su un MacBook con processore Apple M2 e 8 GB di memoria. Dati grezzi e comandi riproducibili sono conservati nel repository.
+
+SEF richiede attualmente Python 3.11 o successivo ed è stato provato su macOS e Windows. Rimane un progetto sperimentale pre-1.0, mentre l’API pubblica viene consolidata in vista di una release stabile. Il progetto cerca primi utilizzatori reali, in particolare nell’ambito del motion magnification per il monitoraggio di strutture ed edifici storici collegato a ENEA.
+
+Il software è distribuito con licenza Apache 2.0 e Commons Clause License Condition v1.0, che esclude la vendita di prodotti o servizi il cui valore derivi in misura sostanziale dalle funzionalità di SEF.
+
+## Esempio di pipeline dichiarativa
+
+Lo stesso runtime può essere configurato senza incorporare l’orchestrazione nel codice applicativo. Questo esempio estrae l’optical flow denso e genera un campo vettoriale e una heatmap dell’intensità.
+
+```json
+{
+  "schema_version": "1.0",
+  "pipeline": {
+    "frame_extractor": {
+      "name": "opencv_buffered",
+      "params": {
+        "path": "/your/path/to/video.mp4",
+        "config": { "max_frames": null, "stride": 1 }
+      }
+    },
+    "frame_processors": [],
+    "signal_extractor": {
+      "name": "opencv_dense_optical_flow",
+      "params": { "cell_size": 16 }
+    },
+    "signal_cleaners": [],
+    "analyzers": [
+      {
+        "name": "dense_optical_flow_vector_field",
+        "params": { "config": { "sample_index": -1, "normalize": false } }
+      }
+    ],
+    "visualizers": [
+      {
+        "name": "optical_flow_vector_field",
+        "params": { "config": { "color_by_magnitude": true } },
+        "result_indices": [0]
+      },
+      {
+        "name": "optical_flow_heatmap",
+        "params": { "config": { "mode": "magnitude", "cmap": "viridis" } },
+        "result_indices": [0]
+      }
+    ]
+  }
+}
+```
+
+La lezione principale è che l’astrazione utile non consiste in un nuovo algoritmo di visione. È l’infrastruttura esplicita che permette ad algoritmi diversi di coesistere, restare analizzabili ed evolvere in modo indipendente.

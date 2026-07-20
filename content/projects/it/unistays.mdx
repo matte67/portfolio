@@ -1,0 +1,108 @@
+---
+locale: "it"
+translationKey: "unistays"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "unistays"
+index: "02"
+title: "UniStays"
+shortTitle: "UniStays"
+subtitle: "La ricerca di alloggi per studenti organizzata intorno a fiducia, compatibilità e singole stanze."
+summary: "Un prodotto web funzionante per studenti, host e moderatori, che unisce ricerca su mappa, filtri avanzati, preferiti, chat contestuale, gestione degli annunci e moderazione orientata alla fiducia."
+year: "2025—26"
+status: "Prototype"
+disciplines:
+  - "Prodotto web"
+  - "Sviluppo full-stack"
+  - "UX design"
+role: "Product design e sviluppo full-stack"
+team: "Progetto indipendente"
+duration: "Dal concept alla beta privata · 2025—26"
+technologies:
+  - "React"
+  - "JavaScript"
+  - "Firebase"
+  - "Google Maps"
+  - "Clerk"
+  - "GA4"
+chip: "/media/unistays/showcase.avif"
+hero:
+  src: "/media/unistays/showcase.avif"
+  alt: "Pagina di dettaglio di un appartamento UniStays mostrata nello schermo di un MacBook."
+  position: "center"
+metrics:
+  - value: "3"
+    label: "Attori del prodotto"
+    context: "Studenti, host o proprietari e amministratori della piattaforma."
+  - value: "Room-first"
+    label: "Modello degli annunci"
+    context: "Disponibilità e compatibilità vengono gestite a livello della singola stanza."
+  - value: "Contestuale"
+    label: "Comunicazione"
+    context: "Ogni chat resta collegata alla stanza e all’appartamento a cui si riferisce."
+links:
+  - label: "Prodotto online"
+    href: "https://uni-stays.netlify.app/"
+    kind: "demo"
+  - label: "Repository privato"
+    kind: "code"
+  - label: "Pitch"
+    href: "/documents/unistays-pitch.pdf"
+    kind: "document"
+featured: true
+order: 2
+seo:
+  title: "UniStays"
+  description: "Un prodotto per gli alloggi studenteschi basato sulla ricerca per stanza, la comunicazione contestuale, la fiducia e la compatibilità."
+---
+
+## Il problema
+
+I portali immobiliari generalisti ottimizzano soprattutto prezzo e posizione, ma negli alloggi per studenti contano anche fiducia, abitudini, aspettative sugli spazi condivisi e compatibilità. Una ricerca tecnicamente corretta può comunque portare a un’esperienza abitativa negativa.
+
+UniStays ripensa l’unità di ricerca a partire dalla stanza e dal suo contesto umano. Prima di avviare una conversazione, gli studenti possono valutare l’appartamento, le stanze disponibili, gli attuali coinquilini e la posizione.
+
+## Ruolo e contributo
+
+Il progetto è passato dall’idea a un prodotto funzionante. Matteo ha curato UI/UX, frontend e backend JavaScript, integrazioni esterne, analytics, chat in tempo reale e gestione degli annunci.
+
+<ProjectGallery
+  items={[
+    {
+      src: "/media/unistays/ipad.avif",
+      alt: "Vista dell'applicazione UniStays su iPad.",
+    },
+    {
+      src: "/media/unistays/macbook.avif",
+      alt: "Vista desktop dell'applicazione UniStays.",
+    },
+    {
+      src: "/media/unistays/iphone.avif",
+      alt: "Ricerca mobile di UniStays con campo per la località e mappa dell'Italia.",
+    },
+  ]}
+/>
+
+## Architettura del prodotto
+
+L’interfaccia separa tre responsabilità: scoperta per gli studenti, gestione dell’offerta per gli host e verifica o moderazione per gli amministratori. Firebase gestisce i dati applicativi e la comunicazione in tempo reale, Clerk l’identità, Google Maps la ricerca geografica e GA4 le analisi di utilizzo.
+
+### Decisioni principali
+
+- Trattare la stanza, non soltanto l’appartamento, come entità di primo livello.
+- Mantenere sincronizzati mappa e filtri, così che la geografia resti leggibile durante la ricerca.
+- Collegare le conversazioni al relativo annuncio invece di offrire una casella di posta priva di contesto.
+- Pubblicare informazioni sui coinquilini soltanto con il loro consenso e affiancare le segnalazioni a un flusso di moderazione.
+
+## Difficoltà e compromessi
+
+Le funzioni orientate alla fiducia aggiungono passaggi alla pubblicazione degli annunci, ma riducono l’incertezza per gli studenti. I dati sulla compatibilità possono migliorare le decisioni, pur richiedendo confini chiari per consenso e privacy. Un’interfaccia centrata sulla mappa facilita la comprensione spaziale, ma deve rimanere efficace su schermi stretti e senza autorizzazione alla posizione precisa.
+
+## Risultato
+
+Il risultato è una beta privata progettata e sviluppata in autonomia, che comprende ricerca, filtri, mappe, preferiti, chat, gestione degli annunci da parte degli host, moderazione e analytics. L’attuale deploy Netlify è una preview e non la pubblicazione definitiva. Il prodotto dimostra ampiezza funzionale, ma necessita ancora di validazione sul campo prima di formulare conclusioni sulla qualità degli abbinamenti o sulla scala del marketplace.
+
+## Lezioni apprese
+
+L’architettura di prodotto è determinata dal modello sociale tanto quanto dalla tecnologia. Modellare esplicitamente stanze, residenti, consenso e conversazioni produce confini più chiari rispetto all’adattamento tardivo di uno schema immobiliare generico.

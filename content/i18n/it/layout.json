@@ -1,0 +1,5 @@
+{
+  "navigation": { "work": "Progetti", "articles": "Articoli", "thesis": "Tesi", "about": "Profilo", "primaryLabel": "Navigazione principale", "mobileLabel": "Navigazione mobile", "menu": "Menu", "changeLanguage": "Cambia lingua", "close": "Chiudi", "homeLabel": "Matteo Vittori, home", "emailLabel": "Scrivi a Matteo", "githubLabel": "Matteo su GitHub" },
+  "footer": { "eyebrow": "Iniziamo una conversazione", "title": "Sistemi che restano chiari mentre crescono.", "explore": "Esplora", "details": "Dettagli", "linksLabel": "Link nel piè di pagina", "role": "Ruolo", "roleValue": "Studente di Informatica", "based": "Sede", "timezone": "Fuso orario", "signature": "Progettato e realizzato con cura." },
+  "accessibility": { "skipToContent": "Vai al contenuto" }
+}

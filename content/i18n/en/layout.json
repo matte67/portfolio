@@ -1,0 +1,5 @@
+{
+  "navigation": { "work": "Work", "articles": "Articles", "thesis": "Thesis", "about": "About", "primaryLabel": "Primary navigation", "mobileLabel": "Mobile navigation", "menu": "Menu", "changeLanguage": "Change language", "close": "Close", "homeLabel": "Matteo Vittori, home", "emailLabel": "Email Matteo", "githubLabel": "Matteo on GitHub" },
+  "footer": { "eyebrow": "Start a conversation", "title": "Building systems that remain clear as they grow.", "explore": "Explore", "details": "Details", "linksLabel": "Footer links", "role": "Role", "roleValue": "Computer Science student", "based": "Based", "timezone": "Timezone", "signature": "Designed and built with care." },
+  "accessibility": { "skipToContent": "Skip to content" }
+}

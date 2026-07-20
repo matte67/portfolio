@@ -1,0 +1,93 @@
+---
+locale: "en"
+translationKey: "hackathon-management-system"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "hackathon-management-system"
+index: "04"
+title: "HackHub"
+shortTitle: "HackHub"
+subtitle: "A Spring Boot backend structured around the full hackathon lifecycle."
+summary: "An academic backend for hackathons, teams, submissions, evaluations, notifications, and moderation, designed with Clean Architecture, domain events, explicit use cases, and replaceable infrastructure."
+year: "2025"
+status: "Academic"
+disciplines:
+  - "Backend engineering"
+  - "Clean Architecture"
+  - "Domain modelling"
+role: "Backend design & development"
+team: "Matteo Vittori · Alejandro Innocenzi"
+duration: "Software Engineering course project · 2025"
+technologies:
+  - "Java 21"
+  - "Spring Boot 3"
+  - "Maven"
+  - "H2"
+  - "OpenAPI"
+  - "Visual Paradigm"
+chip: "/media/hackathon/showcase.avif"
+hero:
+  src: "/media/hackathon/showcase.avif"
+  alt: "Diagram-led placeholder for the Hackathon Management System architecture."
+  position: "center"
+metrics:
+  - value: "10"
+    label: "Domain entities"
+    context: "From hackathons and teams to submissions, support, moderation, and notifications."
+  - value: "Event-driven"
+    label: "Lifecycle"
+    context: "Schedulers, domain events, and listeners coordinate time-based state changes."
+  - value: "4"
+    label: "Architecture layers"
+    context: "Core, application, infrastructure, and presentation dependencies point inward."
+links:
+  - label: "Repository"
+    href: "https://github.com/matte67/HackHub"
+    kind: "code"
+  - label: "Frontend demo"
+    href: "https://marvelous-cajeta-1a68ff.netlify.app/"
+    kind: "demo"
+featured: true
+order: 4
+seo:
+  title: "HackHub"
+  description: "A Clean Architecture Spring Boot backend for hackathons, teams, submissions, evaluation, notifications, and moderation."
+---
+
+## The problem
+
+A hackathon platform coordinates more than registrations. Teams form, submissions move through deadlines, evaluators score work, moderators handle exceptions, and scheduled events trigger notifications. Putting these concerns directly into controllers would make every lifecycle change expensive.
+
+## Architecture
+
+The system applies Clean Architecture so domain rules and use cases remain independent from Spring Boot, H2, and delivery concerns. Domain events communicate meaningful changes without forcing unrelated modules to depend directly on each other.
+
+<ArchitectureLayers />
+
+## Role and contribution
+
+Developed as a Software Engineering course project by Matteo Vittori and Alejandro Innocenzi, HackHub covers backend design and development, Clean Architecture, SOLID principles, event-driven scheduling and notifications, a test-oriented frontend, and UML modelling in Visual Paradigm.
+
+## Important decisions
+
+- Model lifecycle transitions as explicit use cases rather than controller scripts.
+- Use domain listeners for cross-cutting reactions such as notifications.
+- Keep persistence models outside the domain boundary.
+- Use a scheduler for deadline-driven changes instead of relying on user traffic.
+- Maintain visual use-case, class, and sequence models alongside implementation.
+- Use Strategy adapters for calendar and payment integrations.
+- Model support requests and user accounts with explicit State transitions.
+- Inject a centralised clock so lifecycle and scheduler behaviour remain deterministic in tests.
+
+## Delivery and API
+
+The Java 21 and Spring Boot 3 application exposes OpenAPI documentation locally through Swagger UI and uses a file-backed H2 database for its development setup. A separate testing frontend connects to the local REST API and exercises the main workflows. The source is published under the MIT License.
+
+## Challenges and trade-offs
+
+Layered boundaries add mapping and interface overhead to a course-sized application. That cost becomes worthwhile when business rules, persistence, and delivery mechanisms are expected to change independently.
+
+## Results and lessons
+
+The project demonstrates how Clean Architecture changes the location of decisions: Spring Boot becomes an adapter, use cases own orchestration, domain objects carry invariants, and external services remain replaceable strategies.

@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "title": "Articles",
+    "description": "Notes on software architecture, computer vision, product engineering, and the decisions behind technical systems."
+  },
+  "eyebrow": "Writing",
+  "title": "Ideas made useful through detail.",
+  "description": "Technical notes, design decisions, and lessons drawn from building real systems.",
+  "sectionLabel": "Published articles",
+  "emptyTitle": "The first article is being prepared.",
+  "emptyDescription": "New writing will appear here as soon as it is published.",
+  "read": "Read article"
+}

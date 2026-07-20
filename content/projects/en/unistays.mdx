@@ -1,0 +1,108 @@
+---
+locale: "en"
+translationKey: "unistays"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "unistays"
+index: "02"
+title: "UniStays"
+shortTitle: "UniStays"
+subtitle: "Student housing organised around trust, compatibility, and room-level search."
+summary: "A functional web product for students, hosts, and moderators, combining map-based discovery, advanced filters, favourites, contextual chat, listing management, and trust-aware moderation."
+year: "2025—26"
+status: "Prototype"
+disciplines:
+  - "Web product"
+  - "Full-stack development"
+  - "UX design"
+role: "Product design & full-stack development"
+team: "Independent project"
+duration: "From concept to private beta · 2025—26"
+technologies:
+  - "React"
+  - "JavaScript"
+  - "Firebase"
+  - "Google Maps"
+  - "Clerk"
+  - "GA4"
+chip: "/media/unistays/showcase.avif"
+hero:
+  src: "/media/unistays/showcase.avif"
+  alt: "UniStays apartment detail page displayed inside a MacBook mockup."
+  position: "center"
+metrics:
+  - value: "3"
+    label: "Product actors"
+    context: "Students, hosts or owners, and platform administrators."
+  - value: "Room-first"
+    label: "Listing model"
+    context: "Availability and compatibility are handled at room level."
+  - value: "Contextual"
+    label: "Communication"
+    context: "Chat is linked to the relevant room and apartment."
+links:
+  - label: "Live product"
+    href: "https://uni-stays.netlify.app/"
+    kind: "demo"
+  - label: "Private repository"
+    kind: "code"
+  - label: "Pitch"
+    href: "/documents/unistays-pitch.pdf"
+    kind: "document"
+featured: true
+order: 2
+seo:
+  title: "UniStays"
+  description: "A student-housing product built around room-level discovery, contextual communication, trust, and compatibility."
+---
+
+## The problem
+
+General property portals optimise for price and location, but student housing also depends on trust, routines, shared-space expectations, and compatibility. A technically successful search can still produce a poor living experience.
+
+UniStays reframes the unit of discovery around the room and its human context. Students can inspect an apartment, available rooms, current flatmates, and location before starting a conversation.
+
+## Role and contribution
+
+The project moved from idea to a functioning product with Matteo responsible for UI/UX, the JavaScript frontend and backend work, external integrations, analytics, real-time chat, and listing management.
+
+<ProjectGallery
+  items={[
+    {
+      src: "/media/unistays/ipad.avif",
+      alt: "Ipad view of the UniStays application.",
+    },
+    {
+      src: "/media/unistays/macbook.avif",
+      alt: "Desktop view of the UniStays application.",
+    },
+    {
+      src: "/media/unistays/iphone.avif",
+      alt: "Mobile UniStays search experience with location input and an Italy map.",
+    },
+  ]}
+/>
+
+## Product architecture
+
+The interface separates three concerns: discovery for students, inventory management for hosts, and verification or moderation for administrators. Firebase supports application data and real-time communication, Clerk handles identity, Google Maps anchors geographic search, and GA4 supports product analytics.
+
+### Important decisions
+
+- Treat the room—not only the apartment—as a first-class listing entity.
+- Keep map and result filters synchronised so geography remains visible during refinement.
+- Attach conversations to listing context rather than offering an unstructured inbox.
+- Publish flatmate information only with consent and pair reporting with moderation workflows.
+
+## Challenges and trade-offs
+
+Trust features add friction to listing publication, but reduce uncertainty for students. Compatibility data can improve decisions, while requiring careful consent and privacy boundaries. A map-led interface improves spatial understanding, but must remain usable on narrow screens and without precise location permissions.
+
+## Outcome
+
+The result is an independently designed and developed private beta spanning search, filters, maps, favourites, chat, host listing management, moderation, and analytics. The current Netlify deployment is a preview rather than the final public release. The product demonstrates breadth, but still needs real-world validation before claims about matching quality or marketplace scale can be made.
+
+## Lessons learned
+
+Product architecture is shaped by the social model as much as the technology. Treating rooms, residents, consent, and conversations as explicit concepts produces clearer boundaries than adapting a generic property schema after the fact.

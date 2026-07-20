@@ -1,0 +1,11 @@
+{
+  "articles": "Articoli",
+  "published": "Pubblicato",
+  "updated": "Aggiornato",
+  "topics": "Argomenti",
+  "loadingContent": "Caricamento dell’articolo…",
+  "notFoundMetaTitle": "Articolo non trovato",
+  "notFoundEyebrow": "404 · Articolo",
+  "notFoundTitle": "Questo articolo non è disponibile.",
+  "returnArticles": "Torna agli articoli"
+}

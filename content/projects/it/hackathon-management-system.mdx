@@ -1,0 +1,93 @@
+---
+locale: "it"
+translationKey: "hackathon-management-system"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "hackathon-management-system"
+index: "04"
+title: "HackHub"
+shortTitle: "HackHub"
+subtitle: "Un backend Spring Boot strutturato intorno all’intero ciclo di vita di un hackathon."
+summary: "Un backend accademico per hackathon, team, submission, valutazioni, notifiche e moderazione, progettato con Clean Architecture, eventi di dominio, casi d’uso espliciti e infrastruttura sostituibile."
+year: "2025"
+status: "Academic"
+disciplines:
+  - "Backend engineering"
+  - "Clean Architecture"
+  - "Modellazione del dominio"
+role: "Progettazione e sviluppo backend"
+team: "Matteo Vittori · Alejandro Innocenzi"
+duration: "Progetto del corso di Ingegneria del software · 2025"
+technologies:
+  - "Java 21"
+  - "Spring Boot 3"
+  - "Maven"
+  - "H2"
+  - "OpenAPI"
+  - "Visual Paradigm"
+chip: "/media/hackathon/showcase.avif"
+hero:
+  src: "/media/hackathon/showcase.avif"
+  alt: "Rappresentazione dell’architettura e dell’interfaccia dell’Hackathon Management System."
+  position: "center"
+metrics:
+  - value: "10"
+    label: "Entità di dominio"
+    context: "Dagli hackathon e dai team fino a submission, supporto, moderazione e notifiche."
+  - value: "Event-driven"
+    label: "Ciclo di vita"
+    context: "Scheduler, eventi di dominio e listener coordinano i cambiamenti legati al tempo."
+  - value: "4"
+    label: "Livelli architetturali"
+    context: "Core, application, infrastructure e presentation mantengono le dipendenze rivolte verso l’interno."
+links:
+  - label: "Repository"
+    href: "https://github.com/matte67/HackHub"
+    kind: "code"
+  - label: "Demo frontend"
+    href: "https://marvelous-cajeta-1a68ff.netlify.app/"
+    kind: "demo"
+featured: true
+order: 4
+seo:
+  title: "HackHub"
+  description: "Un backend Spring Boot in Clean Architecture per hackathon, team, submission, valutazioni, notifiche e moderazione."
+---
+
+## Il problema
+
+Una piattaforma per hackathon coordina molto più delle iscrizioni. Si formano team, le submission attraversano scadenze, i valutatori assegnano punteggi, i moderatori gestiscono le eccezioni e gli eventi pianificati attivano notifiche. Inserire queste responsabilità direttamente nei controller renderebbe costosa ogni modifica al ciclo di vita.
+
+## Architettura
+
+Il sistema applica la Clean Architecture affinché regole di dominio e casi d’uso restino indipendenti da Spring Boot, H2 e dai meccanismi di delivery. Gli eventi di dominio comunicano cambiamenti significativi senza costringere moduli non correlati a dipendere direttamente gli uni dagli altri.
+
+<ArchitectureLayers />
+
+## Ruolo e contributo
+
+Sviluppato come progetto del corso di Ingegneria del software da Matteo Vittori e Alejandro Innocenzi, HackHub comprende progettazione e sviluppo backend, Clean Architecture, principi SOLID, scheduling event-driven, notifiche, un frontend per i test e modellazione UML in Visual Paradigm.
+
+## Decisioni principali
+
+- Modellare le transizioni del ciclo di vita come casi d’uso espliciti invece che come script nei controller.
+- Usare listener di dominio per reazioni trasversali come le notifiche.
+- Tenere i modelli di persistenza fuori dal confine del dominio.
+- Usare uno scheduler per i cambiamenti legati alle scadenze, senza dipendere dal traffico degli utenti.
+- Mantenere i diagrammi di casi d’uso, classi e sequenza insieme all’implementazione.
+- Applicare adapter Strategy alle integrazioni di calendario e pagamento.
+- Modellare richieste di supporto e account utente attraverso transizioni di stato esplicite.
+- Iniettare un orologio centralizzato per rendere deterministici nei test il ciclo di vita e gli scheduler.
+
+## Delivery e API
+
+L’applicazione Java 21 e Spring Boot 3 espone localmente la documentazione OpenAPI tramite Swagger UI e usa un database H2 persistito su file nell’ambiente di sviluppo. Un frontend di test separato si collega all’API REST locale ed esercita i flussi principali. Il sorgente è pubblicato con licenza MIT.
+
+## Difficoltà e compromessi
+
+I confini tra livelli introducono mapping e interfacce aggiuntive per un’applicazione delle dimensioni di un progetto universitario. Questo costo diventa utile quando regole di business, persistenza e meccanismi di delivery devono poter cambiare in modo indipendente.
+
+## Risultati e lezioni apprese
+
+Il progetto mostra come la Clean Architecture sposti il luogo in cui vengono prese le decisioni: Spring Boot diventa un adapter, i casi d’uso controllano l’orchestrazione, gli oggetti di dominio proteggono le invarianti e i servizi esterni restano strategie sostituibili.

@@ -1,0 +1,8 @@
+{
+  "meta": { "title": "Studente di Informatica", "description": "Matteo Vittori realizza sistemi software modulari per computer vision e web." },
+  "heroGreeting": "Hi, I’m",
+  "exploreWork": "Esplora i progetti selezionati",
+  "email": "Scrivimi",
+  "work": { "eyebrow": "01 · Progetti selezionati", "title": "Sistemi modellati da complessità differenti.", "description": "Casi di studio tra architettura software, computer vision, prodotti web, interazione immersiva e sistemi embedded.", "indexLink": "Vedi tutti i progetti" },
+  "about": { "eyebrow": "02 · Profilo", "title": "Uno studente interessato ai confini.", "paragraphs": ["Sono uno studente di Informatica all’Università di Camerino, concentrato sulla creazione di software che bilancia architetture solide ed esperienze utente intuitive.", "Apprezzo responsabilità ben definite, compromessi espliciti, evidenze riproducibili e interfacce che rivelano il modello sottostante invece di nasconderlo."], "link": "Scopri il mio approccio" }
+}

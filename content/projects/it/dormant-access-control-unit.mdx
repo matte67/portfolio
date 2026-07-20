@@ -1,0 +1,104 @@
+---
+locale: "it"
+translationKey: "dormant-access-control-unit"
+publicationStatus: "published"
+publishedAt: "2026-07-17"
+updatedAt: "2026-07-20"
+slug: "dormant-access-control-unit"
+index: "05"
+title: "Dormant Access Control Unit"
+shortTitle: "Controllo accessi"
+subtitle: "Un controller embedded pilotato da interrupt, che si attiva soltanto quando qualcuno si avvicina."
+summary: "Un prototipo modulare AVR per il controllo accessi, che combina attivazione di prossimità, autenticazione in codice Morse, apertura tramite relè, allarmi e sospensione a basso consumo senza flussi basati su delay."
+year: "2024—25"
+status: "Prototype"
+disciplines:
+  - "Sistemi embedded"
+  - "Progettazione event-driven"
+  - "Ottimizzazione energetica"
+role: "Progettazione e sviluppo del sistema embedded"
+team: "Progetto indipendente"
+duration: "Prototipo accademico"
+technologies:
+  - "C"
+  - "AVR"
+  - "Arduino Nano"
+  - "HC-SR04"
+  - "Wokwi"
+chip: "/media/access-control/showcase.avif"
+hero:
+  src: "/media/access-control/showcase.avif"
+  alt: "Architettura della Dormant Access Control Unit con sensore di prossimità, controller AVR, input Morse, display, relè e allarme."
+  position: "center"
+metrics:
+  - value: "30 cm"
+    label: "Distanza di attivazione"
+    context: "Il controller si attiva soltanto quando il sensore a ultrasuoni rileva un utente nelle vicinanze."
+  - value: "6"
+    label: "Sorgenti di interrupt"
+    context: "Watchdog, interrupt esterni e tre timer coordinano rilevamento, input, display e timeout."
+  - value: "0"
+    label: "Delay bloccanti"
+    context: "Il flusso operativo è event-driven, così rilevamento e feedback rimangono reattivi."
+links:
+  - label: "Simulazione normale"
+    href: "https://wokwi.com/projects/408737880547079169"
+    kind: "demo"
+  - label: "Simulazione di debug"
+    href: "https://wokwi.com/projects/421052364059217921"
+    kind: "demo"
+  - label: "Documentazione"
+    href: "https://docs.google.com/document/d/1UHxso-cX7cJiFWlDNlBvoOX_gzhk8qu8950fqoEQPIY/edit?tab=t.0#heading=h.aczyuw2yex2w"
+    kind: "external"
+featured: true
+order: 5
+seo:
+  title: "Controllo accessi"
+  description: "Un controller AVR pilotato da interrupt che combina prossimità, autenticazione Morse, allarmi e sospensione a basso consumo."
+---
+
+## Il problema
+
+Un controller per il controllo accessi deve reagire immediatamente quando serve, senza mantenere continuamente attive tutte le periferiche. Deve coordinare rilevamento di prossimità, autenticazione, feedback sul display, comando della porta, tentativi falliti e allarmi, restando prevedibile su hardware con risorse limitate.
+
+Il prototipo mantiene il controller in sospensione finché il Watchdog Timer non richiede una misurazione di prossimità. Il rilevamento entro 30 centimetri attiva l’interazione e propone una verifica in codice Morse tramite un singolo pulsante.
+
+## Flusso operativo
+
+1. L’unità rimane in modalità di sospensione a basso consumo.
+2. Il Watchdog Timer attiva periodicamente il sensore HC-SR04.
+3. La presenza di un utente risveglia il sistema e il display mostra `CIAO`.
+4. Pressioni brevi e lunghe del pulsante vengono tradotte in punti e linee Morse.
+5. Un codice valido mostra `Ent` e attiva il relè della porta.
+6. I tentativi non validi mostrano `Er n`; errori ripetuti fanno lampeggiare `8888` e attivano il buzzer.
+7. Il completamento o un timeout riportano il controller in sospensione.
+
+## Architettura modulare
+
+L’implementazione separa sensore a ultrasuoni, display a sette segmenti, gestione dell’input Morse, regole di controllo accessi, allarmi e sospensione. Ogni modulo possiede una responsabilità hardware o comportamentale, riducendo l’accoppiamento tra logica temporale e decisioni di dominio.
+
+Gli interrupt sostituiscono le attese bloccanti nell’intero flusso:
+
+- Il Watchdog Timer pianifica i controlli di prossimità.
+- `INT0` acquisisce l’eco ultrasonico per calcolare la distanza.
+- `INT1` acquisisce l’input del pulsante Morse.
+- `Timer0` genera il segnale di trigger.
+- `Timer1` effettua il multiplexing del display a quattro cifre.
+- `Timer2` gestisce la durata delle pressioni e i timeout dell’interazione.
+
+## Modello temporale
+
+- Debounce del pulsante: 10–50 ms.
+- Punto Morse: 100–300 ms.
+- Linea Morse: 300–900 ms.
+- Timeout dell’input: circa 6 secondi.
+- Aggiornamento del display: almeno 40 Hz.
+- Buzzer di allarme: circa 750 Hz.
+
+## Compromessi
+
+L’HC-SR04 permette soglie di distanza esplicite, ma richiede una misurazione più attiva rispetto a un sensore PIR. Un display a quattro cifre comunica lo stato del sistema più chiaramente dei LED, aggiungendo però complessità di multiplexing e gestione dei timer. L’input Morse riduce l’hardware necessario, ma richiede soglie temporali accurate ed è meno immediato da imparare rispetto a un tastierino.
+
+## Risultato
+
+Due configurazioni Wokwi espongono l’interazione normale e una modalità orientata al debug. Il progetto dimostra progettazione embedded modulare, coordinamento tra hardware e software, gestione degli interrupt e controllo a basso consumo. L’efficienza energetica descritta è un obiettivo architetturale, non una misura della durata della batteria; il prossimo passo di validazione sarebbe il profiling fisico dei consumi.

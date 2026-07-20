@@ -1,0 +1,8 @@
+{
+  "meta": { "title": "Computer Science student", "description": "Matteo Vittori builds modular software systems across computer vision and the web." },
+  "heroGreeting": "Hi, I’m",
+  "exploreWork": "Explore selected work",
+  "email": "Email me",
+  "work": { "eyebrow": "01 · Selected work", "title": "Systems shaped by different kinds of complexity.", "description": "Case studies spanning software architecture, computer vision, web products, immersive interaction, and embedded systems.", "indexLink": "View the complete work index" },
+  "about": { "eyebrow": "02 · About", "title": "An engineer interested in boundaries.", "paragraphs": ["I’m a Computer Science student at the University of Camerino, focused on building software that balances solid architecture with intuitive user experiences.", "I value small responsibilities, honest trade-offs, reproducible evidence, and interfaces that reveal the underlying model instead of hiding it."], "link": "More about my approach" }
+}
