@@ -92,27 +92,6 @@ Published MDX bodies are lazy-loaded per route. Homepage and indexes receive onl
 
 `npm audit --omit=dev` currently reports no production dependency vulnerabilities. The full audit still reports transitive advisories below `@tinacms/cli`; they affect CMS/build tooling rather than the visitor bundle, and no compatible upstream upgrade is currently available. Keep the Tina development server private, avoid automatic forced fixes, and update `tinacms` and `@tinacms/cli` together when Tina publishes a compatible release.
 
-## TinaCloud and GitHub setup
-
-The local repository has been initialized, but cloud publishing requires a GitHub remote and an initial pushed commit.
-
-1. Create or select the GitHub repository.
-2. Add it as the Git remote and push the production branch.
-3. Create a TinaCloud project and authorize that repository.
-4. Register the local and production site URLs in TinaCloud.
-5. Copy `.env.example` to `.env` and fill in:
-
-```dotenv
-TINA_PUBLIC_CLIENT_ID=...
-TINA_TOKEN=...
-TINA_PUBLIC_BRANCH=main
-VITE_CONTENT_PREVIEW=false
-```
-
-`TINA_TOKEN` is build-only and secret. It must never use a public Vite prefix or be committed. `TINA_PUBLIC_CLIENT_ID` is intentionally embedded in the static admin application.
-
-The generated `tina/tina-lock.json` must be committed because TinaCloud uses it to index the schema. `tina/__generated__/` is reproducible and ignored.
-
 ## Netlify setup
 
 Configure the following environment variables in Netlify:
