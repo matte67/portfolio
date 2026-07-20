@@ -19,8 +19,9 @@ async function readJson(path) {
   return JSON.parse(await readFile(join(projectRoot, path), "utf8"));
 }
 
-const [catalog, workCopy, articlesCopy, thesisCopy, aboutCopy] = await Promise.all([
+const [catalog, homeCopy, workCopy, articlesCopy, thesisCopy, aboutCopy] = await Promise.all([
   readContentCatalog(projectRoot),
+  readJson("content/i18n/en/home.json"),
   readJson("content/i18n/en/work.json"),
   readJson("content/i18n/en/articles.json"),
   readJson("content/i18n/en/thesis.json"),
@@ -47,9 +48,17 @@ function selectRouteContent(entries) {
 const publicProjects = selectRouteContent(catalog.projects);
 const publicArticles = selectRouteContent(catalog.articles);
 
+const homeRoute = {
+  path: "/",
+  ...homeCopy.meta,
+  kind: "home",
+  priority: "1.0",
+  projects: publicProjects,
+};
+
 const routes = [
-  { path: "/work", ...workCopy.meta, priority: "0.9" },
-  { path: "/articles", ...articlesCopy.meta, priority: "0.8" },
+  { path: "/work", ...workCopy.meta, kind: "collection", items: publicProjects, priority: "0.9" },
+  { path: "/articles", ...articlesCopy.meta, kind: "collection", items: publicArticles, priority: "0.8" },
   ...publicProjects.map((project) => ({
     path: `/work/${project.slug}`,
     title: project.seo.title,
@@ -57,6 +66,8 @@ const routes = [
     image: project.seo.image ?? project.hero?.src,
     imageAlt: project.seo.imageAlt ?? project.hero?.alt,
     locale: project.locale,
+    kind: "project",
+    content: project,
     type: "article",
     structuredDataType: "CreativeWork",
     priority: "0.8",
@@ -69,6 +80,8 @@ const routes = [
     image: article.seo.image ?? article.hero?.src,
     imageAlt: article.seo.imageAlt ?? article.hero?.alt,
     locale: article.locale,
+    kind: "article",
+    content: article,
     type: "article",
     structuredDataType: "Article",
     publishedAt: article.publishedAt,
@@ -84,10 +97,16 @@ const routes = [
     image: "/media/thesis/cover.png",
     imageAlt: thesisCopy.hero.coverAlt,
     type: "article",
+    kind: "page",
     priority: "0.8",
   },
-  { path: "/about", ...aboutCopy.meta, priority: "0.7" },
+  { path: "/about", ...aboutCopy.meta, kind: "page", priority: "0.7" },
 ].map((route) => ({ ...route, title: `${route.title} — ${author}` }));
+
+const allRoutes = [
+  { ...homeRoute, title: `${homeRoute.title} — ${author}` },
+  ...routes,
+];
 
 function escapeAttribute(value) {
   return String(value)
@@ -99,6 +118,72 @@ function escapeAttribute(value) {
 
 function escapeXml(value) {
   return escapeAttribute(value).replaceAll("'", "&apos;");
+}
+
+function normalizePagePath(path) {
+  return path === "/" ? path : `${path.replace(/\/+$/, "")}/`;
+}
+
+function createStaticNavigation() {
+  return `<nav aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/work/">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/thesis/">Thesis</a>
+      <a href="/about/">About</a>
+    </nav>`;
+}
+
+function createCollectionLinks(items, basePath) {
+  if (!items?.length) return "<p>No published entries yet.</p>";
+  return `<ul>${items.map((item) => `
+        <li>
+          <a href="${normalizePagePath(`${basePath}/${item.slug}`)}">${escapeAttribute(item.title)}</a>
+          <p>${escapeAttribute(item.summary)}</p>
+        </li>`).join("")}
+      </ul>`;
+}
+
+/** Provides meaningful first-response HTML while React remains the interactive UI. */
+function createStaticRouteContent(route) {
+  let content = `<h1>${escapeAttribute(route.title.replace(` — ${author}`, ""))}</h1>
+      <p>${escapeAttribute(route.description)}</p>`;
+
+  if (route.kind === "home") {
+    content += `<section aria-labelledby="selected-work-title">
+        <h2 id="selected-work-title">Selected work</h2>
+        ${createCollectionLinks(route.projects, "/work")}
+      </section>`;
+  } else if (route.kind === "collection") {
+    content += createCollectionLinks(
+      route.items,
+      route.path === "/work" ? "/work" : "/articles",
+    );
+  } else if (route.kind === "project") {
+    const project = route.content;
+    content = `<h1>${escapeAttribute(project.title)}</h1>
+      <p>${escapeAttribute(project.subtitle)}</p>
+      <p>${escapeAttribute(project.summary)}</p>
+      <dl>
+        <dt>Year</dt><dd>${escapeAttribute(project.year)}</dd>
+        <dt>Role</dt><dd>${escapeAttribute(project.role)}</dd>
+        <dt>Disciplines</dt><dd>${escapeAttribute(project.disciplines.join(", "))}</dd>
+        <dt>Technologies</dt><dd>${escapeAttribute(project.technologies.join(", "))}</dd>
+      </dl>`;
+  } else if (route.kind === "article") {
+    const article = route.content;
+    content = `<article>
+        <h1>${escapeAttribute(article.title)}</h1>
+        <p>${escapeAttribute(article.summary)}</p>
+        <p>Published <time datetime="${escapeAttribute(article.publishedAt)}">${escapeAttribute(article.publishedAt)}</time></p>
+        ${article.categories?.length ? `<p>Topics: ${escapeAttribute(article.categories.join(", "))}</p>` : ""}
+      </article>`;
+  }
+
+  return `<main data-prerendered-route="${escapeAttribute(route.path)}">
+    ${createStaticNavigation()}
+    ${content}
+  </main>`;
 }
 
 function replaceMeta(html, attribute, key, content) {
@@ -150,7 +235,7 @@ function serializeStructuredData(route, canonicalUrl, imageUrl) {
 }
 
 function createRouteDocument(baseDocument, route) {
-  const canonicalUrl = new URL(route.path, `${productionOrigin}/`).toString();
+  const canonicalUrl = new URL(normalizePagePath(route.path), `${productionOrigin}/`).toString();
   const imageUrl = new URL(route.image ?? defaultImage, `${productionOrigin}/`).toString();
   const imageAlt = route.imageAlt ?? "Matteo Vittori portfolio homepage";
   const locale = localeMetadata[route.locale] ?? localeMetadata.en;
@@ -160,6 +245,11 @@ function createRouteDocument(baseDocument, route) {
   ).replace(
     /<title>[^<]*<\/title>/,
     `<title>${escapeAttribute(route.title)}</title>`,
+  );
+
+  document = document.replace(
+    '<div id="root"></div>',
+    `<div id="root">${createStaticRouteContent(route)}</div>`,
   );
 
   document = document.replace(
@@ -216,12 +306,13 @@ function createNotFoundDocument(baseDocument) {
 }
 
 function createSitemap() {
-  const entries = [
-    { path: "/", priority: "1.0" },
-    ...routes.map(({ path, priority, lastModified }) => ({ path, priority, lastModified })),
-  ];
+  const entries = allRoutes.map(({ path, priority, lastModified }) => ({
+    path,
+    priority,
+    lastModified,
+  }));
   const urls = entries.map((entry) => {
-    const location = new URL(entry.path, `${productionOrigin}/`).toString();
+    const location = new URL(normalizePagePath(entry.path), `${productionOrigin}/`).toString();
     const lastModified = entry.lastModified
       ? `\n    <lastmod>${escapeXml(entry.lastModified)}</lastmod>`
       : "";
@@ -232,10 +323,10 @@ function createSitemap() {
 
 function createLlmsDocument() {
   const projectLines = publicProjects.map(
-    (project) => `- [${project.shortTitle}](${productionOrigin}/work/${project.slug}): ${project.summary}`,
+    (project) => `- [${project.shortTitle}](${productionOrigin}/work/${project.slug}/): ${project.summary}`,
   );
   const articleLines = publicArticles.map(
-    (article) => `- [${article.title}](${productionOrigin}/articles/${article.slug}): ${article.summary}`,
+    (article) => `- [${article.title}](${productionOrigin}/articles/${article.slug}/): ${article.summary}`,
   );
   return `# Matteo Vittori Portfolio
 
@@ -244,10 +335,10 @@ Portfolio of Matteo Vittori, a Computer Science student focused on modular softw
 ## Main pages
 
 - [Home](${productionOrigin}/): overview and selected work.
-- [Work](${productionOrigin}/work): project case studies.
-- [Articles](${productionOrigin}/articles): technical notes and design decisions.
-- [Thesis](${productionOrigin}/thesis): bachelor thesis on the Signal Extraction Framework.
-- [About](${productionOrigin}/about): background, principles, and education.
+- [Work](${productionOrigin}/work/): project case studies.
+- [Articles](${productionOrigin}/articles/): technical notes and design decisions.
+- [Thesis](${productionOrigin}/thesis/): bachelor thesis on the Signal Extraction Framework.
+- [About](${productionOrigin}/about/): background, principles, and education.
 
 ## Selected projects
 
@@ -262,7 +353,11 @@ ${articleLines.join("\n") || "No public articles yet."}
 const baseDocument = await readFile(join(outputDirectory, "index.html"), "utf8");
 
 await Promise.all([
-  ...routes.map(async (route) => {
+  ...allRoutes.map(async (route) => {
+    if (route.path === "/") {
+      await writeFile(join(outputDirectory, "index.html"), createRouteDocument(baseDocument, route), "utf8");
+      return;
+    }
     const routeDirectory = join(outputDirectory, route.path.slice(1));
     await mkdir(routeDirectory, { recursive: true });
     await writeFile(join(routeDirectory, "index.html"), createRouteDocument(baseDocument, route), "utf8");
@@ -280,4 +375,4 @@ await Promise.all([
   ),
 ]);
 
-console.log(`Generated ${routes.length} public route documents from the content catalogue.`);
+console.log(`Generated ${allRoutes.length} public route documents from the content catalogue.`);

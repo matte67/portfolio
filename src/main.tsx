@@ -16,6 +16,10 @@ if (!rootElement) {
   throw new Error("Application root element was not found.");
 }
 
+// Static route content is emitted at build time for crawlers and no-JS clients.
+// React owns the root once the interactive application starts.
+rootElement.replaceChildren();
+
 createRoot(rootElement).render(
   <StrictMode>
     <ClickSpark

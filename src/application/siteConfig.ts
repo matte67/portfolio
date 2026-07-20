@@ -15,3 +15,9 @@ export const siteConfig = Object.freeze({
 export function toCanonicalUrl(path = "/"): string {
   return new URL(path, `${SITE_ORIGIN}/`).toString();
 }
+
+/** Normalizes index-backed page routes to the trailing-slash URL served by Netlify. */
+export function toCanonicalPageUrl(path = "/"): string {
+  const normalizedPath = path === "/" ? path : `${path.replace(/\/+$/, "")}/`;
+  return toCanonicalUrl(normalizedPath);
+}

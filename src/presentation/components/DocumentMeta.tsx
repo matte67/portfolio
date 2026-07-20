@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { siteConfig, toCanonicalUrl } from "../../application/siteConfig";
+import {
+  siteConfig,
+  toCanonicalPageUrl,
+  toCanonicalUrl,
+} from "../../application/siteConfig";
 import { useLanguage } from "../../application/i18n";
 
 interface DocumentMetaProps {
@@ -55,7 +59,7 @@ export function DocumentMeta({
 
   useEffect(() => {
     const pageTitle = `${title} — ${siteConfig.author}`;
-    const canonicalUrl = toCanonicalUrl(pathname);
+    const canonicalUrl = toCanonicalPageUrl(pathname);
     const socialImageUrl = toCanonicalUrl(image);
 
     document.title = pageTitle;
