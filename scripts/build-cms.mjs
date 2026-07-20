@@ -1,8 +1,17 @@
 import { spawnSync } from "node:child_process";
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { loadEnvFile } from "node:process";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
+const localEnvironmentFile = join(projectRoot, ".env");
+const TINA_HEAP_OPTION = "--max-old-space-size=4096";
+
+// Netlify injects variables into the process. Local production builds instead
+// read the ignored .env file, while existing shell variables retain priority.
+if (existsSync(localEnvironmentFile)) loadEnvFile(localEnvironmentFile);
+
 const hasCloudConfiguration = Boolean(
   process.env.TINA_PUBLIC_CLIENT_ID && process.env.TINA_TOKEN,
 );
@@ -20,9 +29,16 @@ const executable = join(
   ".bin",
   process.platform === "win32" ? "tinacms.cmd" : "tinacms",
 );
+const nodeOptions = process.env.NODE_OPTIONS ?? "";
+const tinaEnvironment = {
+  ...process.env,
+  NODE_OPTIONS: nodeOptions.includes("--max-old-space-size")
+    ? nodeOptions
+    : `${nodeOptions} ${TINA_HEAP_OPTION}`.trim(),
+};
 const result = spawnSync(executable, ["build", "--noTelemetry"], {
   cwd: projectRoot,
-  env: process.env,
+  env: tinaEnvironment,
   stdio: "inherit",
 });
 
