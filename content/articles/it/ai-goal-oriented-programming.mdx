@@ -1,0 +1,117 @@
+---
+locale: it
+translationKey: ai-goal-oriented-programming
+publicationStatus: published
+publishedAt: '2026-07-19'
+updatedAt: '2026-07-20'
+slug: ai-goal-oriented-programming
+title: "La prossima interfaccia della programmazione è l’intento"
+summary: "Lo sviluppo assistito dall’AI sta spostando il centro della programmazione dalla scrittura di ogni dettaglio alla definizione di obiettivi, vincoli e prove di correttezza."
+categories:
+  - AI
+  - Architettura software
+  - Programmazione
+tags:
+  - sviluppo assistito dall’AI
+  - intenti
+  - vincoli
+  - verifica
+  - architettura software
+seo:
+  title: "Programmazione a obiettivi nell’era dell’AI"
+  description: "Una proposta pratica per programmare con l’AI partendo da obiettivi, vincoli, contratti, verifiche e responsabilità umana."
+  image: /social-preview.png
+  imageAlt: "Anteprima del portfolio di Matteo Vittori per un articolo sulla programmazione AI a obiettivi"
+---
+
+Il software è sempre stato scritto a diversi livelli di astrazione. Siamo partiti dalle istruzioni macchina, siamo passati all’assembly e poi a linguaggi che permettono di descrivere algoritmi, strutture dati e regole di dominio senza specificare ogni singola operazione. Lo sviluppo assistito dall’AI suggerisce un altro spostamento di questa soglia: il programmatore può descrivere sempre più spesso **che cosa deve essere ottenuto**, mentre il modello esplora un’implementazione capace di rispettare quella descrizione.
+
+Non significa che il codice scomparirà, né che l’ingegneria possa essere sostituita da un prompt. È una proposta per una diversa interfaccia di programmazione: l’artefatto principale diventa un obiettivo accompagnato da vincoli e prove, mentre il codice è un dettaglio di implementazione che può essere rigenerato, ispezionato e sostituito.
+
+## Dalle istruzioni all’intento
+
+La programmazione tradizionale chiede di definire una sequenza di operazioni. Anche quando lavoriamo ad alto livello, l’implementazione resta l’oggetto principale da revisionare e mantenere. Un flusso basato sull’AI rovescia questa priorità:
+
+- l’obiettivo descrive il risultato desiderato;
+- i vincoli descrivono ciò che non deve cambiare e ciò che la soluzione deve rispettare;
+- le interfacce descrivono come il risultato si collega al resto del sistema;
+- le prove descrivono come stabilire che il risultato sia corretto.
+
+Il modello può scegliere tra algoritmi, librerie, file e strategie implementative. L’ingegnere resta responsabile di decidere se l’obiettivo è sensato, se i vincoli sono completi e se le prove sono abbastanza solide.
+
+## Un obiettivo non è soltanto un prompt
+
+Un prompt non strutturato non è una specifica affidabile. Un obiettivo utile deve essere abbastanza esplicito da poter essere valutato:
+
+```text
+Obiettivo
+  Aggiungere upload ripristinabili per file fino a 5 GB.
+
+Vincoli
+  Mantenere compatibile l’API HTTP esistente.
+  Non pubblicare mai file incompleti.
+  Riprendere dopo un’interruzione senza ricominciare da zero.
+  Non esporre credenziali nelle risposte visibili al client.
+
+Prove
+  Test unitari per ordine dei chunk e retry.
+  Test d’integrazione per interruzione e ripresa.
+  Contratto API esistente ancora verificato.
+  Metriche per dimensione, latenza e fallimenti.
+```
+
+L’esempio è più vicino a un piccolo contratto che a un’istruzione conversazionale. Lascia al modello spazio per scegliere l’implementazione, ma offre al team un criterio stabile per rifiutare una soluzione elegante ma sbagliata.
+
+## La nuova unità di lavoro
+
+In questo paradigma, una modifica non è più soltanto una pull request con alcuni file sorgente. È un pacchetto composto da cinque artefatti collegati:
+
+1. **Intento** — il risultato e il motivo per cui è importante.
+2. **Vincoli** — invarianti, confini, compatibilità, sicurezza e limiti prestazionali.
+3. **Piano** — l’interpretazione proposta dal modello.
+4. **Implementazione** — codice, configurazione, migrazioni e documentazione generate.
+5. **Prove** — test, benchmark, tracce, screenshot e assunzioni ancora irrisolte.
+
+Così l’implementazione può essere sostituita senza rendere usa e getta il sistema. Se arriva un modello, una libreria o un’architettura migliore, possiamo rigenerare l’implementazione sullo stesso intento e confrontare le prove.
+
+## Che cosa cambia per l’architettura
+
+La programmazione a obiettivi favorisce architetture con confini chiari. Un modello lavora in modo più sicuro dentro una porta ben definita che dentro una rete implicita di effetti collaterali. Contratti, schemi, casi d’uso, adattatori e dati tipizzati diventano superfici di comunicazione tra intento umano e implementazione generata.
+
+Non significa che ogni sistema abbia bisogno di più astrazione. Significa che le astrazioni importanti devono essere visibili: che cosa possiede un componente, da cosa può dipendere, che cosa promette e come la promessa viene verificata. In questo senso l’AI rende l’ambiguità architetturale più costosa, non meno.
+
+## La verifica entra nel linguaggio
+
+Se il codice sorgente non è più l’unico artefatto principale, i test non possono essere un’aggiunta finale. Diventano una parte eseguibile della specifica. Un obiettivo senza criteri osservabili è soltanto un desiderio; un vincolo senza test è facile da violare per errore.
+
+Il flusso più solido diventa quindi un ciclo:
+
+```text
+definire l’intento → proporre un piano → implementare → verificare → ispezionare le prove → accettare o correggere
+```
+
+Il ciclo deve essere economico da ripetere e trasparente rispetto all’incertezza. I modelli sono bravi a esplorare uno spazio ampio di soluzioni, ma non sanno automaticamente quali compromessi siano accettabili per il prodotto, l’organizzazione o gli utenti.
+
+## I rischi non spariscono cambiando interfaccia
+
+Questo paradigma introduce anche nuovi modi di fallire. Gli obiettivi possono essere vaghi. I vincoli possono entrare in conflitto. Un modello può produrre un’implementazione convincente localmente ma incompatibile con un requisito che nessuno ha scritto. Le dipendenze generate possono aumentare il rischio di supply chain e una suite di test verde può comunque non rilevare un’interpretazione dannosa dell’obiettivo.
+
+Per questo la responsabilità umana si sposta a un livello superiore invece di scomparire. Le persone devono possedere priorità, threat model, confini dei dati, soglie di qualità e decisione di rilasciare. Il modello può occuparsi di una parte crescente della ricerca e della costruzione, ma la responsabilità non può essere delegata al dettaglio di implementazione.
+
+## Da dove iniziare
+
+Non serve riprogettare l’intera toolchain. È sufficiente scegliere una modifica circoscritta e scrivere cinque cose prima di chiedere a un sistema AI di implementarla:
+
+- il risultato in una frase;
+- vincoli e non-obiettivi;
+- interfacce che devono restare stabili;
+- test di accettazione e metriche osservabili;
+- assunzioni che richiedono ancora una decisione umana.
+
+Poi si chiede al modello di proporre un piano prima di scrivere il codice. Si revisiona il piano, si implementa in un branch piccolo, si raccolgono le prove e si conserva l’intento insieme alla modifica. L’obiettivo non è produrre più codice più velocemente. È accorciare la distanza tra una decisione e un sistema funzionante, rendendola più visibile e più facile da correggere.
+
+## In conclusione
+
+La programmazione è sempre avanzata spostando il confine tra ciò che gli esseri umani specificano e ciò che le macchine espandono. Lo sviluppo assistito dall’AI può spostare quel confine dagli algoritmi e dalle funzioni verso obiettivi, vincoli e prove.
+
+La domanda utile non è se l’AI scriverà il codice. È se sapremo definire il problema abbastanza bene da poterci fidare di un’implementazione diversa, valutarla e cambiarla senza perdere il motivo per cui esiste.

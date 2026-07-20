@@ -1,0 +1,117 @@
+---
+locale: en
+translationKey: ai-goal-oriented-programming
+publicationStatus: published
+publishedAt: '2026-07-19'
+updatedAt: '2026-07-20'
+slug: ai-goal-oriented-programming
+title: "The next programming interface is intent"
+summary: "AI-assisted development is moving the centre of programming from writing every implementation detail to defining goals, constraints, and evidence of success."
+categories:
+  - AI
+  - Software architecture
+  - Programming
+tags:
+  - AI-assisted development
+  - intent
+  - constraints
+  - verification
+  - software architecture
+seo:
+  title: "Goal-oriented programming in the AI era"
+  description: "A practical proposal for AI-based programming built around goals, constraints, contracts, verification, and human ownership."
+  image: /social-preview.png
+  imageAlt: "Matteo Vittori portfolio preview for an article about goal-oriented AI programming"
+---
+
+Software has always been written at several levels of abstraction. We started with machine instructions, moved to assembly, then to languages that let us describe algorithms, data structures, and domain rules without spelling out every operation. AI-assisted development suggests another change in that boundary: the programmer may increasingly describe **what must be achieved**, while the model explores an implementation that satisfies the description.
+
+This is not the end of code, and it is not a licence to replace engineering with a prompt. It is a proposal for a different programming interface: one where the primary artefact is a goal together with its constraints and evidence, and source code is an implementation detail that can be regenerated, inspected, and replaced.
+
+## From instructions to intent
+
+Traditional programming asks us to define a sequence of operations. Even when we work at a high level, the implementation remains the main object we review and maintain. An AI-based workflow reverses the emphasis:
+
+- the goal describes the desired outcome;
+- constraints describe what must never change or what the solution must respect;
+- interfaces describe how the result connects to the rest of the system;
+- evidence describes how we will decide that the result is correct.
+
+The model can then choose between algorithms, libraries, files, and implementation strategies. The engineer remains responsible for deciding whether the goal is meaningful, whether the constraints are complete, and whether the evidence is strong enough.
+
+## A goal is more than a prompt
+
+An unstructured prompt is not a reliable specification. A useful goal should be explicit enough to evaluate:
+
+```text
+Goal
+  Add resumable uploads for files up to 5 GB.
+
+Constraints
+  Keep the existing HTTP API backwards compatible.
+  Never store incomplete files as published assets.
+  Resume after a network interruption without restarting from zero.
+  Do not expose credentials in client-visible responses.
+
+Evidence
+  Unit tests cover chunk ordering and retries.
+  Integration tests cover interruption and resume.
+  The existing API contract remains green.
+  Upload size, latency, and failure metrics are recorded.
+```
+
+The example is closer to a small contract than to a chat instruction. It gives the model room to make implementation choices while giving the team a stable way to reject an attractive but incorrect solution.
+
+## The new unit of work
+
+In this paradigm, a change is no longer just a pull request containing source files. It is a package made of five related artefacts:
+
+1. **Intent** — the outcome and the reason it matters.
+2. **Constraints** — invariants, boundaries, compatibility, security, and performance limits.
+3. **Plan** — the model’s proposed interpretation of the problem.
+4. **Implementation** — the generated code, configuration, migrations, and documentation.
+5. **Evidence** — tests, benchmarks, traces, screenshots, and a record of unresolved assumptions.
+
+This makes implementation replaceable without making the system disposable. If a better model, library, or architecture becomes available, we can regenerate the implementation against the same intent and compare the evidence.
+
+## What changes for architecture
+
+Goal-oriented programming rewards architectures with clear boundaries. A model can work inside a well-defined port more safely than inside an implicit web of side effects. Contracts, schemas, use cases, adapters, and typed data become communication surfaces between human intent and generated implementation.
+
+That does not mean every system needs more abstraction. It means the important abstractions should be visible: what a component owns, what it may depend on, what it promises, and how the promise is checked. In that sense, AI makes architectural ambiguity more expensive, not less.
+
+## Verification becomes part of the language
+
+If source code is no longer the only primary artefact, tests cannot be an afterthought. They become executable parts of the specification. A goal without observable acceptance criteria is only a wish; a constraint without a test is easy to violate accidentally.
+
+The strongest workflow is therefore a loop:
+
+```text
+define intent → propose a plan → implement → verify → inspect evidence → accept or revise
+```
+
+The loop should be cheap to repeat and explicit about uncertainty. Models are good at exploring a large solution space, but they do not automatically know which trade-offs the product, organisation, or users can accept.
+
+## The risks are not solved by changing the interface
+
+This paradigm introduces its own failure modes. Goals can be underspecified. Constraints can conflict. A model can produce a locally convincing implementation that violates a requirement nobody wrote down. Generated dependencies can increase supply-chain risk, and a passing test suite can still miss a harmful interpretation of the goal.
+
+For that reason, human ownership moves up a level instead of disappearing. People must own priorities, threat models, data boundaries, quality thresholds, and the decision to ship. The model can handle more of the search and construction work, but accountability cannot be delegated to the implementation detail.
+
+## A practical starting point
+
+Teams do not need to redesign their entire toolchain to experiment with this idea. Start with one bounded change and write five things before asking an AI system to implement it:
+
+- the outcome in one sentence;
+- the constraints and non-goals;
+- the interfaces that must remain stable;
+- the acceptance tests and observable metrics;
+- the assumptions that still need a human decision.
+
+Then ask the model to propose a plan before it writes code. Review the plan, let it implement in a small branch, run the evidence, and keep the intent alongside the resulting change. The goal is not to produce more code faster. It is to make the distance between a decision and a working system shorter, more visible, and easier to correct.
+
+## Closing thought
+
+Programming has always advanced by moving the boundary between what humans specify and what machines expand. AI-assisted development may move that boundary from algorithms and functions toward goals, constraints, and evidence.
+
+The useful question is not whether AI will write the code. It is whether we can define the problem clearly enough that a different implementation can be trusted, evaluated, and changed without losing the reason it exists.
