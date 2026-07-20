@@ -16,6 +16,8 @@ export interface PublicationMetadata {
 
 export interface SeoMetadata {
   readonly description: string;
+  readonly image?: string;
+  readonly imageAlt?: string;
   readonly title: string;
 }
 

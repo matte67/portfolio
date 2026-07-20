@@ -53,6 +53,18 @@ const seoField: TinaField = {
       required: true,
       ui: { component: "textarea" },
     },
+    {
+      type: "image",
+      name: "image",
+      label: "Social sharing image",
+      description: "Use a JPEG or PNG image, ideally 1200 × 630 px.",
+    },
+    {
+      type: "string",
+      name: "imageAlt",
+      label: "Social image alternative text",
+      description: "Required when a social sharing image is provided.",
+    },
   ],
 };
 

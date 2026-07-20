@@ -44,8 +44,8 @@ export function ArticlePage() {
     <>
       <DocumentMeta
         description={metadata.seo.description}
-        image={metadata.hero?.src}
-        imageAlt={metadata.hero?.alt}
+        image={metadata.seo.image ?? metadata.hero?.src}
+        imageAlt={metadata.seo.imageAlt ?? metadata.hero?.alt}
         title={metadata.seo.title}
         type="article"
       />

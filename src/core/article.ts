@@ -29,6 +29,9 @@ export function validateArticleMetadata(value: ArticleMetadata): ArticleMetadata
 
   assertNonEmptyText(value.seo?.title, "seo.title", label);
   assertNonEmptyText(value.seo?.description, "seo.description", label);
+  if (value.seo?.image) {
+    assertNonEmptyText(value.seo.imageAlt, "seo.imageAlt", label);
+  }
 
   if (!Array.isArray(value.categories) || !Array.isArray(value.tags)) {
     throw new Error(`${label} categories and tags must be arrays.`);

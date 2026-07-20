@@ -10,6 +10,11 @@ const productionOrigin = "https://matteo-vittori.netlify.app";
 const defaultImage = "/social-preview.png";
 const author = "Matteo Vittori";
 
+const localeMetadata = Object.freeze({
+  en: { html: "en", openGraph: "en_US" },
+  it: { html: "it", openGraph: "it_IT" },
+});
+
 async function readJson(path) {
   return JSON.parse(await readFile(join(projectRoot, path), "utf8"));
 }
@@ -22,12 +27,25 @@ const [catalog, workCopy, articlesCopy, thesisCopy, aboutCopy] = await Promise.a
   readJson("content/i18n/en/about.json"),
 ]);
 
-const publicProjects = catalog.projects.filter(
-  (entry) => entry.locale === "en" && entry.isPublic,
-);
-const publicArticles = catalog.articles.filter(
-  (entry) => entry.locale === "en" && entry.isPublic,
-);
+/**
+ * A route has no locale prefix, so it can expose one static social document.
+ * Prefer English when translations share a slug, but retain locale-only content.
+ */
+function selectRouteContent(entries) {
+  const bySlug = new Map();
+
+  for (const entry of entries.filter(({ isPublic }) => isPublic)) {
+    const selected = bySlug.get(entry.slug);
+    if (!selected || (entry.locale === "en" && selected.locale !== "en")) {
+      bySlug.set(entry.slug, entry);
+    }
+  }
+
+  return [...bySlug.values()];
+}
+
+const publicProjects = selectRouteContent(catalog.projects);
+const publicArticles = selectRouteContent(catalog.articles);
 
 const routes = [
   { path: "/work", ...workCopy.meta, priority: "0.9" },
@@ -36,9 +54,11 @@ const routes = [
     path: `/work/${project.slug}`,
     title: project.seo.title,
     description: project.seo.description,
-    image: project.hero?.src,
-    imageAlt: project.hero?.alt,
+    image: project.seo.image ?? project.hero?.src,
+    imageAlt: project.seo.imageAlt ?? project.hero?.alt,
+    locale: project.locale,
     type: "article",
+    structuredDataType: "CreativeWork",
     priority: "0.8",
     lastModified: project.updatedAt ?? project.publishedAt,
   })),
@@ -46,9 +66,15 @@ const routes = [
     path: `/articles/${article.slug}`,
     title: article.seo.title,
     description: article.seo.description,
-    image: article.hero?.src,
-    imageAlt: article.hero?.alt,
+    image: article.seo.image ?? article.hero?.src,
+    imageAlt: article.seo.imageAlt ?? article.hero?.alt,
+    locale: article.locale,
     type: "article",
+    structuredDataType: "Article",
+    publishedAt: article.publishedAt,
+    updatedAt: article.updatedAt,
+    section: article.categories?.[0],
+    tags: article.tags,
     priority: "0.7",
     lastModified: article.updatedAt ?? article.publishedAt,
   })),
@@ -91,11 +117,47 @@ function removeMeta(html, attribute, key) {
   );
 }
 
+function upsertMeta(html, attribute, key, content) {
+  const pattern = new RegExp(
+    `<meta\\s+${attribute}="${key}"\\s+content="[^"]*"\\s*/?>`,
+  );
+  const tag = `<meta ${attribute}="${key}" content="${escapeAttribute(content)}" />`;
+  return pattern.test(html) ? html.replace(pattern, tag) : html.replace("</head>", `    ${tag}\n  </head>`);
+}
+
+function imageMimeType(imagePath) {
+  const extension = imagePath.split(".").pop()?.toLowerCase();
+  return ({ avif: "image/avif", jpeg: "image/jpeg", jpg: "image/jpeg", png: "image/png", webp: "image/webp" })[extension];
+}
+
+function serializeStructuredData(route, canonicalUrl, imageUrl) {
+  if (!route.structuredDataType) return undefined;
+
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": route.structuredDataType,
+    headline: route.title,
+    description: route.description,
+    image: imageUrl,
+    url: canonicalUrl,
+    inLanguage: route.locale ?? "en",
+    datePublished: route.publishedAt,
+    dateModified: route.updatedAt ?? route.publishedAt,
+    articleSection: route.section,
+    keywords: route.tags?.length ? route.tags.join(", ") : undefined,
+    author: { "@type": "Person", name: author, url: productionOrigin },
+  }).replaceAll("<", "\\u003c");
+}
+
 function createRouteDocument(baseDocument, route) {
   const canonicalUrl = new URL(route.path, `${productionOrigin}/`).toString();
   const imageUrl = new URL(route.image ?? defaultImage, `${productionOrigin}/`).toString();
   const imageAlt = route.imageAlt ?? "Matteo Vittori portfolio homepage";
+  const locale = localeMetadata[route.locale] ?? localeMetadata.en;
   let document = baseDocument.replace(
+    /<html lang="[^"]*">/,
+    `<html lang="${locale.html}">`,
+  ).replace(
     /<title>[^<]*<\/title>/,
     `<title>${escapeAttribute(route.title)}</title>`,
   );
@@ -106,11 +168,26 @@ function createRouteDocument(baseDocument, route) {
   );
   document = replaceMeta(document, "name", "description", route.description);
   document = replaceMeta(document, "property", "og:type", route.type ?? "website");
+  document = replaceMeta(document, "property", "og:locale", locale.openGraph);
   document = replaceMeta(document, "property", "og:title", route.title);
   document = replaceMeta(document, "property", "og:description", route.description);
   document = replaceMeta(document, "property", "og:url", canonicalUrl);
   document = replaceMeta(document, "property", "og:image", imageUrl);
   document = replaceMeta(document, "property", "og:image:alt", imageAlt);
+  document = upsertMeta(document, "property", "og:image:secure_url", imageUrl);
+
+  const mimeType = imageMimeType(imageUrl);
+  if (mimeType) document = upsertMeta(document, "property", "og:image:type", mimeType);
+
+  if (route.publishedAt) {
+    document = upsertMeta(document, "property", "article:published_time", route.publishedAt);
+  }
+  if (route.updatedAt) {
+    document = upsertMeta(document, "property", "article:modified_time", route.updatedAt);
+  }
+  if (route.section) {
+    document = upsertMeta(document, "property", "article:section", route.section);
+  }
 
   if (route.image) {
     document = removeMeta(document, "property", "og:image:width");
@@ -120,7 +197,12 @@ function createRouteDocument(baseDocument, route) {
   document = replaceMeta(document, "name", "twitter:title", route.title);
   document = replaceMeta(document, "name", "twitter:description", route.description);
   document = replaceMeta(document, "name", "twitter:image", imageUrl);
-  return replaceMeta(document, "name", "twitter:image:alt", imageAlt);
+  document = replaceMeta(document, "name", "twitter:image:alt", imageAlt);
+
+  const structuredData = serializeStructuredData(route, canonicalUrl, imageUrl);
+  return structuredData
+    ? document.replace("</head>", `    <script type="application/ld+json">${structuredData}</script>\n  </head>`)
+    : document;
 }
 
 function createNotFoundDocument(baseDocument) {

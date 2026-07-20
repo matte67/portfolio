@@ -37,10 +37,10 @@ export function ProjectPage() {
   return (
     <>
       <DocumentMeta
-        description={metadata.summary}
-        image={metadata.hero.src}
-        imageAlt={metadata.hero.alt}
-        title={metadata.shortTitle}
+        description={metadata.seo.description}
+        image={metadata.seo.image ?? metadata.hero.src}
+        imageAlt={metadata.seo.imageAlt ?? metadata.hero.alt}
+        title={metadata.seo.title}
         type="article"
       />
       <article className={`project-page project-page--${metadata.slug}`}>

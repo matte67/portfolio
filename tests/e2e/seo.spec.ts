@@ -42,7 +42,7 @@ test("project routes publish their own canonical URL and social image", async ({
   );
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
-    `${PRODUCTION_ORIGIN}/media/sef/showcase.avif`,
+    `${PRODUCTION_ORIGIN}/media/sef/showcase-social.jpg`,
   );
 });
 
@@ -75,7 +75,7 @@ test("crawler assets expose the production route catalogue", async ({ request })
   expect(manifestResponse.ok()).toBeTruthy();
   const manifest = await manifestResponse.json();
   expect(manifest.projects).toHaveLength(5);
-  expect(manifest.articles).toHaveLength(0);
+  expect(manifest.articles).toHaveLength(1);
 
   expect(socialPreviewResponse.ok()).toBeTruthy();
   expect(socialPreviewResponse.headers()["content-type"]).toContain("image/png");
@@ -91,6 +91,22 @@ test("server responses expose route-specific metadata without JavaScript", async
     `<link rel="canonical" href="${PRODUCTION_ORIGIN}/work/sef" />`,
   );
   expect(html).toContain(
-    `<meta property="og:image" content="${PRODUCTION_ORIGIN}/media/sef/showcase.avif" />`,
+    `<meta property="og:image" content="${PRODUCTION_ORIGIN}/media/sef/showcase-social.jpg" />`,
   );
+});
+
+test("locale-only articles expose static social metadata without JavaScript", async ({ request }) => {
+  const response = await request.get("/articles/ddfgd");
+  const html = await response.text();
+
+  expect(response.ok()).toBeTruthy();
+  expect(html).toContain('<html lang="it">');
+  expect(html).toContain('<meta property="og:locale" content="it_IT" />');
+  expect(html).toContain(
+    `<meta property="og:url" content="${PRODUCTION_ORIGIN}/articles/ddfgd" />`,
+  );
+  expect(html).toContain(
+    `<meta property="og:image" content="${PRODUCTION_ORIGIN}/media/thesis/cover.png" />`,
+  );
+  expect(html).toContain('"@type":"Article"');
 });

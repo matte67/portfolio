@@ -105,6 +105,9 @@ export function validateProjectMetadata(value: ProjectMetadata): ProjectMetadata
   assertNonEmptyText(value.hero.alt, "hero.alt", label);
   assertNonEmptyText(value.seo?.title, "seo.title", label);
   assertNonEmptyText(value.seo?.description, "seo.description", label);
+  if (value.seo?.image) {
+    assertNonEmptyText(value.seo.imageAlt, "seo.imageAlt", label);
+  }
 
   value.links.forEach((link, index) => {
     assertNonEmptyText(link.label, `links[${index}].label`, label);

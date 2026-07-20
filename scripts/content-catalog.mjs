@@ -47,6 +47,7 @@ function validateCommon(data, locale, sourcePath) {
 
   assertText(data.seo?.title, "seo.title", sourcePath);
   assertText(data.seo?.description, "seo.description", sourcePath);
+  if (data.seo?.image) assertText(data.seo.imageAlt, "seo.imageAlt", sourcePath);
 }
 
 function validateProject(data, sourcePath) {
