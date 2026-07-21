@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 
-import { projectCatalog } from "../../app/dependencies";
+import { articleCatalog, projectCatalog } from "../../app/dependencies";
 import { useLanguage } from "../../application/i18n";
 import { getPageCopy } from "../../application/pageCopy";
 import { DocumentMeta } from "../components/DocumentMeta";
@@ -9,6 +9,8 @@ import { SectionHeading } from "../components/SectionHeading";
 import { ArrowMark, DownMark } from "../components/SmartLink";
 import { DecryptedText } from "../effects/DecryptedText";
 import { ThesisPreview } from "../thesis/ThesisPreview";
+import { EditorialIndex } from "../editorial/EditorialIndex";
+import { toArticleIndexItem } from "../editorial/editorialIndexMappers";
 import { MagneticAvatar } from "../visuals/MagneticAvatar";
 import { SignalField } from "../visuals/SignalField";
 
@@ -18,6 +20,10 @@ export function HomePage() {
   const { language } = useLanguage();
   const copy = getPageCopy(language, "home");
   const projects = projectCatalog.listFeaturedProjects(language);
+  const latestArticles = articleCatalog
+    .listArticles(language)
+    .slice(0, 2)
+    .map(({ metadata }) => toArticleIndexItem(metadata, language));
   const selectedProjectItems = projects.map(({ metadata }) => ({
     image: metadata.chip || "/global/matteo-vittori-mark.svg",
     link: `/work/${metadata.slug}`,
@@ -82,6 +88,24 @@ export function HomePage() {
           />
         </Suspense>
         <Link className="section-end-link" to="/work">{copy.work.indexLink} <ArrowMark /></Link>
+      </section>
+
+      <section className="home-articles page-shell section-space" aria-labelledby="home-articles-title">
+        <SectionHeading
+          eyebrow={copy.articles.eyebrow}
+          title={copy.articles.title}
+          description={copy.articles.description}
+        />
+        <EditorialIndex
+          className="home-articles__index pb-0!"
+          contained={false}
+          items={latestArticles}
+          readLabel={copy.articles.read}
+          sectionLabel={copy.articles.sectionLabel}
+          variant="default"
+          showLinks={false}
+        />
+        <Link className="section-end-link mt-0!" to="/articles">{copy.articles.indexLink} <ArrowMark /></Link>
       </section>
 
       <section className="about-preview page-shell section-space" aria-labelledby="about-preview-title">

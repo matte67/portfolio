@@ -14,6 +14,8 @@ test("desktop homepage communicates the portfolio and exposes the flowing projec
   await page.goto("/");
 
   await expect(page.getByRole("heading", { level: 1, name: "Hi, I’m Matteo" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Ideas made useful through detail." })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Read all articles" })).toBeVisible();
   const decryptedName = page.locator(".home-hero__decrypted-name");
   await expect(decryptedName).toBeVisible();
   await expect(decryptedName).toHaveAttribute("data-animating", "false");

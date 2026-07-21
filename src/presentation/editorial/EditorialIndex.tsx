@@ -19,6 +19,8 @@ export interface EditorialIndexItem {
 }
 
 interface EditorialIndexProps {
+  readonly className?: string;
+  readonly contained?: boolean;
   readonly emptyState?: {
     readonly description: ReactNode;
     readonly title: ReactNode;
@@ -26,6 +28,8 @@ interface EditorialIndexProps {
   readonly items: readonly EditorialIndexItem[];
   readonly readLabel: string;
   readonly sectionLabel: string;
+  readonly variant?: "default" | "preview";
+  readonly showLinks?: boolean;
 }
 
 /**
@@ -33,13 +37,24 @@ interface EditorialIndexProps {
  * Domain pages map their metadata into this stable presentation contract.
  */
 export function EditorialIndex({
+  className = "",
+  contained = true,
   emptyState,
   items,
   readLabel,
   sectionLabel,
+  variant = "default",
+  showLinks = true,
 }: EditorialIndexProps) {
+  const indexClassName = [
+    "editorial-index",
+    `editorial-index--${variant}`,
+    contained ? "page-shell" : "",
+    className,
+  ].filter(Boolean).join(" ");
+
   return (
-    <section className="editorial-index page-shell" aria-label={sectionLabel}>
+    <section className={indexClassName} aria-label={sectionLabel}>
       {items.length === 0 && emptyState ? (
         <div className="editorial-index__empty">
           <h2>{emptyState.title}</h2>
@@ -67,7 +82,7 @@ export function EditorialIndex({
                 {item.metadata.map((value, index) => <span key={index}>{value}</span>)}
               </div>
             ) : null}
-            <Link className="text-link" to={item.href}>{readLabel} <ArrowMark /></Link>
+            {showLinks && <Link className="text-link" to={item.href}>{readLabel} <ArrowMark /></Link>}
           </div>
         </article>
       ))}
