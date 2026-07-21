@@ -90,7 +90,7 @@ export function EditorialHero({ fallback, media, variant }: EditorialHeroProps) 
         shakeAngle={media.shakeAngle}
         shakeDuration={media.shakeDuration}
         cameraZoom={media.cameraZoom ?? 21}
-        className={`editorial-hero mb-0! editorial-hero--${variant} editorial-hero--${position} page-shell`}
+        className={`page-shell`}
       />
     ) : (
       <EditorialFigure

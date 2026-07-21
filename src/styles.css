@@ -1225,10 +1225,9 @@ svg {
 }
 
 .mockup-player-embed {
-  width: min(100%, 55rem);
+  width: min(100%, 105rem);
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: var(--radius-large);
   background: var(--color-surface-muted);
 }
 
