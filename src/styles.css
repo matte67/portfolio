@@ -2598,7 +2598,6 @@ svg {
 }
 
 .pdf-reader {
-  margin-bottom: var(--space-section);
   overflow: hidden;
   border-radius: var(--radius-large);
   background: var(--color-surface-muted);
