@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import type { ProjectMedia } from "../../core/project";
 import { EditorialFigure } from "./EditorialMedia";
+import { MockupPlayer } from "./MockupPlayer";
 
 export type EditorialPageVariant = "article" | "project";
 
@@ -77,14 +78,30 @@ export function EditorialHero({ fallback, media, variant }: EditorialHeroProps) 
   }
 
   return (
-    <EditorialFigure
-      alt={media.alt}
-      className={`editorial-hero editorial-hero--${variant} editorial-hero--${position} page-shell`}
-      fill
-      priority
-      src={media.src}
-      wide
-    />
+    media.asMockupAnimation ? (
+      <MockupPlayer
+        mockupId={media.mockupAnimationId ?? ""}
+        aspectRatio={media.aspectRatio ?? "16 / 9"}
+        triggerLoop={media.triggerLoop ?? false}
+        trigger={media.trigger ?? "load"}
+        cursorRange={media.cursorRange ?? "5-7-5-15"}
+        shakeIntensity={media.shakeIntensity}
+        shakeZ={media.shakeZ}
+        shakeAngle={media.shakeAngle}
+        shakeDuration={media.shakeDuration}
+        cameraZoom={media.cameraZoom ?? 21}
+        className={`editorial-hero mb-0! editorial-hero--${variant} editorial-hero--${position} page-shell`}
+      />
+    ) : (
+      <EditorialFigure
+        alt={media.alt}
+        className={`editorial-hero editorial-hero--${variant} editorial-hero--${position} page-shell`}
+        fill
+        priority
+        src={media.src}
+        wide
+      />
+    )
   );
 }
 

@@ -28,6 +28,13 @@ technologies:
   - "GA4"
 chip: "/media/unistays/showcase.avif"
 hero:
+  asMockupAnimation: true
+  mockupAnimationId: "2b9579f9-2ba7-4ed5-8f64-d42af329c34f"
+  triggerLoop: true
+  shakeIntensity: 5
+  shakeZ: 5
+  shakeAngle: 55
+  shakeDuration: 900
   src: "/media/unistays/showcase.avif"
   alt: "Pagina di dettaglio di un appartamento UniStays mostrata nello schermo di un MacBook."
   position: "center"
@@ -69,24 +76,6 @@ UniStays ripensa l’unità di ricerca a partire dalla stanza e dal suo contesto
 
 Il progetto è passato dall’idea a un prodotto funzionante. Matteo ha curato UI/UX, frontend e backend JavaScript, integrazioni esterne, analytics, chat in tempo reale e gestione degli annunci.
 
-<ProjectGallery
-  caption="Viste responsive del prodotto UniStays su desktop, tablet e mobile."
-  items={[
-    {
-      src: "/media/unistays/ipad.avif",
-      alt: "Vista dell'applicazione UniStays su iPad.",
-    },
-    {
-      src: "/media/unistays/macbook.avif",
-      alt: "Vista desktop dell'applicazione UniStays.",
-    },
-    {
-      src: "/media/unistays/iphone.avif",
-      alt: "Ricerca mobile di UniStays con campo per la località e mappa dell'Italia.",
-    },
-  ]}
-/>
-
 ## Architettura del prodotto
 
 L’interfaccia separa tre responsabilità: scoperta per gli studenti, gestione dell’offerta per gli host e verifica o moderazione per gli amministratori. Firebase gestisce i dati applicativi e la comunicazione in tempo reale, Clerk l’identità, Google Maps la ricerca geografica e GA4 le analisi di utilizzo.
@@ -105,6 +94,24 @@ Le funzioni orientate alla fiducia aggiungono passaggi alla pubblicazione degli 
 ## Risultato
 
 Il risultato è una beta privata progettata e sviluppata in autonomia, che comprende ricerca, filtri, mappe, preferiti, chat, gestione degli annunci da parte degli host, moderazione e analytics. L’attuale deploy Netlify è una preview e non la pubblicazione definitiva. Il prodotto dimostra ampiezza funzionale, ma necessita ancora di validazione sul campo prima di formulare conclusioni sulla qualità degli abbinamenti o sulla scala del marketplace.
+
+<ProjectGallery
+  caption="Viste responsive del prodotto UniStays su desktop, tablet e mobile."
+  items={[
+    {
+      src: "/media/unistays/ipad.avif",
+      alt: "Vista dell'applicazione UniStays su iPad.",
+    },
+    {
+      src: "/media/unistays/macbook.avif",
+      alt: "Vista desktop dell'applicazione UniStays.",
+    },
+    {
+      src: "/media/unistays/iphone.avif",
+      alt: "Ricerca mobile di UniStays con campo per la località e mappa dell'Italia.",
+    },
+  ]}
+/>
 
 ## Lezioni apprese
 

@@ -12,6 +12,7 @@ import { UseCaseList } from "../visuals/UseCaseList";
 import { EditorialCallout, EditorialFlow, EditorialQuote } from "./EditorialPrimitives";
 import { EditorialImage, EditorialPre } from "./mdxElements";
 import { EditorialFigure, EditorialGallery } from "./EditorialMedia";
+import { MockupPlayer } from "./MockupPlayer";
 
 /**
  * MDX component registry shared by articles and project case studies.
@@ -29,6 +30,7 @@ export const editorialMdxComponents: MDXComponents = {
   EditorialFlow,
   EditorialGallery,
   EditorialQuote,
+  MockupPlayer,
   MechanicSequence,
   PipelineExplorer,
   ProjectFigure,

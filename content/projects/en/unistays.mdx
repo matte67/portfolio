@@ -28,6 +28,13 @@ technologies:
   - "GA4"
 chip: "/media/unistays/showcase.avif"
 hero:
+  asMockupAnimation: true
+  mockupAnimationId: "2b9579f9-2ba7-4ed5-8f64-d42af329c34f"
+  triggerLoop: true
+  shakeIntensity: 5
+  shakeZ: 5
+  shakeAngle: 55
+  shakeDuration: 900
   src: "/media/unistays/showcase.avif"
   alt: "UniStays apartment detail page displayed inside a MacBook mockup."
   position: "center"
@@ -69,24 +76,6 @@ UniStays reframes the unit of discovery around the room and its human context. S
 
 The project moved from idea to a functioning product with Matteo responsible for UI/UX, the JavaScript frontend and backend work, external integrations, analytics, real-time chat, and listing management.
 
-<ProjectGallery
-  caption="Responsive UniStays product views across desktop, tablet, and mobile."
-  items={[
-    {
-      src: "/media/unistays/ipad.avif",
-      alt: "Ipad view of the UniStays application.",
-    },
-    {
-      src: "/media/unistays/macbook.avif",
-      alt: "Desktop view of the UniStays application.",
-    },
-    {
-      src: "/media/unistays/iphone.avif",
-      alt: "Mobile UniStays search experience with location input and an Italy map.",
-    },
-  ]}
-/>
-
 ## Product architecture
 
 The interface separates three concerns: discovery for students, inventory management for hosts, and verification or moderation for administrators. Firebase supports application data and real-time communication, Clerk handles identity, Google Maps anchors geographic search, and GA4 supports product analytics.
@@ -105,6 +94,24 @@ Trust features add friction to listing publication, but reduce uncertainty for s
 ## Outcome
 
 The result is an independently designed and developed private beta spanning search, filters, maps, favourites, chat, host listing management, moderation, and analytics. The current Netlify deployment is a preview rather than the final public release. The product demonstrates breadth, but still needs real-world validation before claims about matching quality or marketplace scale can be made.
+
+<ProjectGallery
+  caption="Responsive UniStays product views across desktop, tablet, and mobile."
+  items={[
+    {
+      src: "/media/unistays/ipad.avif",
+      alt: "Ipad view of the UniStays application.",
+    },
+    {
+      src: "/media/unistays/macbook.avif",
+      alt: "Desktop view of the UniStays application.",
+    },
+    {
+      src: "/media/unistays/iphone.avif",
+      alt: "Mobile UniStays search experience with location input and an Italy map.",
+    },
+  ]}
+/>
 
 ## Lessons learned
 

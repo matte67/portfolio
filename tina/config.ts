@@ -161,6 +161,22 @@ const mdxTemplates = [
     ],
   },
   {
+    name: "MockupPlayer",
+    label: "Animated mockup player",
+    fields: [
+      { type: "string" as const, name: "mockupId", label: "Mockup ID", required: true },
+      { type: "string" as const, name: "aspectRatio", label: "Aspect ratio" },
+      { type: "string" as const, name: "trigger", label: "Trigger", options: ["load"] },
+      { type: "boolean" as const, name: "triggerLoop", label: "Loop trigger" },
+      { type: "string" as const, name: "cursorRange", label: "Cursor range" },
+      { type: "number" as const, name: "shakeIntensity", label: "Shake intensity" },
+      { type: "number" as const, name: "shakeZ", label: "Shake depth" },
+      { type: "number" as const, name: "shakeAngle", label: "Shake angle" },
+      { type: "number" as const, name: "shakeDuration", label: "Shake duration" },
+      { type: "number" as const, name: "cameraZoom", label: "Camera zoom" },
+    ],
+  },
+  {
     name: "EditorialCallout",
     label: "Editorial callout",
     fields: [

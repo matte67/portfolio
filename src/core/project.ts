@@ -23,6 +23,17 @@ export interface ProjectLink {
 }
 
 export interface ProjectMedia {
+  readonly asMockupAnimation?: boolean;
+  readonly mockupAnimationId?: string;
+  readonly trigger?: string;
+  readonly triggerLoop?: boolean;
+  readonly cursorRange?: string;
+  readonly shakeIntensity?: number; 
+  readonly shakeZ?: number;
+  readonly shakeAngle?: number;
+  readonly shakeDuration?: number;
+  readonly cameraZoom?: number;
+  readonly aspectRatio?: string;
   readonly src?: string;
   readonly alt: string;
   readonly position?: "center" | "top";

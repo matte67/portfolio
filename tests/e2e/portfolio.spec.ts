@@ -276,6 +276,16 @@ test("localized project content follows the selected language", async ({ page })
   await expect(page.getByText("Overhead in streaming")).toBeVisible();
 });
 
+test("UniStays renders the animated mockup player block", async ({ page }) => {
+  await page.goto("/work/unistays");
+
+  const player = page.locator(".mockup-player-embed mockup-player");
+  await expect(player).toHaveAttribute("mockup-id", "2b9579f9-2ba7-4ed5-8f64-d42af329c34f");
+  await expect(player).toHaveAttribute("trigger", "load");
+  await expect(player).toHaveAttribute("trigger-loop", "true");
+  await expectNoHorizontalOverflow(page);
+});
+
 test("articles expose the published editorial card", async ({ page }) => {
   await page.goto("/articles");
 
