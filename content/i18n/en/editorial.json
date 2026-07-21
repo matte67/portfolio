@@ -1,0 +1,67 @@
+{
+  "accessPoints": {
+    "eyebrow": "One core",
+    "title": "Choose the interface, keep the model",
+    "ariaLabel": "SEF access points",
+    "descriptions": {
+      "API": "Compose and extend pipelines directly in Python.",
+      "CLI": "Validate and execute a reproducible configuration from the terminal.",
+      "Studio": "Configure, inspect, and preview the same core through a visual interface."
+    }
+  },
+  "architecture": {
+    "alt": "Architecture layers",
+    "caption": "Dependencies point inward. The core owns contracts, runtime planning, events, errors, and policies."
+  },
+  "benchmark": {
+    "eyebrow": "Reference benchmark",
+    "title": "Abstraction cost, measured",
+    "description": "Streaming stayed close to the direct loop while using about a quarter of its peak memory.",
+    "ariaLabel": "Peak process memory in mebibytes",
+    "streamingOverhead": "Streaming overhead",
+    "directLoop": "Direct loop",
+    "batch": "SEF batch",
+    "streaming": "SEF streaming",
+    "source": "Source: SEF thesis presentation. Add raw benchmark data and environment details before publication."
+  },
+  "character": {
+    "eyebrow": "Shared ecosystem",
+    "title": "Species are relationships, not collectibles",
+    "description": "Each character belongs to a habitat and a dynamic ecological network affected by group decisions.",
+    "ariaLabel": "RE:WILD character artwork",
+    "caption": "Character assets supplied in the RE:WILD project material.",
+    "alts": ["Fawn character", "Bird character", "Dolphin character", "Sea turtle character"]
+  },
+  "contentNeededLabel": "Content checkpoint",
+  "mechanicSequence": {
+    "ariaLabel": "RE:WILD gameplay sequence",
+    "phases": [
+      ["01", "Brief", "Read the ecosystem in crisis."],
+      ["02", "Explore", "Locate damaged habitats and imbalance."],
+      ["03", "Cooperate", "Restore, relocate, and manage resources."],
+      ["04", "Respond", "Face pollution, drought, or habitat loss."],
+      ["05", "Rebalance", "Watch the biodiversity index react."],
+      ["06", "Debrief", "Connect actions with concepts learned."]
+    ]
+  },
+  "pipeline": {
+    "eyebrow": "Interactive model",
+    "title": "A video-to-signal pipeline in explicit stages",
+    "ariaLabel": "Pipeline stages",
+    "stages": [
+      ["Frame extractor", "Acquires frames from a file, camera, or continuous source."],
+      ["Frame processor", "Transforms visual data through independent, replaceable operations."],
+      ["Signal extractor", "Turns frames into measures, trajectories, motion, or temporal series."],
+      ["Signal cleaner", "Filters, normalises, and corrects the extracted signal."],
+      ["Analyzer", "Interprets structured signals and produces analytical results."],
+      ["Visualizer", "Creates plots, media, tables, or inspectable artifacts."]
+    ]
+  },
+  "useCases": [
+    ["Tracking", "Single and multi-object trajectories from continuous video."],
+    ["Optical flow", "Sparse and dense motion fields converted into structured data."],
+    ["Motion magnification", "Subtle temporal variation made observable and measurable."],
+    ["ArUco", "Marker displacement and relative-motion analysis."],
+    ["Pose", "Realtime COCO pose estimation and gesture classification."]
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "accessPoints": {
+    "eyebrow": "Un solo core",
+    "title": "Scegli l’interfaccia, conserva il modello",
+    "ariaLabel": "Modalità di accesso a SEF",
+    "descriptions": {
+      "API": "Componi ed estendi le pipeline direttamente in Python.",
+      "CLI": "Valida ed esegui una configurazione riproducibile dal terminale.",
+      "Studio": "Configura, ispeziona e visualizza lo stesso core attraverso un’interfaccia grafica."
+    }
+  },
+  "architecture": {
+    "alt": "Livelli dell’architettura",
+    "caption": "Le dipendenze puntano verso l’interno. Il core possiede contratti, pianificazione del runtime, eventi, errori e policy."
+  },
+  "benchmark": {
+    "eyebrow": "Benchmark di riferimento",
+    "title": "Il costo dell’astrazione, misurato",
+    "description": "Lo streaming resta vicino al ciclo diretto usando circa un quarto della memoria di picco.",
+    "ariaLabel": "Memoria di processo di picco in mebibyte",
+    "streamingOverhead": "Overhead streaming",
+    "directLoop": "Ciclo diretto",
+    "batch": "SEF batch",
+    "streaming": "SEF streaming",
+    "source": "Fonte: presentazione della tesi SEF. Aggiungere dati grezzi e dettagli dell’ambiente prima della pubblicazione."
+  },
+  "character": {
+    "eyebrow": "Ecosistema condiviso",
+    "title": "Le specie sono relazioni, non oggetti da collezionare",
+    "description": "Ogni personaggio appartiene a un habitat e a una rete ecologica dinamica, influenzata dalle decisioni del gruppo.",
+    "ariaLabel": "Illustrazioni dei personaggi di RE:WILD",
+    "caption": "Asset dei personaggi forniti nel materiale del progetto RE:WILD.",
+    "alts": ["Personaggio cerbiatto", "Personaggio uccello", "Personaggio delfino", "Personaggio tartaruga marina"]
+  },
+  "contentNeededLabel": "Contenuto da completare",
+  "mechanicSequence": {
+    "ariaLabel": "Sequenza di gioco di RE:WILD",
+    "phases": [
+      ["01", "Briefing", "Leggere l’ecosistema in crisi."],
+      ["02", "Esplorare", "Individuare habitat danneggiati e squilibri."],
+      ["03", "Cooperare", "Ripristinare, spostare specie e gestire risorse."],
+      ["04", "Reagire", "Affrontare inquinamento, siccità o perdita di habitat."],
+      ["05", "Riequilibrare", "Osservare la risposta dell’indice di biodiversità."],
+      ["06", "Riflettere", "Collegare le azioni ai concetti appresi."]
+    ]
+  },
+  "pipeline": {
+    "eyebrow": "Modello interattivo",
+    "title": "Una pipeline video-segnale divisa in fasi esplicite",
+    "ariaLabel": "Fasi della pipeline",
+    "stages": [
+      ["Frame extractor", "Acquisisce frame da file, camera o sorgente continua."],
+      ["Frame processor", "Trasforma i dati visivi con operazioni indipendenti e sostituibili."],
+      ["Signal extractor", "Converte i frame in misure, traiettorie, movimento o serie temporali."],
+      ["Signal cleaner", "Filtra, normalizza e corregge il segnale estratto."],
+      ["Analyzer", "Interpreta segnali strutturati e produce risultati analitici."],
+      ["Visualizer", "Crea grafici, media, tabelle o artefatti ispezionabili."]
+    ]
+  },
+  "useCases": [
+    ["Tracking", "Traiettorie di uno o più oggetti da video continui."],
+    ["Optical flow", "Campi di movimento sparsi e densi convertiti in dati strutturati."],
+    ["Motion magnification", "Variazioni temporali sottili rese osservabili e misurabili."],
+    ["ArUco", "Spostamento dei marker e analisi del movimento relativo."],
+    ["Pose", "Stima della posa COCO in tempo reale e classificazione dei gesti."]
+  ]
+}

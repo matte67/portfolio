@@ -36,7 +36,13 @@ const tinaEnvironment = {
     ? nodeOptions
     : `${nodeOptions} ${TINA_HEAP_OPTION}`.trim(),
 };
-const result = spawnSync(executable, ["build", "--noTelemetry"], {
+const tinaArguments = ["build", "--noTelemetry"];
+if (process.env.TINA_SKIP_CLOUD_CHECKS === "true") {
+  // Useful for local previews while a schema change is intentionally kept unpushed.
+  tinaArguments.push("--skip-cloud-checks");
+}
+
+const result = spawnSync(executable, tinaArguments, {
   cwd: projectRoot,
   env: tinaEnvironment,
   stdio: "inherit",

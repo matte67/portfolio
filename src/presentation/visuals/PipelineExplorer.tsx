@@ -1,25 +1,22 @@
 import { useState } from "react";
 
-const stages = [
-  { name: "Frame extractor", detail: "Acquires frames from a file, camera, or continuous source." },
-  { name: "Frame processor", detail: "Transforms visual data through independent, replaceable operations." },
-  { name: "Signal extractor", detail: "Turns frames into measures, trajectories, motion, or temporal series." },
-  { name: "Signal cleaner", detail: "Filters, normalises, and corrects the extracted signal." },
-  { name: "Analyzer", detail: "Interprets structured signals and produces analytical results." },
-  { name: "Visualizer", detail: "Creates plots, media, tables, or inspectable artifacts." },
-] as const;
+import { useLanguage } from "../../application/i18n";
+import { getPageCopy } from "../../application/pageCopy";
 
 export function PipelineExplorer() {
+  const { language } = useLanguage();
+  const copy = getPageCopy(language, "editorial").pipeline;
+  const stages = copy.stages.map(([name, detail]) => ({ name, detail }));
   const [activeIndex, setActiveIndex] = useState(0);
   const activeStage = stages[activeIndex];
 
   return (
     <section className="pipeline-explorer" aria-labelledby="pipeline-explorer-title">
       <header className="pipeline-explorer__header">
-        <p className="eyebrow">Interactive model</p>
-        <h3 id="pipeline-explorer-title">A video-to-signal pipeline in explicit stages</h3>
+        <p className="eyebrow">{copy.eyebrow}</p>
+        <h3 id="pipeline-explorer-title">{copy.title}</h3>
       </header>
-      <div className="pipeline-explorer__stages" aria-label="Pipeline stages">
+      <div className="pipeline-explorer__stages" aria-label={copy.ariaLabel}>
         {stages.map((stage, index) => (
           <button
             aria-pressed={activeIndex === index}

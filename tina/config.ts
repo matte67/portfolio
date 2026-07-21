@@ -127,6 +127,79 @@ const mdxTemplates = [
           { type: "string" as const, name: "alt", label: "Alternative text", required: true },
         ],
       },
+      { type: "string" as const, name: "caption", label: "Caption" },
+    ],
+  },
+  {
+    name: "EditorialFigure",
+    label: "Editorial figure",
+    fields: [
+      { type: "image" as const, name: "src", label: "Image", required: true },
+      { type: "string" as const, name: "alt", label: "Alternative text", required: true },
+      { type: "string" as const, name: "caption", label: "Caption" },
+      { type: "string" as const, name: "credit", label: "Credit" },
+      { type: "boolean" as const, name: "wide", label: "Wide layout" },
+      { type: "boolean" as const, name: "priority", label: "Load as hero" },
+    ],
+  },
+  {
+    name: "EditorialGallery",
+    label: "Editorial gallery",
+    fields: [
+      {
+        type: "object" as const,
+        name: "items",
+        label: "Images",
+        list: true,
+        required: true,
+        fields: [
+          { type: "image" as const, name: "src", label: "Image", required: true },
+          { type: "string" as const, name: "alt", label: "Alternative text", required: true },
+        ],
+      },
+      { type: "string" as const, name: "caption", label: "Caption" },
+    ],
+  },
+  {
+    name: "EditorialCallout",
+    label: "Editorial callout",
+    fields: [
+      { type: "string" as const, name: "eyebrow", label: "Eyebrow" },
+      { type: "string" as const, name: "title", label: "Title", required: true },
+      { type: "string" as const, name: "body", label: "Body", ui: { component: "textarea" } },
+      {
+        type: "string" as const,
+        name: "tone",
+        label: "Tone",
+        options: ["accent", "dark", "quiet"],
+      },
+    ],
+  },
+  {
+    name: "EditorialFlow",
+    label: "Editorial flow",
+    fields: [
+      { type: "string" as const, name: "label", label: "Accessible label" },
+      {
+        type: "object" as const,
+        name: "items",
+        label: "Steps",
+        list: true,
+        required: true,
+        fields: [
+          { type: "string" as const, name: "number", label: "Number" },
+          { type: "string" as const, name: "title", label: "Title", required: true },
+          { type: "string" as const, name: "description", label: "Description", required: true, ui: { component: "textarea" } },
+        ],
+      },
+    ],
+  },
+  {
+    name: "EditorialQuote",
+    label: "Editorial quote",
+    fields: [
+      { type: "string" as const, name: "quote", label: "Quote", required: true, ui: { component: "textarea" } },
+      { type: "string" as const, name: "cite", label: "Attribution" },
     ],
   },
 ];

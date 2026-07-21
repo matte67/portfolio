@@ -1,22 +1,28 @@
+import { useLanguage } from "../../application/i18n";
+import { getPageCopy } from "../../application/pageCopy";
+
 const characters = [
-  ["/media/rewild/fawn.avif", "Fawn character"],
-  ["/media/rewild/bird.avif", "Bird character"],
-  ["/media/rewild/dolphin.avif", "Dolphin character"],
-  ["/media/rewild/tortue.avif", "Sea turtle character"],
+  "/media/rewild/fawn.avif",
+  "/media/rewild/bird.avif",
+  "/media/rewild/dolphin.avif",
+  "/media/rewild/tortue.avif",
 ] as const;
 
 export function CharacterField() {
+  const { language } = useLanguage();
+  const copy = getPageCopy(language, "editorial").character;
+
   return (
     <figure className="character-field">
       <div className="character-field__copy flex flex-col gap-4">
-        <p className="eyebrow">Shared ecosystem</p>
-        <h3>Species are relationships, not collectibles</h3>
-        <p>Each character belongs to a habitat and a dynamic ecological network affected by group decisions.</p>
+        <p className="eyebrow">{copy.eyebrow}</p>
+        <h3>{copy.title}</h3>
+        <p>{copy.description}</p>
       </div>
-      <div className="character-field__animals" aria-label="RE:WILD character artwork">
-        {characters.map(([src, alt]) => <img alt={alt} key={src} loading="lazy" src={src} />)}
+      <div className="character-field__animals" aria-label={copy.ariaLabel}>
+        {characters.map((src, index) => <img alt={copy.alts[index]} key={src} loading="lazy" src={src} />)}
       </div>
-      <figcaption>Character assets supplied in the RE:WILD project material.</figcaption>
+      <figcaption>{copy.caption}</figcaption>
     </figure>
   );
 }

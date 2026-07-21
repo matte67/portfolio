@@ -1,15 +1,13 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const cases = [
-  ["Tracking", "Single and multi-object trajectories from continuous video."],
-  ["Optical flow", "Sparse and dense motion fields converted into structured data."],
-  ["Motion magnification", "Subtle temporal variation made observable and measurable."],
-  ["ArUco", "Marker displacement and relative-motion analysis."],
-  ["Pose", "Realtime COCO pose estimation and gesture classification."],
-] as const;
+import { useLanguage } from "../../application/i18n";
+import { getPageCopy } from "../../application/pageCopy";
 
 export function UseCaseList() {
+  const { language } = useLanguage();
+  const cases = getPageCopy(language, "editorial").useCases;
+
   return (
     <div className="use-case-list">
       {cases.map(([title, description], index) => (

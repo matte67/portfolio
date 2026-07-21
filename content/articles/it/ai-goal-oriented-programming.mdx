@@ -17,6 +17,10 @@ tags:
   - vincoli
   - verifica
   - architettura software
+hero:
+  src: /media/articles/ai-goal-oriented-programming/ai-human.png
+  alt: 'Ciclo visivo che collega intento, vincoli, implementazione e prove nella programmazione a obiettivi.'
+  position: center
 seo:
   title: "Programmazione a obiettivi nell’era dell’AI"
   description: "Una proposta pratica per programmare con l’AI partendo da obiettivi, vincoli, contratti, verifiche e responsabilità umana."
@@ -24,9 +28,18 @@ seo:
   imageAlt: "Anteprima del portfolio di Matteo Vittori per un articolo sulla programmazione AI a obiettivi"
 ---
 
-Il software è sempre stato scritto a diversi livelli di astrazione. Siamo partiti dalle istruzioni macchina, siamo passati all’assembly e poi a linguaggi che permettono di descrivere algoritmi, strutture dati e regole di dominio senza specificare ogni singola operazione. Lo sviluppo assistito dall’AI suggerisce un altro spostamento di questa soglia: il programmatore può descrivere sempre più spesso **che cosa deve essere ottenuto**, mentre il modello esplora un’implementazione capace di rispettare quella descrizione.
+Il software è sempre stato scritto a diversi livelli di astrazione.
+
+Siamo partiti dalle istruzioni macchina, siamo passati all’assembly e poi a linguaggi che permettono di descrivere algoritmi, strutture dati e regole di dominio senza specificare ogni singola operazione. Lo sviluppo assistito dall’AI suggerisce un altro spostamento di questa soglia: il programmatore può descrivere sempre più spesso **che cosa deve essere ottenuto**, mentre il modello esplora un’implementazione capace di rispettare quella descrizione.
 
 Non significa che il codice scomparirà, né che l’ingegneria possa essere sostituita da un prompt. È una proposta per una diversa interfaccia di programmazione: l’artefatto principale diventa un obiettivo accompagnato da vincoli e prove, mentre il codice è un dettaglio di implementazione che può essere rigenerato, ispezionato e sostituito.
+
+<EditorialFigure
+  src="/media/articles/ai-goal-oriented-programming/goal-contract.svg"
+  alt="Cinque schede collegate mostrano intento, vincoli, piano, implementazione e prove come un unico pacchetto di cambiamento."
+  caption="Un obiettivo diventa utile quando porta con sé confini, percorso proposto e prove necessarie per accettare il risultato."
+  wide={true}
+/>
 
 ## Dalle istruzioni all’intento
 
@@ -62,6 +75,10 @@ Prove
 
 L’esempio è più vicino a un piccolo contratto che a un’istruzione conversazionale. Lascia al modello spazio per scegliere l’implementazione, ma offre al team un criterio stabile per rifiutare una soluzione elegante ma sbagliata.
 
+<EditorialCallout eyebrow="Principio guida" title="Il modello sceglie il percorso. Il team sceglie il confine." tone="accent">
+  <p>Un’implementazione generata è sostituibile. Sono l’intento, i vincoli e le prove di accettazione a rendere una modifica comprensibile e governabile.</p>
+</EditorialCallout>
+
 ## La nuova unità di lavoro
 
 In questo paradigma, una modifica non è più soltanto una pull request con alcuni file sorgente. È un pacchetto composto da cinque artefatti collegati:
@@ -90,6 +107,17 @@ Il flusso più solido diventa quindi un ciclo:
 definire l’intento → proporre un piano → implementare → verificare → ispezionare le prove → accettare o correggere
 ```
 
+<EditorialFlow
+  label="Ciclo della programmazione a obiettivi"
+  items={[
+    { number: "01", title: "Definire", description: "Esplicitare il risultato e il motivo per cui conta." },
+    { number: "02", title: "Vincolare", description: "Rendere visibili invarianti, confini e non-obiettivi." },
+    { number: "03", title: "Costruire", description: "Lasciare al modello l’esplorazione dentro il confine." },
+    { number: "04", title: "Verificare", description: "Eseguire test, ispezionare tracce e confrontare le prove." },
+    { number: "05", title: "Decidere", description: "Accettare, correggere o rifiutare l’interpretazione." },
+  ]}
+/>
+
 Il ciclo deve essere economico da ripetere e trasparente rispetto all’incertezza. I modelli sono bravi a esplorare uno spazio ampio di soluzioni, ma non sanno automaticamente quali compromessi siano accettabili per il prodotto, l’organizzazione o gli utenti.
 
 ## I rischi non spariscono cambiando interfaccia
@@ -109,6 +137,10 @@ Non serve riprogettare l’intera toolchain. È sufficiente scegliere una modifi
 - assunzioni che richiedono ancora una decisione umana.
 
 Poi si chiede al modello di proporre un piano prima di scrivere il codice. Si revisiona il piano, si implementa in un branch piccolo, si raccolgono le prove e si conserva l’intento insieme alla modifica. L’obiettivo non è produrre più codice più velocemente. È accorciare la distanza tra una decisione e un sistema funzionante, rendendola più visibile e più facile da correggere.
+
+<EditorialQuote cite="Una regola pratica per i team che usano l’AI">
+  L’implementazione è sostituibile; il motivo per cui esiste, no.
+</EditorialQuote>
 
 ## In conclusione
 

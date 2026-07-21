@@ -1,17 +1,28 @@
-import { Link } from "react-router-dom";
-
 import { projectCatalog } from "../../app/dependencies";
 import { useLanguage } from "../../application/i18n";
 import { getPageCopy } from "../../application/pageCopy";
 import { DocumentMeta } from "../components/DocumentMeta";
-import { ArrowMark } from "../components/SmartLink";
 import { DecryptedText } from "../effects/DecryptedText";
+import { EditorialIndex, type EditorialIndexItem } from "../editorial/EditorialIndex";
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
 export function WorkPage() {
   const { language } = useLanguage();
   const copy = getPageCopy(language, "work");
   const projects = projectCatalog.listProjects(language);
+  const items: EditorialIndexItem[] = projects.map(({ metadata }) => ({
+    ariaLabel: `${copy.view} ${metadata.title}`,
+    eyebrow: `${metadata.index} · ${metadata.year}`,
+    href: `/work/${metadata.slug}`,
+    media: {
+      alt: metadata.hero.alt,
+      fallback: <PlaceholderVisual />,
+      src: metadata.hero.src,
+    },
+    metadata: [metadata.role, metadata.disciplines.join(" · ")],
+    summary: metadata.summary,
+    title: metadata.title,
+  }));
 
   return (
     <>
@@ -32,22 +43,11 @@ export function WorkPage() {
         </h1>
         <p className="pt-4">{copy.description}</p>
       </header>
-      <section className="work-list page-shell" aria-label={copy.sectionLabel}>
-        {projects.map(({ metadata }) => (
-          <article key={metadata.slug}>
-            <Link className="work-list__media" to={`/work/${metadata.slug}`} aria-label={`${copy.view} ${metadata.title}`}>
-              {metadata.hero.src ? <img alt={metadata.hero.alt} decoding="async" loading="lazy" src={metadata.hero.src} /> : <PlaceholderVisual />}
-            </Link>
-            <div className="work-list__copy">
-              <span className="eyebrow">{metadata.index} · {metadata.year}</span>
-              <h2><Link to={`/work/${metadata.slug}`}>{metadata.title}</Link></h2>
-              <p>{metadata.summary}</p>
-              <div className="work-list__meta"><span>{metadata.role}</span><span>{metadata.disciplines.join(" · ")}</span></div>
-              <Link className="text-link" to={`/work/${metadata.slug}`}>{copy.read} <ArrowMark /></Link>
-            </div>
-          </article>
-        ))}
-      </section>
+      <EditorialIndex
+        items={items}
+        readLabel={copy.read}
+        sectionLabel={copy.sectionLabel}
+      />
     </>
   );
 }

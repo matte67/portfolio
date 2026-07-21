@@ -97,20 +97,20 @@ test("server responses expose route-specific metadata without JavaScript", async
   expect(html).toContain("SEF coordinates acquisition, processing, signal extraction");
 });
 
-test("locale-only articles expose static social metadata without JavaScript", async ({ request }) => {
-  const response = await request.get("/articles/ddfgd");
+test("published articles expose static social metadata without JavaScript", async ({ request }) => {
+  const response = await request.get("/articles/ai-goal-oriented-programming");
   const html = await response.text();
 
   expect(response.ok()).toBeTruthy();
-  expect(html).toContain('<html lang="it">');
-  expect(html).toContain('<meta property="og:locale" content="it_IT" />');
+  expect(html).toContain('<html lang="en">');
+  expect(html).toContain('<meta property="og:locale" content="en_US" />');
   expect(html).toContain(
-    `<meta property="og:url" content="${PRODUCTION_ORIGIN}/articles/ddfgd/" />`,
+    `<meta property="og:url" content="${PRODUCTION_ORIGIN}/articles/ai-goal-oriented-programming/" />`,
   );
   expect(html).toContain(
-    `<meta property="og:image" content="${PRODUCTION_ORIGIN}/media/thesis/cover.png" />`,
+    `<meta property="og:image" content="${PRODUCTION_ORIGIN}/social-preview.png" />`,
   );
   expect(html).toContain('"@type":"Article"');
-  expect(html).toContain('data-prerendered-route="/articles/ddfgd"');
-  expect(html).toContain('<time datetime="2026-07-20">2026-07-20</time>');
+  expect(html).toContain('data-prerendered-route="/articles/ai-goal-oriented-programming"');
+  expect(html).toContain('<time datetime="2026-07-19">2026-07-19</time>');
 });

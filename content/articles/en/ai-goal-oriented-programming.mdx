@@ -17,6 +17,10 @@ tags:
   - constraints
   - verification
   - software architecture
+hero:
+  src: /media/articles/ai-goal-oriented-programming/ai-human.png
+  alt: 'A visual loop connecting intent, constraints, implementation, and evidence in goal-oriented programming.'
+  position: center
 seo:
   title: "Goal-oriented programming in the AI era"
   description: "A practical proposal for AI-based programming built around goals, constraints, contracts, verification, and human ownership."
@@ -27,6 +31,13 @@ seo:
 Software has always been written at several levels of abstraction. We started with machine instructions, moved to assembly, then to languages that let us describe algorithms, data structures, and domain rules without spelling out every operation. AI-assisted development suggests another change in that boundary: the programmer may increasingly describe **what must be achieved**, while the model explores an implementation that satisfies the description.
 
 This is not the end of code, and it is not a licence to replace engineering with a prompt. It is a proposal for a different programming interface: one where the primary artefact is a goal together with its constraints and evidence, and source code is an implementation detail that can be regenerated, inspected, and replaced.
+
+<EditorialFigure
+  src="/media/articles/ai-goal-oriented-programming/goal-contract.svg"
+  alt="Five connected cards showing intent, constraints, plan, implementation, and evidence as one change package."
+  caption="A goal becomes useful when it carries its boundaries, its proposed path, and the evidence needed to accept the result."
+  wide={true}
+/>
 
 ## From instructions to intent
 
@@ -62,6 +73,10 @@ Evidence
 
 The example is closer to a small contract than to a chat instruction. It gives the model room to make implementation choices while giving the team a stable way to reject an attractive but incorrect solution.
 
+<EditorialCallout eyebrow="Working principle" title="The model chooses the path. The team chooses the boundary." tone="accent">
+  <p>A generated implementation is replaceable. The intent, constraints, and acceptance evidence are what make a change understandable and governable.</p>
+</EditorialCallout>
+
 ## The new unit of work
 
 In this paradigm, a change is no longer just a pull request containing source files. It is a package made of five related artefacts:
@@ -90,6 +105,17 @@ The strongest workflow is therefore a loop:
 define intent → propose a plan → implement → verify → inspect evidence → accept or revise
 ```
 
+<EditorialFlow
+  label="Goal-oriented programming loop"
+  items={[
+    { number: "01", title: "Define", description: "State the outcome and why it matters." },
+    { number: "02", title: "Constrain", description: "Make invariants, boundaries, and non-goals explicit." },
+    { number: "03", title: "Build", description: "Let the model explore an implementation inside the boundary." },
+    { number: "04", title: "Verify", description: "Run tests, inspect traces, and compare the evidence." },
+    { number: "05", title: "Decide", description: "Accept, revise, or reject the interpretation." },
+  ]}
+/>
+
 The loop should be cheap to repeat and explicit about uncertainty. Models are good at exploring a large solution space, but they do not automatically know which trade-offs the product, organisation, or users can accept.
 
 ## The risks are not solved by changing the interface
@@ -109,6 +135,10 @@ Teams do not need to redesign their entire toolchain to experiment with this ide
 - the assumptions that still need a human decision.
 
 Then ask the model to propose a plan before it writes code. Review the plan, let it implement in a small branch, run the evidence, and keep the intent alongside the resulting change. The goal is not to produce more code faster. It is to make the distance between a decision and a working system shorter, more visible, and easier to correct.
+
+<EditorialQuote cite="A practical rule for AI-assisted teams">
+  The implementation is replaceable; the reason for the change is not.
+</EditorialQuote>
 
 ## Closing thought
 

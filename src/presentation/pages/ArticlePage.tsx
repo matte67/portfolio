@@ -2,20 +2,17 @@ import { Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { articleCatalog } from "../../app/dependencies";
+import { formatPublicationDate } from "../../application/formatPublicationDate";
 import { useLanguage } from "../../application/i18n";
 import { getPageCopy } from "../../application/pageCopy";
 import { DocumentMeta } from "../components/DocumentMeta";
-import { projectMdxComponents } from "../project/mdxComponents";
-
-function formatDate(value: string | undefined, language: "en" | "it") {
-  if (!value) return undefined;
-  return new Intl.DateTimeFormat(language, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(`${value}T12:00:00.000Z`));
-}
+import {
+  EditorialHero,
+  EditorialMasthead,
+  EditorialReadingLayout,
+  type EditorialFact,
+} from "../editorial/EditorialPageStructure";
+import { editorialMdxComponents } from "../editorial/mdxComponents";
 
 export function ArticlePage() {
   const { language } = useLanguage();
@@ -37,8 +34,17 @@ export function ArticlePage() {
   }
 
   const { metadata, content: Content } = document;
-  const publishedDate = formatDate(metadata.publishedAt, language);
-  const updatedDate = formatDate(metadata.updatedAt, language);
+  const publishedDate = formatPublicationDate(metadata.publishedAt, language);
+  const updatedDate = formatPublicationDate(metadata.updatedAt, language);
+  const facts: EditorialFact[] = [
+    ...(updatedDate ? [{ label: copy.updated, value: updatedDate }] : []),
+    ...(metadata.categories.length > 0
+      ? [{ label: copy.topics, value: metadata.categories.join(" · ") }]
+      : []),
+    ...(metadata.tags.length > 0
+      ? [{ label: copy.tags, value: metadata.tags.join(" · ") }]
+      : []),
+  ];
 
   return (
     <>
@@ -49,47 +55,30 @@ export function ArticlePage() {
         title={metadata.seo.title}
         type="article"
       />
-      <article className="article-page">
-        <header className="article-masthead page-shell">
-          <div className="project-masthead__breadcrumb">
-            <Link to="/articles">{copy.articles}</Link>
-            <span aria-hidden="true">/</span>
-            <span>{metadata.categories[0] ?? metadata.title}</span>
-          </div>
-          <div className="article-masthead__title">
-            <p className="eyebrow">
-              {publishedDate ? `${copy.published} · ${publishedDate}` : copy.articles}
-            </p>
-            <h1>{metadata.title}</h1>
-            <p>{metadata.summary}</p>
-          </div>
-        </header>
+      <article className="editorial-page article-page">
+        <EditorialMasthead
+          chips={metadata.categories}
+          collectionHref="/articles"
+          collectionLabel={copy.articles}
+          contextLabel={metadata.categories[0] ?? metadata.title}
+          eyebrow={publishedDate ? `${copy.published} · ${publishedDate}` : copy.articles}
+          summary={metadata.summary}
+          title={metadata.title}
+          variant="article"
+        />
 
-        {metadata.hero?.src ? (
-          <div className="project-hero page-shell">
-            <img
-              alt={metadata.hero.alt}
-              className={`project-hero__image project-hero__image--${metadata.hero.position ?? "center"}`}
-              src={metadata.hero.src}
-            />
-          </div>
-        ) : null}
+        {metadata.hero ? <EditorialHero media={metadata.hero} variant="article" /> : null}
 
-        <div className="article-reading-layout page-shell">
-          <aside className="article-facts" aria-label={copy.articles}>
-            <dl>
-              {updatedDate ? <div><dt>{copy.updated}</dt><dd>{updatedDate}</dd></div> : null}
-              {metadata.categories.length > 0 ? (
-                <div><dt>{copy.topics}</dt><dd>{metadata.categories.join(" · ")}</dd></div>
-              ) : null}
-            </dl>
-          </aside>
-          <div className="project-body">
-            <Suspense fallback={<p aria-busy="true">{copy.loadingContent}</p>}>
-              <Content components={projectMdxComponents} />
-            </Suspense>
-          </div>
-        </div>
+        <EditorialReadingLayout
+          bodyClassName="article-body"
+          facts={facts}
+          factsLabel={copy.articles}
+          variant="article"
+        >
+          <Suspense fallback={<p aria-busy="true">{copy.loadingContent}</p>}>
+            <Content components={editorialMdxComponents} />
+          </Suspense>
+        </EditorialReadingLayout>
       </article>
     </>
   );

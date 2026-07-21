@@ -274,11 +274,61 @@ test("localized project content follows the selected language", async ({ page })
   await expect(page.getByText("Overhead in streaming")).toBeVisible();
 });
 
-test("articles expose a deliberate empty state before the first publication", async ({ page }) => {
+test("articles expose the published editorial card", async ({ page }) => {
   await page.goto("/articles");
 
   await expect(page.getByRole("heading", { level: 1, name: "Ideas made useful through detail." })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2, name: "The first article is being prepared." })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "The next programming interface is intent" })).toBeVisible();
+  await expect(page.locator(".editorial-card__media img")).toHaveAttribute(
+    "src",
+    "/media/articles/ai-goal-oriented-programming/ai-human.png",
+  );
+});
+
+test("article and project heroes preserve the shared contained frame", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+
+  for (const route of ["/articles/ai-goal-oriented-programming", "/work/unistays"]) {
+    await page.goto(route);
+    const hero = page.locator(".editorial-hero");
+    const image = hero.locator(".editorial-image");
+    const bounds = await hero.boundingBox();
+
+    expect(bounds).not.toBeNull();
+    if (bounds) expect(bounds.width / bounds.height).toBeCloseTo(16 / 9, 1);
+    await expect(image).toHaveCSS("object-fit", "contain");
+    await expectNoHorizontalOverflow(page);
+  }
+});
+
+test("content figures follow the prose measure and editorial spacing", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+
+  for (const [route, selector] of [
+    ["/articles/ai-goal-oriented-programming", ".editorial-figure:not(.editorial-hero)"],
+    ["/work/sef", ".editorial-figure:not(.editorial-hero)"],
+    ["/work/unistays", ".editorial-gallery"],
+  ] as const) {
+    await page.goto(route);
+    const body = page.locator(".editorial-reading-layout__body");
+    const figure = body.locator(selector).first();
+    const caption = figure.locator("figcaption");
+    const [bodyBounds, figureBounds] = await Promise.all([body.boundingBox(), figure.boundingBox()]);
+
+    expect(bodyBounds).not.toBeNull();
+    expect(figureBounds).not.toBeNull();
+    if (bodyBounds && figureBounds) {
+      expect(figureBounds.x).toBeCloseTo(bodyBounds.x, 0);
+      expect(figureBounds.width).toBeLessThanOrEqual(Math.min(bodyBounds.width, 800) + 1);
+    }
+
+    const marginTop = await figure.evaluate((element) => (
+      Number.parseFloat(getComputedStyle(element).marginTop)
+    ));
+    expect(marginTop).toBeGreaterThanOrEqual(56);
+    await expect(caption).toHaveCSS("display", "grid");
+    await expectNoHorizontalOverflow(page);
+  }
 });
 
 test("mobile layout, navigation, and thesis fallback remain usable", async ({ page }) => {
@@ -354,12 +404,12 @@ test("case-study visuals remain inside the reading column while facts stay stick
 
     for (const route of routes) {
       await page.goto(route);
-      const readingLayout = page.locator(".project-reading-layout");
-      const facts = page.locator(".project-facts");
-      const body = page.locator(".project-body");
+      const readingLayout = page.locator(".editorial-reading-layout--project");
+      const facts = page.locator(".editorial-facts");
+      const body = page.locator(".editorial-reading-layout__body");
       const visual = body.locator([
-        ".project-figure--wide",
-        ".project-gallery",
+        ".editorial-figure--wide",
+        ".editorial-gallery",
         ".pipeline-explorer",
         ".access-points",
         ".benchmark-panel",
@@ -409,8 +459,8 @@ test("case-study visuals remain inside the reading column while facts stay stick
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/work/sef");
-  const mobileFacts = page.locator(".project-facts");
-  const mobileBody = page.locator(".project-body");
+  const mobileFacts = page.locator(".editorial-facts");
+  const mobileBody = page.locator(".editorial-reading-layout__body");
   await mobileBody.locator(".pipeline-explorer").scrollIntoViewIfNeeded();
   await expect(mobileFacts).toHaveCSS("position", "static");
 

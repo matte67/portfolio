@@ -3,6 +3,7 @@ import type { Language } from "./i18n";
 import aboutEn from "../../content/i18n/en/about.json";
 import articleEn from "../../content/i18n/en/article.json";
 import articlesEn from "../../content/i18n/en/articles.json";
+import editorialEn from "../../content/i18n/en/editorial.json";
 import homeEn from "../../content/i18n/en/home.json";
 import layoutEn from "../../content/i18n/en/layout.json";
 import notFoundEn from "../../content/i18n/en/not-found.json";
@@ -13,6 +14,7 @@ import workEn from "../../content/i18n/en/work.json";
 import aboutIt from "../../content/i18n/it/about.json";
 import articleIt from "../../content/i18n/it/article.json";
 import articlesIt from "../../content/i18n/it/articles.json";
+import editorialIt from "../../content/i18n/it/editorial.json";
 import homeIt from "../../content/i18n/it/home.json";
 import layoutIt from "../../content/i18n/it/layout.json";
 import notFoundIt from "../../content/i18n/it/not-found.json";
@@ -22,8 +24,8 @@ import thesisPreviewIt from "../../content/i18n/it/thesis-preview.json";
 import workIt from "../../content/i18n/it/work.json";
 
 const pageCopy = {
-  en: { about: aboutEn, article: articleEn, articles: articlesEn, home: homeEn, layout: layoutEn, notFound: notFoundEn, project: projectEn, thesis: thesisEn, thesisPreview: thesisPreviewEn, work: workEn },
-  it: { about: aboutIt, article: articleIt, articles: articlesIt, home: homeIt, layout: layoutIt, notFound: notFoundIt, project: projectIt, thesis: thesisIt, thesisPreview: thesisPreviewIt, work: workIt },
+  en: { about: aboutEn, article: articleEn, articles: articlesEn, editorial: editorialEn, home: homeEn, layout: layoutEn, notFound: notFoundEn, project: projectEn, thesis: thesisEn, thesisPreview: thesisPreviewEn, work: workEn },
+  it: { about: aboutIt, article: articleIt, articles: articlesIt, editorial: editorialIt, home: homeIt, layout: layoutIt, notFound: notFoundIt, project: projectIt, thesis: thesisIt, thesisPreview: thesisPreviewIt, work: workIt },
 } as const;
 
 export type PageCopyName = keyof typeof pageCopy.en;

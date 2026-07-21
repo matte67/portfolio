@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760" role="img" aria-labelledby="title description">
+  <title id="title">The five artefacts of a goal-oriented change</title>
+  <desc id="description">Intent, constraints, plan, implementation, and evidence are connected as one change package.</desc>
+  <defs>
+    <marker id="arrow" markerHeight="10" markerWidth="10" orient="auto" refX="8" refY="5" viewBox="0 0 10 10">
+      <path d="m0 0 10 5-10 5Z" fill="#b44d32" />
+    </marker>
+  </defs>
+  <rect width="1600" height="760" rx="42" fill="#181916" />
+  <text x="88" y="104" fill="#f3efe6" font-family="IBM Plex Mono, monospace" font-size="21" letter-spacing="4">ONE CHANGE · FIVE ARTEFACTS</text>
+  <text x="88" y="180" fill="#f3efe6" font-family="Instrument Sans, Arial, sans-serif" font-size="62" font-weight="600" letter-spacing="-3">The code is only one layer.</text>
+  <path d="M88 220h320" stroke="#b44d32" stroke-width="4" />
+
+  <g font-family="Instrument Sans, Arial, sans-serif">
+    <g transform="translate(88 320)">
+      <rect width="248" height="240" rx="22" fill="#b44d32" />
+      <text x="28" y="48" fill="#f3efe6" font-family="IBM Plex Mono, monospace" font-size="17">01</text>
+      <text x="28" y="120" fill="#fff" font-size="31" font-weight="600">Intent</text>
+      <text x="28" y="164" fill="#f3d8cf" font-size="19">Outcome + reason</text>
+    </g>
+    <g transform="translate(384 320)">
+      <rect width="248" height="240" rx="22" fill="#fbf8f1" />
+      <text x="28" y="48" fill="#8f3522" font-family="IBM Plex Mono, monospace" font-size="17">02</text>
+      <text x="28" y="120" fill="#181916" font-size="31" font-weight="600">Constraints</text>
+      <text x="28" y="164" fill="#5d5b54" font-size="19">Boundaries + non-goals</text>
+    </g>
+    <g transform="translate(680 320)">
+      <rect width="248" height="240" rx="22" fill="#e8e1d5" />
+      <text x="28" y="48" fill="#8f3522" font-family="IBM Plex Mono, monospace" font-size="17">03</text>
+      <text x="28" y="120" fill="#181916" font-size="31" font-weight="600">Plan</text>
+      <text x="28" y="164" fill="#5d5b54" font-size="19">Model interpretation</text>
+    </g>
+    <g transform="translate(976 320)">
+      <rect width="248" height="240" rx="22" fill="#fbf8f1" />
+      <text x="28" y="48" fill="#8f3522" font-family="IBM Plex Mono, monospace" font-size="17">04</text>
+      <text x="28" y="120" fill="#181916" font-size="31" font-weight="600">Build</text>
+      <text x="28" y="164" fill="#5d5b54" font-size="19">Code + configuration</text>
+    </g>
+    <g transform="translate(1272 320)">
+      <rect width="248" height="240" rx="22" fill="#b44d32" />
+      <text x="28" y="48" fill="#f3efe6" font-family="IBM Plex Mono, monospace" font-size="17">05</text>
+      <text x="28" y="120" fill="#fff" font-size="31" font-weight="600">Evidence</text>
+      <text x="28" y="164" fill="#f3d8cf" font-size="19">Tests + decision</text>
+    </g>
+  </g>
+  <g stroke="#b44d32" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M345 440h30" />
+    <path d="M641 440h30" />
+    <path d="M937 440h30" />
+    <path d="M1233 440h30" />
+  </g>
+  <text x="88" y="666" fill="#aaa9a3" font-family="IBM Plex Mono, monospace" font-size="18" letter-spacing="1">A better model can replace the build without erasing the reason it exists.</text>
+</svg>
