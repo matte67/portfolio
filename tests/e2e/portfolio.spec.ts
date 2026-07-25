@@ -293,7 +293,7 @@ test("articles expose the published editorial card", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 2, name: "The next programming interface is intent" })).toBeVisible();
   await expect(page.locator(".editorial-card__media img")).toHaveAttribute(
     "src",
-    "/media/articles/ai-goal-oriented-programming/ai-human.png",
+    "/media/articles/ai-goal-oriented-programming/ai-me-handshake.avif",
   );
 });
 

@@ -1258,11 +1258,8 @@ svg {
 .editorial-card__media {
   position: relative;
   display: grid;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
   place-items: center;
   border-radius: var(--radius-large);
-  background: var(--color-surface-muted);
   isolation: isolate;
 }
 
@@ -1270,7 +1267,6 @@ svg {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(130deg, transparent 25%, rgb(180 77 50 / 12%), transparent 75%);
   content: "";
 }
 
@@ -3110,10 +3106,6 @@ svg {
 
   .editorial-index--preview .editorial-card {
     gap: 1.25rem;
-  }
-
-  .editorial-card__media {
-    aspect-ratio: 16 / 9;
   }
 
   .editorial-masthead__title,

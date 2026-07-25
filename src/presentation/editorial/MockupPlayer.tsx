@@ -108,7 +108,7 @@ export function MockupPlayer({
   }, []);
 
   return (
-    <div className={"mockup-player-embed " + className} data-mockup-id={mockupId}>
+    <div className={"mockup-player-embed  " + className} data-mockup-id={mockupId}>
       {createElement("mockup-player", {
         "aspect-ratio": aspectRatio,
         "camera-zoom": cameraZoom,
