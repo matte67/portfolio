@@ -18,7 +18,7 @@ import { ProjectLinks } from "../project/ProjectLinks";
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
 export function ProjectPage() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "project");
   const notFoundCopy = getPageCopy(language, "notFound");
   const { slug = "" } = useParams();
@@ -31,7 +31,7 @@ export function ProjectPage() {
         <section className="not-found page-shell">
           <p className="eyebrow">{notFoundCopy.projectEyebrow}</p>
           <h1>{notFoundCopy.projectTitle}</h1>
-          <Link className="button-link" to="/work">{notFoundCopy.returnWork}</Link>
+          <Link className="button-link" to={toLocalizedPath("/work")}>{notFoundCopy.returnWork}</Link>
         </section>
       </>
     );
@@ -59,7 +59,7 @@ export function ProjectPage() {
       <article className={`project-page project-page--${metadata.slug}`}>
         <EditorialMasthead
           actions={<ProjectLinks links={metadata.links} />}
-          collectionHref="/work"
+          collectionHref={toLocalizedPath("/work")}
           collectionLabel={copy.work}
           contextLabel={metadata.index}
           eyebrow={`${copy.statuses[metadata.status]} · ${metadata.year}`}
@@ -115,7 +115,7 @@ export function ProjectPage() {
             <ProjectLinks links={metadata.links} />
           </div>
           {nextProject ? (
-            <Link className="next-project" to={`/work/${nextProject.slug}`}>
+            <Link className="next-project" to={toLocalizedPath(`/work/${nextProject.slug}`)}>
               <span>{copy.next} · {nextProject.index}</span>
               <strong>{nextProject.shortTitle}</strong>
               <ArrowMark />

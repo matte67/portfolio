@@ -1,5 +1,6 @@
 import type { ArticleMetadata } from "../../core/article";
 import type { Language } from "../../application/i18n";
+import { toLocalizedPath } from "../../application/localizedPath";
 import { formatPublicationDate } from "../../application/formatPublicationDate";
 import type { EditorialIndexItem } from "./EditorialIndex";
 
@@ -11,7 +12,7 @@ export function toArticleIndexItem(
   return {
     ariaLabel: metadata.title,
     eyebrow: formatPublicationDate(metadata.publishedAt, language),
-    href: `/articles/${metadata.slug}`,
+    href: toLocalizedPath(`/articles/${metadata.slug}`, language),
     media: {
       alt: metadata.hero?.alt ?? "",
       src: metadata.hero?.src,

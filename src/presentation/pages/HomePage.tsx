@@ -17,7 +17,7 @@ import { SignalField } from "../visuals/SignalField";
 const FlowingMenu = lazy(() => import("../components/FlowingMenu"));
 
 export function HomePage() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "home");
   const projects = projectCatalog.listFeaturedProjects(language);
   const latestArticles = articleCatalog
@@ -26,7 +26,7 @@ export function HomePage() {
     .map(({ metadata }) => toArticleIndexItem(metadata, language));
   const selectedProjectItems = projects.map(({ metadata }) => ({
     image: metadata.chip || "/global/matteo-vittori-mark.svg",
-    link: `/work/${metadata.slug}`,
+    link: toLocalizedPath(`/work/${metadata.slug}`),
     meta: `${metadata.disciplines.slice(0, 2).join(" · ")} · ${metadata.year}`,
     text: metadata.shortTitle,
   }));
@@ -87,7 +87,7 @@ export function HomePage() {
             speed={10}
           />
         </Suspense>
-        <Link className="section-end-link" to="/work">{copy.work.indexLink} <ArrowMark /></Link>
+        <Link className="section-end-link" to={toLocalizedPath("/work")}>{copy.work.indexLink} <ArrowMark /></Link>
       </section>
 
       <section className="home-articles page-shell section-space" aria-labelledby="home-articles-title">
@@ -105,7 +105,7 @@ export function HomePage() {
           variant="default"
           showLinks={false}
         />
-        <Link className="section-end-link mt-0!" to="/articles">{copy.articles.indexLink} <ArrowMark /></Link>
+        <Link className="section-end-link" to={toLocalizedPath("/articles")}>{copy.articles.indexLink} <ArrowMark /></Link>
       </section>
 
       <section className="about-preview page-shell section-space" aria-labelledby="about-preview-title">
@@ -120,7 +120,7 @@ export function HomePage() {
           <p>
             {copy.about.paragraphs[1]}
           </p>
-          <Link className="text-link" to="/about">{copy.about.link} <ArrowMark /></Link>
+          <Link className="text-link" to={toLocalizedPath("/about")}>{copy.about.link} <ArrowMark /></Link>
         </div>
       </section>
 

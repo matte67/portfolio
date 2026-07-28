@@ -47,9 +47,25 @@ async function resolveRequestPath(pathname) {
   return existingFile(join(candidate, "index.html"));
 }
 
+function legacyRedirect(pathname) {
+  if (pathname === "/") return "/en/";
+
+  const match = pathname.match(/^\/(work|articles|thesis|about)(?:\/(.*))?\/?$/);
+  if (!match) return undefined;
+
+  const [, section, remainder] = match;
+  return `/en/${section}${remainder ? `/${remainder}` : "/"}`;
+}
+
 const server = createServer(async (request, response) => {
   try {
     const requestUrl = new URL(request.url ?? "/", `http://${host}:${port}`);
+    const redirectLocation = legacyRedirect(requestUrl.pathname);
+    if (redirectLocation) {
+      response.writeHead(301, { Location: `${redirectLocation}${requestUrl.search}` });
+      response.end();
+      return;
+    }
     const requestedFile = await resolveRequestPath(requestUrl.pathname);
     const file = requestedFile ?? join(publicRoot, "404.html");
     const statusCode = requestedFile ? 200 : 404;

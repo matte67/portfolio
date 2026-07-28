@@ -6,7 +6,6 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 
 import { router } from "./app/router";
-import { LanguageProvider } from "./application/i18n";
 import { ClickSpark } from "./presentation/effects/ClickSpark";
 import "./styles.css";
 
@@ -29,9 +28,7 @@ createRoot(rootElement).render(
       sparkRadius={25}
       sparkSize={12}
     >
-      <LanguageProvider>
-        <RouterProvider router={router} />
-      </LanguageProvider>
+      <RouterProvider router={router} />
     </ClickSpark>
   </StrictMode>,
 );

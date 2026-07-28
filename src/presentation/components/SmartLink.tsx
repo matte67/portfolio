@@ -9,6 +9,8 @@ import {
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
+import { useLanguage } from "../../application/i18n";
+
 interface SmartLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
   readonly href: string;
   readonly children: ReactNode;
@@ -36,11 +38,12 @@ export function NextMark() {
 
 /** Uses client navigation for routes and a normal anchor for documents or external URLs. */
 export function SmartLink({ href, children, ...props }: SmartLinkProps) {
+  const { toLocalizedPath } = useLanguage();
   const isRoute = href.startsWith("/") && !href.endsWith(".pdf");
 
   if (isRoute) {
     return (
-      <Link to={href} className={props.className} aria-label={props["aria-label"]}>
+      <Link to={toLocalizedPath(href)} className={props.className} aria-label={props["aria-label"]}>
         {children}
       </Link>
     );

@@ -3,16 +3,16 @@ import { expect, test } from "@playwright/test";
 const PRODUCTION_ORIGIN = "https://matteo-vittori.netlify.app";
 
 test("homepage exposes complete production and social metadata", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/en/");
 
   await expect(page).toHaveTitle("Computer Science student — Matteo Vittori");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    `${PRODUCTION_ORIGIN}/`,
+    `${PRODUCTION_ORIGIN}/en/`,
   );
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
     "content",
-    `${PRODUCTION_ORIGIN}/`,
+    `${PRODUCTION_ORIGIN}/en/`,
   );
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
@@ -29,12 +29,12 @@ test("homepage exposes complete production and social metadata", async ({ page }
 });
 
 test("project routes publish their own canonical URL and social image", async ({ page }) => {
-  await page.goto("/work/sef");
+  await page.goto("/en/work/sef");
 
   await expect(page).toHaveTitle("SEF — Matteo Vittori");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    `${PRODUCTION_ORIGIN}/work/sef/`,
+    `${PRODUCTION_ORIGIN}/en/work/sef/`,
   );
   await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
     "content",
@@ -47,7 +47,7 @@ test("project routes publish their own canonical URL and social image", async ({
 });
 
 test("unknown routes are excluded from indexing", async ({ page }) => {
-  await page.goto("/this-route-does-not-exist");
+  await page.goto("/en/this-route-does-not-exist");
 
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     "content",
@@ -67,50 +67,80 @@ test("crawler assets expose the production route catalogue", async ({ request })
 
   expect(sitemapResponse.ok()).toBeTruthy();
   const sitemap = await sitemapResponse.text();
-  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/work/sef/</loc>`);
-  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/articles/</loc>`);
-  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/thesis/</loc>`);
+  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/en/work/sef/</loc>`);
+  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/it/work/sef/</loc>`);
+  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/en/articles/</loc>`);
+  expect(sitemap).toContain(`<loc>${PRODUCTION_ORIGIN}/it/thesis/</loc>`);
 
   const manifestResponse = await request.get("/content-manifest.json");
   expect(manifestResponse.ok()).toBeTruthy();
   const manifest = await manifestResponse.json();
-  expect(manifest.projects).toHaveLength(5);
-  expect(manifest.articles).toHaveLength(1);
+  expect(manifest.projects).toHaveLength(10);
+  expect(manifest.articles).toHaveLength(2);
 
   expect(socialPreviewResponse.ok()).toBeTruthy();
   expect(socialPreviewResponse.headers()["content-type"]).toContain("image/png");
 });
 
 test("server responses expose route-specific metadata without JavaScript", async ({ request }) => {
-  const response = await request.get("/work/sef");
+  const response = await request.get("/en/work/sef");
   const html = await response.text();
 
   expect(response.ok()).toBeTruthy();
   expect(html).toContain("<title>SEF — Matteo Vittori</title>");
   expect(html).toContain(
-    `<link rel="canonical" href="${PRODUCTION_ORIGIN}/work/sef/" />`,
+    `<link rel="canonical" href="${PRODUCTION_ORIGIN}/en/work/sef/" />`,
   );
   expect(html).toContain(
     `<meta property="og:image" content="${PRODUCTION_ORIGIN}/media/sef/showcase.avif" />`,
   );
-  expect(html).toContain('data-prerendered-route="/work/sef"');
+  expect(html).toContain('data-prerendered-route="/en/work/sef"');
   expect(html).toContain("SEF coordinates acquisition, processing, signal extraction");
 });
 
 test("published articles expose static social metadata without JavaScript", async ({ request }) => {
-  const response = await request.get("/articles/ai-goal-oriented-programming");
+  const response = await request.get("/it/articles/ai-goal-oriented-programming");
   const html = await response.text();
 
   expect(response.ok()).toBeTruthy();
-  expect(html).toContain('<html lang="en">');
-  expect(html).toContain('<meta property="og:locale" content="en_US" />');
+  expect(html).toContain('<html lang="it">');
+  expect(html).toContain('<meta property="og:locale" content="it_IT" />');
   expect(html).toContain(
-    `<meta property="og:url" content="${PRODUCTION_ORIGIN}/articles/ai-goal-oriented-programming/" />`,
+    `<meta property="og:url" content="${PRODUCTION_ORIGIN}/it/articles/ai-goal-oriented-programming/" />`,
   );
   expect(html).toContain(
     `<meta property="og:image" content="${PRODUCTION_ORIGIN}/social-preview.png" />`,
   );
   expect(html).toContain('"@type":"Article"');
-  expect(html).toContain('data-prerendered-route="/articles/ai-goal-oriented-programming"');
+  expect(html).toContain('data-prerendered-route="/it/articles/ai-goal-oriented-programming"');
   expect(html).toContain('<time datetime="2026-07-19">2026-07-19</time>');
+});
+
+test("localized documents expose reciprocal language alternatives and preserve legacy links", async ({ request }) => {
+  const italianResponse = await request.get("/it/work/sef");
+  const legacyResponse = await request.get("/work/sef", { maxRedirects: 0 });
+  const italianHtml = await italianResponse.text();
+
+  expect(italianResponse.ok()).toBeTruthy();
+  expect(italianHtml).toContain(
+    `<link rel="alternate" hreflang="en" href="${PRODUCTION_ORIGIN}/en/work/sef/" />`,
+  );
+  expect(italianHtml).toContain(
+    `<link rel="alternate" hreflang="it" href="${PRODUCTION_ORIGIN}/it/work/sef/" />`,
+  );
+  expect(italianHtml).toContain(
+    `<link rel="alternate" hreflang="x-default" href="${PRODUCTION_ORIGIN}/en/work/sef/" />`,
+  );
+  expect(legacyResponse.status()).toBe(301);
+  expect(legacyResponse.headers().location).toBe("/en/work/sef");
+});
+
+test("the language control keeps visitors on the equivalent localized page", async ({ page }) => {
+  await page.goto("/en/work/sef");
+
+  await page.getByRole("button", { name: "Change language" }).evaluate((button) => button.click());
+
+  await expect(page).toHaveURL(/\/it\/work\/sef$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "it");
+  await expect(page.getByRole("heading", { level: 2, name: "Il problema" })).toBeVisible();
 });

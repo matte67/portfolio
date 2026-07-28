@@ -14,99 +14,115 @@ const localeMetadata = Object.freeze({
   en: { html: "en", openGraph: "en_US" },
   it: { html: "it", openGraph: "it_IT" },
 });
+const locales = Object.keys(localeMetadata);
 
 async function readJson(path) {
   return JSON.parse(await readFile(join(projectRoot, path), "utf8"));
 }
 
-const [catalog, homeCopy, workCopy, articlesCopy, thesisCopy, aboutCopy] = await Promise.all([
+const [catalog, copiesByLocale] = await Promise.all([
   readContentCatalog(projectRoot),
-  readJson("content/i18n/en/home.json"),
-  readJson("content/i18n/en/work.json"),
-  readJson("content/i18n/en/articles.json"),
-  readJson("content/i18n/en/thesis.json"),
-  readJson("content/i18n/en/about.json"),
+  Promise.all(locales.map(async (locale) => [locale, {
+    about: await readJson(`content/i18n/${locale}/about.json`),
+    articles: await readJson(`content/i18n/${locale}/articles.json`),
+    home: await readJson(`content/i18n/${locale}/home.json`),
+    layout: await readJson(`content/i18n/${locale}/layout.json`),
+    thesis: await readJson(`content/i18n/${locale}/thesis.json`),
+    work: await readJson(`content/i18n/${locale}/work.json`),
+  }])),
 ]);
+const localizedCopy = Object.fromEntries(copiesByLocale);
+const publicProjects = catalog.projects.filter(({ isPublic }) => isPublic);
+const publicArticles = catalog.articles.filter(({ isPublic }) => isPublic);
 
-/**
- * A route has no locale prefix, so it can expose one static social document.
- * Prefer English when translations share a slug, but retain locale-only content.
- */
-function selectRouteContent(entries) {
-  const bySlug = new Map();
-
-  for (const entry of entries.filter(({ isPublic }) => isPublic)) {
-    const selected = bySlug.get(entry.slug);
-    if (!selected || (entry.locale === "en" && selected.locale !== "en")) {
-      bySlug.set(entry.slug, entry);
-    }
-  }
-
-  return [...bySlug.values()];
+function localePath(locale, path = "") {
+  return `/${locale}${path}`;
 }
 
-const publicProjects = selectRouteContent(catalog.projects);
-const publicArticles = selectRouteContent(catalog.articles);
+function pageAlternates(path) {
+  return locales.map((locale) => ({ locale, path: localePath(locale, path) }));
+}
 
-const homeRoute = {
-  path: "/",
-  ...homeCopy.meta,
-  kind: "home",
-  priority: "1.0",
-  projects: publicProjects,
-};
+function contentAlternates(entries, entry, collectionPath) {
+  return entries
+    .filter(({ translationKey }) => translationKey === entry.translationKey)
+    .map(({ locale, slug }) => ({ locale, path: localePath(locale, `${collectionPath}/${slug}`) }));
+}
 
-const routes = [
-  { path: "/work", ...workCopy.meta, kind: "collection", items: publicProjects, priority: "0.9" },
-  { path: "/articles", ...articlesCopy.meta, kind: "collection", items: publicArticles, priority: "0.8" },
-  ...publicProjects.map((project) => ({
-    path: `/work/${project.slug}`,
-    title: project.seo.title,
-    description: project.seo.description,
-    image: project.seo.image ?? project.hero?.src,
-    imageAlt: project.seo.imageAlt ?? project.hero?.alt,
-    locale: project.locale,
-    kind: "project",
-    content: project,
-    type: "article",
-    structuredDataType: "CreativeWork",
-    priority: "0.8",
-    lastModified: project.updatedAt ?? project.publishedAt,
-  })),
-  ...publicArticles.map((article) => ({
-    path: `/articles/${article.slug}`,
-    title: article.seo.title,
-    description: article.seo.description,
-    image: article.seo.image ?? article.hero?.src,
-    imageAlt: article.seo.imageAlt ?? article.hero?.alt,
-    locale: article.locale,
-    kind: "article",
-    content: article,
-    type: "article",
-    structuredDataType: "Article",
-    publishedAt: article.publishedAt,
-    updatedAt: article.updatedAt,
-    section: article.categories?.[0],
-    tags: article.tags,
-    priority: "0.7",
-    lastModified: article.updatedAt ?? article.publishedAt,
-  })),
-  {
-    path: "/thesis",
-    ...thesisCopy.meta,
-    image: "/media/thesis/cover.png",
-    imageAlt: thesisCopy.hero.coverAlt,
-    type: "article",
-    kind: "page",
-    priority: "0.8",
-  },
-  { path: "/about", ...aboutCopy.meta, kind: "page", priority: "0.7" },
-].map((route) => ({ ...route, title: `${route.title} — ${author}` }));
+function staticLabels(copy) {
+  return {
+    navigation: copy.layout.navigation,
+    noPublishedEntries: copy.articles.emptyDescription,
+    selectedWork: copy.home.work.title,
+  };
+}
 
-const allRoutes = [
-  { ...homeRoute, title: `${homeRoute.title} — ${author}` },
-  ...routes,
-];
+const allRoutes = locales.flatMap((locale) => {
+  const copy = localizedCopy[locale];
+  const projects = publicProjects.filter((project) => project.locale === locale);
+  const articles = publicArticles.filter((article) => article.locale === locale);
+  const labels = staticLabels(copy);
+
+  return [
+    {
+      path: localePath(locale), ...copy.home.meta, alternates: pageAlternates(""), kind: "home",
+      labels, locale, priority: "1.0", projects,
+    },
+    {
+      path: localePath(locale, "/work"), ...copy.work.meta, alternates: pageAlternates("/work"),
+      items: projects, kind: "collection", labels, locale, priority: "0.9",
+    },
+    {
+      path: localePath(locale, "/articles"), ...copy.articles.meta, alternates: pageAlternates("/articles"),
+      items: articles, kind: "collection", labels, locale, priority: "0.8",
+    },
+    ...projects.map((project) => ({
+      path: localePath(locale, `/work/${project.slug}`),
+      title: project.seo.title,
+      description: project.seo.description,
+      image: project.seo.image ?? project.hero?.src,
+      imageAlt: project.seo.imageAlt ?? project.hero?.alt,
+      alternates: contentAlternates(publicProjects, project, "/work"),
+      kind: "project",
+      content: project,
+      labels,
+      locale,
+      type: "article",
+      structuredDataType: "CreativeWork",
+      priority: "0.8",
+      lastModified: project.updatedAt ?? project.publishedAt,
+    })),
+    ...articles.map((article) => ({
+      path: localePath(locale, `/articles/${article.slug}`),
+      title: article.seo.title,
+      description: article.seo.description,
+      image: article.seo.image ?? article.hero?.src,
+      imageAlt: article.seo.imageAlt ?? article.hero?.alt,
+      alternates: contentAlternates(publicArticles, article, "/articles"),
+      kind: "article",
+      content: article,
+      labels,
+      locale,
+      type: "article",
+      structuredDataType: "Article",
+      publishedAt: article.publishedAt,
+      updatedAt: article.updatedAt,
+      section: article.categories?.[0],
+      tags: article.tags,
+      priority: "0.7",
+      lastModified: article.updatedAt ?? article.publishedAt,
+    })),
+    {
+      path: localePath(locale, "/thesis"), ...copy.thesis.meta, alternates: pageAlternates("/thesis"),
+      image: "/media/thesis/cover.png", imageAlt: copy.thesis.hero.coverAlt, type: "article",
+      kind: "page", labels, locale, priority: "0.8",
+    },
+    {
+      path: localePath(locale, "/about"), ...copy.about.meta, alternates: pageAlternates("/about"),
+      kind: "page", labels, locale, priority: "0.7",
+    },
+  ].map((route) => ({ ...route, title: `${route.title} — ${author}` }));
+});
 
 function escapeAttribute(value) {
   return String(value)
@@ -124,18 +140,20 @@ function normalizePagePath(path) {
   return path === "/" ? path : `${path.replace(/\/+$/, "")}/`;
 }
 
-function createStaticNavigation() {
-  return `<nav aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="/work/">Work</a>
-      <a href="/articles/">Articles</a>
-      <a href="/thesis/">Thesis</a>
-      <a href="/about/">About</a>
+function createStaticNavigation(route) {
+  const { navigation } = route.labels;
+  const prefix = `/${route.locale}`;
+  return `<nav aria-label="${escapeAttribute(navigation.primaryLabel)}">
+      <a href="${prefix}/">${escapeAttribute(navigation.homeLabel)}</a>
+      <a href="${prefix}/work/">${escapeAttribute(navigation.work)}</a>
+      <a href="${prefix}/articles/">${escapeAttribute(navigation.articles)}</a>
+      <a href="${prefix}/thesis/">${escapeAttribute(navigation.thesis)}</a>
+      <a href="${prefix}/about/">${escapeAttribute(navigation.about)}</a>
     </nav>`;
 }
 
-function createCollectionLinks(items, basePath) {
-  if (!items?.length) return "<p>No published entries yet.</p>";
+function createCollectionLinks(items, basePath, noPublishedEntries) {
+  if (!items?.length) return `<p>${escapeAttribute(noPublishedEntries)}</p>`;
   return `<ul>${items.map((item) => `
         <li>
           <a href="${normalizePagePath(`${basePath}/${item.slug}`)}">${escapeAttribute(item.title)}</a>
@@ -151,13 +169,14 @@ function createStaticRouteContent(route) {
 
   if (route.kind === "home") {
     content += `<section aria-labelledby="selected-work-title">
-        <h2 id="selected-work-title">Selected work</h2>
-        ${createCollectionLinks(route.projects, "/work")}
+        <h2 id="selected-work-title">${escapeAttribute(route.labels.selectedWork)}</h2>
+        ${createCollectionLinks(route.projects, `/${route.locale}/work`, route.labels.noPublishedEntries)}
       </section>`;
   } else if (route.kind === "collection") {
     content += createCollectionLinks(
       route.items,
-      route.path === "/work" ? "/work" : "/articles",
+      route.path.endsWith("/work") ? `/${route.locale}/work` : `/${route.locale}/articles`,
+      route.labels.noPublishedEntries,
     );
   } else if (route.kind === "project") {
     const project = route.content;
@@ -181,7 +200,7 @@ function createStaticRouteContent(route) {
   }
 
   return `<main data-prerendered-route="${escapeAttribute(route.path)}">
-    ${createStaticNavigation()}
+    ${createStaticNavigation(route)}
     ${content}
   </main>`;
 }
@@ -232,6 +251,25 @@ function serializeStructuredData(route, canonicalUrl, imageUrl) {
     keywords: route.tags?.length ? route.tags.join(", ") : undefined,
     author: { "@type": "Person", name: author, url: productionOrigin },
   }).replaceAll("<", "\\u003c");
+}
+
+function serializeAlternateLinks(route) {
+  const alternates = route.alternates ?? [];
+  const defaultPath = alternates.find(({ locale }) => locale === "en")?.path ?? route.path;
+  const alternateLinks = alternates.map(({ locale, path }) => (
+    `    <link rel="alternate" hreflang="${locale}" href="${new URL(normalizePagePath(path), `${productionOrigin}/`).toString()}" />`
+  ));
+  alternateLinks.push(
+    `    <link rel="alternate" hreflang="x-default" href="${new URL(normalizePagePath(defaultPath), `${productionOrigin}/`).toString()}" />`,
+  );
+  return alternateLinks.join("\n");
+}
+
+function serializeOpenGraphAlternates(route) {
+  return (route.alternates ?? [])
+    .filter(({ locale }) => locale !== route.locale)
+    .map(({ locale }) => `    <meta property="og:locale:alternate" content="${localeMetadata[locale].openGraph}" />`)
+    .join("\n");
 }
 
 function createRouteDocument(baseDocument, route) {
@@ -290,9 +328,12 @@ function createRouteDocument(baseDocument, route) {
   document = replaceMeta(document, "name", "twitter:image:alt", imageAlt);
 
   const structuredData = serializeStructuredData(route, canonicalUrl, imageUrl);
-  return structuredData
-    ? document.replace("</head>", `    <script type="application/ld+json">${structuredData}</script>\n  </head>`)
-    : document;
+  const additionalHeadMarkup = [
+    serializeAlternateLinks(route),
+    serializeOpenGraphAlternates(route),
+    structuredData ? `    <script type="application/ld+json">${structuredData}</script>` : "",
+  ].filter(Boolean).join("\n");
+  return document.replace("</head>", `${additionalHeadMarkup}\n  </head>`);
 }
 
 function createNotFoundDocument(baseDocument) {
@@ -322,11 +363,11 @@ function createSitemap() {
 }
 
 function createLlmsDocument() {
-  const projectLines = publicProjects.map(
-    (project) => `- [${project.shortTitle}](${productionOrigin}/work/${project.slug}/): ${project.summary}`,
+  const projectLines = publicProjects.filter(({ locale }) => locale === "en").map(
+    (project) => `- [${project.shortTitle}](${productionOrigin}/en/work/${project.slug}/): ${project.summary}`,
   );
-  const articleLines = publicArticles.map(
-    (article) => `- [${article.title}](${productionOrigin}/articles/${article.slug}/): ${article.summary}`,
+  const articleLines = publicArticles.filter(({ locale }) => locale === "en").map(
+    (article) => `- [${article.title}](${productionOrigin}/en/articles/${article.slug}/): ${article.summary}`,
   );
   return `# Matteo Vittori Portfolio
 
@@ -334,11 +375,11 @@ Portfolio of Matteo Vittori, a Computer Science student focused on modular softw
 
 ## Main pages
 
-- [Home](${productionOrigin}/): overview and selected work.
-- [Work](${productionOrigin}/work/): project case studies.
-- [Articles](${productionOrigin}/articles/): technical notes and design decisions.
-- [Thesis](${productionOrigin}/thesis/): bachelor thesis on the Signal Extraction Framework.
-- [About](${productionOrigin}/about/): background, principles, and education.
+- [Home](${productionOrigin}/en/): overview and selected work.
+- [Work](${productionOrigin}/en/work/): project case studies.
+- [Articles](${productionOrigin}/en/articles/): technical notes and design decisions.
+- [Thesis](${productionOrigin}/en/thesis/): bachelor thesis on the Signal Extraction Framework.
+- [About](${productionOrigin}/en/about/): background, principles, and education.
 
 ## Selected projects
 

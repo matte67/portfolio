@@ -5,7 +5,7 @@ import { getPageCopy } from "../../application/pageCopy";
 import { ArrowMark, DownloadMark } from "../components/SmartLink";
 
 export function ThesisPreview() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "thesisPreview");
   return (
     <section className="thesis-preview page-shell" aria-labelledby="thesis-preview-title">
@@ -26,7 +26,7 @@ export function ThesisPreview() {
           {copy.items.map((item) => <li key={item}>{item}</li>)}
         </ul>
         <div className="thesis-preview__links">
-          <Link className="button-link" to="/thesis">{copy.read} <ArrowMark /></Link>
+          <Link className="button-link" to={toLocalizedPath("/thesis")}>{copy.read} <ArrowMark /></Link>
           <a className="text-link" download href="/documents/thesis-matteo-vittori.pdf">{copy.download} <DownloadMark /></a>
         </div>
       </div>

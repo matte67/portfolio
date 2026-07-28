@@ -7,6 +7,8 @@ import {
   toCanonicalUrl,
 } from "../../application/siteConfig";
 import { useLanguage } from "../../application/i18n";
+import { toLocalizedPath } from "../../application/localizedPath";
+import { supportedLocales } from "../../core/content";
 
 interface DocumentMetaProps {
   readonly title: string;
@@ -45,6 +47,25 @@ function setCanonicalLink(href: string) {
   element.href = href;
 }
 
+function setLanguageAlternates(pathname: string, noIndex: boolean) {
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((element) => element.remove());
+  if (noIndex) return;
+
+  for (const locale of supportedLocales) {
+    const alternate = document.createElement("link");
+    alternate.rel = "alternate";
+    alternate.hreflang = locale;
+    alternate.href = toCanonicalPageUrl(toLocalizedPath(pathname, locale));
+    document.head.append(alternate);
+  }
+
+  const defaultAlternate = document.createElement("link");
+  defaultAlternate.rel = "alternate";
+  defaultAlternate.hreflang = "x-default";
+  defaultAlternate.href = toCanonicalPageUrl(toLocalizedPath(pathname, "en"));
+  document.head.append(defaultAlternate);
+}
+
 /** Keeps browser, crawler, and social metadata aligned with the active SPA route. */
 export function DocumentMeta({
   title,
@@ -64,6 +85,7 @@ export function DocumentMeta({
 
     document.title = pageTitle;
     setCanonicalLink(canonicalUrl);
+    setLanguageAlternates(pathname, noIndex);
 
     setMetaContent("name", "author", siteConfig.author);
     setMetaContent("name", "description", description);

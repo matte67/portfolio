@@ -1,30 +1,43 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import type { ContentLocale } from "../core/content";
+import { toLocalizedPath } from "./localizedPath";
 
 export type Language = ContentLocale;
 
 interface LanguageContextValue {
   readonly language: Language;
   readonly setLanguage: (language: Language) => void;
+  readonly toLocalizedPath: (path: string) => string;
 }
 
-const LANGUAGE_STORAGE_KEY = "portfolio-language";
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-/** Provides the active interface language and remembers a visitor's choice. */
-export function LanguageProvider({ children }: { readonly children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    return savedLanguage === "it" ? "it" : "en";
-  });
+/** Provides a URL-derived language and changes locale without losing the current page. */
+export function LanguageProvider({
+  children,
+  language,
+}: {
+  readonly children: ReactNode;
+  readonly language: Language;
+}) {
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     document.documentElement.lang = language;
   }, [language]);
 
-  const value = useMemo(() => ({ language, setLanguage }), [language]);
+  const value = useMemo(() => ({
+    language,
+    setLanguage(nextLanguage: Language) {
+      if (nextLanguage === language) return;
+      navigate(toLocalizedPath(`${location.pathname}${location.search}${location.hash}`, nextLanguage));
+    },
+    toLocalizedPath: (path: string) => toLocalizedPath(path, language),
+  }), [language, location.hash, location.pathname, location.search, navigate]);
+
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

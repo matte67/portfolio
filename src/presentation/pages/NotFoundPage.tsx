@@ -6,7 +6,7 @@ import { DocumentMeta } from "../components/DocumentMeta";
 import { SignalField } from "../visuals/SignalField";
 
 export function NotFoundPage() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "notFound");
   return (
     <section className="not-found page-shell">
@@ -15,7 +15,7 @@ export function NotFoundPage() {
         <p className="eyebrow">{copy.eyebrow}</p>
         <h1>{copy.title}</h1>
         <p>{copy.description}</p>
-        <Link className="button-link" to="/">{copy.returnHome}</Link>
+        <Link className="button-link" to={toLocalizedPath("/")}>{copy.returnHome}</Link>
       </div>
       <SignalField />
     </section>

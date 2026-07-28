@@ -11,7 +11,7 @@ async function expectNoHorizontalOverflow(page: Page) {
 
 test("desktop homepage communicates the portfolio and exposes the flowing project menu", async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
-  await page.goto("/");
+  await page.goto("/en/");
 
   await expect(page.getByRole("heading", { level: 1, name: "Hi, I’m Matteo" })).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "Ideas made useful through detail." })).toBeVisible();
@@ -245,7 +245,7 @@ test("desktop homepage communicates the portfolio and exposes the flowing projec
 
 test("SEF interactions expose pipeline and access-point state", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/work/sef");
+  await page.goto("/en/work/sef");
 
   await expect(page.getByRole("heading", { level: 1, name: "Signal Extraction Framework" })).toBeVisible();
   const signalExtractor = page.getByRole("button", { name: "03 Signal extractor" });
@@ -266,10 +266,7 @@ test("SEF interactions expose pipeline and access-point state", async ({ page })
 });
 
 test("localized project content follows the selected language", async ({ page }) => {
-  await page.addInitScript(() => {
-    window.localStorage.setItem("portfolio-language", "it");
-  });
-  await page.goto("/work/sef");
+  await page.goto("/it/work/sef");
 
   await expect(page.getByRole("heading", { level: 2, name: "Il problema" })).toBeVisible();
   await expect(page.getByText("Tesi di laurea · A.A. 2025/26")).toBeVisible();
@@ -277,7 +274,7 @@ test("localized project content follows the selected language", async ({ page })
 });
 
 test("UniStays renders the animated mockup player block", async ({ page }) => {
-  await page.goto("/work/unistays");
+  await page.goto("/en/work/unistays");
 
   const player = page.locator(".mockup-player-embed mockup-player");
   await expect(player).toHaveAttribute("mockup-id", "2b9579f9-2ba7-4ed5-8f64-d42af329c34f");
@@ -287,7 +284,7 @@ test("UniStays renders the animated mockup player block", async ({ page }) => {
 });
 
 test("articles expose the published editorial card", async ({ page }) => {
-  await page.goto("/articles");
+  await page.goto("/en/articles");
 
   await expect(page.getByRole("heading", { level: 1, name: "Ideas made useful through detail." })).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "The next programming interface is intent" })).toBeVisible();
@@ -297,10 +294,42 @@ test("articles expose the published editorial card", async ({ page }) => {
   );
 });
 
+test("editorial roller keeps copy pinned while the active media changes", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/en/work");
+
+  const roller = page.locator(".editorial-index--roller");
+  const items = roller.locator(".editorial-roller__item");
+  const mediaList = roller.locator(".editorial-roller__media");
+  const panel = roller.locator(".editorial-roller__panel");
+  await expect(items).toHaveCount(5);
+  await expect(mediaList).toHaveCount(5);
+  const media = mediaList.nth(1);
+  await expect(panel).toHaveCSS("position", "sticky");
+
+  const panelTitle = panel.getByRole("heading", { level: 2 });
+  const initialTitle = await panelTitle.textContent();
+  await items.nth(1).scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollBy(0, 180));
+
+  await expect.poll(async () => media.evaluate((element) => Number.parseFloat(
+    element.style.getPropertyValue("--editorial-media-parallax"),
+  ))).not.toBe(0);
+
+  await expect(media).toHaveCSS("transform", /matrix/);
+  await expect.poll(() => panelTitle.textContent()).not.toBe(initialTitle);
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(media).toHaveCSS("transform", "none");
+  await expect(panel.locator(".editorial-roller__panel-inner")).toHaveCSS("animation-name", "none");
+
+  expect(initialTitle).toBeTruthy();
+});
+
 test("article and project heroes preserve the shared contained frame", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
 
-  for (const route of ["/articles/ai-goal-oriented-programming", "/work/unistays"]) {
+  for (const route of ["/en/articles/ai-goal-oriented-programming", "/en/work/unistays"]) {
     await page.goto(route);
     const hero = page.locator(".editorial-hero");
     const image = hero.locator(".editorial-image");
@@ -317,9 +346,9 @@ test("content figures follow the prose measure and editorial spacing", async ({ 
   await page.setViewportSize({ width: 1440, height: 900 });
 
   for (const [route, selector] of [
-    ["/articles/ai-goal-oriented-programming", ".editorial-figure:not(.editorial-hero)"],
-    ["/work/sef", ".editorial-figure:not(.editorial-hero)"],
-    ["/work/unistays", ".editorial-gallery"],
+    ["/en/articles/ai-goal-oriented-programming", ".editorial-figure:not(.editorial-hero)"],
+    ["/en/work/sef", ".editorial-figure:not(.editorial-hero)"],
+    ["/en/work/unistays", ".editorial-gallery"],
   ] as const) {
     await page.goto(route);
     const body = page.locator(".editorial-reading-layout__body");
@@ -345,7 +374,7 @@ test("content figures follow the prose measure and editorial spacing", async ({ 
 
 test("mobile layout, navigation, and thesis fallback remain usable", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/en/");
   const mobileHeader = page.locator(".site-header");
   await expect(mobileHeader).toHaveAttribute("data-visible", "false");
   await expect(mobileHeader).toHaveAttribute("data-merged", "true");
@@ -384,7 +413,7 @@ test("mobile layout, navigation, and thesis fallback remain usable", async ({ pa
   await page.getByRole("button", { name: "Menu" }).click();
   await page.locator(".mobile-navigation").getByRole("button", { name: "Close" }).click();
 
-  await page.goto("/thesis");
+  await page.goto("/en/thesis");
   await expect(page.locator(".pdf-reader__desktop")).toBeHidden();
   await expect(page.locator(".pdf-reader__mobile")).toBeVisible();
   await expect(page.getByRole("link", { name: "Open all 89 pages" })).toBeVisible();
@@ -394,21 +423,21 @@ test("mobile layout, navigation, and thesis fallback remain usable", async ({ pa
 
 test("tablet layouts preserve the editorial grid without overflow", async ({ page }) => {
   await page.setViewportSize({ width: 1024, height: 768 });
-  await page.goto("/");
+  await page.goto("/en/");
   await expectNoHorizontalOverflow(page);
   await page.screenshot({ path: "test-results/screenshots/home-tablet.png" });
 
-  await page.goto("/work/sef");
+  await page.goto("/en/work/sef");
   await expect(page.getByRole("heading", { level: 1, name: "Signal Extraction Framework" })).toBeVisible();
   await expectNoHorizontalOverflow(page);
 });
 
 test("case-study visuals remain inside the reading column while facts stay sticky", async ({ page }) => {
   const routes = [
-    "/work/sef",
-    "/work/unistays",
-    "/work/rewild",
-    "/work/hackathon-management-system",
+    "/en/work/sef",
+    "/en/work/unistays",
+    "/en/work/rewild",
+    "/en/work/hackathon-management-system",
   ];
 
   for (const width of [1440, 1024]) {
@@ -470,7 +499,7 @@ test("case-study visuals remain inside the reading column while facts stay stick
   }
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/work/sef");
+  await page.goto("/en/work/sef");
   const mobileFacts = page.locator(".editorial-facts");
   const mobileBody = page.locator(".editorial-reading-layout__body");
   await mobileBody.locator(".pipeline-explorer").scrollIntoViewIfNeeded();
@@ -493,13 +522,13 @@ test("case-study visuals remain inside the reading column while facts stay stick
 test("remaining route mastheads are visually stable", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   const routes = [
-    ["/work", "Systems are best understood through their decisions.", "work-index"],
-    ["/work/unistays", "UniStays", "project-unistays"],
-    ["/work/rewild", "RE:WILD", "project-rewild"],
-    ["/work/hackathon-management-system", "HackHub", "project-hackathon"],
-    ["/work/dormant-access-control-unit", "Dormant Access Control Unit", "project-access-control"],
-    ["/thesis", "Design and development of a modular framework for video-stream analysis in Python.", "thesis-desktop"],
-    ["/about", "Building from the core outward.", "about"],
+    ["/en/work", "Systems are best understood through their decisions.", "work-index"],
+    ["/en/work/unistays", "UniStays", "project-unistays"],
+    ["/en/work/rewild", "RE:WILD", "project-rewild"],
+    ["/en/work/hackathon-management-system", "HackHub", "project-hackathon"],
+    ["/en/work/dormant-access-control-unit", "Dormant Access Control Unit", "project-access-control"],
+    ["/en/thesis", "Design and development of a modular framework for video-stream analysis in Python.", "thesis-desktop"],
+    ["/en/about", "Building from the core outward.", "about"],
   ] as const;
 
   for (const [path, heading, screenshotName] of routes) {
@@ -513,12 +542,12 @@ test("remaining route mastheads are visually stable", async ({ page }) => {
 test("minimum viewport and reduced motion are supported", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/work/hackathon-management-system");
+  await page.goto("/en/work/hackathon-management-system");
 
   await expect(page.getByRole("heading", { level: 1, name: "HackHub" })).toBeVisible();
   await expectNoHorizontalOverflow(page);
 
-  await page.goto("/");
+  await page.goto("/en/");
   await expect(page.getByTestId("click-spark-canvas")).toBeHidden();
   await expect(page.locator(".home-hero__decrypted-name")).toHaveAttribute("data-animating", "false");
   await expect(page.locator(".flowing-menu__marquee").first()).toBeHidden();

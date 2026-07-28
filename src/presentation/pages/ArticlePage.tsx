@@ -15,7 +15,7 @@ import {
 import { editorialMdxComponents } from "../editorial/mdxComponents";
 
 export function ArticlePage() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "article");
   const { slug = "" } = useParams();
   const document = articleCatalog.findArticle(slug, language);
@@ -27,7 +27,7 @@ export function ArticlePage() {
         <section className="not-found page-shell">
           <p className="eyebrow">{copy.notFoundEyebrow}</p>
           <h1>{copy.notFoundTitle}</h1>
-          <Link className="button-link" to="/articles">{copy.returnArticles}</Link>
+          <Link className="button-link" to={toLocalizedPath("/articles")}>{copy.returnArticles}</Link>
         </section>
       </>
     );
@@ -58,7 +58,7 @@ export function ArticlePage() {
       <article className="editorial-page article-page">
         <EditorialMasthead
           chips={metadata.categories}
-          collectionHref="/articles"
+          collectionHref={toLocalizedPath("/articles")}
           collectionLabel={copy.articles}
           contextLabel={metadata.categories[0] ?? metadata.title}
           eyebrow={publishedDate ? `${copy.published} · ${publishedDate}` : copy.articles}

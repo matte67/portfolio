@@ -1,5 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 
+import { LanguageRoute, LegacyRouteRedirect } from "./LanguageRoute";
+import { LanguageProvider } from "../application/i18n";
 import { SiteLayout } from "../presentation/layout/SiteLayout";
 import { NotFoundPage } from "../presentation/pages/NotFoundPage";
 
@@ -32,12 +34,20 @@ const loadArticlePage = async () => ({
 });
 
 export const router = createBrowserRouter([
+  { path: "/", element: <Navigate replace to="/en/" /> },
+  { path: "/work/*", element: <LegacyRouteRedirect /> },
+  { path: "/articles/*", element: <LegacyRouteRedirect /> },
+  { path: "/thesis/*", element: <LegacyRouteRedirect /> },
+  { path: "/about/*", element: <LegacyRouteRedirect /> },
   {
-    path: "/",
-    element: <SiteLayout />,
-    errorElement: <NotFoundPage />,
+    path: "/:language",
+    element: <LanguageRoute />,
     children: [
-      { index: true, lazy: loadHomePage },
+      {
+        element: <SiteLayout />,
+        errorElement: <NotFoundPage />,
+        children: [
+          { index: true, lazy: loadHomePage },
       { path: "work", lazy: loadWorkPage },
       { path: "work/:slug", lazy: loadProjectPage },
       { path: "articles", lazy: loadArticlesPage },
@@ -45,6 +55,12 @@ export const router = createBrowserRouter([
       { path: "thesis", lazy: loadThesisPage },
       { path: "about", lazy: loadAboutPage },
       { path: "*", element: <NotFoundPage /> },
+        ],
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <LanguageProvider language="en"><NotFoundPage /></LanguageProvider>,
   },
 ]);

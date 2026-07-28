@@ -25,6 +25,7 @@ export function ArticlesPage() {
       <EditorialIndex
         emptyState={{ description: copy.emptyDescription, title: copy.emptyTitle }}
         items={items}
+        mode="roller"
         readLabel={copy.read}
         sectionLabel={copy.sectionLabel}
       />

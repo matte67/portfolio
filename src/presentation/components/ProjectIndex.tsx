@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import type { ProjectDocument } from "../../application/ports/ProjectRepository";
+import { useLanguage } from "../../application/i18n";
 import { ArrowMark } from "./SmartLink";
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
@@ -12,6 +13,7 @@ interface ProjectIndexProps {
 }
 
 export function ProjectIndex({ projects }: ProjectIndexProps) {
+  const { toLocalizedPath } = useLanguage();
   const [expandedSlug, setExpandedSlug] = useState(projects[0]?.metadata.slug ?? "");
 
   return (
@@ -28,7 +30,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
           >
             <div className="project-row__summary">
               <span className="project-row__index">{metadata.index}</span>
-              <Link className="project-row__title" to={`/work/${metadata.slug}`}>
+              <Link className="project-row__title" to={toLocalizedPath(`/work/${metadata.slug}`)}>
                 <strong>{metadata.shortTitle}</strong>
                 <span>{metadata.subtitle}</span>
               </Link>
@@ -46,7 +48,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
               </button>
             </div>
             <div className="project-row__preview" id={panelId} hidden={!isExpanded}>
-              <Link className="project-row__media" to={`/work/${metadata.slug}`} aria-label={`View ${metadata.title} case study`}>
+              <Link className="project-row__media" to={toLocalizedPath(`/work/${metadata.slug}`)} aria-label={`View ${metadata.title} case study`}>
                 {metadata.hero.src ? (
                   <img alt={metadata.hero.alt} decoding="async" loading="lazy" src={metadata.hero.src} />
                 ) : (
@@ -59,7 +61,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
                   <div><dt>Role</dt><dd>{metadata.role}</dd></div>
                   <div><dt>Stack</dt><dd>{metadata.technologies.slice(0, 4).join(", ")}</dd></div>
                 </dl>
-                <Link className="text-link" to={`/work/${metadata.slug}`}>
+                <Link className="text-link" to={toLocalizedPath(`/work/${metadata.slug}`)}>
                   Read case study <ArrowMark />
                 </Link>
               </div>

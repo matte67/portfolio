@@ -112,8 +112,8 @@ Tina’s repository-backed media manager writes below `public/media`. Use AVIF o
 
 Media committed to the repository is public. Do not upload private drafts, credentials, personal data, or source assets that should not be downloadable.
 
-## Current multilingual SEO boundary
+## Multilingual URLs and SEO
 
-The interface and project content support English and Italian, but the selected language currently lives in `localStorage` and both variants share the same URL. Static crawler documents therefore use English as the canonical representation.
+Every public page has a language-specific URL: `/en/...` for English and `/it/...` for Italian. The locale switcher keeps visitors on the matching route, including case studies and articles. Existing unprefixed public URLs permanently redirect to their English equivalent so old links keep working without creating duplicate indexed pages.
 
-True bilingual indexing, `hreflang`, and separate canonical URLs require a subsequent routing migration such as `/en/work/...` and `/it/work/...`. The content model already supports that change without another data migration.
+The production build emits a static HTML document for every public localized route. Each document has its own canonical URL, localized Open Graph/Twitter metadata, `hreflang` alternates (including `x-default`), and a matching sitemap entry. Keep `translationKey` identical across translations: it is how the generator relates translations when slugs eventually differ.

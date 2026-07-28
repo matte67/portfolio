@@ -7,13 +7,13 @@ import { EditorialIndex, type EditorialIndexItem } from "../editorial/EditorialI
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
 export function WorkPage() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "work");
   const projects = projectCatalog.listProjects(language);
   const items: EditorialIndexItem[] = projects.map(({ metadata }) => ({
     ariaLabel: `${copy.view} ${metadata.title}`,
     eyebrow: `${metadata.index} · ${metadata.year}`,
-    href: `/work/${metadata.slug}`,
+    href: toLocalizedPath(`/work/${metadata.slug}`),
     media: {
       alt: metadata.hero.alt,
       fallback: <PlaceholderVisual />,
@@ -45,6 +45,7 @@ export function WorkPage() {
       </header>
       <EditorialIndex
         items={items}
+        mode="roller"
         readLabel={copy.read}
         sectionLabel={copy.sectionLabel}
       />

@@ -19,9 +19,14 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "layout");
-  const primaryNavigation = [[copy.navigation.work, "/work"], [copy.navigation.articles, "/articles"], [copy.navigation.thesis, "/thesis"], [copy.navigation.about, "/about"]] as const;
+  const primaryNavigation = [
+    [copy.navigation.work, toLocalizedPath("/work")],
+    [copy.navigation.articles, toLocalizedPath("/articles")],
+    [copy.navigation.thesis, toLocalizedPath("/thesis")],
+    [copy.navigation.about, toLocalizedPath("/about")],
+  ] as const;
   const [isOpen, setIsOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -86,7 +91,7 @@ export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
         <FrameCorner anchor="right" edge="top" position="absolute" side="left" roundness={1} size="1.5rem" />
 
         <div className={`site-header__inner ${isHeaderVisible ? "rounded-b-3xl!" : "rounded-b-[6rem]!"} py-1 px-10 md:py-3 md:px-8 transition-all duration-1400`}>
-          <NavLink className="site-brand inline-flex items-center gap-3 text-sm font-semibold no-underline" to="/" aria-label={copy.navigation.homeLabel}>
+          <NavLink className="site-brand inline-flex items-center gap-3 text-sm font-semibold no-underline" to={toLocalizedPath("/")} aria-label={copy.navigation.homeLabel}>
             <img alt="" aria-hidden="true" className="site-brand__mark size-8" src="/global/matteo-vittori-mark-reverse.svg" />
             <span>Matteo Vittori</span>
           </NavLink>

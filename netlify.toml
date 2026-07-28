@@ -11,6 +11,36 @@
   to = "/admin/index.html"
   status = 200
 
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/work/*"
+  to = "/en/work/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/*"
+  to = "/en/articles/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/thesis/*"
+  to = "/en/thesis/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about/*"
+  to = "/en/about/:splat"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

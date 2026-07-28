@@ -7,7 +7,7 @@ import { ArrowMark, DownMark, DownloadMark } from "../components/SmartLink";
 import { PdfReader } from "../thesis/PdfReader";
 
 export function ThesisPage() {
-  const { language } = useLanguage();
+  const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "thesis");
   return (
     <>
@@ -61,7 +61,7 @@ export function ThesisPage() {
         </div>
         <div>
           <p className="pb-3">{copy.sef.body}</p>
-          <Link className="text-link" to="/work/sef">{copy.sef.link} <ArrowMark /></Link>
+          <Link className="text-link" to={toLocalizedPath("/work/sef")}>{copy.sef.link} <ArrowMark /></Link>
         </div>
       </section>
 
