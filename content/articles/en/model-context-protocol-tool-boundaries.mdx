@@ -1,0 +1,104 @@
+---
+locale: en
+translationKey: model-context-protocol-tool-boundaries
+publicationStatus: published
+publishedAt: '2026-08-03'
+updatedAt: '2026-08-03'
+slug: model-context-protocol-tool-boundaries
+title: "MCP makes AI agents useful only when the tool boundary is clear"
+summary: "Model Context Protocol is helping AI assistants connect to real tools. The important engineering question is not only what an agent can do, but what it is allowed to do and how we verify it."
+categories:
+  - AI
+  - Software architecture
+  - Developer tools
+tags:
+  - Model Context Protocol
+  - MCP
+  - AI agents
+  - tool design
+  - software architecture
+hero:
+  src: /media/articles/model-context-protocol-tool-boundaries/mcp-tool-boundaries.png
+  alt: 'A developer and an AI assistant review a controlled connection between a workspace and a set of tools.'
+  position: center
+seo:
+  title: "Model Context Protocol and safer AI tool boundaries"
+  description: "A practical introduction to MCP, AI agents, tool permissions, and why clear boundaries matter more than a long list of integrations."
+  image: /media/articles/model-context-protocol-tool-boundaries/mcp-tool-boundaries.png
+  imageAlt: "Developer and AI assistant reviewing controlled tool access"
+---
+
+AI assistants become much more useful when they can look beyond a chat box: read a repository, search documentation, create a task, or fetch data from a service. But that extra power also changes the engineering problem. We are no longer designing only prompts. We are designing the boundary between a model and the actions it can take.
+
+That is why **Model Context Protocol (MCP)** is becoming interesting. MCP is an open protocol for connecting AI applications to external context and tools. Its server model distinguishes between prompts, resources, and tools: templates chosen by the user, data attached by the application, and executable functions the model can call. [The specification](https://modelcontextprotocol.io/specification/2025-11-25/server/index) makes that separation explicit.
+
+The idea is simple, but the design choices behind it are not.
+
+## From a capable model to a useful system
+
+A language model can explain how to update a project. It cannot reliably update the project without access to the repository, a way to inspect changes, and a constrained action for making a commit. The same pattern appears everywhere:
+
+- a support assistant needs access to the right customer information;
+- a research assistant needs a trustworthy search or document source;
+- a development assistant needs carefully scoped repository operations.
+
+MCP gives applications a common way to expose those capabilities. Instead of building a one-off integration for every assistant and every data source, a server can describe the resources and tools it offers in a shared format.
+
+This does not make an agent automatically safe or correct. It makes the integration boundary visible enough to design and review.
+
+## A tool is a small API contract
+
+The most useful way to think about an MCP tool is not as a magic ability, but as a small API contract. It should have a clear name, a narrow purpose, defined inputs, and an understandable result.
+
+Compare these two directions:
+
+```text
+Bad: "Manage the portfolio repository."
+
+Better:
+  read_article(slug)
+  list_article_drafts()
+  create_article_draft(title, body)
+  request_publish_review(slug)
+```
+
+The second version does not remove all risk, but it creates places to add validation, permissions, logs, and human review. It also makes failures easier to understand. If an agent chooses the wrong tool, we can inspect the decision. If a tool is too broad, we can redesign the contract instead of trying to fix everything with another prompt.
+
+## Read, propose, then act
+
+A practical pattern for an AI workflow is to increase permission gradually:
+
+1. **Read** — let the assistant inspect only the information needed for the task.
+2. **Propose** — ask it to show a plan or a draft before anything changes.
+3. **Act** — expose a narrow write operation only after the proposed change is understandable.
+4. **Verify** — run checks and show the evidence before accepting the result.
+
+For example, an article-writing agent can first list existing topics, research one proposal, prepare the two language versions, and generate a preview. Publishing should still depend on a clean validation result and a focused commit. The agent is useful because the workflow is structured, not because it has unrestricted access.
+
+<EditorialCallout eyebrow="A useful default" title="Give an agent the smallest tool that can complete the next step." tone="accent">
+  <p>Small, explicit actions are easier to test, explain, revoke, and improve than one broad tool with an unclear promise.</p>
+</EditorialCallout>
+
+## Permission is part of the product
+
+Tool access is not just an implementation detail. A tool that reads a calendar, edits a database, or writes files represents a real permission. The MCP specification explicitly treats tools as potentially arbitrary code execution and asks hosts to obtain user consent and make actions understandable. [Its security guidance](https://modelcontextprotocol.io/specification/2025-03-26/index) is a useful reminder that an agent’s capability should never hide the decision to use it.
+
+This matters even for small personal workflows. A weekly content assistant should not silently rewrite old articles. A coding assistant should not stage unrelated files. A research assistant should not treat an unverified web page as evidence. These are product rules that belong in the tool and workflow design.
+
+## Why this is timely
+
+MCP was introduced as an open standard in late 2024. In December 2025, Anthropic announced that it was being donated to the Linux Foundation’s Agentic AI Foundation alongside other agentic-development projects, with support from a broad group of technology companies. [That announcement](https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation) is a sign that connecting agents to tools is moving from an experiment toward shared infrastructure.
+
+The hype is understandable: an agent connected to the right systems can finish a real workflow instead of only describing one. The useful engineering response is not to connect everything at once. It is to choose one bounded workflow and make every action inspectable.
+
+## A practical starting point
+
+If you want to explore MCP, begin with one repetitive task where the inputs and the success condition are already clear. Then write down:
+
+- what the assistant needs to read;
+- which action it may take;
+- which action still requires approval;
+- what evidence proves the result is acceptable;
+- how you would turn the access off if it behaves unexpectedly.
+
+Good AI systems are not defined only by a powerful model. They are defined by the contracts, permissions, and evidence around that model. MCP is valuable because it gives those decisions a place to live.
