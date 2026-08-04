@@ -5,8 +5,8 @@ publicationStatus: published
 publishedAt: '2026-08-03'
 updatedAt: '2026-08-03'
 slug: model-context-protocol-tool-boundaries
-title: "MCP rende utili gli agenti AI solo quando il confine degli strumenti è chiaro"
-summary: "Il Model Context Protocol aiuta gli assistenti AI a collegarsi a strumenti reali. La domanda ingegneristica non è soltanto cosa un agente può fare, ma cosa è autorizzato a fare e come possiamo verificarlo."
+title: MCP rende utili gli agenti AI solo quando il confine degli strumenti è chiaro
+summary: 'Il Model Context Protocol aiuta gli assistenti AI a collegarsi a strumenti reali. La domanda ingegneristica non è soltanto cosa un agente può fare, ma cosa è autorizzato a fare e come possiamo verificarlo.'
 categories:
   - IA
   - Architettura software
@@ -18,14 +18,14 @@ tags:
   - progettazione degli strumenti
   - architettura software
 hero:
-  src: /media/articles/model-context-protocol-tool-boundaries/mcp-tool-boundaries.png
-  alt: 'Uno sviluppatore e un assistente AI esaminano una connessione controllata tra un ambiente di lavoro e un insieme di strumenti.'
+  src: /media/articles/model-context-protocol-tool-boundaries/mcp-tool-boundaries.avif
+  alt: Uno sviluppatore e un assistente AI esaminano una connessione controllata tra un ambiente di lavoro e un insieme di strumenti.
   position: center
 seo:
-  title: "Model Context Protocol e confini sicuri per gli strumenti AI"
-  description: "Un’introduzione pratica a MCP, agli agenti AI, ai permessi degli strumenti e al motivo per cui confini chiari valgono più di una lunga lista di integrazioni."
+  title: Model Context Protocol e confini sicuri per gli strumenti AI
+  description: 'Un’introduzione pratica a MCP, agli agenti AI, ai permessi degli strumenti e al motivo per cui confini chiari valgono più di una lunga lista di integrazioni.'
   image: /media/articles/model-context-protocol-tool-boundaries/mcp-tool-boundaries.png
-  imageAlt: "Sviluppatore e assistente AI esaminano un accesso controllato agli strumenti"
+  imageAlt: Sviluppatore e assistente AI esaminano un accesso controllato agli strumenti
 ---
 
 Gli assistenti AI diventano molto più utili quando possono andare oltre una chat: leggere un repository, cercare documentazione, creare un’attività o recuperare dati da un servizio. Questo potere aggiuntivo però cambia anche il problema ingegneristico. Non stiamo più progettando soltanto prompt: stiamo progettando il confine tra un modello e le azioni che può compiere.
@@ -38,9 +38,9 @@ L’idea è semplice, ma le decisioni progettuali che porta con sé non lo sono.
 
 Un modello linguistico può spiegare come aggiornare un progetto. Non può aggiornare il progetto in modo affidabile senza accesso al repository, un modo per ispezionare le modifiche e un’azione vincolata per creare un commit. Lo stesso schema si ripete ovunque:
 
-- un assistente di supporto ha bisogno delle giuste informazioni sul cliente;
-- un assistente di ricerca ha bisogno di una fonte affidabile per la ricerca o i documenti;
-- un assistente di sviluppo ha bisogno di operazioni sul repository delimitate con attenzione.
+* un assistente di supporto ha bisogno delle giuste informazioni sul cliente;
+* un assistente di ricerca ha bisogno di una fonte affidabile per la ricerca o i documenti;
+* un assistente di sviluppo ha bisogno di operazioni sul repository delimitate con attenzione.
 
 MCP offre alle applicazioni un modo comune per esporre queste capacità. Invece di costruire un’integrazione diversa per ogni assistente e ogni fonte dati, un server può descrivere risorse e strumenti disponibili in un formato condiviso.
 
@@ -75,9 +75,7 @@ Uno schema pratico per un flusso AI consiste nell’aumentare i permessi gradual
 
 Per esempio, un agente che scrive articoli può prima elencare i temi già affrontati, fare ricerca su una proposta, preparare le due versioni linguistiche e generare un’anteprima. La pubblicazione dovrebbe comunque dipendere da una validazione pulita e da un commit mirato. L’agente è utile perché il flusso è strutturato, non perché dispone di accesso senza limiti.
 
-<EditorialCallout eyebrow="Un buon punto di partenza" title="Dai a un agente lo strumento più piccolo capace di completare il prossimo passo." tone="accent">
-  <p>Azioni piccole ed esplicite sono più facili da testare, spiegare, revocare e migliorare rispetto a uno strumento molto ampio con una promessa poco chiara.</p>
-</EditorialCallout>
+<EditorialCallout eyebrow="Un buon punto di partenza" title="Dai a un agente lo strumento più piccolo capace di completare il prossimo passo." tone="accent" />
 
 ## Il permesso è parte del prodotto
 
@@ -95,10 +93,10 @@ L’interesse è comprensibile: un agente collegato ai sistemi giusti può compl
 
 Se vuoi esplorare MCP, inizia da un’attività ripetitiva in cui input e condizione di successo sono già chiari. Poi scrivi:
 
-- cosa deve poter leggere l’assistente;
-- quale azione può compiere;
-- quale azione richiede ancora approvazione;
-- quale evidenza dimostra che il risultato è accettabile;
-- come disattiveresti l’accesso se si comportasse in modo inatteso.
+* cosa deve poter leggere l’assistente;
+* quale azione può compiere;
+* quale azione richiede ancora approvazione;
+* quale evidenza dimostra che il risultato è accettabile;
+* come disattiveresti l’accesso se si comportasse in modo inatteso.
 
 I buoni sistemi AI non sono definiti soltanto da un modello potente. Sono definiti dai contratti, dai permessi e dalle evidenze che circondano quel modello. MCP è prezioso perché offre a queste decisioni un posto in cui vivere.
