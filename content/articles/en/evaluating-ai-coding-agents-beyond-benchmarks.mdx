@@ -1,0 +1,85 @@
+---
+locale: en
+translationKey: evaluating-ai-coding-agents-beyond-benchmarks
+publicationStatus: published
+publishedAt: '2026-08-10'
+updatedAt: '2026-08-10'
+slug: evaluating-ai-coding-agents-beyond-benchmarks
+title: "A coding-agent benchmark is a clue, not a verdict"
+summary: "Benchmark scores can be useful signals, but an AI coding agent should be evaluated in the repository, toolchain, and acceptance criteria where it will actually work."
+categories:
+  - AI
+  - Software architecture
+  - Developer tools
+tags:
+  - AI coding agents
+  - AI evaluation
+  - software quality
+  - benchmarks
+  - AI-assisted development
+hero:
+  src: /media/articles/evaluating-ai-coding-agents-beyond-benchmarks/evaluation-workbench.png
+  alt: 'An engineer observes three connected transparent modules that represent a task, its working environment, and the evidence used to evaluate it.'
+  position: center
+seo:
+  title: "How to evaluate AI coding agents beyond benchmarks"
+  description: "A practical framework for evaluating AI coding agents with representative tasks, controlled environments, reviewable diffs, and evidence that matters to a real repository."
+  image: /media/articles/evaluating-ai-coding-agents-beyond-benchmarks/evaluation-workbench.png
+  imageAlt: "An engineer examining a transparent evaluation rig for an AI-assisted code change"
+---
+
+Coding-agent benchmarks are easy to read: one number appears to say which model is better. That number can be useful, but it is not the same as an answer to a much more practical question: **will this agent make a safe, reviewable change in this repository?**
+
+That distinction matters more as coding agents move from autocomplete to planning, editing files, running tests, and preparing changes for review. A recent [OpenAI audit of SWE-Bench Pro](https://openai.com/index/separating-signal-from-noise-coding-evaluations/) found that a substantial share of its tasks had evaluation problems, including underspecified prompts, overly strict tests, and low test coverage. The lesson is not that benchmarks are worthless. It is that a score only has meaning inside the task and measurement system that produced it.
+
+## The environment is part of the result
+
+An agent does not work in a vacuum. Its result depends on the repository snapshot, instructions, available tools, context strategy, retry budget, test command, and scorer. Change one of these and the measured outcome can change too.
+
+[OpenAI's evaluation guidance](https://openai.com/index/trustworthy-third-party-evaluations-foundations/) makes this explicit: a comparison needs a fixed task set, harness, tools, budget, and validity checks if its score is meant to compare systems fairly. That is a useful engineering principle even when the “evaluation lab” is a small project.
+
+<EditorialCallout eyebrow="A practical rule" title="A benchmark measures a setup, not an agent in the abstract." tone="accent">
+  <p>Use public scores to narrow a shortlist. Use representative work to decide whether a tool belongs in your workflow.</p>
+</EditorialCallout>
+
+## Build a small evaluation you can inspect
+
+You do not need hundreds of tasks to start. Pick three to five changes that resemble the work you actually expect to delegate. Each should be small enough to review, but real enough to expose how the agent reasons about an unfamiliar codebase.
+
+For every task, write down four things before running it:
+
+1. **Task** — the user-visible outcome and the constraints that must hold.
+2. **Environment** — the repository revision, allowed tools, instructions, and time or retry budget.
+3. **Evidence** — the tests, build, manual check, and diff review needed for acceptance.
+4. **Cost** — elapsed time, attempts, and any human correction required to finish safely.
+
+The final item matters. A tool that succeeds after several retries and a large manual rewrite may still be useful, but it tells a different story from an agent that produces a small, correct patch on the first pass.
+
+## A concrete example
+
+Imagine evaluating an agent on a portfolio feature:
+
+```text
+Task
+  Add a new article card with its Italian translation.
+
+Constraints
+  Keep localized URLs canonical.
+  Do not alter existing articles or shared components.
+  Preserve the published-content validation rules.
+
+Evidence
+  Content validation, type checking, linting, and build pass.
+  The diff contains only the intended content and media files.
+  Both locale routes render with the correct metadata.
+```
+
+This is more informative than asking an agent to “improve the article page.” It tests whether the agent can discover conventions, respect a narrow boundary, and leave evidence a reviewer can verify. If it edits a shared component unnecessarily, passes a build only by bypassing a real failure, or misses the Italian translation, that is a useful result—not a reason to hide the experiment.
+
+## Review the path, not only the finish line
+
+A green test suite is necessary, but it may not be sufficient. Low-coverage tests can approve an incomplete change; a task can also be so ambiguous that two reasonable implementations receive different scores. Review the plan, commands, diff, and remaining assumptions alongside the final test result.
+
+For an emerging engineer, this is encouraging rather than intimidating. Careful evaluation is not a giant research programme. It is the familiar discipline of defining acceptance criteria, controlling the environment, and reading a change before merging it—applied to a new kind of collaborator.
+
+The useful question is not “Which coding agent has the highest score?” It is: **under clearly stated conditions, what evidence would make this change trustworthy enough to accept?**
