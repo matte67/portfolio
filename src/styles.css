@@ -1259,6 +1259,29 @@ svg {
   max-width: 42rem;
 }
 
+.editorial-index__brand {
+  display: flex;
+  height: clamp(3rem, 4vw, 4.25rem);
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.project-logo {
+  display: inline-flex;
+  max-width: min(15rem, 100%);
+  height: 100%;
+  align-items: center;
+}
+
+.project-logo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
 .editorial-roller__copy h2 {
   max-width: 12ch;
   margin: 1rem 0 1.5rem;
@@ -1496,6 +1519,17 @@ svg {
   flex-wrap: wrap;
   flex-direction: column;
   gap: 0.6rem;
+}
+
+.editorial-masthead__brand {
+  display: flex;
+  height: clamp(3.5rem, 5vw, 5.5rem);
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.editorial-masthead__brand .project-logo {
+  max-width: min(19rem, 100%);
 }
 
 .editorial-chip {
@@ -3241,6 +3275,10 @@ svg {
     padding-top: 1.5rem;
   }
 
+  .editorial-index__brand {
+    height: 3.5rem;
+  }
+
   .editorial-roller__copy h2 {
     max-width: 13ch;
     margin-bottom: 1.15rem;
@@ -3257,6 +3295,11 @@ svg {
   .editorial-masthead {
     gap: 2rem;
     padding-block: 4rem 3rem;
+  }
+
+  .editorial-masthead__brand {
+    height: 4.25rem;
+    margin-bottom: 1.25rem;
   }
 
   .editorial-masthead--article .editorial-masthead__title h1 {

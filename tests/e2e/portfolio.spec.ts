@@ -271,6 +271,26 @@ test("localized project content follows the selected language", async ({ page })
   await expect(page.getByRole("heading", { level: 2, name: "Il problema" })).toBeVisible();
   await expect(page.getByText("Tesi di laurea · A.A. 2025/26")).toBeVisible();
   await expect(page.getByText("Overhead in streaming")).toBeVisible();
+  await expect(page.getByRole("img", { name: "Logo SEF." })).toHaveAttribute(
+    "src",
+    "/media/sef/logo.svg",
+  );
+});
+
+test("available project logos appear in the work index and project masthead", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/en/work");
+
+  const panelLogo = page.locator(".editorial-roller__panel .project-logo img");
+  await expect(panelLogo).toHaveAttribute("src", "/media/sef/logo.svg");
+  await expect(panelLogo).toHaveAttribute("alt", "");
+
+  await page.goto("/en/work/unistays");
+  await expect(page.getByRole("img", { name: "UniStays logo." })).toHaveAttribute(
+    "src",
+    "/media/unistays/logo.svg",
+  );
+  await expectNoHorizontalOverflow(page);
 });
 
 test("UniStays renders the animated mockup player block", async ({ page }) => {

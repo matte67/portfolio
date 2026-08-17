@@ -4,6 +4,7 @@ import { getPageCopy } from "../../application/pageCopy";
 import { DocumentMeta } from "../components/DocumentMeta";
 import { DecryptedText } from "../effects/DecryptedText";
 import { EditorialIndex, type EditorialIndexItem } from "../editorial/EditorialIndex";
+import { ProjectLogo } from "../project/ProjectLogo";
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
 export function WorkPage() {
@@ -12,6 +13,7 @@ export function WorkPage() {
   const projects = projectCatalog.listProjects(language);
   const items: EditorialIndexItem[] = projects.map(({ metadata }) => ({
     ariaLabel: `${copy.view} ${metadata.title}`,
+    brand: metadata.logo ? <ProjectLogo decorative logo={metadata.logo} /> : undefined,
     eyebrow: `${metadata.index} · ${metadata.year}`,
     href: toLocalizedPath(`/work/${metadata.slug}`),
     media: {

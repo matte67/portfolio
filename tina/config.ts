@@ -293,6 +293,16 @@ function projectCollection(locale: Locale): Collection {
       { type: "image", name: "chip", label: "Menu image", required: true },
       {
         type: "object",
+        name: "logo",
+        label: "Project logo",
+        description: "Optional. When provided, it appears in the work index and project masthead.",
+        fields: [
+          { type: "image", name: "src", label: "Logo file", required: true },
+          { type: "string", name: "alt", label: "Alternative text", required: true },
+        ],
+      },
+      {
+        type: "object",
         name: "hero",
         label: "Hero image",
         required: true,

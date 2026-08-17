@@ -8,6 +8,7 @@ import { useEditorialRoller } from "./useEditorialRoller";
 
 export interface EditorialIndexItem {
   readonly ariaLabel: string;
+  readonly brand?: ReactNode;
   readonly eyebrow: ReactNode;
   readonly href: string;
   readonly media: {
@@ -128,6 +129,7 @@ export function EditorialIndex({
             )}
           </Link>
           <div className="editorial-card__copy">
+            {item.brand ? <div className="editorial-index__brand">{item.brand}</div> : null}
             <span className="eyebrow">{item.eyebrow}</span>
             <h2><Link to={item.href}>{item.title}</Link></h2>
             <p>{item.summary}</p>
@@ -151,6 +153,7 @@ function RollerCopy({
 }: Pick<EditorialIndexProps, "readLabel" | "showLinks"> & { readonly item: EditorialIndexItem }) {
   return (
     <div className="editorial-roller__copy">
+      {item.brand ? <div className="editorial-index__brand">{item.brand}</div> : null}
       <span className="eyebrow">{item.eyebrow}</span>
       <h2><Link to={item.href}>{item.title}</Link></h2>
       <p>{item.summary}</p>

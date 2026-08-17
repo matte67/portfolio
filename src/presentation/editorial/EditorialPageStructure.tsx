@@ -14,6 +14,7 @@ export interface EditorialFact {
 
 interface EditorialMastheadProps {
   readonly actions?: ReactNode;
+  readonly brand?: ReactNode;
   readonly chips?: readonly string[];
   readonly collectionHref: string;
   readonly collectionLabel: string;
@@ -30,6 +31,7 @@ interface EditorialMastheadProps {
  */
 export function EditorialMasthead({
   actions,
+  brand,
   chips = [],
   collectionHref,
   collectionLabel,
@@ -47,6 +49,7 @@ export function EditorialMasthead({
         <span>{contextLabel}</span>
       </div>
       <div className="editorial-masthead__title">
+        {brand ? <div className="editorial-masthead__brand">{brand}</div> : null}
         <div className="editorial-masthead__meta">
           <p className="eyebrow">{eyebrow}</p>
           <div className="flex gap-2">

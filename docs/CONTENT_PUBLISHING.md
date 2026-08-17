@@ -110,6 +110,8 @@ For protected preview deployments, set `VITE_CONTENT_PREVIEW=true`. Never enable
 
 Tina’s repository-backed media manager writes below `public/media`. Use AVIF or WebP for photographic assets where practical and keep meaningful alternative text in every locale. Documents remain under `public/documents`.
 
+Project logos are optional. Upload the asset to `public/media/<project-slug>/logo.svg` (or another web-ready format), then fill in **Project logo → Logo file** and its localized alternative text in each project document. The same metadata automatically feeds the work index and the project masthead; projects without a logo keep the standard layout.
+
 Media committed to the repository is public. Do not upload private drafts, credentials, personal data, or source assets that should not be downloadable.
 
 ## Multilingual URLs and SEO

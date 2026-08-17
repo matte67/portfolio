@@ -58,6 +58,10 @@ function validateProject(data, sourcePath) {
     throw new Error(`${sourcePath}: unsupported project status "${data.status}".`);
   }
   assertText(data.hero?.alt, "hero.alt", sourcePath);
+  if (data.logo) {
+    assertText(data.logo.src, "logo.src", sourcePath);
+    assertText(data.logo.alt, "logo.alt", sourcePath);
+  }
   if (!Number.isFinite(data.order)) {
     throw new Error(`${sourcePath}: order must be numeric.`);
   }

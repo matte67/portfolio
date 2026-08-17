@@ -14,6 +14,7 @@ import {
   type EditorialFact,
 } from "../editorial/EditorialPageStructure";
 import { editorialMdxComponents } from "../editorial/mdxComponents";
+import { ProjectLogo } from "../project/ProjectLogo";
 import { ProjectLinks } from "../project/ProjectLinks";
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
@@ -59,6 +60,7 @@ export function ProjectPage() {
       <article className={`project-page project-page--${metadata.slug}`}>
         <EditorialMasthead
           actions={<ProjectLinks links={metadata.links} />}
+          brand={metadata.logo ? <ProjectLogo logo={metadata.logo} /> : undefined}
           collectionHref={toLocalizedPath("/work")}
           collectionLabel={copy.work}
           contextLabel={metadata.index}

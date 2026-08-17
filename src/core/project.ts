@@ -39,6 +39,12 @@ export interface ProjectMedia {
   readonly position?: "center" | "top";
 }
 
+/** Optional visual identity shown consistently across project surfaces. */
+export interface ProjectLogo {
+  readonly src: string;
+  readonly alt: string;
+}
+
 export interface ProjectMetric {
   readonly value: string;
   readonly label: string;
@@ -61,6 +67,7 @@ export interface ProjectMetadata extends PublicationMetadata {
   readonly duration: string;
   readonly technologies: readonly string[];
   readonly chip: string;
+  readonly logo?: ProjectLogo;
   readonly hero: ProjectMedia;
   readonly metrics: readonly ProjectMetric[];
   readonly links: readonly ProjectLink[];
@@ -114,6 +121,10 @@ export function validateProjectMetadata(value: ProjectMetadata): ProjectMetadata
   }
 
   assertNonEmptyText(value.hero.alt, "hero.alt", label);
+  if (value.logo) {
+    assertNonEmptyText(value.logo.src, "logo.src", label);
+    assertNonEmptyText(value.logo.alt, "logo.alt", label);
+  }
   assertNonEmptyText(value.seo?.title, "seo.title", label);
   assertNonEmptyText(value.seo?.description, "seo.description", label);
   if (value.seo?.image) {
