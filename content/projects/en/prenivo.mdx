@@ -1,0 +1,76 @@
+---
+locale: "en"
+translationKey: "prenivo"
+publicationStatus: "published"
+publishedAt: "2026-09-10"
+updatedAt: "2026-09-11"
+slug: "prenivo"
+index: "06"
+title: "prenivo."
+shortTitle: "prenivo."
+subtitle: "From customer request to preparation and pickup, in one workflow."
+summary: "A web app for small businesses that brings bookings, customers, the product catalogue, and production together, keeping request details available as the team organises its day."
+year: "2026"
+status: "Prototype"
+disciplines: ["Product design", "Full-stack development", "UX/UI"]
+role: "Product design and full-stack development"
+team: "Independent project"
+duration: "In development · 2026"
+technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "Supabase", "Tailwind CSS"]
+chip: "/media/prenivo/showcase.avif"
+logo: {"src": "/media/prenivo/logo.svg", "alt": "Prenivo logo."}
+hero: {"src": "/media/prenivo/studio.webp", "alt": "Prenivo on tablet and smartphone: production, booking creation, and product selection.", "position": "center"}
+metrics: [{"value": "3", "label": "Connected stages", "context": "Booking, preparation, and pickup."}, {"value": "7", "label": "Operational statuses", "context": "From pending requests to collection, including cancellations and no-shows."}, {"value": "Web", "label": "Responsive access", "context": "An interface for desktop, tablet, and smartphone."}]
+links: [{"label": "Product website · publication pending", "href": "https://prenivo.netlify.app/it/", "kind": "external"}]
+featured: true
+order: 3
+seo: {"title": "Prenivo", "description": "Design and development of an app for managing bookings, production, and pickups in small businesses.", "image": "/media/prenivo/studio.webp", "imageAlt": "Prenivo production and booking interfaces."}
+---
+
+## The problem
+
+A cake ordered over the phone, a change written on paper, a colleague trying to find out what is ready. When requests are scattered across notes and conversations, reconstructing the day requires constant handovers. Products, customisations, and pickup times can lose their context.
+
+I created Prenivo to bring this information into a shared operational workflow, primarily for pastry shops, cafés, small food workshops, and businesses preparing products for collection.
+
+## Role and contribution
+
+I worked on product design, the interface, and full-stack development of the management app, alongside its commercial presentation. The work connects the booking model to the needs of the counter and workshop: recording a request, reviewing it, preparing it, and following it through to collection.
+
+## From request to pickup
+
+Staff record requests received at the counter or by phone, including the customer, products, quantities, customisations, and pickup slot. When the public channel is enabled, customers can submit requests online. These remain pending until the business reviews and confirms them.
+
+Each booking keeps its details and progress together. Statuses distinguish pending, confirmed, in preparation, ready, collected, cancelled, and no-show bookings. Search, filters, and detail views help recover context when a customer calls back or a colleague takes over.
+
+## Organising the day
+
+- **Operational dashboard:** status overview, upcoming pickups, and overdue items.
+- **Aggregated production:** quantities by product and category, linked to the bookings being prepared.
+- **Catalogue:** products, categories, and available options during booking creation.
+- **Availability and capacity:** opening hours, pickup slots, and warnings to assess the daily workload.
+- **Customers and team:** reusable customer details and access with roles and permissions.
+- **Analysis:** booking and product trends; financial figures describe order values and estimates.
+
+## Design decisions
+
+Separating requests from confirmations gives the business control over the work it accepts. The production view groups what needs preparing while preserving links to individual booking details. Capacity warnings support staff decisions, including supported operational exceptions.
+
+The interface adapts to its context: a computer for a broad overview, a tablet in the workshop, and a smartphone for checking or entering requests. Product selection highlights categories and options with controls suited to touch interaction.
+
+<ProjectGallery
+  caption="Product selection while creating a booking in Prenivo."
+  items={[{ src: "/media/prenivo/product-picker.avif", alt: "Desktop product picker showing the Crostate category, variants, prices, and confirmation button." }]}
+/>
+
+## Architecture
+
+The management app uses Next.js, React, and TypeScript, with PostgreSQL, Drizzle ORM, and Supabase. Its structure separates domain rules, use cases, data access, and presentation. Shared components keep fields, pickers, and statuses consistent across views.
+
+The product website is a separate project: it explains the features and presents the product without requiring access to a business’s operational data.
+
+## Project status
+
+Prenivo is in development, with an implemented management app and a product website being prepared for publication. The supplied link points to the planned commercial website address. Extending the product to other sectors requires dedicated workflows; the use case described here covers product bookings, preparation, and pickups.
+
+The design outcome is a continuous workflow between counter and workshop. Its impact on time, errors, and organisation remains to be measured in real-world use.

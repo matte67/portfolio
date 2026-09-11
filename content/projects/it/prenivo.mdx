@@ -1,0 +1,76 @@
+---
+locale: "it"
+translationKey: "prenivo"
+publicationStatus: "published"
+publishedAt: "2026-09-10"
+updatedAt: "2026-09-11"
+slug: "prenivo"
+index: "06"
+title: "prenivo."
+shortTitle: "prenivo."
+subtitle: "Dalla richiesta del cliente alla preparazione e al ritiro, in un unico flusso."
+summary: "Un’app web per piccole attività che riunisce prenotazioni, clienti, catalogo e produzione: i dettagli seguono ogni richiesta e il team può organizzare il lavoro della giornata."
+year: "2026"
+status: "Prototype"
+disciplines: ["Product design", "Sviluppo full-stack", "UX/UI"]
+role: "Progettazione del prodotto e sviluppo full-stack"
+team: "Progetto indipendente"
+duration: "In sviluppo · 2026"
+technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "Supabase", "Tailwind CSS"]
+chip: "/media/prenivo/studio.webp"
+logo: {"src": "/media/prenivo/logo.svg", "alt": "Logo Prenivo."}
+hero: {"src": "/media/prenivo/studio.webp", "alt": "Prenivo su tablet e smartphone: produzione, nuova prenotazione e selezione dei prodotti.", "position": "center"}
+metrics: [{"value": "3", "label": "Fasi collegate", "context": "Prenotazione, preparazione e ritiro."}, {"value": "7", "label": "Stati operativi", "context": "Dalla richiesta in attesa al ritiro, con annullamenti e mancati ritiri."}, {"value": "Web", "label": "Accesso responsive", "context": "Un’interfaccia per computer, tablet e smartphone."}]
+links: [{"label": "Sito di presentazione · in pubblicazione", "href": "https://prenivo.netlify.app/it/", "kind": "external"}]
+featured: true
+order: 3
+seo: {"title": "Prenivo", "description": "Progettazione e sviluppo di un’app per gestire prenotazioni, produzione e ritiri nelle piccole attività.", "image": "/media/prenivo/studio.webp", "imageAlt": "Interfacce Prenivo per produzione e prenotazioni."}
+---
+
+## Il problema
+
+Una torta ordinata al telefono, una modifica annotata su un foglio, un collega che deve capire cosa è già pronto. Quando le richieste sono distribuite tra appunti e conversazioni, ricostruire la giornata richiede continui passaggi di informazioni. Prodotti, personalizzazioni e orari di ritiro possono perdere il loro contesto.
+
+Ho creato Prenivo per riunire queste informazioni in un flusso operativo condiviso, pensato soprattutto per pasticcerie, bar, piccoli laboratori e attività con prodotti da preparare e ritirare.
+
+## Ruolo e contributo
+
+Ho curato la progettazione del prodotto, l’interfaccia e lo sviluppo full-stack del gestionale, insieme alla sua presentazione commerciale. Il lavoro collega il modello della prenotazione alle esigenze del banco e del laboratorio: raccogliere una richiesta, valutarla, prepararla e accompagnarla fino al ritiro.
+
+## Dalla richiesta al ritiro
+
+Lo staff registra le richieste ricevute al banco o al telefono, indicando cliente, prodotti, quantità, personalizzazioni e fascia di ritiro. Quando il canale pubblico è attivo, il cliente può inviare una richiesta online: entra in attesa e viene valutata e confermata dall’attività.
+
+La prenotazione mantiene insieme dettagli e avanzamento. Gli stati distinguono richieste in attesa, confermate, in preparazione, pronte, ritirate, annullate e mancati ritiri. Ricerca, filtri e dettaglio aiutano a recuperare il contesto quando un cliente richiama o il lavoro passa a un collega.
+
+## Organizzare la giornata
+
+- **Dashboard operativa:** riepilogo degli stati, prossimi ritiri e situazioni in ritardo.
+- **Produzione aggregata:** quantità per prodotto e categoria, collegate alle prenotazioni da preparare.
+- **Catalogo:** prodotti, categorie e opzioni disponibili durante l’inserimento.
+- **Disponibilità e capacità:** aperture, fasce e avvisi per valutare il carico della giornata.
+- **Clienti e team:** informazioni riutilizzabili e accessi con ruoli e permessi.
+- **Analisi:** lettura dell’andamento delle prenotazioni e dei prodotti; i valori economici rappresentano ordini e stime.
+
+## Scelte di progettazione
+
+La separazione tra richiesta e conferma lascia all’attività il controllo sul lavoro da accettare. La vista di produzione raggruppa ciò che serve preparare, mantenendo il collegamento ai dettagli della singola prenotazione. Gli avvisi di capacità supportano le decisioni dello staff, comprese le eccezioni operative previste.
+
+L’interfaccia si adatta al contesto: computer per una visione ampia, tablet in laboratorio e smartphone per consultare o inserire una richiesta. La selezione dei prodotti mette in evidenza categorie e opzioni, con controlli adatti anche al touch.
+
+<ProjectGallery
+  caption="Selezione dei prodotti durante l’inserimento di una prenotazione in Prenivo."
+  items={[{ src: "/media/prenivo/product-picker.png", alt: "Selettore desktop con categoria Crostate, varianti, prezzi e pulsante di conferma." }]}
+/>
+
+## Architettura
+
+Il gestionale usa Next.js, React e TypeScript, con PostgreSQL, Drizzle ORM e Supabase. La struttura separa regole di dominio, casi d’uso, accesso ai dati e presentazione. I componenti condivisi mantengono coerenti campi, selettori e stati nelle diverse viste.
+
+Il sito di presentazione è un progetto separato: racconta le funzionalità e mostra il prodotto senza richiedere l’accesso ai dati operativi dell’attività.
+
+## Stato del progetto
+
+Prenivo è un prodotto in sviluppo, con un gestionale implementato e un sito di presentazione in preparazione per la pubblicazione. Il link indicato rimanda alla destinazione prevista del sito commerciale. L’estensione ad altri settori richiede flussi dedicati, mentre il caso d’uso descritto riguarda prenotazioni di prodotti, preparazione e ritiri.
+
+Il risultato progettuale è un percorso continuo tra banco e laboratorio. I benefici su tempi, errori e organizzazione restano da misurare nell’utilizzo sul campo.

@@ -75,7 +75,7 @@ test("crawler assets expose the production route catalogue", async ({ request })
   const manifestResponse = await request.get("/content-manifest.json");
   expect(manifestResponse.ok()).toBeTruthy();
   const manifest = await manifestResponse.json();
-  expect(manifest.projects).toHaveLength(10);
+  expect(manifest.projects).toHaveLength(12);
   expect(manifest.articles).toHaveLength(2);
 
   expect(socialPreviewResponse.ok()).toBeTruthy();

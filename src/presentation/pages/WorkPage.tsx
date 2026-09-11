@@ -19,7 +19,7 @@ export function WorkPage() {
     media: {
       alt: metadata.hero.alt,
       fallback: <PlaceholderVisual />,
-      src: metadata.hero.src,
+      src: metadata.chip,
     },
     metadata: [metadata.role, metadata.disciplines.join(" · ")],
     summary: metadata.summary,

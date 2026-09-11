@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Prenivo">
+  <rect width="512" height="512" rx="112" fill="#23614c"/>
+  <path d="M146 179c0-61 49-110 110-110s110 49 110 110v29h23c18 0 33 15 33 33v135c0 37-30 67-67 67H157c-37 0-67-30-67-67V241c0-18 15-33 33-33h23v-29Z" fill="#f5f3ee"/>
+  <path d="M187 208v-29c0-38 31-69 69-69s69 31 69 69v29H187Z" fill="#b45134"/>
+  <circle cx="194" cy="302" r="18" fill="#23614c"/>
+  <circle cx="256" cy="302" r="18" fill="#23614c"/>
+  <circle cx="318" cy="302" r="18" fill="#23614c"/>
+</svg>

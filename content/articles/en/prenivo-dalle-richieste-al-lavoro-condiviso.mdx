@@ -1,0 +1,68 @@
+---
+locale: "en"
+translationKey: "prenivo-dalle-richieste-al-lavoro-condiviso"
+publicationStatus: "published"
+publishedAt: "2026-09-11"
+updatedAt: "2026-09-11"
+slug: "prenivo-dalle-richieste-al-lavoro-condiviso"
+title: "The hidden work behind a booking: why I created Prenivo"
+summary: "Between a phone call, a change, and a pickup, the challenge is keeping context intact. Prenivo connects customer requests to the work of the people preparing them."
+categories: ["Product design", "Software development"]
+tags: ["Prenivo", "bookings", "UX", "product design"]
+hero: {"src": "/media/articles/prenivo-dalle-richieste-al-lavoro-condiviso/prenivo.avif", "alt": "Prenivo on tablet and smartphone, showing production and booking creation.", "position": "center"}
+seo: {"title": "The hidden work behind a booking: why I created Prenivo", "description": "Between a phone call, a change, and a pickup, the challenge is keeping context intact. Prenivo connects customer requests to the work of the people preparing them.", "image": "/media/prenivo/studio.webp", "imageAlt": "Prenivo on tablet and smartphone, showing production and booking creation."}
+---
+
+Imagine a Saturday morning in a small pastry shop. A customer phones to order a cake. Later, they call again: the inscription has changed, and they want to collect it earlier. Meanwhile, someone in the workshop has already started preparing it using the original instructions.
+
+This is an illustrative scene, but it captures the problem that led me to build Prenivo: **a booking keeps changing after it has been written down**. Recording the details is only the first step. Those details need to remain understandable and available as the work moves between people.
+
+## When remembering becomes part of the process
+
+A note on the counter is immediate. A phone call helps clarify a special request. A message can contain a useful correction. Each channel serves a purpose; the difficulty appears when a decision has to be reconstructed across all of them.
+
+What is the updated pickup time? Did the change reach the person preparing the order? Is that cake ready, or merely confirmed? To answer, someone has to interrupt their work, find a note, or ask a colleague.
+
+In this kind of workflow, people’s memory holds the system together. With a few requests and one person handling both intake and preparation, that may be enough. A shift change or a heavier workload makes the amount of context being passed around more apparent.
+
+I designed Prenivo around a question: how can a request remain understandable to someone who did not hear the original conversation?
+
+## The booking as a point of reference
+
+The answer starts with a simple object: a booking that holds the customer, products, quantities, customisations, and pickup details together. Specific instructions stay alongside the work they concern.
+
+In Prenivo, staff record requests received at the counter or by phone. When the public channel is enabled, customers can also submit requests online. The aim is to bring the information into one place the team can consult, while preserving the distinction between how a request arrives and what should happen next.
+
+This changes the question the interface needs to answer. Alongside “how many bookings do we have?”, it should help someone understand “what do I need to know to move this request forward?”.
+
+## Receiving a request does not mean accepting it
+
+One of the most important distinctions concerns confirmation. A customer submitting a request online has expressed a need; the business still needs to assess it against availability and planned work.
+
+That is why a public request enters **pending confirmation**. It is a small boundary in interface copy, but a substantial one in expectations: receiving a request and committing to it are separate moments.
+
+The same principle guides the later statuses. Confirmed, in preparation, ready, and collected describe different stages. Making those differences explicit helps the person reading a booking understand which action makes sense at that point.
+
+## The counter and the workshop ask different questions
+
+The person speaking with a customer needs to find an individual booking. The person preparing orders needs to know which products and quantities make up the day’s workload.
+
+This led to Prenivo’s aggregated production view: grouping quantities by product and category while keeping links to the bookings. The overview makes the workload readable; the detail preserves customisations that cannot be absorbed into a total.
+
+That balance matters. An overly detailed list requires people to add quantities in their heads. An overly compressed summary can hide what makes one request different from another. The two views need to support each other.
+
+## An interface that leaves room for judgement
+
+Pickup slots, opening hours, and capacity warnings help staff assess the work ahead. Some operational decisions still depend on the business’s circumstances. Prenivo allows staff to evaluate certain exceptions under the rules of its internal workflow.
+
+Device choices follow the work too: a broad view on a computer, a tablet in the workshop, a phone for checking or recording a request. Keeping information consistent matters as much as arranging controls on a screen.
+
+## What still needs to be demonstrated
+
+Prenivo is in development, focused on product bookings, preparation, and pickups. The management app is implemented; its everyday usefulness still needs real-world validation.
+
+To evaluate it, I would start with concrete questions. Can a colleague find what they need during a shift handover? Can a change be recovered without reconstructing the conversation? Does the production summary provide a clear route to an individual request’s customisation? These are proposed observation criteria, not measured outcomes.
+
+The problem I want to address is the work required to keep everyone else’s work connected. A carefully designed booking can become the place where a customer’s request remains understandable all the way to collection, even when several people handle it.
+
+[Explore the Prenivo project](/en/work/prenivo).
