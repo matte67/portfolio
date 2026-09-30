@@ -1813,6 +1813,32 @@ svg {
   border-radius: var(--radius-large);
 }
 
+.project-video {
+  width: min(100%, 50rem);
+  margin-block: clamp(3.5rem, 6vw, 5.5rem);
+  margin-inline: 0;
+}
+
+.project-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-large);
+  border: 5px solid var(--color-ink);
+  background: var(--color-surface);
+  object-fit: cover;
+  object-position: center;
+}
+
+.project-video figcaption {
+  margin-top: 1rem;
+  padding-inline: 0.15rem;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  line-height: 1.7;
+}
+
 .editorial-figure:not(.editorial-hero) .editorial-image {
   max-height: 48rem;
 }

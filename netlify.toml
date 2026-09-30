@@ -6,6 +6,9 @@
   NODE_VERSION = "22"
   NODE_OPTIONS = "--max-old-space-size=4096"
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"

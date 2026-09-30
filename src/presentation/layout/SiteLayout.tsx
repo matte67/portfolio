@@ -7,6 +7,7 @@ import { GradualBlur } from "../effects/GradualBlur";
 import { FrameCorner } from "./FrameCorner";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
+import { ChatAssistant } from "../chat/ChatAssistant";
 
 const NAVIGATION_SCROLL_THRESHOLD = 24;
 const BLUR_REVEAL_DISTANCE = 120;
@@ -109,6 +110,7 @@ export function SiteLayout() {
         target="page"
         zIndex={-20}
       />
+      <ChatAssistant />
     </>
   );
 }

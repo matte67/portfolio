@@ -1,5 +1,23 @@
 {
   "navigation": { "work": "Progetti", "articles": "Articoli", "thesis": "Tesi", "about": "Profilo", "primaryLabel": "Navigazione principale", "mobileLabel": "Navigazione mobile", "menu": "Menu", "changeLanguage": "Cambia lingua", "close": "Chiudi", "homeLabel": "Matteo Vittori, home", "emailLabel": "Scrivi a Matteo", "githubLabel": "Matteo su GitHub" },
   "footer": { "eyebrow": "Iniziamo una conversazione", "title": "Sistemi che restano chiari mentre crescono.", "explore": "Esplora", "details": "Dettagli", "linksLabel": "Link nel piè di pagina", "role": "Ruolo", "roleValue": "Studente di Informatica", "based": "Sede", "timezone": "Fuso orario", "signature": "Progettato e realizzato con cura." },
-  "accessibility": { "skipToContent": "Vai al contenuto" }
+  "accessibility": { "skipToContent": "Vai al contenuto" },
+  "chat": {
+    "launcher": "Apri la chat con l’assistente",
+    "title": "Assistente portfolio",
+    "online": "Qui per orientarti nel portfolio",
+    "close": "Chiudi chat",
+    "welcome": "Ciao! Posso aiutarti a esplorare i progetti, gli articoli e il percorso di Matteo.",
+    "placeholder": "Scrivi un messaggio…",
+    "send": "Invia messaggio",
+    "cancel": "Annulla risposta",
+    "typing": "L’assistente sta scrivendo",
+    "retry": "Riprova",
+    "error": "Non sono riuscito a completare la risposta. Riprova tra poco.",
+    "rateLimit": "Hai inviato troppe richieste. Aspetta un minuto e riprova.",
+    "unavailable": "La chat non è disponibile al momento. Puoi scrivere direttamente a Matteo.",
+    "privacy": "L’assistente usa solo contenuti pubblici del portfolio e non ha accesso ad altri dati personali. I messaggi vengono elaborati da Google Gemini.",
+    "privacyDetails": "La conversazione resta in questa sessione e non viene salvata dal sito. Il messaggio e il contesto pubblico necessario alla risposta vengono inviati a Google Gemini tramite un endpoint server-side.",
+    "clearHint": "Invio per mandare, Maiusc+Invio per andare a capo"
+  }
 }

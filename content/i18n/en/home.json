@@ -1,9 +1,9 @@
 {
-  "meta": { "title": "Computer Science student", "description": "Matteo Vittori builds modular software systems across computer vision and the web." },
+  "meta": { "title": "Computer Science – Artificial Intelligence student", "description": "Matteo Vittori studies Computer Science – Artificial Intelligence at Politecnico di Milano and builds modular software systems." },
   "heroGreeting": "Hi, I’m",
   "exploreWork": "Explore selected work",
   "email": "Email me",
   "work": { "eyebrow": "01 · Selected work", "title": "Systems shaped by different kinds of complexity.", "description": "Case studies spanning software architecture, computer vision, web products, immersive interaction, and embedded systems.", "indexLink": "View the complete work index" },
   "articles": { "eyebrow": "02 · Latest writing", "title": "Ideas made useful through detail.", "description": "Notes on software, AI-assisted programming, and the decisions behind maintainable systems.", "sectionLabel": "Latest articles", "read": "Read article", "indexLink": "Read all articles" },
-  "about": { "eyebrow": "03 · About", "title": "An engineer interested in boundaries.", "paragraphs": ["I’m a Computer Science student at the University of Camerino, focused on building software that balances solid architecture with intuitive user experiences.", "I value small responsibilities, honest trade-offs, reproducible evidence, and interfaces that reveal the underlying model instead of hiding it."], "link": "More about my approach" }
+  "about": { "eyebrow": "03 · About", "title": "A student interested in boundaries.", "paragraphs": ["I study Computer Science – Artificial Intelligence at Politecnico di Milano. I’m interested in building software that balances solid architecture with intuitive user experiences.", "I value small responsibilities, honest trade-offs, reproducible evidence, and interfaces that reveal the underlying model instead of hiding it."], "link": "More about my approach" }
 }

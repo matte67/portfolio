@@ -22,7 +22,7 @@
     "directLoop": "Direct loop",
     "batch": "SEF batch",
     "streaming": "SEF streaming",
-    "source": "Source: SEF thesis presentation. Add raw benchmark data and environment details before publication."
+    "source": "Source: benchmarks are published on Github."
   },
   "character": {
     "eyebrow": "Shared ecosystem",
@@ -30,7 +30,12 @@
     "description": "Each character belongs to a habitat and a dynamic ecological network affected by group decisions.",
     "ariaLabel": "RE:WILD character artwork",
     "caption": "Character assets supplied in the RE:WILD project material.",
-    "alts": ["Fawn character", "Bird character", "Dolphin character", "Sea turtle character"]
+    "alts": [
+      "Fawn character",
+      "Bird character",
+      "Dolphin character",
+      "Sea turtle character"
+    ]
   },
   "contentNeededLabel": "Content checkpoint",
   "mechanicSequence": {
@@ -49,18 +54,39 @@
     "title": "A video-to-signal pipeline in explicit stages",
     "ariaLabel": "Pipeline stages",
     "stages": [
-      ["Frame extractor", "Acquires frames from a file, camera, or continuous source."],
-      ["Frame processor", "Transforms visual data through independent, replaceable operations."],
-      ["Signal extractor", "Turns frames into measures, trajectories, motion, or temporal series."],
-      ["Signal cleaner", "Filters, normalises, and corrects the extracted signal."],
-      ["Analyzer", "Interprets structured signals and produces analytical results."],
+      [
+        "Frame extractor",
+        "Acquires frames from a file, camera, or continuous source."
+      ],
+      [
+        "Frame processor",
+        "Transforms visual data through independent, replaceable operations."
+      ],
+      [
+        "Signal extractor",
+        "Turns frames into measures, trajectories, motion, or temporal series."
+      ],
+      [
+        "Signal cleaner",
+        "Filters, normalises, and corrects the extracted signal."
+      ],
+      [
+        "Analyzer",
+        "Interprets structured signals and produces analytical results."
+      ],
       ["Visualizer", "Creates plots, media, tables, or inspectable artifacts."]
     ]
   },
   "useCases": [
     ["Tracking", "Single and multi-object trajectories from continuous video."],
-    ["Optical flow", "Sparse and dense motion fields converted into structured data."],
-    ["Motion magnification", "Subtle temporal variation made observable and measurable."],
+    [
+      "Optical flow",
+      "Sparse and dense motion fields converted into structured data."
+    ],
+    [
+      "Motion magnification",
+      "Subtle temporal variation made observable and measurable."
+    ],
     ["ArUco", "Marker displacement and relative-motion analysis."],
     ["Pose", "Realtime COCO pose estimation and gesture classification."]
   ]

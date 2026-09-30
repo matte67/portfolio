@@ -1,5 +1,47 @@
 {
-  "navigation": { "work": "Work", "articles": "Articles", "thesis": "Thesis", "about": "About", "primaryLabel": "Primary navigation", "mobileLabel": "Mobile navigation", "menu": "Menu", "changeLanguage": "Change language", "close": "Close", "homeLabel": "Matteo Vittori, home", "emailLabel": "Email Matteo", "githubLabel": "Matteo on GitHub" },
-  "footer": { "eyebrow": "Start a conversation", "title": "Building systems that remain clear as they grow.", "explore": "Explore", "details": "Details", "linksLabel": "Footer links", "role": "Role", "roleValue": "Computer Science student", "based": "Based", "timezone": "Timezone", "signature": "Designed and built with care." },
-  "accessibility": { "skipToContent": "Skip to content" }
+  "navigation": {
+    "work": "Work",
+    "articles": "Articles",
+    "thesis": "Thesis",
+    "about": "About",
+    "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile navigation",
+    "menu": "Menu",
+    "changeLanguage": "Change language",
+    "close": "Close",
+    "homeLabel": "Matteo Vittori, home",
+    "emailLabel": "Email Matteo",
+    "githubLabel": "Matteo on GitHub"
+  },
+  "footer": {
+    "eyebrow": "Start a conversation",
+    "title": "Building systems that remain clear as they grow.",
+    "explore": "Explore",
+    "details": "Details",
+    "linksLabel": "Footer links",
+    "role": "Role",
+    "roleValue": "Computer Science student",
+    "based": "Based",
+    "timezone": "Timezone",
+    "signature": "Designed and built with care."
+  },
+  "accessibility": { "skipToContent": "Skip to content" },
+  "chat": {
+    "launcher": "Open chat with the assistant",
+    "title": "Portfolio assistant",
+    "online": "Here to help you explore the portfolio",
+    "close": "Close chat",
+    "welcome": "Hi! I can help you explore Matteo’s projects, articles, and background.",
+    "placeholder": "Write a message…",
+    "send": "Send message",
+    "cancel": "Cancel response",
+    "typing": "The assistant is writing",
+    "retry": "Try again",
+    "error": "I couldn’t finish that response. Please try again shortly.",
+    "rateLimit": "Too many requests. Wait a minute and try again.",
+    "unavailable": "Chat is unavailable right now. You can email Matteo directly.",
+    "privacy": "The assistant uses public portfolio content only and has no access to other personal data. Messages are processed by Google Gemini.",
+    "privacyDetails": "The conversation stays in this session and is not saved by the site. Your message and the public context needed to answer are sent to Google Gemini through a server-side endpoint.",
+    "clearHint": "Enter to send, Shift+Enter for a new line"
+  }
 }
