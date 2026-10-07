@@ -5,8 +5,8 @@ publicationStatus: published
 publishedAt: '2026-07-19'
 updatedAt: '2026-07-20'
 slug: ai-goal-oriented-programming
-title: "The next programming interface is intent"
-summary: "AI-assisted development is moving the centre of programming from writing every implementation detail to defining goals, constraints, and evidence of success."
+title: The next programming interface is intent
+summary: 'AI-assisted development is moving the centre of programming from writing every implementation detail to defining goals, constraints, and evidence of success.'
 categories:
   - AI
   - Software architecture
@@ -18,35 +18,30 @@ tags:
   - verification
   - software architecture
 hero:
-  src: /media/articles/ai-goal-oriented-programming/ai-me-handshake.avif
+  src: /media/articles/ai-goal-oriented-programming/ai-oriented-handshake.webp
   alt: 'A visual loop connecting intent, constraints, implementation, and evidence in goal-oriented programming.'
   position: center
 seo:
-  title: "Goal-oriented programming in the AI era"
-  description: "A practical proposal for AI-based programming built around goals, constraints, contracts, verification, and human ownership."
-  image: /social-preview.png
-  imageAlt: "Matteo Vittori portfolio preview for an article about goal-oriented AI programming"
+  title: Goal-oriented programming in the AI era
+  description: 'A practical proposal for AI-based programming built around goals, constraints, contracts, verification, and human ownership.'
+  image: /media/social-preview.png
+  imageAlt: Matteo Vittori portfolio preview for an article about goal-oriented AI programming
 ---
 
 Software has always been written at several levels of abstraction. We started with machine instructions, moved to assembly, then to languages that let us describe algorithms, data structures, and domain rules without spelling out every operation. AI-assisted development suggests another change in that boundary: the programmer may increasingly describe **what must be achieved**, while the model explores an implementation that satisfies the description.
 
 This is not the end of code, and it is not a licence to replace engineering with a prompt. It is a proposal for a different programming interface: one where the primary artefact is a goal together with its constraints and evidence, and source code is an implementation detail that can be regenerated, inspected, and replaced.
 
-<EditorialFigure
-  src="/media/articles/ai-goal-oriented-programming/goal-contract.svg"
-  alt="Five connected cards showing intent, constraints, plan, implementation, and evidence as one change package."
-  caption="A goal becomes useful when it carries its boundaries, its proposed path, and the evidence needed to accept the result."
-  wide={true}
-/>
+<EditorialFigure src="/media/articles/ai-goal-oriented-programming/goal-contract.svg" alt="Five connected cards showing intent, constraints, plan, implementation, and evidence as one change package." caption="A goal becomes useful when it carries its boundaries, its proposed path, and the evidence needed to accept the result." wide={true} />
 
 ## From instructions to intent
 
 Traditional programming asks us to define a sequence of operations. Even when we work at a high level, the implementation remains the main object we review and maintain. An AI-based workflow reverses the emphasis:
 
-- the goal describes the desired outcome;
-- constraints describe what must never change or what the solution must respect;
-- interfaces describe how the result connects to the rest of the system;
-- evidence describes how we will decide that the result is correct.
+* the goal describes the desired outcome;
+* constraints describe what must never change or what the solution must respect;
+* interfaces describe how the result connects to the rest of the system;
+* evidence describes how we will decide that the result is correct.
 
 The model can then choose between algorithms, libraries, files, and implementation strategies. The engineer remains responsible for deciding whether the goal is meaningful, whether the constraints are complete, and whether the evidence is strong enough.
 
@@ -73,9 +68,7 @@ Evidence
 
 The example is closer to a small contract than to a chat instruction. It gives the model room to make implementation choices while giving the team a stable way to reject an attractive but incorrect solution.
 
-<EditorialCallout eyebrow="Working principle" title="The model chooses the path. The team chooses the boundary." tone="accent">
-  <p>A generated implementation is replaceable. The intent, constraints, and acceptance evidence are what make a change understandable and governable.</p>
-</EditorialCallout>
+<EditorialCallout eyebrow="Working principle" title="The model chooses the path. The team chooses the boundary." tone="accent" />
 
 ## The new unit of work
 
@@ -108,11 +101,31 @@ define intent → propose a plan → implement → verify → inspect evidence �
 <EditorialFlow
   label="Goal-oriented programming loop"
   items={[
-    { number: "01", title: "Define", description: "State the outcome and why it matters." },
-    { number: "02", title: "Constrain", description: "Make invariants, boundaries, and non-goals explicit." },
-    { number: "03", title: "Build", description: "Let the model explore an implementation inside the boundary." },
-    { number: "04", title: "Verify", description: "Run tests, inspect traces, and compare the evidence." },
-    { number: "05", title: "Decide", description: "Accept, revise, or reject the interpretation." },
+    {
+      number: "01",
+      title: "Define",
+      description: "State the outcome and why it matters."
+    },
+    {
+      number: "02",
+      title: "Constrain",
+      description: "Make invariants, boundaries, and non-goals explicit."
+    },
+    {
+      number: "03",
+      title: "Build",
+      description: "Let the model explore an implementation inside the boundary."
+    },
+    {
+      number: "04",
+      title: "Verify",
+      description: "Run tests, inspect traces, and compare the evidence."
+    },
+    {
+      number: "05",
+      title: "Decide",
+      description: "Accept, revise, or reject the interpretation."
+    }
   ]}
 />
 
@@ -128,17 +141,15 @@ For that reason, human ownership moves up a level instead of disappearing. Peopl
 
 Teams do not need to redesign their entire toolchain to experiment with this idea. Start with one bounded change and write five things before asking an AI system to implement it:
 
-- the outcome in one sentence;
-- the constraints and non-goals;
-- the interfaces that must remain stable;
-- the acceptance tests and observable metrics;
-- the assumptions that still need a human decision.
+* the outcome in one sentence;
+* the constraints and non-goals;
+* the interfaces that must remain stable;
+* the acceptance tests and observable metrics;
+* the assumptions that still need a human decision.
 
 Then ask the model to propose a plan before it writes code. Review the plan, let it implement in a small branch, run the evidence, and keep the intent alongside the resulting change. The goal is not to produce more code faster. It is to make the distance between a decision and a working system shorter, more visible, and easier to correct.
 
-<EditorialQuote cite="A practical rule for AI-assisted teams">
-  The implementation is replaceable; the reason for the change is not.
-</EditorialQuote>
+<EditorialQuote cite="A practical rule for AI-assisted teams" />
 
 ## Closing thought
 
