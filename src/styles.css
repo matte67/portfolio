@@ -198,6 +198,13 @@ body {
     box-shadow 360ms var(--ease-standard);
 }
 
+.site-header__top-gap-patch {
+  position: absolute;
+  right: -1.5rem;
+  left: -1.5rem;
+  height: 10px;
+}
+
 .site-header[data-merged="true"] .site-header__inner {
   min-height: calc(var(--frame-header-height) - 0.7rem);
   border-color: transparent;
@@ -2988,7 +2995,7 @@ svg {
 
 .not-found {
   display: grid;
-  min-height: 70svh;
+  min-height: 100svh;
   grid-template-columns: 7fr 5fr;
   align-items: center;
   gap: 2rem;
@@ -3002,6 +3009,7 @@ svg {
   font-weight: 560;
   letter-spacing: -0.065em;
   line-height: 0.92;
+  color: var(--color-canvas)
 }
 
 .not-found p:not(.eyebrow) {

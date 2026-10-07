@@ -39,7 +39,7 @@ test("desktop homepage communicates the portfolio and exposes the flowing projec
   await page.screenshot({ path: "test-results/screenshots/click-spark-active.png" });
 
   const brandMark = page.locator(".site-header__inner .site-brand__mark");
-  await expect(brandMark).toHaveAttribute("src", "/global/matteo-vittori-mark-reverse.svg");
+  await expect(brandMark).toHaveAttribute("src", "/global/matteo-vittori-mark-reverse.png");
   await expect.poll(() => brandMark.evaluate(
     (image) => (image as HTMLImageElement).naturalWidth,
   )).toBeGreaterThan(0);

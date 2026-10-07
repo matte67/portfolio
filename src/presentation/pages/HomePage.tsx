@@ -22,7 +22,7 @@ export function HomePage() {
   const projects = projectCatalog.listFeaturedProjects(language);
   const latestArticles = articleCatalog
     .listArticles(language)
-    .slice(0, 2)
+    .slice(0, 1)
     .map(({ metadata }) => toArticleIndexItem(metadata, language));
   const selectedProjectItems = projects.map(({ metadata }) => ({
     image: metadata.chip || "/global/matteo-vittori-mark.svg",
@@ -64,19 +64,31 @@ export function HomePage() {
           </div>
           <MagneticAvatar />
           <div className="home-hero__actions absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 flex-wrap items-center justify-center gap-6 whitespace-nowrap max-[48rem]:bottom-4 max-[25rem]:w-[calc(100%-2.5rem)] max-[25rem]:flex-col max-[25rem]:items-stretch">
-            <a className="button-link" href="#selected-work">{copy.exploreWork} <DownMark /></a>
-            <a className="text-link" href="mailto:matteo01.vittori@icloud.com">{copy.email} <ArrowMark /></a>
+            <a className="button-link" href="#selected-work">
+              {copy.exploreWork} <DownMark />
+            </a>
+            <a className="text-link" href="mailto:matteo01.vittori@icloud.com">
+              {copy.email} <ArrowMark />
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="selected-work page-shell section-space" id="selected-work" aria-labelledby="selected-work-title">
+      <section
+        className="selected-work page-shell section-space"
+        id="selected-work"
+        aria-labelledby="selected-work-title"
+      >
         <SectionHeading
           eyebrow={copy.work.eyebrow}
           title={copy.work.title}
           description={copy.work.description}
         />
-        <Suspense fallback={<div aria-hidden="true" className="flowing-menu-fallback" />}>
+        <Suspense
+          fallback={
+            <div aria-hidden="true" className="flowing-menu-fallback" />
+          }
+        >
           <FlowingMenu
             bgColor="transparent"
             borderColor="#00000000"
@@ -87,10 +99,15 @@ export function HomePage() {
             speed={10}
           />
         </Suspense>
-        <Link className="section-end-link" to={toLocalizedPath("/work")}>{copy.work.indexLink} <ArrowMark /></Link>
+        <Link className="section-end-link" to={toLocalizedPath("/work")}>
+          {copy.work.indexLink} <ArrowMark />
+        </Link>
       </section>
 
-      <section className="home-articles page-shell section-space" aria-labelledby="home-articles-title">
+      <section
+        className="home-articles page-shell section-space"
+        aria-labelledby="home-articles-title"
+      >
         <SectionHeading
           eyebrow={copy.articles.eyebrow}
           title={copy.articles.title}
@@ -105,22 +122,25 @@ export function HomePage() {
           variant="default"
           showLinks={false}
         />
-        <Link className="section-end-link" to={toLocalizedPath("/articles")}>{copy.articles.indexLink} <ArrowMark /></Link>
+        <Link className="section-end-link" to={toLocalizedPath("/articles")}>
+          {copy.articles.indexLink} <ArrowMark />
+        </Link>
       </section>
 
-      <section className="about-preview page-shell section-space" aria-labelledby="about-preview-title">
+      <section
+        className="about-preview page-shell section-space"
+        aria-labelledby="about-preview-title"
+      >
         <div>
           <p className="eyebrow">{copy.about.eyebrow}</p>
           <h2 id="about-preview-title">{copy.about.title}</h2>
         </div>
         <div className="about-preview__copy">
-          <p>
-            {copy.about.paragraphs[0]}
-          </p>
-          <p>
-            {copy.about.paragraphs[1]}
-          </p>
-          <Link className="text-link" to={toLocalizedPath("/about")}>{copy.about.link} <ArrowMark /></Link>
+          <p>{copy.about.paragraphs[0]}</p>
+          <p>{copy.about.paragraphs[1]}</p>
+          <Link className="text-link" to={toLocalizedPath("/about")}>
+            {copy.about.link} <ArrowMark />
+          </Link>
         </div>
       </section>
 

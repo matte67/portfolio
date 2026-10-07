@@ -10,8 +10,8 @@ import {
   type SignalPoint,
 } from "./signalPattern";
 
-const POINT_COUNT = 8440;
-const FORMATION_POINT_COUNT = 8440;
+const POINT_COUNT = 5440;
+const FORMATION_POINT_COUNT = 5440;
 const FORMATION_DURATION_MS = 6200;
 const FORMATION_DPR_LIMIT = 1.7;
 const FORMATION_CENTER_X = SIGNAL_VIEWBOX_WIDTH / 2;
@@ -114,14 +114,22 @@ function createFormationParticles(count: number): readonly FormationParticle[] {
   });
 }
 
-function transformSpherePoint(point: SignalPoint, scale: number, rotation: number) {
+function transformSpherePoint(
+  point: SignalPoint,
+  scale: number,
+  rotation: number,
+) {
   const angle = rotation * (Math.PI / 180);
   const relativeX = point.x - FORMATION_CENTER_X;
   const relativeY = point.y - FORMATION_CENTER_Y;
 
   return {
-    x: FORMATION_CENTER_X + (relativeX * Math.cos(angle) - relativeY * Math.sin(angle)) * scale,
-    y: FORMATION_CENTER_Y + (relativeX * Math.sin(angle) + relativeY * Math.cos(angle)) * scale,
+    x:
+      FORMATION_CENTER_X +
+      (relativeX * Math.cos(angle) - relativeY * Math.sin(angle)) * scale,
+    y:
+      FORMATION_CENTER_Y +
+      (relativeX * Math.sin(angle) + relativeY * Math.cos(angle)) * scale,
   };
 }
 
@@ -140,7 +148,10 @@ function drawFormationFrame(
   inkColor: string,
 ) {
   context.clearRect(0, 0, SIGNAL_VIEWBOX_WIDTH, SIGNAL_VIEWBOX_HEIGHT);
-  const paths = Array.from({ length: FORMATION_OPACITY_BUCKETS.length * 2 }, () => new Path2D());
+  const paths = Array.from(
+    { length: FORMATION_OPACITY_BUCKETS.length * 2 },
+    () => new Path2D(),
+  );
 
   for (const particle of particles) {
     let x: number;
@@ -162,7 +173,7 @@ function drawFormationFrame(
     } else if (progress <= FORMATION_COLLAPSE_END) {
       const stage = easeInOutCubic(
         (progress - FORMATION_EXPAND_END) /
-        (FORMATION_COLLAPSE_END - FORMATION_EXPAND_END),
+          (FORMATION_COLLAPSE_END - FORMATION_EXPAND_END),
       );
       const transformed = transformSpherePoint(
         particle.source,
@@ -176,7 +187,7 @@ function drawFormationFrame(
     } else if (progress <= FORMATION_EXPLOSION_END) {
       const stage = easeOutCubic(
         (progress - FORMATION_COLLAPSE_END) /
-        (FORMATION_EXPLOSION_END - FORMATION_COLLAPSE_END),
+          (FORMATION_EXPLOSION_END - FORMATION_COLLAPSE_END),
       );
       const collapsed = transformSpherePoint(particle.source, 0.1, 450);
       x = collapsed.x + particle.explosionX * stage;
@@ -185,8 +196,7 @@ function drawFormationFrame(
       opacity = particle.source.opacity * lerp(0.58, 1.05, stage);
     } else {
       const stage = easeOutQuint(
-        (progress - FORMATION_EXPLOSION_END) /
-        (1 - FORMATION_EXPLOSION_END),
+        (progress - FORMATION_EXPLOSION_END) / (1 - FORMATION_EXPLOSION_END),
       );
       const collapsed = transformSpherePoint(particle.source, 0.1, 450);
       const startX = collapsed.x + particle.explosionX;
@@ -198,11 +208,21 @@ function drawFormationFrame(
 
       x = lerp(startX, particle.target.x, stage) - (deltaY / distance) * curve;
       y = lerp(startY, particle.target.y, stage) + (deltaX / distance) * curve;
-      radius = lerp(particle.source.radius * 1.12, particle.target.radius, stage);
-      opacity = lerp(Math.max(0.36, particle.source.opacity), particle.target.opacity, stage);
+      radius = lerp(
+        particle.source.radius * 1.12,
+        particle.target.radius,
+        stage,
+      );
+      opacity = lerp(
+        Math.max(0.36, particle.source.opacity),
+        particle.target.opacity,
+        stage,
+      );
     }
 
-    const colorOffset = particle.source.accent ? FORMATION_OPACITY_BUCKETS.length : 0;
+    const colorOffset = particle.source.accent
+      ? FORMATION_OPACITY_BUCKETS.length
+      : 0;
     const path = paths[colorOffset + opacityBucketIndex(opacity)];
     path.moveTo(x + radius, y);
     path.arc(x, y, radius, 0, Math.PI * 2);
@@ -211,7 +231,8 @@ function drawFormationFrame(
   for (let index = 0; index < paths.length; index += 1) {
     const opacityIndex = index % FORMATION_OPACITY_BUCKETS.length;
     context.globalAlpha = FORMATION_OPACITY_BUCKETS[opacityIndex];
-    context.fillStyle = index < FORMATION_OPACITY_BUCKETS.length ? inkColor : accentColor;
+    context.fillStyle =
+      index < FORMATION_OPACITY_BUCKETS.length ? inkColor : accentColor;
     context.fill(paths[index]);
   }
   context.globalAlpha = 1;
@@ -226,7 +247,9 @@ function clamp(value: number, minimum: number, maximum: number) {
 }
 
 function cellKey(x: number, y: number): string {
-  return `${Math.floor(x / SPATIAL_CELL_SIZE)}:${Math.floor(y / SPATIAL_CELL_SIZE)}`;
+  return `${Math.floor(x / SPATIAL_CELL_SIZE)}:${Math.floor(
+    y / SPATIAL_CELL_SIZE,
+  )}`;
 }
 
 /** Indexes the static point distribution once, avoiding full-field scans during interactions. */
@@ -243,7 +266,12 @@ function createSpatialIndex(points: readonly FieldPoint[]): SpatialIndex {
   return index;
 }
 
-function findCandidatePointIndexes(index: SpatialIndex, x: number, y: number, radius: number): readonly number[] {
+function findCandidatePointIndexes(
+  index: SpatialIndex,
+  x: number,
+  y: number,
+  radius: number,
+): readonly number[] {
   if (radius <= 0) return [];
 
   const minimumX = Math.floor((x - radius) / SPATIAL_CELL_SIZE);
@@ -269,7 +297,8 @@ function findCandidatePointIndexes(index: SpatialIndex, x: number, y: number, ra
 export function SignalField({ animateEntrance = false }: SignalFieldProps) {
   const points = useMemo(() => createSignalPoints(POINT_COUNT), []);
   const formationParticles = useMemo(
-    () => animateEntrance ? createFormationParticles(FORMATION_POINT_COUNT) : [],
+    () =>
+      animateEntrance ? createFormationParticles(FORMATION_POINT_COUNT) : [],
     [animateEntrance],
   );
   const spatialIndex = useMemo(() => createSpatialIndex(points), [points]);
@@ -277,7 +306,9 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const meshRef = useRef<SVGGElement>(null);
   const pointElementsRef = useRef<(SVGCircleElement | null)[]>([]);
-  const animatedPointsRef = useRef<AnimatedFieldPoint[]>(points.map(toAnimatedPoint));
+  const animatedPointsRef = useRef<AnimatedFieldPoint[]>(
+    points.map(toAnimatedPoint),
+  );
   const pointerRef = useRef<PointerState>({
     x: 0,
     y: 0,
@@ -287,7 +318,10 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
     lastY: 0,
     isInside: false,
   });
-  const { movingLayerRef, rootRef } = useMagneticMotion<HTMLDivElement, HTMLDivElement>({
+  const { movingLayerRef, rootRef } = useMagneticMotion<
+    HTMLDivElement,
+    HTMLDivElement
+  >({
     interactionSelector: " .about-hero, .not-found",
     interpolationFactor: 0.1,
     maxHorizontalShift: 9,
@@ -317,7 +351,10 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       return;
     }
 
-    const devicePixelRatio = Math.min(window.devicePixelRatio || 1, FORMATION_DPR_LIMIT);
+    const devicePixelRatio = Math.min(
+      window.devicePixelRatio || 1,
+      FORMATION_DPR_LIMIT,
+    );
     canvas.width = SIGNAL_VIEWBOX_WIDTH * devicePixelRatio;
     canvas.height = SIGNAL_VIEWBOX_HEIGHT * devicePixelRatio;
     context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
@@ -345,10 +382,17 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
     const renderFormation = (time: number) => {
       startTime ??= time;
       const progress = clamp((time - startTime) / FORMATION_DURATION_MS, 0, 1);
-      drawFormationFrame(context, formationParticles, progress, accentColor, inkColor);
+      drawFormationFrame(
+        context,
+        formationParticles,
+        progress,
+        accentColor,
+        inkColor,
+      );
 
       const crossfade = clamp(
-        (progress - FORMATION_CROSSFADE_START) / (1 - FORMATION_CROSSFADE_START),
+        (progress - FORMATION_CROSSFADE_START) /
+          (1 - FORMATION_CROSSFADE_START),
         0,
         1,
       );
@@ -365,7 +409,8 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
     animationFrame = window.requestAnimationFrame(renderFormation);
 
     return () => {
-      if (animationFrame !== undefined) window.cancelAnimationFrame(animationFrame);
+      if (animationFrame !== undefined)
+        window.cancelAnimationFrame(animationFrame);
       root.dataset.formationState = "pending";
       canvas.style.removeProperty("display");
       canvas.style.removeProperty("opacity");
@@ -377,12 +422,22 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
     const root = rootRef.current;
     const svg = svgRef.current;
     const mesh = meshRef.current;
-    const interactionRegion = root?.closest<HTMLElement>(".home-hero, .about-hero, .not-found") ?? root?.parentElement;
+    const interactionRegion =
+      root?.closest<HTMLElement>(".home-hero, .about-hero, .not-found") ??
+      root?.parentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const finePointer = window.matchMedia("(pointer: fine)");
     const animatedPoints = animatedPointsRef.current;
 
-    if (!root || !svg || !mesh || !interactionRegion || reducedMotion.matches || !finePointer.matches) return;
+    if (
+      !root ||
+      !svg ||
+      !mesh ||
+      !interactionRegion ||
+      reducedMotion.matches ||
+      !finePointer.matches
+    )
+      return;
 
     let frameId: number | undefined;
     const activeProximityIndexes = new Set<number>();
@@ -394,7 +449,9 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       const matrix = mesh.getScreenCTM();
       if (!matrix) return null;
 
-      return new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+      return new DOMPoint(event.clientX, event.clientY).matrixTransform(
+        matrix.inverse(),
+      );
     };
 
     const applyPointTransform = (point: AnimatedFieldPoint, index: number) => {
@@ -405,9 +462,10 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       const distanceX = point.x - pointer.x;
       const distanceY = point.y - pointer.y;
       const distance = Math.hypot(distanceX, distanceY);
-      const proximity = pointer.isInside && PROXIMITY_RADIUS > 0
-        ? clamp(1 - distance / PROXIMITY_RADIUS, 0, 1)
-        : 0;
+      const proximity =
+        pointer.isInside && PROXIMITY_RADIUS > 0
+          ? clamp(1 - distance / PROXIMITY_RADIUS, 0, 1)
+          : 0;
       const directionX = distance === 0 ? 0 : distanceX / distance;
       const directionY = distance === 0 ? 0 : distanceY / distance;
       const hoverDistance = proximity * proximity * 4.5;
@@ -415,13 +473,21 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       const offsetY = point.inertiaY + directionY * hoverDistance;
       const scale = 1 + proximity * 0.52;
 
-      element.setAttribute("transform", `translate(${offsetX} ${offsetY}) scale(${scale})`);
-      element.setAttribute("opacity", String(Math.min(0.92, point.opacity + proximity * 0.32)));
+      element.setAttribute(
+        "transform",
+        `translate(${offsetX} ${offsetY}) scale(${scale})`,
+      );
+      element.setAttribute(
+        "opacity",
+        String(Math.min(0.92, point.opacity + proximity * 0.32)),
+      );
     };
 
     const renderProximity = () => {
       frameId = undefined;
-      pendingRenderIndexes.forEach((index) => applyPointTransform(animatedPoints[index], index));
+      pendingRenderIndexes.forEach((index) =>
+        applyPointTransform(animatedPoints[index], index),
+      );
       pendingRenderIndexes.clear();
     };
 
@@ -431,16 +497,20 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       frameId ??= window.requestAnimationFrame(renderProximity);
     };
 
-    const findPointsWithinRadius = (x: number, y: number, radius: number) => (
+    const findPointsWithinRadius = (x: number, y: number, radius: number) =>
       findCandidatePointIndexes(spatialIndex, x, y, radius).filter((index) => {
         const point = animatedPoints[index];
         return Math.hypot(point.x - x, point.y - y) < radius;
-      })
-    );
+      });
 
     const updateProximityPoints = (x: number, y: number) => {
-      const nextActiveIndexes = new Set(findPointsWithinRadius(x, y, PROXIMITY_RADIUS));
-      const affectedIndexes = new Set([...activeProximityIndexes, ...nextActiveIndexes]);
+      const nextActiveIndexes = new Set(
+        findPointsWithinRadius(x, y, PROXIMITY_RADIUS),
+      );
+      const affectedIndexes = new Set([
+        ...activeProximityIndexes,
+        ...nextActiveIndexes,
+      ]);
 
       activeProximityIndexes.clear();
       nextActiveIndexes.forEach((index) => activeProximityIndexes.add(index));
@@ -461,7 +531,12 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       });
     };
 
-    const displacePoint = (point: AnimatedFieldPoint, index: number, pushX: number, pushY: number) => {
+    const displacePoint = (
+      point: AnimatedFieldPoint,
+      index: number,
+      pushX: number,
+      pushY: number,
+    ) => {
       point.isAnimating = true;
       gsap.killTweensOf(point);
       gsap.to(point, {
@@ -481,13 +556,18 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       const pointer = pointerRef.current;
       const position = pointAt(event);
       if (!position) return;
-      const elapsed = pointer.lastTime ? Math.max(now - pointer.lastTime, 16) : 16;
+      const elapsed = pointer.lastTime
+        ? Math.max(now - pointer.lastTime, 16)
+        : 16;
       const velocityX = ((position.x - pointer.lastX) / elapsed) * 1_000;
       const velocityY = ((position.y - pointer.lastY) / elapsed) * 1_000;
 
       pointer.x = position.x;
       pointer.y = position.y;
-      pointer.speed = Math.min(MAX_POINTER_SPEED, Math.hypot(velocityX, velocityY));
+      pointer.speed = Math.min(
+        MAX_POINTER_SPEED,
+        Math.hypot(velocityX, velocityY),
+      );
       pointer.lastTime = now;
       pointer.lastX = position.x;
       pointer.lastY = position.y;
@@ -496,22 +576,25 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
 
       if (pointer.speed <= SPEED_TRIGGER) return;
 
-      findPointsWithinRadius(position.x, position.y, PROXIMITY_RADIUS).forEach((index) => {
-        const point = animatedPoints[index];
-        const distanceX = point.x - position.x;
-        const distanceY = point.y - position.y;
-        const distance = Math.hypot(distanceX, distanceY);
-        if (distance >= PROXIMITY_RADIUS || point.isAnimating) return;
+      findPointsWithinRadius(position.x, position.y, PROXIMITY_RADIUS).forEach(
+        (index) => {
+          const point = animatedPoints[index];
+          const distanceX = point.x - position.x;
+          const distanceY = point.y - position.y;
+          const distance = Math.hypot(distanceX, distanceY);
+          if (distance >= PROXIMITY_RADIUS || point.isAnimating) return;
 
-        const falloff = 1 - distance / PROXIMITY_RADIUS;
-        const velocityInfluence = Math.min(pointer.speed / MAX_POINTER_SPEED, 1) * 6;
-        displacePoint(
-          point,
-          index,
-          distanceX * falloff * 0.14 + velocityX * velocityInfluence * 0.002,
-          distanceY * falloff * 0.14 + velocityY * velocityInfluence * 0.002,
-        );
-      });
+          const falloff = 1 - distance / PROXIMITY_RADIUS;
+          const velocityInfluence =
+            Math.min(pointer.speed / MAX_POINTER_SPEED, 1) * 6;
+          displacePoint(
+            point,
+            index,
+            distanceX * falloff * 0.14 + velocityX * velocityInfluence * 0.002,
+            distanceY * falloff * 0.14 + velocityY * velocityInfluence * 0.002,
+          );
+        },
+      );
     };
 
     const handlePointerLeave = () => {
@@ -526,28 +609,34 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
 
       const position = pointAt(event);
       if (!position) return;
-      findPointsWithinRadius(position.x, position.y, SHOCK_RADIUS).forEach((index) => {
-        const point = animatedPoints[index];
-        const distanceX = point.x - position.x;
-        const distanceY = point.y - position.y;
-        const distance = Math.hypot(distanceX, distanceY);
-        if (distance >= SHOCK_RADIUS || point.isAnimating) return;
+      findPointsWithinRadius(position.x, position.y, SHOCK_RADIUS).forEach(
+        (index) => {
+          const point = animatedPoints[index];
+          const distanceX = point.x - position.x;
+          const distanceY = point.y - position.y;
+          const distance = Math.hypot(distanceX, distanceY);
+          if (distance >= SHOCK_RADIUS || point.isAnimating) return;
 
-        const falloff = 1 - distance / SHOCK_RADIUS;
-        displacePoint(
-          point,
-          index,
-          distanceX * SHOCK_STRENGTH * falloff,
-          distanceY * SHOCK_STRENGTH * falloff,
-        );
-      });
+          const falloff = 1 - distance / SHOCK_RADIUS;
+          displacePoint(
+            point,
+            index,
+            distanceX * SHOCK_STRENGTH * falloff,
+            distanceY * SHOCK_STRENGTH * falloff,
+          );
+        },
+      );
     };
 
     if (PROXIMITY_RADIUS > 0) {
-      interactionRegion.addEventListener("pointermove", handlePointerMove, { passive: true });
+      interactionRegion.addEventListener("pointermove", handlePointerMove, {
+        passive: true,
+      });
       interactionRegion.addEventListener("pointerleave", handlePointerLeave);
     }
-    interactionRegion.addEventListener("pointerdown", handlePointerDown, { passive: true });
+    interactionRegion.addEventListener("pointerdown", handlePointerDown, {
+      passive: true,
+    });
 
     return () => {
       interactionRegion.removeEventListener("pointermove", handlePointerMove);
@@ -565,7 +654,11 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
       data-formation-state={animateEntrance ? "pending" : undefined}
       ref={rootRef}
     >
-      <div className="signal-field__magnetic" data-testid="magnetic-signal-field" ref={movingLayerRef}>
+      <div
+        className="signal-field__magnetic"
+        data-testid="magnetic-signal-field"
+        ref={movingLayerRef}
+      >
         {animateEntrance && (
           <canvas
             aria-hidden="true"
@@ -573,7 +666,11 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
             ref={formationCanvasRef}
           />
         )}
-        <svg ref={svgRef} viewBox={`0 0 ${SIGNAL_VIEWBOX_WIDTH} ${SIGNAL_VIEWBOX_HEIGHT}`} role="presentation">
+        <svg
+          ref={svgRef}
+          viewBox={`0 0 ${SIGNAL_VIEWBOX_WIDTH} ${SIGNAL_VIEWBOX_HEIGHT}`}
+          role="presentation"
+        >
           <g className="signal-field__mesh" ref={meshRef}>
             {points.map((point, index) => (
               <circle
@@ -583,7 +680,9 @@ export function SignalField({ animateEntrance = false }: SignalFieldProps) {
                 key={index}
                 opacity={point.opacity}
                 r={point.radius}
-                ref={(element) => { pointElementsRef.current[index] = element; }}
+                ref={(element) => {
+                  pointElementsRef.current[index] = element;
+                }}
               />
             ))}
           </g>

@@ -40,7 +40,7 @@
     "error": "I couldn’t finish that response. Please try again shortly.",
     "rateLimit": "Too many requests. Wait a minute and try again.",
     "unavailable": "Chat is unavailable right now. You can email Matteo directly.",
-    "privacy": "The assistant uses public portfolio content only and has no access to other personal data. Messages are processed by Google Gemini.",
+    "privacy": "The assistant uses public portfolio content only and has no access to other personal data. Messages are processed by AI.",
     "privacyDetails": "The conversation stays in this session and is not saved by the site. Your message and the public context needed to answer are sent to Google Gemini through a server-side endpoint.",
     "clearHint": "Enter to send, Shift+Enter for a new line"
   }
