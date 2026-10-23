@@ -1,0 +1,57 @@
+---
+locale: "it"
+translationKey: "spazio"
+publicationStatus: "published"
+publishedAt: "2026-10-23"
+updatedAt: "2026-10-24"
+slug: "spazio"
+index: "10"
+title: "Spazio"
+shortTitle: "Spazio"
+subtitle: "La tua TV, dal primo tasto."
+summary: "Un launcher alternativo per Android TV e Google TV: app preferite, ingressi e contenuti condivisi dalle app in una Home progettata per il telecomando."
+year: "2026"
+status: "Prototype"
+disciplines: ["Interaction design", "Sviluppo frontend", "Android"]
+role: "Product design, sviluppo frontend e integrazione Android"
+team: "Progetto indipendente"
+duration: "2026 · In evoluzione"
+technologies: ["React", "TypeScript", "Kotlin", "Android WebView", "Vite"]
+chip: "/media/spazio/showcase.webp"
+hero: {"src": "/media/spazio/showcase.webp", "alt": "Mockup TV con la Home Spazio, app preferite e contenuti dimostrativi.", "position": "center"}
+metrics: [{"value": "TV", "label": "Telecomando al centro", "context": "Navigazione direzionale e focus visibile guidano l’interazione."}]
+links: []
+featured: true
+order: -1
+seo: {"title": "Spazio", "description": "Un launcher alternativo per Android TV e Google TV: app preferite, ingressi e contenuti condivisi dalle app in una Home progettata per il telecomando.", "image": "/media/spazio/showcase.webp", "imageAlt": "Mockup TV con la Home Spazio, app preferite e contenuti dimostrativi."}
+---
+
+## Progettare da qualche metro di distanza
+
+Una Home TV deve funzionare dal divano. Il cursore non c’è, il telecomando ha pochi tasti e ogni spostamento deve rendere chiaro dove ci si trova e cosa succederà premendo conferma.
+
+Spazio è un launcher alternativo per Android TV e Google TV. Riunisce app preferite, collegamenti agli ingressi disponibili e contenuti che le app installate condividono con il sistema.
+
+## Una Home da attraversare con il telecomando
+
+Ho costruito la gerarchia attorno a elementi grandi, gruppi riconoscibili e navigazione direzionale. Il focus è parte dell’interfaccia: indica la selezione corrente e accompagna il passaggio tra navigazione, applicazioni e contenuti.
+
+La schermata iniziale permette di raggiungere le app preferite e accedere all’elenco completo. Le sezioni dei contenuti dipendono da ciò che le app espongono e dai permessi concessi sul dispositivo.
+
+<ProjectGallery items={[{src: "/media/spazio/settings.webp", alt: "Impostazioni Spazio con scelta di sfondi e aspetto."}, {src: "/media/spazio/theme.webp", alt: "Anteprima Spazio con tema Minecraft e applicazioni preferite."}]} caption="Schermate dimostrative: impostazioni e una variante tematica della Home." />
+
+## Personalizzare senza perdere orientamento
+
+Sfondi e temi cambiano l’atmosfera della Home; la struttura della navigazione mantiene punti di riferimento coerenti. La personalizzazione lavora sull’aspetto, mentre i compiti principali restano riconoscibili.
+
+I mockup mostrano l’interfaccia e contenuti dimostrativi. Loghi e riferimenti alle applicazioni identificano le destinazioni: non indicano partnership con i relativi servizi.
+
+## Il ponte tra web e Android
+
+L’interfaccia React e TypeScript è inclusa nel pacchetto Android e viene eseguita in una WebView: l’avvio sulla TV non richiede un computer acceso. Un bridge Kotlin collega la presentazione alle capacità del sistema, con repository dedicati ad applicazioni, ingressi e contenuti.
+
+Questa separazione permette di lavorare sull’esperienza visiva senza mescolare i componenti con l’accesso alle API native.
+
+## Stato del progetto
+
+Spazio è un prototipo per Android TV e Google TV con Android 11 o successivo. La compatibilità e la scelta della Home dipendono anche dal firmware del dispositivo. Il progetto include un percorso di sviluppo e packaging Android; questa presentazione non annuncia una release sugli store.

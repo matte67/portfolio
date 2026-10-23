@@ -1,0 +1,58 @@
+---
+locale: "it"
+translationKey: "spesino"
+publicationStatus: "published"
+publishedAt: "2026-10-23"
+updatedAt: "2026-10-24"
+slug: "spesino"
+index: "08"
+title: "Spesino"
+shortTitle: "Spesino"
+subtitle: "La spesa parte da ciò che ti serve."
+summary: "Liste, offerte e confronto tra supermercati in un percorso che rende espliciti quantità, condizioni promozionali e compromessi di viaggio."
+year: "2026"
+status: "Prototype"
+disciplines: ["Product design", "Architettura software", "Sviluppo full-stack"]
+role: "Product design, architettura e sviluppo full-stack"
+team: "Progetto indipendente"
+duration: "2026 · In evoluzione"
+technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Node.js"]
+chip: "/media/spesino/showcase.webp"
+hero: {"src": "/media/spesino/showcase.webp", "alt": "Mockup desktop e mobile del prototipo Spesino con ricerca prodotti e lista della spesa.", "position": "center"}
+metrics: [{"value": "Lista", "label": "Prima i bisogni", "context": "La richiesta resta distinta dal prodotto e dalla confezione da acquistare."}]
+links: [{"label": "Visita Spesino", "href": "https://spesino.vercel.app", "kind": "external"}]
+featured: true
+order: -3
+seo: {"title": "Spesino", "description": "Liste, offerte e confronto tra supermercati in un percorso che rende espliciti quantità, condizioni promozionali e compromessi di viaggio.", "image": "/media/spesino/showcase.webp", "imageAlt": "Mockup desktop e mobile del prototipo Spesino con ricerca prodotti e lista della spesa."}
+logo: {"src": "/media/spesino/logo.webp", "alt": "Logo Spesino"}
+---
+
+## Un prezzo basso non basta
+
+Una confezione più economica può contenere meno prodotto. Un’offerta può richiedere una carta o più pezzi. E un risparmio sulla spesa può richiedere una sosta in più. Confrontare numeri isolati lascia fuori gran parte della decisione.
+
+Spesino parte dalla lista: cosa serve, in quale quantità e con quali preferenze. Le offerte diventano possibili risposte a quel bisogno.
+
+## Dalla ricerca alla lista
+
+Il percorso collega ricerca, scelta dei supermercati, tragitto e preferenze. Si può cercare una categoria generica oppure un prodotto preciso; la lista mantiene esplicite quantità e richieste prima di cercare una combinazione di acquisto.
+
+<ProjectFigure src="/media/spesino/planner.webp" alt="Schermata dimostrativa Spesino con ricerca prodotti a sinistra e lista della spesa a destra." caption="Schermata dimostrativa del percorso lista: ricerca e riepilogo rimangono visibili nello stesso contesto." />
+
+## Rendere comprensibile il confronto
+
+Ho progettato il modello per distinguere ciò che viene richiesto da ciò che viene acquistato: confezioni intere, quantità in più, formati e condizioni promozionali. Il confronto deve spiegare la proposta e rendere visibili eventuali righe non coperte.
+
+Quando il calcolo considera viaggio e tempo, questi entrano come preferenze esplicite. Le stime dipendono dai dati disponibili e dai limiti della ricerca: l’interfaccia non deve trasformare un risultato parziale in una promessa di risparmio.
+
+## Dati che cambiano, confini chiari
+
+Il progetto separa dominio, contratti, casi d’uso, adattatori e interfaccia. Acquisizione delle offerte, catalogo e calcolo delle alternative hanno responsabilità distinte. Le offerte hanno una validità temporale; una fonte non disponibile richiede uno stato dedicato e un percorso di riprova.
+
+Next.js e React gestiscono la presentazione, mentre i servizi applicativi coordinano regole e accesso ai dati. Il modello evita di legare il significato della lista al formato restituito da una singola catena.
+
+## Stato e prospettiva
+
+Spesino ha un’interfaccia pubblica e continua a evolvere come prototipo. Le immagini mostrano schermate dimostrative di sviluppo: disponibilità del catalogo e risultati dipendono dalle fonti attive. Non sono riportati risparmi medi o risultati d’uso non misurati.
+
+L’accesso condiviso è presentato nel case study [Nodale](/it/work/nodale); [Boccone](/it/work/boccone) esplora il momento precedente, quando si decide cosa cucinare.

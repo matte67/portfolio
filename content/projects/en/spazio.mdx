@@ -1,0 +1,57 @@
+---
+locale: "en"
+translationKey: "spazio"
+publicationStatus: "published"
+publishedAt: "2026-10-23"
+updatedAt: "2026-10-24"
+slug: "spazio"
+index: "10"
+title: "Spazio"
+shortTitle: "Spazio"
+subtitle: "Your TV, from the first press."
+summary: "An alternative launcher for Android TV and Google TV: favourite apps, inputs, and app-shared content in a Home designed around the remote."
+year: "2026"
+status: "Prototype"
+disciplines: ["Interaction design", "Frontend development", "Android"]
+role: "Product design, frontend development, and Android integration"
+team: "Independent project"
+duration: "2026 · Ongoing"
+technologies: ["React", "TypeScript", "Kotlin", "Android WebView", "Vite"]
+chip: "/media/spazio/showcase.webp"
+hero: {"src": "/media/spazio/showcase.webp", "alt": "TV mockup showing the Spazio Home, favourite applications, and demonstration content.", "position": "center"}
+metrics: [{"value": "TV", "label": "Remote-first interaction", "context": "Directional navigation and visible focus guide each action."}]
+links: []
+featured: true
+order: -1
+seo: {"title": "Spazio", "description": "An alternative launcher for Android TV and Google TV: favourite apps, inputs, and app-shared content in a Home designed around the remote.", "image": "/media/spazio/showcase.webp", "imageAlt": "TV mockup showing the Spazio Home, favourite applications, and demonstration content."}
+---
+
+## Design from across the room
+
+A TV Home needs to work from the sofa. There is no cursor, the remote has few buttons, and every move should make the current selection and next action clear.
+
+Spazio is an alternative launcher for Android TV and Google TV. It brings together favourite apps, available input shortcuts, and content installed apps share with the system.
+
+## A Home navigated with a remote
+
+I built the hierarchy around large elements, recognisable groups, and directional navigation. Focus is part of the interface: it marks the current selection and guides transitions between navigation, applications, and content.
+
+The Home provides access to favourites and the full app list. Content sections depend on what installed apps expose and the permissions granted on the device.
+
+<ProjectGallery items={[{src: "/media/spazio/settings.webp", alt: "Spazio settings with wallpaper and appearance options."}, {src: "/media/spazio/theme.webp", alt: "Spazio demonstration with a Minecraft theme and favourite applications."}]} caption="Demonstration screens: settings and a themed Home variant." />
+
+## Personalisation with familiar landmarks
+
+Wallpapers and themes change the atmosphere of the Home while navigation retains consistent reference points. Personalisation changes its appearance while the main tasks remain recognisable.
+
+Mockups show the interface and demonstration content. Application logos identify destinations; they do not imply partnerships with those services.
+
+## Bridging web and Android
+
+The React and TypeScript interface is bundled into the Android package and runs in a WebView: starting it on the TV does not require a computer. A Kotlin bridge connects presentation to system capabilities, with repositories for applications, inputs, and content.
+
+This separation allows the visual experience to evolve independently of native API access.
+
+## Project status
+
+Spazio is a prototype for Android TV and Google TV running Android 11 or later. Compatibility and Home selection also depend on device firmware. The project includes an Android development and packaging workflow; this presentation does not announce an app-store release.

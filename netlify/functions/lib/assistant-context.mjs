@@ -10,6 +10,8 @@ Articoli pubblici: “La prossima interfaccia della programmazione è l’intent
 
 Prenivo è un prodotto web pubblico per piccole attività, pensato soprattutto per pasticcerie, bar e laboratori. Collega richieste, preparazione e ritiro; gestisce clienti, catalogo, produzione e avanzamento. Le richieste pubbliche restano in attesa finché l’attività non le valuta e conferma. I valori economici descritti sono ordini e stime. Matteo ha curato progettazione del prodotto e sviluppo full-stack. Il suo impatto sul lavoro quotidiano non è ancora misurato nell’uso sul campo. Sito: https://prenivo.it. Demo: https://demo.prenivo.it.
 
+Nuovi progetti pubblicati: Boccone è un ricettario personale e una community di cucina, con ricerca per ingredienti e modalità cucina (/it/work/boccone). Spesino è un prototipo per liste, offerte e confronto della spesa; il catalogo dipende dalle fonti disponibili e non sono dichiarati risparmi misurati (/it/work/spesino). Nodale è l’identità e il portale account comune a Boccone e Spesino (/it/work/nodale). Spazio è un prototipo di launcher per Android TV e Google TV 11+, con interfaccia React/TypeScript e bridge Kotlin; non è annunciata una release sugli store (/it/work/spazio).
+
 Percorsi interni utili: /it/work, /it/articles, /it/thesis, /it/about.`,
   en: `Matteo Vittori studies Computer Science – Artificial Intelligence at Politecnico di Milano. The portfolio publishes projects, articles, and a thesis; use this public content to answer questions about Matteo and his work.
 
@@ -20,6 +22,8 @@ Matteo's bachelor's thesis, written with Alejandro Innocenzi, documents the desi
 Public articles: “The next programming interface is intent” discusses goals, constraints, and evidence in AI-assisted development; “A coding-agent benchmark is a clue, not a verdict” covers evaluating agents in their real working context; “MCP makes AI agents useful only when the tool boundary is clear” covers permissions and tool verifiability; “The hidden work behind a booking: why I created Prenivo” describes keeping context intact from request to preparation.
 
 Prenivo is a public web product for small businesses, especially pastry shops, cafés, and workshops. It connects requests, preparation, and pickup, and covers customers, catalogue, production, and progress. Public requests remain pending until the business reviews and confirms them. Financial values described are order values and estimates. Matteo worked on product design and full-stack development. Its impact on day-to-day work has not yet been measured in field use. Website: https://prenivo.it. Demo: https://demo.prenivo.it.
+
+New published projects: Boccone is a personal cookbook and cooking community with ingredient search and cooking mode (/en/work/boccone). Spesino is a prototype for grocery lists, offers, and comparisons; catalogue availability depends on its sources and no measured savings are claimed (/en/work/spesino). Nodale is the shared identity and account portal for Boccone and Spesino (/en/work/nodale). Spazio is a launcher prototype for Android TV and Google TV 11+, with a React/TypeScript interface and Kotlin bridge; no app-store release is announced (/en/work/spazio).
 
 Useful internal paths: /en/work, /en/articles, /en/thesis, /en/about.`,
 };

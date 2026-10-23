@@ -25,6 +25,10 @@ The production build also emits a small static HTML entry for every public route
 
 - `/`
 - `/work`
+- `/work/boccone`
+- `/work/spesino`
+- `/work/nodale`
+- `/work/spazio`
 - `/work/sef`
 - `/work/unistays`
 - `/work/rewild`
