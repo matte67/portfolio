@@ -8,8 +8,8 @@ slug: "spesino"
 index: "08"
 title: "Spesino"
 shortTitle: "Spesino"
-subtitle: "Groceries start with what you need."
-summary: "Lists, offers, and supermarket comparisons in a journey that makes quantities, promotional conditions, and travel trade-offs explicit."
+subtitle: "From offers to a grocery list you can use."
+summary: "Discover offers, build a list, and compare purchases and travel. A journey that takes price comparison all the way to shopping in store."
 year: "2026"
 status: "Prototype"
 disciplines: ["Product design", "Software architecture", "Full-stack development"]
@@ -17,72 +17,84 @@ role: "Product design, architecture, and full-stack development"
 team: "Independent project"
 duration: "2026 · Ongoing"
 technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Node.js"]
-chip: "/media/spesino/chip.avif"
-hero: {"src": "/media/spesino/studio.webp", "alt": "Desktop and mobile mockups of the Spesino prototype, showing product search and a grocery list.", "position": "center"}
-metrics: [{"value": "List", "label": "An explicit need", "context": "Categories, products, and quantities before comparison."}, {"value": "Compare", "label": "Understandable choices", "context": "Packages, promotions, and alternatives linked to the request."}, {"value": "Nodale", "label": "Continuity with Boccone", "context": "From recipe to list and shopping plan."}]
+chip: "/media/spesino/offers-chip.avif"
+hero: {"src": "/media/spesino/offers-studio.webp", "alt": "Spesino offer catalogue on tablet, smartphone checklist, and shopping plan using demonstration data.", "position": "center"}
+metrics: [{"value": "Discover", "label": "Two starting points", "context": "Explore offers or start with what the list needs."}, {"value": "Compare", "label": "An explainable choice", "context": "Prices, quantities, conditions, and travel in the same context."}, {"value": "Shop", "label": "The plan becomes a checklist", "context": "Products by supermarket, progress, and requests still to cover."}]
 links: [{"label": "Visit Spesino", "href": "https://spesino.vercel.app", "kind": "external"}]
 featured: true
 order: -3
-seo: {"title": "Spesino", "description": "Lists, offers, and supermarket comparisons in a journey that makes quantities, promotional conditions, and travel trade-offs explicit.", "image": "/media/spesino/studio.webp", "imageAlt": "Desktop and mobile mockups of the Spesino prototype, showing product search and a grocery list."}
+seo: {"title": "Spesino", "description": "Discover offers, build a list, and compare purchases and travel. A journey that takes price comparison all the way to shopping in store.", "image": "/media/spesino/offers-studio.webp", "imageAlt": "Spesino offer catalogue on tablet, smartphone checklist, and shopping plan using demonstration data."}
 logo: {"src": "/media/spesino/logo.webp", "alt": "Spesino"}
 ---
 
-## Grocery shopping is a sequence of decisions
+## Better grocery shopping starts before the supermarket
 
-Which product, package size, promotion, and supermarket should you choose? A cheaper package may contain less; an extra stop can absorb the benefit of an offer. Spesino brings those decisions back to their starting point: what the list actually needs.
+A package looks cheaper, but contains less. A promotion requires two items. Another supermarket has a better price, but adds a detour. Preparing a grocery shop means bringing these details together, often from different leaflets, notes, and websites.
 
-The goal is an understandable shopping plan in which quantities, alternatives, and travel can be considered together.
+I designed Spesino to support the complete decision: discover offers, turn them into a list, choose where to buy, and take a usable plan into the store.
 
-## A category or a specific product
+## Start with offers or with your own list
 
-“Pasta” and a particular package of pasta are different requests. Search can start with a generic category or a specific product, followed by quantity and preference confirmation. The list collects those needs before comparison begins.
+**“Let’s see what is worth buying this week.”** The catalogue supports browsing products and promotions, searching by name or brand, and narrowing the selection with filters. Each card brings price, format, validity, conditions, and store availability together. An interesting product can go straight into the list.
 
-The summary stays beside search: adding a product immediately shows how the list changes while preserving the requests already entered.
+**“I already know what I need.”** People arriving with a list can write it directly. Both starting points lead into the same journey: selected offers stay connected to their products while missing items are added.
 
-<ProjectFigure src="/media/spesino/planner.webp" alt="Spesino category and product search beside a grocery list summary." caption="Development screen: search and the list work in the same space." />
+<ProjectFigure src="/media/spesino/offers.webp" mobileSrc="/media/spesino/offers-mobile.webp" alt="Spesino catalogue with demonstration offers showing formats, unit prices, conditions, and add-to-list actions." caption="Offer discovery: original product components with demonstration data, not current prices." />
 
-## Decide where to shop
+## From “I need pasta” to a purchase quantity
 
-The journey continues through supermarkets, travel, and preferences. Selecting stores makes the comparison’s scope explicit: which locations you are willing to visit and which journey is worth considering.
+A broad category and an exact package express different intentions. Search preserves that distinction: someone can ask for pasta without choosing a brand, or specify a particular product and confirm its quantity.
 
-These decisions ground the proposal in a shopping context. Product price is one part of the choice, alongside distance, time, and the number of stops.
+For example, two 500 g packages and one 1 kg package fulfil the same need, but can have different prices and conditions. The model separates the request from the purchase: the person defines the need, and comparison considers ways to fulfil it.
 
-<ProjectFigure src="/media/spesino/supermarkets.webp" alt="Spesino supermarket selection opened from the Boccone shopping workflow." caption="The supermarket step retains a connection to the original Boccone list." />
+<ProjectFigure src="/media/spesino/planner.webp" alt="Spesino search showing category and product suggestions alongside an existing grocery list." caption="Search and the summary remain close together, preserving the list’s context as products are added." />
 
-## Understand a proposal and compare an alternative
+## Price and its conditions belong together
 
-The plan distinguishes requested quantities from the packages needed to fulfil them. Formats, surplus quantities, promotional conditions, and uncovered requests must remain visible.
+A package price becomes useful when its quantity and unit price are known. Discounts work the same way: loyalty cards, minimum purchases, and formats belong to the decision. Cards make those conditions available before a product is added.
 
-Alternatives allow a decision to be revisited: users can examine another offer and see which request it addresses. A useful result explains why it was proposed and allows it to change.
+Comparison also lets people examine alternative offers for the same request. This is an important part of the experience: understand a proposal and change it while preserving the connection to what was needed.
 
-<ProjectFigure src="/media/spesino/comparison.webp" alt="Development example comparing alternative apple offers in Spesino." caption="Development comparison screen: alternatives remain connected to the list request." />
+<ProjectFigure src="/media/spesino/comparison.webp" alt="Alternative apple offers showing supermarket, format, price, and a selection action." caption="Alternatives address a specific list request and expose the details needed to choose." />
 
-## Product cost and the value of the journey
+## Is another store worth the journey?
 
-Results compare product costs and, when data and preferences allow, the trade-off with travel. Choosing one supermarket can be reasonable even when a lower-price combination exists.
+A lower combination of product prices can require more stops. Spesino compares product cost and, when data allows, the trade-off with travel. Store selection, travel mode, and the value assigned to time make the person’s preferences explicit.
 
-Covered and missing quantities remain distinct. Calculation limits need to be visible, especially when the system cannot compare every alternative or estimate a route.
+Results distinguish covered products from requests still needing attention. A single-supermarket alternative has a practical purpose too: deciding whether the benefit of a second stop justifies the journey.
 
-<ProjectFigure src="/media/spesino/plan.webp" alt="Example Spesino plan showing comparisons, covered-product totals, and a supermarket breakdown." caption="Development example: prices illustrate the interface and are not a current shopping quote." />
+<ProjectFigure src="/media/spesino/plan.webp" alt="Spesino plan with purchase alternatives, covered-product totals, and a supermarket breakdown." caption="Example result: amounts and combinations illustrate comparison and are not a current shopping quote." />
 
-## When the list starts with a recipe
+## A plan to use between the shelves
 
-With [Boccone](/en/work/boccone), the starting point can be a dish. Missing ingredients become a list that can be used immediately; people who want offer and route comparisons can continue with Spesino.
+After selection, the plan becomes a checklist organised by supermarket. Quantities, conditions, and the order of stops remain available. Purchases can be checked off and filtered to show what is left.
 
-That continuity is deliberate: from deciding what to cook to deciding what to buy. A recipe should not become another generic search that forces someone to start again.
+The list also keeps requests that offers did not cover, so they remain part of the shop. Actual spending can be recorded separately from the estimate: a different checkout price does not retrospectively rewrite the original comparison.
 
-<EditorialFlow label="From recipe to grocery shopping" items={[{title: "Choose in Boccone", description: "Pick a dish and adjust its servings."}, {title: "Check what is missing", description: "Mark what you have and prepare the list."}, {title: "Continue with Spesino", description: "Consider offers, supermarkets, and travel."}]} />
+<ProjectFigure src="/media/spesino/checklist.webp" mobileSrc="/media/spesino/checklist-mobile.webp" alt="Spesino checklist with progress, products grouped by supermarket, and demonstration prices." caption="From comparison to shopping: the original checklist component shows purchases, progress, and stops using demonstration data." />
 
-## Two products, one family
+## Return to the products you buy often
 
-Spesino belongs to Nodale alongside Boccone. A shared account entry point makes the transition recognisable, while separate products retain their own jobs: recipes and community on one side, grocery lists and comparison on the other.
+For milk, pasta, or other regular purchases, repeating the same search adds work. Followed searches retain the product or category and the stores to check. People can return to relevant offers, pause a search, and resume it when needed.
 
-The experience also shares selected list components. Keeping these consistent makes actions familiar without introducing uncalculated prices or results into a simple checklist.
+This extends the product beyond a single list. Work on alerts separates choosing what to follow from activating a device; push delivery needs its own deployment verification.
 
-## Design and product status
+<ProjectFigure src="/media/spesino/watches.webp" mobileSrc="/media/spesino/watches-mobile.webp" alt="Spesino followed-search interface with pasta and milk requests, selected stores, and pause or resume controls." caption="Followed searches: development interface with active and paused examples." />
 
-I worked on user experience, architecture, and full-stack development. The domain distinguishes requests, products, packages, and promotions; use cases coordinate comparison; adapters handle catalogues, data, and external services. Next.js and React compose the interface.
+## When it begins with a recipe
 
-Spesino continues to evolve as a public prototype. Images show development examples; catalogue availability, offer validity, and routes depend on available sources and services. Its design goal is an understandable decision; actual savings need to be evaluated against real purchases.
+With [Boccone](/en/work/boccone), the need can start before the list: choose a dish, adjust servings, and mark ingredients already available. Missing ingredients become a list; people who want offer and route comparisons can continue with Spesino.
 
-[Visit Spesino](https://spesino.vercel.app) or explore [Boccone and its cookbook](/en/work/boccone).
+Both belong to Nodale, with a common account entry point and distinct responsibilities. Boccone preserves the cooking and community context; Spesino develops the purchase decision. Selected list components are also shared so familiar actions carry across the transition.
+
+<EditorialFlow label="From cooking to grocery shopping" items={[{title: "Choose a recipe", description: "In Boccone, decide what to cook and for how many people."}, {title: "Prepare the list", description: "Check which ingredients are available and what is missing."}, {title: "Organise purchases", description: "In Spesino, compare products, stores, and travel."}]} />
+
+## Build around changing data
+
+I worked on user experience, architecture, and full-stack development. Quantity, package, and promotion rules are separate from presentation; use cases coordinate search and comparison; adapters handle catalogues, sources, and external services.
+
+A promotion has a validity period and a store context. The catalogue preserves that context, and the interface distinguishes a search without matches from an unavailable source. These choices also make incomplete results understandable.
+
+Spesino continues to evolve as a public prototype. Screens illustrate the product through development examples; catalogue availability, routes, and personal services depend on deployment and active sources. Actual savings still need to be measured against real purchases.
+
+[Explore Spesino](https://spesino.vercel.app) or discover [Boccone, recipes and community](/en/work/boccone).

@@ -1,11 +1,14 @@
 import type { ReactNode } from "react";
 
+const EDITORIAL_MOBILE_IMAGE_QUERY = "(max-width: 48rem)";
+
 interface EditorialImageProps {
   readonly alt: string;
   readonly className?: string;
   readonly fill?: boolean;
   readonly priority?: boolean;
   readonly src: string;
+  readonly mobileSrc?: string;
 }
 
 /** One image implementation for cards, heroes, figures, and galleries. */
@@ -15,8 +18,9 @@ export function EditorialImage({
   fill = false,
   priority = false,
   src,
+  mobileSrc,
 }: EditorialImageProps) {
-  return (
+  const image = (
     <img
       alt={alt}
       className={["editorial-image", fill ? "editorial-image--fill" : "", className]
@@ -27,10 +31,20 @@ export function EditorialImage({
       src={src}
     />
   );
+
+  // Art direction keeps detailed product screens readable at narrow widths.
+  if (!mobileSrc) return image;
+  return (
+    <picture className="editorial-picture">
+      <source media={EDITORIAL_MOBILE_IMAGE_QUERY} srcSet={mobileSrc} />
+      {image}
+    </picture>
+  );
 }
 
 interface EditorialFigureProps {
   readonly src: string;
+  readonly mobileSrc?: string;
   readonly alt: string;
   readonly caption?: ReactNode;
   readonly credit?: ReactNode;
@@ -53,6 +67,7 @@ export function EditorialFigure({
   fill = false,
   priority = false,
   src,
+  mobileSrc,
   wide = false,
 }: EditorialFigureProps) {
   const figureClassName = [
@@ -69,6 +84,7 @@ export function EditorialFigure({
           fill={fill}
           priority={priority}
           src={src}
+          mobileSrc={mobileSrc}
         />
       </div>
       {caption || credit ? (

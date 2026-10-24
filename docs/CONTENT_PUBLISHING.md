@@ -114,11 +114,13 @@ Project logos are optional. Upload the asset to `public/media/<project-slug>/log
 
 Media committed to the repository is public. Do not upload private drafts, credentials, personal data, or source assets that should not be downloadable.
 
+Detailed screenshots can provide an optional **Mobile image** (`mobileSrc`) on `ProjectFigure` and `EditorialFigure`. The browser selects it below 48rem while retaining the same alternative text and caption; use a view of the same feature, not unrelated content.
+
 ### Project imagery and portfolio identity
 
-Keep `chip` and `hero` separate. The chip is a compact project preview, following the existing Prenivo and HackHub assets: 2116 × 1204, warm cream canvas, rounded outer corners, and a terracotta screen surround. Preserve the product’s actual UI inside that composition. The hero uses a transparent product showcase, following Prenivo’s studio composition; do not reuse a solid-background chip as the hero. Use `chip.avif` and `studio.webp` respectively, with localized alternative text.
+Keep `chip` and `hero` separate. The chip is a compact project preview, following the existing Prenivo and HackHub assets: 2116 × 1204, warm cream canvas, rounded outer corners, and a terracotta screen surround. Preserve the product’s actual UI inside that composition. The hero uses a transparent product showcase, following Prenivo’s studio composition; do not reuse a solid-background chip as the hero. Use distinct assets such as `chip.avif` and `studio.webp`, with localized alternative text. When replacing published media, use a new descriptive filename so existing browser caches pick up the revision.
 
-For Boccone, the community, cooks, official profile, recipe, and cooking screens were captured from the public product. The creation screen uses the actual RecipeEditor component rendered in isolation with a demonstration recipe; it does not represent a newly published community recipe. Spesino screenshots show development examples, including the handoff from Boccone. Describe these as examples, with no claim that illustrated prices are current.
+For Boccone, the community, cooks, official profile, recipe, and cooking screens were captured from the public product. The creation screen uses the actual RecipeEditor component rendered in isolation with a demonstration recipe; it does not represent a newly published community recipe. Spesino screenshots show development examples, including the handoff from Boccone. Its catalogue, shopping checklist, and followed-search scenes render the original OfferCard, ShoppingChecklist, and WatchRow components in isolation with synthetic data; the scenes write nothing to the product services. Describe these as examples, with no claim that illustrated prices are current or push delivery is verified.
 
 Boccone and Spesino are the published case studies for this iteration. Nodale is explained as their shared identity and account entry point; its standalone page and Spazio remain drafts.
 

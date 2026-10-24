@@ -107,6 +107,7 @@ const mdxTemplates = [
     label: "Project figure",
     fields: [
       { type: "image" as const, name: "src", label: "Image", required: true },
+      { type: "image" as const, name: "mobileSrc", label: "Mobile image (optional)" },
       { type: "string" as const, name: "alt", label: "Alternative text", required: true },
       { type: "string" as const, name: "caption", label: "Caption" },
       { type: "boolean" as const, name: "wide", label: "Wide layout" },
@@ -135,6 +136,7 @@ const mdxTemplates = [
     label: "Editorial figure",
     fields: [
       { type: "image" as const, name: "src", label: "Image", required: true },
+      { type: "image" as const, name: "mobileSrc", label: "Mobile image (optional)" },
       { type: "string" as const, name: "alt", label: "Alternative text", required: true },
       { type: "string" as const, name: "caption", label: "Caption" },
       { type: "string" as const, name: "credit", label: "Credit" },

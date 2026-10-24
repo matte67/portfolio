@@ -26,7 +26,7 @@ for (const locale of ["it", "en"] as const) {
       await page.goto(`/${locale}/work/${slug}`);
       await expect(page.getByRole("heading", { level: 1, name: title, exact: true })).toBeVisible();
       await expect(page.locator("h2").first()).toBeVisible();
-      const hero = page.locator(`img[src="/media/${slug}/studio.webp"]`).first();
+      const hero = page.locator(`.editorial-hero img[src^="/media/${slug}/"]`).first();
       await expect(hero).toBeVisible();
       await expect.poll(() => hero.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
       await hero.evaluate((element) => (element as HTMLImageElement).decode());
@@ -68,4 +68,19 @@ test("only the two focused case studies remain publicly indexed", async ({ reque
       expect((await request.get(`/${locale}/work/${slug}`)).status()).toBe(404);
     }
   }
+});
+
+// A dense desktop screenshot must not be the only view on a phone.
+test("Spesino figures select readable mobile screenshots and restore desktop sources", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/it/work/spesino");
+  for (const feature of ["offers", "checklist", "watches"]) {
+    const image = page.locator(`img[src="/media/spesino/${feature}.webp"]`);
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((element) => (element as HTMLImageElement).currentSrc)).toContain(`${feature}-mobile.webp`);
+    await expect.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const checklist = page.locator('img[src="/media/spesino/checklist.webp"]');
+  await expect.poll(() => checklist.evaluate((element) => (element as HTMLImageElement).currentSrc)).toContain("/checklist.webp");
 });

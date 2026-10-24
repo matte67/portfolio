@@ -1407,6 +1407,10 @@ svg {
   content: "";
 }
 
+.editorial-picture {
+  display: block;
+}
+
 .editorial-image {
   display: block;
   width: 100%;
