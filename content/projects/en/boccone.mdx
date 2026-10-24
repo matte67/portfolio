@@ -8,8 +8,8 @@ slug: "boccone"
 index: "07"
 title: "boccone."
 shortTitle: "boccone."
-subtitle: "From a dinner idea to the pleasure of cooking."
-summary: "A personal cookbook and cooking community: discover recipes, start with ingredients you have, and follow preparation step by step."
+subtitle: "Your recipes. Your cooking. A community."
+summary: "A cookbook to create and use, a community of recipes and cooks, and a natural path from ingredients to groceries with Spesino, within the Nodale ecosystem."
 year: "2026"
 status: "Released"
 disciplines: ["Product design", "Full-stack development", "UX/UI"]
@@ -17,42 +17,80 @@ role: "Product design and full-stack development"
 team: "Independent project"
 duration: "2026 · Ongoing"
 technologies: ["React", "Vinext", "JavaScript", "IndexedDB", "Drizzle ORM", "Cloudflare Workers"]
-chip: "/media/boccone/showcase.webp"
-hero: {"src": "/media/boccone/showcase.webp", "alt": "Boccone on desktop and smartphone, showing recipe discovery and the community.", "position": "center"}
-metrics: [{"value": "Cook", "label": "A guided journey", "context": "Ingredients, servings, and preparation in the same cookbook."}]
+chip: "/media/boccone/chip.avif"
+hero: {"src": "/media/boccone/studio.webp", "alt": "Boccone on desktop and smartphone, showing recipe discovery and the community.", "position": "center"}
+metrics: [{"value": "Create", "label": "Your cookbook", "context": "Ingredients, images, and steps to preserve your way of cooking."}, {"value": "Discover", "label": "Recipes and cooks", "context": "Preparations and public profiles to explore in the community."}, {"value": "Continue", "label": "From cooking to groceries", "context": "Missing ingredients become a list; Spesino adds offers and travel."}]
 links: [{"label": "Visit boccone.", "href": "https://boccone-ricettario-matteo.mattebosse.chatgpt.site", "kind": "external"}]
 featured: true
 order: -4
-seo: {"title": "boccone.", "description": "A personal cookbook and cooking community: discover recipes, start with ingredients you have, and follow preparation step by step.", "image": "/media/boccone/showcase.webp", "imageAlt": "Boccone on desktop and smartphone, showing recipe discovery and the community."}
+seo: {"title": "boccone.", "description": "A cookbook to create and use, a community of recipes and cooks, and a natural path from ingredients to groceries with Spesino, within the Nodale ecosystem.", "image": "/media/boccone/studio.webp", "imageAlt": "Boccone on desktop and smartphone, showing recipe discovery and the community."}
 logo: {"src": "/media/boccone/logo.svg", "alt": "boccone."}
 ---
 
-## What should I cook tonight?
+## Give a good recipe somewhere to go
 
-One recipe saved in a chat, another in bookmarks, a few ingredients left in the fridge. Inspiration comes from many places; turning it into a meal still means finding and organising the information.
+A recipe discovered today should be easy to find tomorrow, adjust to the people at the table, and share with someone who enjoys cooking. Boccone connects those moments: a personal cookbook, new ideas to explore, and a community where the people behind the dishes are recognisable.
 
-Boccone gives recipes a useful, recognisable home: a personal space to collect them and a community to explore when you need an idea.
+The goal is to make everyday cooking easier and more participatory. The product should be useful both to someone looking for dinner inspiration and to someone building and publishing their own cookbook.
 
-## From discovery to cooking
+## Create a recipe in your own cooking style
 
-Search by recipe, ingredient, or tag works alongside categories. Available ingredients provide another starting point for finding something you can prepare. Recipe details bring quantities, servings, timing, and instructions together; cooking mode guides preparation step by step.
+A familiar dish can become a complete recipe: cover photo, ingredients, quantities, servings, timing, and difficulty. Instructions are organised into steps, each with space for images and useful references. A faster variation can live alongside the main preparation.
 
-<ProjectFigure src="/media/boccone/community.webp" alt="Boccone community with search, category filters, and photographed recipe cards." caption="The community keeps recipes central, with filters close to search and recognisable categories." />
+Creating a recipe starts with preserving something of your own. Publishing it to the community is a separate choice, making the preparation available to others with its author context intact.
 
-## An identity that invites you to cook
+<ProjectFigure src="/media/boccone/create.webp" alt="Boccone editor with a demonstration pasta and chickpea recipe, including photo, title, description, category, servings, and ingredients." caption="Recipe creation: the actual product editor shown with demonstration content." />
 
-I designed a warm interface with natural colours, illustrations, and food photography. Categories support discovery, while consistent cards make different recipes easier to compare. On mobile, navigation and content reorganise to give reading more room.
+## Search for a dish or start with what you have
 
-Personal and public spaces serve different purposes: keeping your own recipes or sharing a preparation with the community. Public profiles give recipes their author context.
+The community supports search by recipe name, ingredient, or tag, alongside category browsing and available-ingredient matching. These are different starting points for the same question: what can I cook?
 
-## Behind the interface
+Cards bring photographs, descriptions, origins, and authors together. The detail view connects servings, ingredients, and instructions, so a recipe can move from inspiration to preparation without reconstructing its information elsewhere.
 
-I worked on identity, user experience, and development. Ingredient and quantity rules are separate from use cases, persistence, and UI components. The local cookbook uses IndexedDB; the public experience runs through the application and its Cloudflare infrastructure.
+<ProjectFigure src="/media/boccone/community.webp" alt="Boccone community with search, category filters, and recipes published by the official profile." caption="Recipe discovery: search and filters support a recognisable photographic catalogue." />
 
-These boundaries let search, publishing, and cooking mode evolve without concentrating every responsibility in the recipe page.
+## A community of cooks, too
 
-## A product within an ecosystem
+The Cooks view shifts attention from dishes to people. Each public profile brings together an introduction and published recipes. Finding an interesting dish can become a way to explore its author’s cookbook.
 
-Boccone is available online. Personal services use the Nodale account portal; Spesino is the dedicated grocery and offers product. Each keeps its own identity and experience.
+This is a central goal of Boccone: make a cooking style recognisable and give an author’s contributions continuity. A recipe becomes an entry point to more ideas from the same kitchen.
 
-[Explore Boccone](https://boccone-ricettario-matteo.mattebosse.chatgpt.site) or read about [Spesino](/en/work/spesino) and [Nodale](/en/work/nodale).
+<ProjectFigure src="/media/boccone/cooks.webp" alt="Boccone Cooks view showing public profiles, introductions, and recipe counts." caption="From recipes to their authors: the community can also be explored through its cooks." />
+
+## A cookbook for the moment you cook
+
+After choosing a dish, users can adjust servings and check which ingredients are already available. Cooking mode presents one step at a time, with images, ingredients, and progress, keeping the recipe readable during preparation.
+
+I gave this moment a different hierarchy from the catalogue: fewer things to compare, more space for the next action. Discovering a recipe and following it at the stove need different kinds of attention.
+
+<ProjectFigure src="/media/boccone/cooking.webp" alt="Boccone cooking mode on the first step of pumpkin and Taleggio risotto, showing servings and a preparation photograph." caption="Cooking mode focuses attention on the step being prepared." />
+
+## Missing ingredients become a grocery list
+
+Before cooking, users can mark ingredients they already have and create a list of what is missing. That list remains usable in Boccone: quantities can be reviewed, products added, and purchases checked off.
+
+For finding offers and organising a route, the next step is Spesino. The choice is explicit: a straightforward list for someone who needs it immediately, or a grocery comparison for someone deciding where to shop.
+
+<ProjectFigure src="/media/boccone/shopping-choice.webp" alt="Boccone offers a choice between creating the list alone or finding offers and a route with Spesino." caption="The connection to Spesino starts with a concrete need: buying what the recipe requires." />
+
+## Why Boccone belongs to Nodale
+
+Boccone and [Spesino](/en/work/spesino) address neighbouring moments in everyday life: deciding what to prepare and organising what to buy. Nodale is their common identity, with a shared account entry point and products that retain recognisable purposes and visual languages.
+
+Integration is also about continuity. Turning recipe ingredients into a list should not mean entering everything again. Boccone preserves the cooking context; Spesino adds product, offer, supermarket, and travel comparisons.
+
+## Growing the community, one publication at a time
+
+The launch strategy centres on the official **@boccone** profile: consistently publish complete, carefully prepared recipes so visitors immediately find something to try. Clear ingredients, preparation photographs, and editorial sources also demonstrate the kind of contribution the platform wants to welcome.
+
+The official profile identifies the project’s own content. The goal is to expand the catalogue, give people reasons to return, and invite other cooks to publish their recipes. This is a strategy for editorial growth and participation; its outcomes still need to be measured in use.
+
+<ProjectFigure src="/media/boccone/official.webp" alt="The official Boccone kitchen profile with its badge and published recipe collection." caption="The official profile develops the catalogue and gives the product a recognisable editorial voice." />
+
+## Design and development
+
+I worked on identity, interface design, and full-stack development. Recipe, ingredient, and quantity rules are separate from use cases, persistence adapters, and components. The local cookbook and community services have dedicated boundaries; the public experience uses React, Vinext, and Cloudflare infrastructure.
+
+The same approach shapes the connection to Spesino: share a journey and selected components while keeping each product’s responsibilities clear.
+
+[Explore Boccone](https://boccone-ricettario-matteo.mattebosse.chatgpt.site) or continue with [the Spesino case study](/en/work/spesino).

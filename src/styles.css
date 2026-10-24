@@ -1799,6 +1799,11 @@ svg {
   margin-top: var(--space-flow);
 }
 
+/* Longer product narratives keep the same reading rhythm as editorial articles. */
+:is(.project-page--boccone, .project-page--spesino) .editorial-body > :is(p, ul, ol) + :is(p, ul, ol) {
+  margin-top: var(--space-flow);
+}
+
 .editorial-body a {
   color: var(--color-accent-dark);
   text-decoration-color: color-mix(in srgb, var(--color-accent) 50%, transparent);

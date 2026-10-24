@@ -3,8 +3,6 @@ import { expect, test } from "@playwright/test";
 const projects = [
   { slug: "boccone", title: "boccone." },
   { slug: "spesino", title: "Spesino" },
-  { slug: "nodale", title: "nodale." },
-  { slug: "spazio", title: "Spazio" },
 ] as const;
 
 // Exercise both discovery and the independently lazy-loaded translations.
@@ -16,11 +14,19 @@ for (const locale of ["it", "en"] as const) {
       await expect(page.locator(`a[href="/${locale}/work/${slug}"]`).first()).toBeVisible();
     }
 
+    for (const slug of ["nodale", "spazio"]) {
+      await expect(page.locator(`a[href="/${locale}/work/${slug}"]`)).toHaveCount(0);
+    }
+    const chip = page.locator('img[src="/media/boccone/chip.avif"]').first();
+    await chip.scrollIntoViewIfNeeded();
+    await expect.poll(() => chip.evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await page.screenshot({ path: `test-results/screenshots/${locale}-focused-work-index.png`, animations: "disabled" });
+
     for (const { slug, title } of projects) {
       await page.goto(`/${locale}/work/${slug}`);
       await expect(page.getByRole("heading", { level: 1, name: title, exact: true })).toBeVisible();
       await expect(page.locator("h2").first()).toBeVisible();
-      const hero = page.locator(`img[src="/media/${slug}/showcase.webp"]`).first();
+      const hero = page.locator(`img[src="/media/${slug}/studio.webp"]`).first();
       await expect(hero).toBeVisible();
       await expect.poll(() => hero.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
       await hero.evaluate((element) => (element as HTMLImageElement).decode());
@@ -32,7 +38,7 @@ for (const locale of ["it", "en"] as const) {
         available: document.documentElement.clientWidth,
       }));
       expect(dimensions.actual).toBeLessThanOrEqual(dimensions.available);
-      // Lazy figures must load when reached, including the TV theme gallery.
+      // Each use-case figure must load when reached, including the editor and handoff.
       for (const image of await page.locator("main img").all()) {
         await image.scrollIntoViewIfNeeded();
         await expect.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
@@ -49,5 +55,17 @@ test("new case studies remain navigable with reduced motion at minimum width", a
     await page.goto(`/it/work/${slug}`);
     await expect(page.getByRole("heading", { level: 1, name: title, exact: true })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  }
+});
+
+// Drafts must disappear from static publication as well as the client catalogue.
+test("only the two focused case studies remain publicly indexed", async ({ request }) => {
+  const sitemap = await request.get("/sitemap.xml");
+  const xml = await sitemap.text();
+  for (const locale of ["it", "en"]) {
+    for (const slug of ["nodale", "spazio"]) {
+      expect(xml).not.toContain(`/${locale}/work/${slug}`);
+      expect((await request.get(`/${locale}/work/${slug}`)).status()).toBe(404);
+    }
   }
 });

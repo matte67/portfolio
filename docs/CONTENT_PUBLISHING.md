@@ -114,6 +114,14 @@ Project logos are optional. Upload the asset to `public/media/<project-slug>/log
 
 Media committed to the repository is public. Do not upload private drafts, credentials, personal data, or source assets that should not be downloadable.
 
+### Project imagery and portfolio identity
+
+Keep `chip` and `hero` separate. The chip is a compact project preview, following the existing Prenivo and HackHub assets: 2116 × 1204, warm cream canvas, rounded outer corners, and a terracotta screen surround. Preserve the product’s actual UI inside that composition. The hero uses a transparent product showcase, following Prenivo’s studio composition; do not reuse a solid-background chip as the hero. Use `chip.avif` and `studio.webp` respectively, with localized alternative text.
+
+For Boccone, the community, cooks, official profile, recipe, and cooking screens were captured from the public product. The creation screen uses the actual RecipeEditor component rendered in isolation with a demonstration recipe; it does not represent a newly published community recipe. Spesino screenshots show development examples, including the handoff from Boccone. Describe these as examples, with no claim that illustrated prices are current.
+
+Boccone and Spesino are the published case studies for this iteration. Nodale is explained as their shared identity and account entry point; its standalone page and Spazio remain drafts.
+
 ## Multilingual URLs and SEO
 
 Every public page has a language-specific URL: `/en/...` for English and `/it/...` for Italian. The locale switcher keeps visitors on the matching route, including case studies and articles. Existing unprefixed public URLs permanently redirect to their English equivalent so old links keep working without creating duplicate indexed pages.

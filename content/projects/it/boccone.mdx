@@ -8,8 +8,8 @@ slug: "boccone"
 index: "07"
 title: "boccone."
 shortTitle: "boccone."
-subtitle: "Dall’idea per cena al piacere di cucinare."
-summary: "Un ricettario personale e una community di cucina: scopri ricette, parti dagli ingredienti che hai e segui la preparazione passo dopo passo."
+subtitle: "Le tue ricette. La tua cucina. Una community."
+summary: "Un ricettario da creare e usare, una community di ricette e cuochi e un passaggio naturale dagli ingredienti alla spesa con Spesino, dentro l’ecosistema Nodale."
 year: "2026"
 status: "Released"
 disciplines: ["Product design", "Sviluppo full-stack", "UX/UI"]
@@ -17,42 +17,80 @@ role: "Product design e sviluppo full-stack"
 team: "Progetto indipendente"
 duration: "2026 · In evoluzione"
 technologies: ["React", "Vinext", "JavaScript", "IndexedDB", "Drizzle ORM", "Cloudflare Workers"]
-chip: "/media/boccone/showcase.webp"
-hero: {"src": "/media/boccone/showcase.webp", "alt": "Boccone su desktop e smartphone: ricerca delle ricette e community.", "position": "center"}
-metrics: [{"value": "Cucina", "label": "Un percorso guidato", "context": "Ingredienti, porzioni e preparazione nello stesso ricettario."}]
+chip: "/media/boccone/chip.avif"
+hero: {"src": "/media/boccone/studio.webp", "alt": "Boccone su desktop e smartphone: ricerca delle ricette e community.", "position": "center"}
+metrics: [{"value": "Crea", "label": "Il tuo ricettario", "context": "Ingredienti, immagini e passaggi per conservare il tuo modo di cucinare."}, {"value": "Scopri", "label": "Ricette e cuochi", "context": "Preparazioni e profili pubblici da esplorare nella community."}, {"value": "Continua", "label": "Dalla cucina alla spesa", "context": "Gli ingredienti mancanti diventano una lista; Spesino aggiunge offerte e percorso."}]
 links: [{"label": "Visita boccone.", "href": "https://boccone-ricettario-matteo.mattebosse.chatgpt.site", "kind": "external"}]
 featured: true
 order: -4
-seo: {"title": "boccone.", "description": "Un ricettario personale e una community di cucina: scopri ricette, parti dagli ingredienti che hai e segui la preparazione passo dopo passo.", "image": "/media/boccone/showcase.webp", "imageAlt": "Boccone su desktop e smartphone: ricerca delle ricette e community."}
+seo: {"title": "boccone.", "description": "Un ricettario da creare e usare, una community di ricette e cuochi e un passaggio naturale dagli ingredienti alla spesa con Spesino, dentro l’ecosistema Nodale.", "image": "/media/boccone/studio.webp", "imageAlt": "Boccone su desktop e smartphone: ricerca delle ricette e community."}
 logo: {"src": "/media/boccone/logo.svg", "alt": "Logo boccone."}
 ---
 
-## Cosa cucino stasera?
+## Dare un seguito a una buona ricetta
 
-Una ricetta salvata in una chat, un’altra tra i preferiti, qualche ingrediente rimasto in frigorifero. L’ispirazione arriva da tante parti; trasformarla in qualcosa da cucinare richiede ancora di ritrovare e organizzare le informazioni.
+Una ricetta scoperta oggi dovrebbe essere facile da ritrovare domani, adattare alle persone a tavola e condividere con chi ama cucinare. Boccone nasce per collegare questi momenti: il ricettario personale, la scoperta di nuove idee e una community in cui riconoscere anche le persone dietro ai piatti.
 
-Boccone nasce per dare alle ricette un posto riconoscibile e utile: uno spazio personale per raccoglierle e una community da esplorare quando manca un’idea.
+L’obiettivo è rendere la cucina quotidiana più semplice e partecipata. Il prodotto deve essere utile sia a chi cerca un’idea per cena sia a chi vuole costruire e pubblicare il proprio ricettario.
 
-## Dalla scoperta ai fornelli
+## Creare una ricetta, con il proprio modo di cucinare
 
-La ricerca per ricette, ingredienti e tag si affianca alle categorie. Si può partire anche dagli ingredienti disponibili, per cercare una preparazione compatibile con ciò che si ha già. Il dettaglio mantiene insieme quantità, porzioni, tempi e procedimento; la modalità cucina accompagna l’esecuzione passo dopo passo.
+Chi prepara spesso lo stesso piatto può raccoglierlo in una scheda completa: copertina, ingredienti, quantità, porzioni, tempo e difficoltà. Il procedimento è diviso in passaggi, ciascuno con la possibilità di aggiungere immagini e riferimenti utili. Anche una variante più veloce può trovare spazio nella stessa ricetta.
 
-<ProjectFigure src="/media/boccone/community.webp" alt="La community Boccone con ricerca, filtri per categoria e ricette illustrate da fotografie." caption="La community: il contenuto viene prima, con filtri vicini alla ricerca e categorie immediatamente riconoscibili." />
+La creazione serve prima di tutto a conservare qualcosa di proprio. Pubblicare nella community è una scelta distinta: permette di rendere quella preparazione accessibile anche agli altri, con il contesto del suo autore.
 
-## Un’identità che invita a cucinare
+<ProjectFigure src="/media/boccone/create.webp" alt="Editor Boccone con una ricetta dimostrativa di pasta e ceci: foto, titolo, descrizione, categoria, porzioni e ingredienti." caption="Creazione di una ricetta: il vero editor del prodotto, mostrato con contenuti dimostrativi." />
 
-Ho progettato un’interfaccia calda, con colori naturali, illustrazioni e fotografie delle preparazioni. Le categorie aiutano a orientarsi, mentre la struttura delle schede rende confrontabili ricette diverse. Su smartphone, navigazione e contenuti si riorganizzano per lasciare spazio alla lettura.
+## Cercare un piatto o partire da quello che c’è
 
-La parte personale e quella pubblica hanno compiti diversi: conservare le proprie ricette, oppure condividere una preparazione con la community. Profili e ricette pubbliche costruiscono il contesto attorno a chi cucina.
+Nella community si può cercare una ricetta per nome, ingrediente o tag, esplorare le categorie oppure indicare gli ingredienti già disponibili. Sono punti di partenza diversi per la stessa domanda: cosa posso cucinare?
 
-## Il lavoro dietro l’interfaccia
+Le schede riuniscono fotografia, descrizione, provenienza e autore. Nel dettaglio, porzioni, ingredienti e procedimento rimangono collegati: la ricetta può passare dall’ispirazione all’uso concreto senza dover ricostruire le informazioni altrove.
 
-Ho curato identità, esperienza d’uso e sviluppo. Le regole su ingredienti e quantità sono separate dai casi d’uso, dalla persistenza e dai componenti. Il ricettario locale usa IndexedDB; la parte pubblica è servita attraverso l’applicazione e la sua infrastruttura Cloudflare.
+<ProjectFigure src="/media/boccone/community.webp" alt="Community Boccone con ricerca, categorie e ricette pubblicate dal profilo ufficiale." caption="La scoperta delle ricette: ricerca e filtri accompagnano un catalogo fotografico riconoscibile." />
 
-Questa distinzione permette di evolvere ricerca, pubblicazione e modalità cucina senza concentrare tutto nella pagina della ricetta.
+## Una community fatta anche di cuochi
 
-## Un prodotto, dentro un ecosistema
+La vista Cuochi sposta l’attenzione dai piatti alle persone. Ogni profilo pubblico raccoglie presentazione e ricette pubblicate: dopo aver trovato una preparazione interessante, si può esplorare il ricettario di chi l’ha creata.
 
-Boccone è consultabile online. L’accesso ai servizi personali passa dal portale Nodale; Spesino è il prodotto dedicato a offerte e spesa. I due mantengono una propria identità e un’esperienza dedicata.
+Questo è uno degli obiettivi centrali di Boccone: far emergere uno stile di cucina e dare continuità ai contributi di un autore. Le ricette diventano un punto d’ingresso verso altre idee della stessa cucina.
 
-[Esplora Boccone](https://boccone-ricettario-matteo.mattebosse.chatgpt.site) oppure scopri i case study di [Spesino](/it/work/spesino) e [Nodale](/it/work/nodale).
+<ProjectFigure src="/media/boccone/cooks.webp" alt="La vista Cuochi di Boccone, con profili pubblici, presentazioni e numero di ricette." caption="Dalle ricette ai loro autori: la community si può esplorare anche attraverso i cuochi." />
+
+## Il ricettario, mentre si cucina
+
+Una volta scelto il piatto, si regolano le porzioni e si controlla cosa è già in dispensa. La modalità cucina mostra un passaggio alla volta, con immagini, ingredienti e avanzamento, così la ricetta resta leggibile anche durante la preparazione.
+
+Ho dato a questo momento una gerarchia diversa da quella del catalogo: meno elementi da confrontare, più spazio al gesto successivo. Scoprire una ricetta e seguirla ai fornelli richiedono attenzioni diverse.
+
+<ProjectFigure src="/media/boccone/cooking.webp" alt="Modalità cucina Boccone sul primo passaggio del risotto zucca e taleggio, con porzioni e immagine della preparazione." caption="La modalità cucina concentra l’attenzione sul passaggio da eseguire." />
+
+## Gli ingredienti mancanti diventano una lista
+
+Prima di cucinare si possono segnare gli ingredienti già disponibili e creare una lista con quelli che mancano. La lista rimane utilizzabile in Boccone: si possono rivedere quantità, aggiungere prodotti e spuntare gli acquisti.
+
+Se si vuole anche cercare offerte e organizzare il percorso, il passaggio successivo è Spesino. La scelta è esplicita: una semplice lista per chi ne ha bisogno subito, oppure il confronto della spesa per chi vuole approfondire dove acquistare.
+
+<ProjectFigure src="/media/boccone/shopping-choice.webp" alt="Boccone propone di creare solo la lista oppure cercare offerte e percorso con Spesino." caption="Il collegamento con Spesino parte da un bisogno concreto: comprare ciò che serve per cucinare." />
+
+## Perché Boccone fa parte di Nodale
+
+Boccone e [Spesino](/it/work/spesino) affrontano due momenti vicini della vita quotidiana: decidere cosa preparare e organizzare ciò che serve acquistare. Nodale è l’identità comune che li collega, con un punto di accesso condiviso e prodotti che conservano scopi e linguaggi riconoscibili.
+
+L’integrazione riguarda anche la continuità dell’esperienza: la lista nata dagli ingredienti non deve diventare un lavoro da riscrivere. Boccone mantiene il contesto della cucina; Spesino aggiunge il confronto tra prodotti, offerte, supermercati e tragitto.
+
+## Far crescere la community, una pubblicazione alla volta
+
+La strategia di avvio passa dal profilo ufficiale **@boccone**: pubblicare con costanza ricette complete, curate e riconoscibili, così chi arriva trova subito qualcosa da provare. Ingredienti chiari, immagini dei passaggi e fonti editoriali costruiscono anche un esempio del tipo di contributo che la piattaforma vuole accogliere.
+
+Il profilo ufficiale rende riconoscibile il contenuto del progetto. L’obiettivo è ampliare progressivamente il catalogo, offrire nuovi motivi per tornare e invitare altri cuochi a pubblicare le proprie ricette. È un percorso di crescita editoriale e partecipazione: i suoi risultati andranno misurati nell’uso.
+
+<ProjectFigure src="/media/boccone/official.webp" alt="La cucina di Boccone: profilo ufficiale con badge e raccolta di ricette pubblicate." caption="Il profilo ufficiale alimenta il catalogo e rende riconoscibile la voce editoriale del prodotto." />
+
+## Progettazione e sviluppo
+
+Ho curato identità, interfaccia e sviluppo full-stack. Le regole per ricette, ingredienti e quantità restano separate dai casi d’uso, dagli adattatori di persistenza e dai componenti. Il lavoro sul ricettario locale e quello sui servizi della community hanno confini dedicati; l’esperienza pubblica usa React, Vinext e l’infrastruttura Cloudflare.
+
+La stessa attenzione ai confini guida il rapporto con Spesino: condividere il percorso e componenti mirati, lasciando a ciascun prodotto le proprie responsabilità.
+
+[Esplora Boccone](https://boccone-ricettario-matteo.mattebosse.chatgpt.site) oppure continua con [il case study di Spesino](/it/work/spesino).

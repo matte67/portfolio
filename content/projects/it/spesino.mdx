@@ -17,42 +17,72 @@ role: "Product design, architettura e sviluppo full-stack"
 team: "Progetto indipendente"
 duration: "2026 · In evoluzione"
 technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Node.js"]
-chip: "/media/spesino/showcase.webp"
-hero: {"src": "/media/spesino/showcase.webp", "alt": "Mockup desktop e mobile del prototipo Spesino con ricerca prodotti e lista della spesa.", "position": "center"}
-metrics: [{"value": "Lista", "label": "Prima i bisogni", "context": "La richiesta resta distinta dal prodotto e dalla confezione da acquistare."}]
+chip: "/media/spesino/chip.avif"
+hero: {"src": "/media/spesino/studio.webp", "alt": "Mockup desktop e mobile del prototipo Spesino con ricerca prodotti e lista della spesa.", "position": "center"}
+metrics: [{"value": "Lista", "label": "Un bisogno esplicito", "context": "Categorie, prodotti e quantità prima del confronto."}, {"value": "Confronto", "label": "Scelte comprensibili", "context": "Confezioni, promozioni e alternative collegate alla richiesta."}, {"value": "Nodale", "label": "Continuità con Boccone", "context": "Dalla ricetta alla lista e al piano di acquisto."}]
 links: [{"label": "Visita Spesino", "href": "https://spesino.vercel.app", "kind": "external"}]
 featured: true
 order: -3
-seo: {"title": "Spesino", "description": "Liste, offerte e confronto tra supermercati in un percorso che rende espliciti quantità, condizioni promozionali e compromessi di viaggio.", "image": "/media/spesino/showcase.webp", "imageAlt": "Mockup desktop e mobile del prototipo Spesino con ricerca prodotti e lista della spesa."}
+seo: {"title": "Spesino", "description": "Liste, offerte e confronto tra supermercati in un percorso che rende espliciti quantità, condizioni promozionali e compromessi di viaggio.", "image": "/media/spesino/studio.webp", "imageAlt": "Mockup desktop e mobile del prototipo Spesino con ricerca prodotti e lista della spesa."}
 logo: {"src": "/media/spesino/logo.webp", "alt": "Logo Spesino"}
 ---
 
-## Un prezzo basso non basta
+## Fare la spesa è una sequenza di scelte
 
-Una confezione più economica può contenere meno prodotto. Un’offerta può richiedere una carta o più pezzi. E un risparmio sulla spesa può richiedere una sosta in più. Confrontare numeri isolati lascia fuori gran parte della decisione.
+Quale prodotto comprare, in che formato, con quale promozione e in quale supermercato? Una confezione meno cara può contenere meno; una seconda sosta può assorbire il vantaggio di un’offerta. Spesino nasce per riportare queste decisioni al loro punto di partenza: ciò che serve davvero nella lista.
 
-Spesino parte dalla lista: cosa serve, in quale quantità e con quali preferenze. Le offerte diventano possibili risposte a quel bisogno.
+L’obiettivo è aiutare a costruire un piano comprensibile, in cui quantità, alternative e tragitto si possano valutare insieme.
 
-## Dalla ricerca alla lista
+## Una categoria o un prodotto preciso
 
-Il percorso collega ricerca, scelta dei supermercati, tragitto e preferenze. Si può cercare una categoria generica oppure un prodotto preciso; la lista mantiene esplicite quantità e richieste prima di cercare una combinazione di acquisto.
+“Pasta” e una specifica confezione di pasta sono richieste diverse. La ricerca permette di partire da una categoria generica oppure da un prodotto, per poi confermare quantità e preferenze. La lista raccoglie questi bisogni prima del confronto.
 
-<ProjectFigure src="/media/spesino/planner.webp" alt="Schermata dimostrativa Spesino con ricerca prodotti a sinistra e lista della spesa a destra." caption="Schermata dimostrativa del percorso lista: ricerca e riepilogo rimangono visibili nello stesso contesto." />
+Il riepilogo resta vicino alla ricerca: aggiungere un prodotto significa vedere subito come cambia la propria spesa, senza perdere le righe già inserite.
 
-## Rendere comprensibile il confronto
+<ProjectFigure src="/media/spesino/planner.webp" alt="Spesino con ricerca di una categoria o confezione precisa e riepilogo della lista." caption="Schermata di sviluppo: ricerca e lista lavorano nello stesso spazio." />
 
-Ho progettato il modello per distinguere ciò che viene richiesto da ciò che viene acquistato: confezioni intere, quantità in più, formati e condizioni promozionali. Il confronto deve spiegare la proposta e rendere visibili eventuali righe non coperte.
+## Scegliere dove acquistare
 
-Quando il calcolo considera viaggio e tempo, questi entrano come preferenze esplicite. Le stime dipendono dai dati disponibili e dai limiti della ricerca: l’interfaccia non deve trasformare un risultato parziale in una promessa di risparmio.
+Il percorso prosegue con i supermercati, il tragitto e le preferenze. Selezionare i negozi rende esplicito il perimetro del confronto: quali punti vendita si è disposti a raggiungere e quale viaggio ha senso considerare.
 
-## Dati che cambiano, confini chiari
+Queste scelte servono anche a evitare una proposta astratta: il prezzo del prodotto è solo una parte della decisione, insieme a distanza, tempo e numero di soste.
 
-Il progetto separa dominio, contratti, casi d’uso, adattatori e interfaccia. Acquisizione delle offerte, catalogo e calcolo delle alternative hanno responsabilità distinte. Le offerte hanno una validità temporale; una fonte non disponibile richiede uno stato dedicato e un percorso di riprova.
+<ProjectFigure src="/media/spesino/supermarkets.webp" alt="Passaggio di scelta dei supermercati in Spesino, aperto dal flusso di Boccone." caption="Il passaggio ai supermercati mantiene il collegamento alla lista di origine in Boccone." />
 
-Next.js e React gestiscono la presentazione, mentre i servizi applicativi coordinano regole e accesso ai dati. Il modello evita di legare il significato della lista al formato restituito da una singola catena.
+## Capire una proposta, confrontare un’alternativa
 
-## Stato e prospettiva
+Il piano distingue ciò che si vuole acquistare dalle confezioni necessarie a coprirlo. Formato, quantità in più, condizioni promozionali ed eventuali richieste non coperte devono rimanere leggibili.
 
-Spesino ha un’interfaccia pubblica e continua a evolvere come prototipo. Le immagini mostrano schermate dimostrative di sviluppo: disponibilità del catalogo e risultati dipendono dalle fonti attive. Non sono riportati risparmi medi o risultati d’uso non misurati.
+Le alternative permettono di tornare sulla scelta: si può esaminare un’offerta diversa e capire a quale richiesta risponde. Un risultato utile spiega perché è stato proposto e permette di modificarlo.
 
-L’accesso condiviso è presentato nel case study [Nodale](/it/work/nodale); [Boccone](/it/work/boccone) esplora il momento precedente, quando si decide cosa cucinare.
+<ProjectFigure src="/media/spesino/comparison.webp" alt="Esempio di confronto tra offerte alternative per le mele in Spesino." caption="Schermata di sviluppo del confronto: le alternative rimangono collegate alla richiesta della lista." />
+
+## Il costo dei prodotti e il valore del tragitto
+
+Le viste di risultato mettono a confronto il costo dei prodotti e, quando i dati e le preferenze lo permettono, il compromesso con il viaggio. Scegliere un solo supermercato può essere ragionevole anche quando esiste una combinazione di prezzi più bassa.
+
+Le quantità coperte e quelle mancanti restano distinte. Il prodotto deve rendere riconoscibili i limiti del calcolo, soprattutto quando non è possibile confrontare tutte le alternative o stimare un percorso.
+
+<ProjectFigure src="/media/spesino/plan.webp" alt="Esempio di piano Spesino con confronti, totale dei prodotti coperti e ripartizione per supermercato." caption="Esempio di sviluppo: i prezzi illustrano il funzionamento dell’interfaccia e non rappresentano un preventivo aggiornato." />
+
+## Quando la lista nasce da una ricetta
+
+Con [Boccone](/it/work/boccone), il punto di partenza può essere un piatto. Gli ingredienti che mancano diventano una lista, utilizzabile subito per la spesa; chi desidera confrontare offerte e percorso può continuare con Spesino.
+
+È una continuità intenzionale: dalla decisione di cucinare alla decisione di acquistare. Non occorre trasformare una ricetta in una nuova ricerca generica e ricominciare da zero.
+
+<EditorialFlow label="Dalla ricetta alla spesa" items={[{title: "Scegli in Boccone", description: "Decidi cosa cucinare e regola le porzioni."}, {title: "Controlla i mancanti", description: "Segna ciò che hai e prepara la lista."}, {title: "Continua con Spesino", description: "Valuta offerte, supermercati e tragitto."}]} />
+
+## Due prodotti, una famiglia
+
+Spesino fa parte di Nodale insieme a Boccone. Il punto di accesso comune rende riconoscibile il passaggio tra le applicazioni, mentre la separazione dei prodotti lascia a ciascuno il proprio compito: ricette e community da una parte, lista e confronto della spesa dall’altra.
+
+L’esperienza condivide anche componenti mirati per le liste. Mantenerli coerenti aiuta a ritrovare gesti familiari, senza portare nel contesto di una semplice checklist prezzi o risultati che non sono stati calcolati.
+
+## Progettazione e stato del prodotto
+
+Ho curato esperienza d’uso, architettura e sviluppo full-stack. Il dominio distingue richieste, prodotti, confezioni e promozioni; i casi d’uso coordinano il confronto; gli adattatori gestiscono cataloghi, dati e servizi esterni. Next.js e React compongono l’interfaccia.
+
+Spesino continua a evolvere come prototipo pubblico. Le immagini mostrano casi di sviluppo; catalogo, validità delle offerte e percorsi dipendono dalle fonti e dai servizi disponibili. Il valore progettuale è rendere comprensibile la decisione; il risparmio effettivo andrà valutato su acquisti reali.
+
+[Visita Spesino](https://spesino.vercel.app) oppure scopri [Boccone e il suo ricettario](/it/work/boccone).
