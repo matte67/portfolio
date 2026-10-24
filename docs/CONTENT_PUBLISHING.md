@@ -67,6 +67,8 @@ A future `publishedAt` does not schedule a Netlify build. A deploy must still oc
 
 ## Validation and build
 
+After changing Tina fields or MDX templates, run `npx tinacms dev --noTelemetry --noWatch --no-server` to regenerate `tina/tina-lock.json`, then commit it with `tina/config.ts`. TinaCloud indexes the lockfile; a production build checks that the local and remote schemas match.
+
 ```bash
 npm run validate:content
 npm run cms:audit
