@@ -12,19 +12,20 @@ sys.path.insert(0, str(PROJECT_DIR))
 
 from scene import build_scene
 from scroll_timeline import save_timeline
+from config import OUTPUT_REVISION
 
 
 def main():
     """Build the scene from factory defaults and save it at the requested path."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output-dir', type=Path, default=PROJECT_DIR / 'output' / 'scroll-route')
+    parser.add_argument('--output-dir', type=Path, default=PROJECT_DIR / 'output' / OUTPUT_REVISION)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.context.preferences.filepaths.save_version = 0
     scene = bpy.context.scene
-    scene.name = 'Almost There / Percorso dei progetti'
+    scene.name = 'Almost There / Percorso biografico'
     camera, focuses = build_scene(scene)
     bpy.context.view_layer.objects.active = camera
     for screen in bpy.data.screens:

@@ -23,6 +23,7 @@ export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
   const copy = getPageCopy(language, "layout");
   const primaryNavigation = [
     [copy.navigation.work, toLocalizedPath("/work")],
+    [copy.navigation.artwork, toLocalizedPath("/artwork")],
     [copy.navigation.articles, toLocalizedPath("/articles")],
     [copy.navigation.thesis, toLocalizedPath("/thesis")],
     [copy.navigation.about, toLocalizedPath("/about")],
@@ -128,7 +129,7 @@ export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
           </NavLink>
 
           <nav
-            className="desktop-navigation hidden items-center gap-[clamp(1.4rem,3vw,2.6rem)] md:flex"
+            className="desktop-navigation hidden items-center gap-[clamp(1rem,2.5vw,2.6rem)] lg:flex"
             aria-label={copy.navigation.primaryLabel}
           >
             {primaryNavigation.map(([label, href]) => (
@@ -164,7 +165,7 @@ export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
             aria-controls="mobile-navigation"
             aria-expanded={isOpen}
             aria-label={copy.navigation.menu}
-            className="mobile-menu-button grid size-10 place-items-center rounded-xl border-0 bg-transparent text-lg md:hidden"
+            className="mobile-menu-button grid size-10 place-items-center rounded-xl border-0 bg-transparent text-lg lg:hidden"
             onClick={() => setIsOpen(true)}
             ref={menuButtonRef}
             type="button"

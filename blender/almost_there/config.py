@@ -41,6 +41,7 @@ class Stop:
     focus_height: float
     second: float
     projects: tuple[str, ...]
+    look_lead: float = 8.6
 
 
 @dataclass(frozen=True)
@@ -61,18 +62,19 @@ ROAD = RoadSettings()
 CAMERA = CameraSettings()
 PREVIEW = PreviewSettings()
 STOPS = (
-    Stop('childhood', 'Infanzia · RE:WILD', 8, -1, 9.5, (6.1, 9.3), 1.65, 0.60, ('rewild',)),
-    Stop('cinema', 'Cinema · Spazio', 26, 1, 8.7, (5.8, 5.5), 1.64, 1.83, ('spazio',)),
-    Stop('camerino', 'Camerino · HackHub', 44, -1, 9.5, (6.5, 6.5), 1.85, 3.06,
-         ('hackathon-management-system',)),
+    Stop('childhood', 'Infanzia, famiglia e calcio', 8, -1, 9.5, (6.1, 9.3), 1.65, 0.60, ()),
+    Stop('amandola', 'Amandola · Scuole superiori', 26, 1, 8.9, (6.0, 6.9), 3.38, 1.83, ('spazio',)),
+    Stop('camerino', 'Università di Camerino', 44, -1, 10.5, (7.8, 7.5), 2.94, 3.06,
+         ('rewild', 'dormant-access-control-unit', 'hackathon-management-system'), look_lead=12.9),
     Stop('unistays', 'UniStays', 62, 1, 9.0, (6.0, 5.4), 1.85, 4.30, ('unistays',)),
-    Stop('arduino', 'Dormant Access Control Unit', 80, -1, 8.6, (5.5, 5.0), 1.50, 5.57,
-         ('dormant-access-control-unit',)),
+    Stop('graduation', 'Laurea triennale · SEF · Londra', 80, -1, 10.0, (7.2, 7.0), 3.20, 5.57,
+         ('sef',), look_lead=11.25),
     Stop('nodale', 'Boccone · Spesino · Nodale', 98, 1, 9.5, (6.9, 5.6), 1.75, 6.90,
          ('boccone', 'spesino', 'nodale')),
     Stop('prenivo', 'Prenivo', 116, -1, 9.0, (6.2, 5.5), 1.75, 8.22, ('prenivo',)),
-    Stop('polimi', 'Politecnico · SEF', 134, 1, 9.4, (6.3, 6.8), 1.85, 9.55, ('sef',)),
+    Stop('polimi', 'Politecnico di Milano', 134, 1, 10.4, (7.5, 7.2), 3.32, 9.55, (), look_lead=11.5),
 )
+OUTPUT_REVISION = 'biographical-route'
 DENSITY = 1.0
 MONUMENT_ORIGIN = (0.0, 213.0, 3.8)
 SUN_ENERGY = 1.85

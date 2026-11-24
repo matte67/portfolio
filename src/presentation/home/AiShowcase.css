@@ -14,7 +14,11 @@
   line-height: 0.98;
 }
 
-.ai-showcase__copy p {
+.ai-showcase__copy .eyebrow {
+  margin-bottom: 1rem;
+}
+
+.ai-showcase__copy h2 + p {
   max-width: 34ch;
   margin: 1.35rem 0 0;
   color: var(--color-muted);
@@ -40,25 +44,25 @@
 
 .ai-showcase__phone {
   position: relative;
-  width: clamp(9.75rem, 19vw, 15rem);
-  aspect-ratio: 680 / 1368;
+  width: clamp(13rem, 25vw, 20.5rem);
+  aspect-ratio: 1024 / 1536;
   transform-style: preserve-3d;
 }
 
-/* The front artwork and the dark rear shell sit on separate depth planes. */
+/* The rose gold body follows the silhouette inside the PNG's transparent margins. */
 .ai-showcase__phone::before,
 .ai-showcase__phone::after {
   position: absolute;
-  inset: 1.25% 2.1%;
-  border-radius: 20% / 9%;
-  background: #222321;
+  inset: 1.2% 13.8% 1.6% 13.4%;
+  border-radius: 17% / 8.6%;
+  background: #9e7369;
   pointer-events: none;
   content: "";
 }
 
 .ai-showcase__phone::before {
   transform: translateZ(-5px);
-  background: #434541;
+  background: #c89b8d;
 }
 
 .ai-showcase__phone::after {
@@ -75,13 +79,14 @@
 }
 
 .ai-showcase__screen {
-  transform: translateZ(0.25px);
+  transform: translateZ(1px);
   position: absolute;
-  inset: 3.15% 6.35%;
+  /* The new artwork includes opaque glass, so the video sits over its inner display. */
+  inset: 13.35% 17.85% 13.9% 17.65%;
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: 13% / 6%;
+  border-radius: 0.65% / 0.4%;
   background: #060606;
 }
 
@@ -139,7 +144,7 @@
   }
 
   .ai-showcase__phone {
-    width: clamp(9.75rem, 48vw, 12.4rem);
+    width: clamp(13rem, 64vw, 16.75rem);
   }
 }
 

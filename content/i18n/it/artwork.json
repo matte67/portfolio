@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Artwork",
+    "description": "Illustrazioni, esperimenti visivi e cortometraggi di Matteo Vittori."
+  },
+  "intro": "Illustrazioni, esperimenti visivi e cortometraggi che realizzo accanto ai miei progetti software.",
+  "openOriginal": "Apri originale",
+  "mediaError": "Impossibile caricare l’anteprima.",
+  "items": {
+    "almost-there": {
+      "title": "Almost There",
+      "alt": "Un viaggio in prima persona tra isole sospese, verso un tempio avvolto dalla nebbia arancione."
+    },
+    "monk-1": {
+      "title": "Monk · Braci",
+      "alt": "Una figura seduta e il suo riflesso, illuminati da braci arancioni nel buio."
+    },
+    "monk-2": {
+      "title": "Monk · Il sentiero",
+      "alt": "Una figura con un cappuccio arancione risale un sentiero roccioso tra nebbia e volti."
+    },
+    "monk-3": {
+      "title": "Monk · Ritratto di gruppo",
+      "alt": "Un gruppo di scimmie circonda una figura chiara con un cappuccio arancione su fondo nero."
+    },
+    "monk-4": {
+      "title": "Monk · Studio di gruppo",
+      "alt": "Una variante del ritratto di gruppo con la figura col cappuccio arancione al centro."
+    },
+    "finally-did-it": {
+      "title": "I finally did it",
+      "alt": "Una scritta rossa su un muro scrostato."
+    },
+    "life": {
+      "title": "Life",
+      "alt": "Una figura si tende contro dei cavi in un paesaggio buio e tempestoso."
+    },
+    "unistays-assets": {
+      "title": "UniStays · 3D assets",
+      "alt": "Casette e forme lucide verde acqua in una composizione 3D."
+    },
+    "a-due-passi": {
+      "title": "A due passi dall’uni",
+      "alt": "Un escursionista con uno zaino arancione sale una scalinata in questo corto per UniStays."
+    }
+  }
+}

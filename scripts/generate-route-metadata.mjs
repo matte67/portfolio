@@ -26,6 +26,7 @@ const [catalog, copiesByLocale] = await Promise.all([
     contact: await readJson(`content/i18n/${locale}/contact.json`),
     about: await readJson(`content/i18n/${locale}/about.json`),
     articles: await readJson(`content/i18n/${locale}/articles.json`),
+    artwork: await readJson(`content/i18n/${locale}/artwork.json`),
     home: await readJson(`content/i18n/${locale}/home.json`),
     layout: await readJson(`content/i18n/${locale}/layout.json`),
     thesis: await readJson(`content/i18n/${locale}/thesis.json`),
@@ -72,6 +73,10 @@ const allRoutes = locales.flatMap((locale) => {
     {
       path: localePath(locale, "/work"), ...copy.work.meta, alternates: pageAlternates("/work"),
       items: projects, kind: "collection", labels, locale, priority: "0.9",
+    },
+    {
+      path: localePath(locale, "/artwork"), ...copy.artwork.meta, alternates: pageAlternates("/artwork"),
+      kind: "page", labels, locale, priority: "0.8",
     },
     {
       path: localePath(locale, "/articles"), ...copy.articles.meta, alternates: pageAlternates("/articles"),
@@ -151,6 +156,7 @@ function createStaticNavigation(route) {
   return `<nav aria-label="${escapeAttribute(navigation.primaryLabel)}">
       <a href="${prefix}/">${escapeAttribute(navigation.homeLabel)}</a>
       <a href="${prefix}/work/">${escapeAttribute(navigation.work)}</a>
+      <a href="${prefix}/artwork/">${escapeAttribute(navigation.artwork)}</a>
       <a href="${prefix}/articles/">${escapeAttribute(navigation.articles)}</a>
       <a href="${prefix}/thesis/">${escapeAttribute(navigation.thesis)}</a>
       <a href="${prefix}/about/">${escapeAttribute(navigation.about)}</a>
@@ -382,6 +388,7 @@ Portfolio of Matteo Vittori, a Computer Science student focused on modular softw
 
 - [Home](${productionOrigin}/en/): overview and selected work.
 - [Work](${productionOrigin}/en/work/): project case studies.
+- [Artwork](${productionOrigin}/en/artwork/): illustrations, visual experiments and short films.
 - [Articles](${productionOrigin}/en/articles/): technical notes and design decisions.
 - [Thesis](${productionOrigin}/en/thesis/): bachelor thesis on the Signal Extraction Framework.
 - [About](${productionOrigin}/en/about/): background, principles, and education.

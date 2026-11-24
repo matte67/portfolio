@@ -14,6 +14,19 @@ def collection(name, parent):
     return item
 
 
+def place_collection(group, name, origin, *, angle=0.0, scale=1.0):
+    """Keep a group editable under one pivot without flattening its existing hierarchy."""
+    pivot = bpy.data.objects.new(name, None)
+    group.objects.link(pivot)
+    for item in group.all_objects:
+        if item != pivot and item.parent is None:
+            item.parent = pivot
+    pivot.location = origin
+    pivot.rotation_euler.z = angle
+    pivot.scale = (scale,) * 3
+    return pivot
+
+
 def mesh(group, name, vertices, faces, materials, indices=()):
     """Link a mesh with optional per-face material assignments."""
     data = bpy.data.meshes.new(name)

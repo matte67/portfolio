@@ -277,14 +277,7 @@ test("localized project content follows the selected language", async ({ page })
   );
 });
 
-test("available project logos appear in the work index and project masthead", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/en/work");
-
-  const panelLogo = page.locator(".editorial-roller__panel .project-logo img");
-  await expect(panelLogo).toHaveAttribute("src", "/media/sef/logo.svg");
-  await expect(panelLogo).toHaveAttribute("alt", "");
-
+test("available project logos appear in the project masthead", async ({ page }) => {
   await page.goto("/en/work/unistays");
   await expect(page.getByRole("img", { name: "UniStays logo." })).toHaveAttribute(
     "src",
@@ -314,36 +307,43 @@ test("articles expose the published editorial card", async ({ page }) => {
   );
 });
 
-test("editorial roller keeps copy pinned while the active media changes", async ({ page }) => {
+test("Work scrubs the film beneath the site frame and reveals case studies at their islands", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en/work");
 
-  const roller = page.locator(".editorial-index--roller");
-  const items = roller.locator(".editorial-roller__item");
-  const mediaList = roller.locator(".editorial-roller__media");
-  const panel = roller.locator(".editorial-roller__panel");
-  await expect(items).toHaveCount(5);
-  await expect(mediaList).toHaveCount(5);
-  const media = mediaList.nth(1);
-  await expect(panel).toHaveCSS("position", "sticky");
+  const stage = page.locator(".work-journey__stage");
+  const video = page.locator("video.work-journey__video");
+  const uniStays = page.getByRole("link", { name: "Read case study · UniStays" });
+  const rewild = page.getByRole("link", { name: "Read case study · RE:WILD" });
+  const frame = page.locator(".site-frame__viewport");
+  await expect(video).toBeVisible();
+  await expect(stage).toHaveCSS("position", "sticky");
+  const frameBounds = await frame.boundingBox();
+  const stageBounds = await stage.boundingBox();
+  expect(frameBounds).not.toBeNull();
+  expect(stageBounds?.width).toBeCloseTo(frameBounds!.width, 0);
+  expect(stageBounds?.height).toBeCloseTo(frameBounds!.height, 0);
+  await expect(page.locator(".television-overlay")).toBeAttached();
+  await expect(uniStays).toBeHidden();
 
-  const panelTitle = panel.getByRole("heading", { level: 2 });
-  const initialTitle = await panelTitle.textContent();
-  await items.nth(1).scrollIntoViewIfNeeded();
-  await page.evaluate(() => window.scrollBy(0, 180));
+  await page.getByRole("button", { name: "UniStays", exact: true }).click();
+  await expect(uniStays).toBeVisible();
+  await expect(uniStays).toHaveAttribute("href", "/en/work/unistays");
+  await expect.poll(() => video.evaluate((element) => (element as HTMLVideoElement).currentTime)).toBeCloseTo(4.17, 1);
 
-  await expect.poll(async () => media.evaluate((element) => Number.parseFloat(
-    element.style.getPropertyValue("--editorial-media-parallax"),
-  ))).not.toBe(0);
+  // A reverse scroll reaches the earlier Camerino cue without using its stop button.
+  await page.mouse.wheel(0, -540);
+  await expect(rewild).toBeVisible();
+  await expect(uniStays).toBeHidden();
+  await expect.poll(() => video.evaluate((element) => (element as HTMLVideoElement).currentTime)).toBeLessThan(3.25);
 
-  await expect(media).toHaveCSS("transform", /matrix/);
-  await expect.poll(() => panelTitle.textContent()).not.toBe(initialTitle);
-
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(media).toHaveCSS("transform", "none");
-  await expect(panel.locator(".editorial-roller__panel-inner")).toHaveCSS("animation-name", "none");
-
-  expect(initialTitle).toBeTruthy();
+  await page.getByRole("button", { name: "Prenivo", exact: true }).click();
+  await expect(video).toHaveCount(0);
+  await expect(stage.locator("img")).toHaveAttribute("src", "/media/work/prenivo.webp");
+  await expect(page.getByRole("link", { name: "Read case study · Prenivo" })).toBeVisible();
+  await expectNoHorizontalOverflow(page);
 });
 
 test("article and project heroes preserve the shared contained frame", async ({ page }) => {
@@ -542,7 +542,7 @@ test("case-study visuals remain inside the reading column while facts stay stick
 test("remaining route mastheads are visually stable", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   const routes = [
-    ["/en/work", "Systems are best understood through their decisions.", "work-index"],
+    ["/en/work", "Selected Work", "work-index"],
     ["/en/work/unistays", "UniStays", "project-unistays"],
     ["/en/work/rewild", "RE:WILD", "project-rewild"],
     ["/en/work/hackathon-management-system", "HackHub", "project-hackathon"],

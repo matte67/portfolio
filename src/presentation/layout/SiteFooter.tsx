@@ -9,7 +9,7 @@ import { FooterMergeCorner } from "./FooterMergeCorner";
 
 export function SiteFooter() {
   const { language } = useLanguage();
-  const copy = getPageCopy(language, "layout").footer;
+  const { footer: copy, navigation } = getPageCopy(language, "layout");
   return (
     <footer className="site-footer">
       <FooterMergeCorner side="left" />
@@ -32,6 +32,12 @@ export function SiteFooter() {
           <nav className="site-footer__links" aria-label={copy.linksLabel}>
             <p>{copy.explore}</p>
             <ul>
+              <li>
+                <SmartLink href="/artwork">
+                  <span>{navigation.artwork}</span>
+                  <ArrowMark />
+                </SmartLink>
+              </li>
               <li>
                 <SmartLink href="/contact">
                   <span>{language === "it" ? "Contattami" : "Contact me"}</span>

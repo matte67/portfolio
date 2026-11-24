@@ -1,1 +1,33 @@
-{"meta":{"title":"Selected Work","description":"Selected software architecture, computer vision, web, interactive, and embedded projects by Matteo Vittori."},"eyebrow":"Selected work · 2025—26","headingPrefix":"Systems are best understood through their ","headingEmphasis":"decisions.","description":"Case studies across modular architecture, computer vision, web products, immersive interaction, and embedded systems.","sectionLabel":"Project case studies","view":"View","read":"Read case study","searchLabel":"Search projects"}
+{
+  "meta": {
+    "title": "Selected Work",
+    "description": "Selected software architecture, computer vision, web, interactive, and embedded projects by Matteo Vittori."
+  },
+  "start": "Scroll to explore",
+  "route": "Journey stops",
+  "read": "Read case study",
+  "stops": {
+    "opening": "Start",
+    "childhood": "Childhood, family and football",
+    "amandola": "Amandola",
+    "camerino": "University of Camerino",
+    "unistays": "UniStays",
+    "graduation": "Graduation, SEF and London",
+    "nodale": "Boccone, Spesino and Nodale",
+    "prenivo": "Prenivo",
+    "polimi": "Politecnico di Milano",
+    "temple": "The temple"
+  },
+  "projects": {
+    "spazio": { "title": "Spazio", "summary": "An Android TV home screen designed around the remote." },
+    "dormant-access-control-unit": { "title": "Access Control", "summary": "A prototype with a proximity sensor and Morse code authentication." },
+    "rewild": { "title": "RE:WILD", "summary": "An immersive group game about restoring ecosystems." },
+    "hackathon-management-system": { "title": "HackHub", "summary": "A backend for hackathon teams, submissions and judging." },
+    "unistays": { "title": "UniStays", "summary": "Rooms and flatmates for students, with map search and chat." },
+    "sef": { "title": "SEF", "summary": "A modular computer vision pipeline for extracting and analysing signals." },
+    "boccone": { "title": "Boccone", "summary": "A shared cookbook that takes ingredients to your shopping list." },
+    "spesino": { "title": "Spesino", "summary": "A grocery app for comparing offers, lists and trips." },
+    "nodale": { "title": "Nodale", "summary": "One shared account for Boccone and Spesino." },
+    "prenivo": { "title": "Prenivo", "summary": "Orders, production and appointments for small businesses." }
+  }
+}

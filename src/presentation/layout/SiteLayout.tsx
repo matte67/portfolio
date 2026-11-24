@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useMatch } from "react-router-dom";
 
 import { useLanguage } from "../../application/i18n";
 import { getPageCopy } from "../../application/pageCopy";
@@ -21,6 +21,7 @@ function clampProgress(value: number) {
 
 export function SiteLayout() {
   const location = useLocation();
+  const isCinematicWork = useMatch("/:language/work") !== null;
   const { language } = useLanguage();
   const copy = getPageCopy(language, "layout");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,7 +50,7 @@ export function SiteLayout() {
       const scrollDelta = scrollTop - scrollDirectionAnchorRef.current;
 
       setIsScrolled(scrollTop > NAVIGATION_SCROLL_THRESHOLD);
-      setBottomBlurProgress(Math.min(revealProgress, exitProgress));
+      if (!isCinematicWork) setBottomBlurProgress(Math.min(revealProgress, exitProgress));
 
       if (scrollTop <= NAVIGATION_SCROLL_THRESHOLD) {
         setIsHeaderVisible(false);
@@ -75,18 +76,18 @@ export function SiteLayout() {
       window.removeEventListener("resize", handleScroll);
       if (animationFrame !== undefined) window.cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [isCinematicWork]);
 
   return (
     <>
       <a className="skip-link" href="#main-content">{copy.accessibility.skipToContent}</a>
-      <div className="site-frame">
+      <div className="site-frame" data-cinematic-work={isCinematicWork || undefined}>
         <div aria-hidden="true" className="site-frame__viewport" />
         <FrameCorner edge="top" side="left" />
         <FrameCorner edge="top" side="right" />
         <FrameCorner edge="bottom" side="left" />
         <FrameCorner edge="bottom" side="right" />
-        <SiteHeader isMerged isVisible={isHeaderVisible} />
+        <SiteHeader isMerged isVisible={isHeaderVisible || (isCinematicWork && !isScrolled)} />
         <div className="site-frame__surface">
           <main id="main-content">
             <TelevisionOverlay />
@@ -95,23 +96,25 @@ export function SiteLayout() {
           <SiteFooter />
         </div>
       </div>
-      <GradualBlur
-        active={isScrolled}
-        animated
-        className="site-bottom-blur mb-(--frame-gap) px-(--frame-gap)"
-        curve="bezier"
-        divCount={8}
-        duration="0.45s"
-        easing="cubic-bezier(0.22, 1, 0.36, 1)"
-        exponential
-        height="clamp(5rem, 9vw, 8rem)"
-        opacity={0.72}
-        position="bottom"
-        progress={bottomBlurProgress}
-        strength={1.8}
-        target="page"
-        zIndex={-20}
-      />
+      {!isCinematicWork && (
+        <GradualBlur
+          active={isScrolled}
+          animated
+          className="site-bottom-blur mb-(--frame-gap) px-(--frame-gap)"
+          curve="bezier"
+          divCount={8}
+          duration="0.45s"
+          easing="cubic-bezier(0.22, 1, 0.36, 1)"
+          exponential
+          height="clamp(5rem, 9vw, 8rem)"
+          opacity={0.72}
+          position="bottom"
+          progress={bottomBlurProgress}
+          strength={1.8}
+          target="page"
+          style={{ zIndex: "var(--z-site-bottom-blur)" }}
+        />
+      )}
       <ChatAssistant />
     </>
   );

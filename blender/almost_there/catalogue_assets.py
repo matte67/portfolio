@@ -25,16 +25,12 @@ def build_rewild_detail(group, palette):
 
 
 def build_spazio_detail(group, palette):
-    """Set a TV launcher with its remote beside the analog projection."""
-    x = 2.25
-    front, z = display_panel(group, palette, 'Spazio / Android TV', x, -1.14, 2.31, 1.42, 'basalt')
-    for i, color in enumerate(('terracotta', 'sage', 'gold')):
-        box(group, 'Spazio / riquadro app', (x-0.63+i*0.63, front, z-0.15),
-            (0.51, 0.046, 0.41), palette[color])
-    label(group, 'Spazio / nome sullo schermo', 'Spazio', (x-0.60, front-0.024, z+0.35), 0.29, palette['ivory'])
-    box(group, 'Spazio / ripiano', (x, -1.50, 0.63), (2.54, 0.82, 0.13), palette['cliff'])
-    box(group, 'Spazio / telecomando', (x+0.04, -2.31, 0.68), (0.39, 0.78, 0.12), palette['dark'], -0.18)
-    tube(group, 'Spazio / tasto direzionale', (x, -2.27, 0.74), (x, -2.27, 0.765), 0.106, palette['ivory'], sides=14)
+    """Keep Spazio as one small remote, scaled like the other personal objects."""
+    x, y = 1.54, -2.38
+    box(group, 'Spazio / telecomando', (x, y, 0.33), (0.31, 0.16, 0.56), palette['dark'])
+    tube(group, 'Spazio / tasto direzionale', (x, y-0.097, 0.42), (x, y-0.071, 0.42),
+         0.073, palette['metal'], sides=14)
+    label(group, 'Spazio / marchio sul telecomando', 'Spazio', (x, y-0.094, 0.20), 0.063, palette['ivory'])
 
 
 def build_hackhub_detail(group, palette):

@@ -65,9 +65,9 @@ export function HomePage() {
           </div>
           <MagneticAvatar />
           <div className="home-hero__actions absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 flex-wrap items-center justify-center gap-6 whitespace-nowrap max-[48rem]:bottom-4 max-[25rem]:w-[calc(100%-2.5rem)] max-[25rem]:flex-col max-[25rem]:items-stretch">
-            <a className="button-link" href="#selected-work">
-              {copy.exploreWork} <DownMark />
-            </a>
+            <Link className="button-link" to={toLocalizedPath("/work")}>
+              {copy.exploreWork}
+            </Link>
             <a className="text-link" href="mailto:matteo01.vittori@icloud.com">
               {copy.email} <ArrowMark />
             </a>

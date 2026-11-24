@@ -71,8 +71,7 @@ def build_childhood(group, palette):
     _kindergarten(group, palette)
 
 
-def _boots(group, palette):
-    x, y = 2.05, -2.09
+def _boots(group, palette, x, y):
     box(group, 'Scarpini / asse di legno', (x, y+0.15, 1.66), (2.31, 0.46, 3.2), palette['cliff'])
     tube(group, 'Scarpini / chiodo', (x, y, 2.88), (x, y-0.34, 2.91),
          0.054, palette['dark'], sides=6, tip=0.095)
@@ -96,31 +95,29 @@ def _boots(group, palette):
                 (0.16, 0.14, 0.073), palette['gold'])
 
 
-def build_camerino(group, palette):
-    """Pair the first university threshold with balls and boots from football."""
-    box(group, 'Camerino / portico', (-0.9, 1.42, 2.73), (6.9, 1.68, 1.0), palette['dust'])
-    box(group, 'Camerino / cornice', (-0.9, 1.33, 3.25), (7.25, 1.89, 0.24), palette['terracotta'])
-    label(group, 'Camerino / iscrizione', 'UNIVERSITÀ DI CAMERINO', (-0.94, 0.55, 2.72), 0.43, palette['dark'])
-    for x in (-4.02, -2.54, 0.63, 2.09):
-        box(group, 'Camerino / pilastro', (x, 1.35, 1.24), (0.44, 0.82, 2.49), palette['ivory'])
-    for step in range(4):
-        box(group, 'Camerino / gradino', (-1.12, -2.68+step*0.63, 0.14+step*0.11),
-            (2.74, 0.74, 0.26+step*0.19), palette['stone'])
-    _book(group, palette, (-1.39, -0.92, 0.67), (0.92, 0.76, 0.14), 'sage', 0.11)
-    _boots(group, palette)
-    for center, size in (((0.77,-3.24,0.54),0.54), ((3.33,-1.88,0.47),0.47), ((3.52,-3.23,0.29),0.29)):
+def build_football_memorabilia(group, palette):
+    """Keep the football equipment visible beside the Camerino entrance."""
+    _boots(group, palette, 3.57, -0.42)
+    for center, size in (((2.23,-2.65,0.54),0.54), ((4.47,-1.85,0.47),0.47), ((4.12,-2.55,0.29),0.29)):
         football(group, palette, center, size)
 
 
-def build_polimi(group, palette):
-    """Prepare a focused, lit study desk beneath a campus nameplate."""
-    box(group, 'Politecnico / quinta', (0.1, 1.40, 2.28), (7.8, 0.65, 4.58), palette['basalt'])
-    for x in (-3.35, -2.59, 2.75, 3.50):
-        box(group, 'Politecnico / lesena', (x, 1.01, 2.22), (0.22, 0.32, 4.44), palette['stone'])
-    label(group, 'Politecnico / iscrizione', 'POLITECNICO DI MILANO', (0.36, 1.04, 3.63),
-          0.42, palette['ivory'])
-    label(group, 'Politecnico / corso', 'COMPUTER SCIENCE · AI', (0.06, 1.032, 2.99),
-          0.27, palette['dust'])
+def build_amandola_school(group, palette):
+    """Represent the secondary-school diploma through personal-scale objects."""
+    x, y = -1.18, -2.04
+    box(group, 'Diploma / panca', (x, y+0.17, 0.44), (2.06, 0.94, 0.88), palette['cliff'])
+    box(group, 'Diploma / cornice', (x, y, 1.34), (1.84, 0.16, 0.91), palette['brick_dark'])
+    box(group, 'Diploma / pergamena', (x, y-0.091, 1.34), (1.65, 0.042, 0.74), palette['ivory'])
+    label(group, 'Diploma / iscrizione', 'DIPLOMA', (x, y-0.118, 1.51), 0.25, palette['dark'])
+    label(group, 'Diploma / scuole superiori', 'SCUOLE SUPERIORI', (x, y-0.118, 1.26), 0.125, palette['dark'])
+    tube(group, 'Diploma / sigillo', (x, y-0.13, 1.06), (x, y-0.116, 1.06),
+         0.076, palette['terracotta'], sides=16)
+    for index, color in enumerate(('sage', 'terracotta', 'basalt')):
+        _book(group, palette, (0.56, -2.34, 0.19+0.17*index), (0.81, 0.63, 0.13), color, 0.13*index)
+
+
+def build_study_desk(group, palette):
+    """Prepare the focused study arrangement in front of the Politecnico facade."""
     box(group, 'Studio / scrivania', (0, -1.48, 1.15), (4.9, 2.16, 0.18), palette['cliff'])
     for x in (-2.18, 2.18):
         box(group, 'Studio / sostegno', (x, -1.43, 0.56), (0.22, 1.86, 1.12), palette['dark'])

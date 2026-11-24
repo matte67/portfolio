@@ -29,6 +29,10 @@ const loadArticlesPage = async () => ({
   Component: (await import("../presentation/pages/ArticlesPage")).ArticlesPage,
 });
 
+const loadArtworkPage = async () => ({
+  Component: (await import("../presentation/pages/ArtworkPage")).ArtworkPage,
+});
+
 const loadArticlePage = async () => ({
   Component: (await import("../presentation/pages/ArticlePage")).ArticlePage,
 });
@@ -52,6 +56,7 @@ export const router = createBrowserRouter([
       { path: "work/:slug", lazy: loadProjectPage },
       { path: "articles", lazy: loadArticlesPage },
       { path: "articles/:slug", lazy: loadArticlePage },
+      { path: "artwork", lazy: loadArtworkPage },
       { path: "thesis", lazy: loadThesisPage },
       { path: "contact", lazy: async () => ({ Component: (await import("../presentation/pages/ContactPage")).ContactPage }) },
       { path: "about", lazy: loadAboutPage },

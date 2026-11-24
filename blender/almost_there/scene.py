@@ -7,40 +7,47 @@ import bpy
 from mathutils import Vector
 
 from animation import build_camera
+from architecture import build_amandola_arch, build_camerino_campus, build_polimi_facade
 from atmosphere import build_final_fog
 from catalogue_assets import (build_hackhub_detail, build_nodale, build_prenivo,
                               build_rewild_detail, build_sef_detail, build_spazio_detail)
-from cinema import build_cinema
 from config import (BACKGROUND, CAMERA, DENSITY, MONUMENT_ORIGIN, PREVIEW, ROAD,
                     STOPS, SUN_ENERGY)
-from geometry import collection, island
+from geometry import collection, island, place_collection
+from graduation import build_graduation
 from materials import build_palette, linear_color
-from memories import build_camerino, build_childhood, build_polimi
+from memories import build_amandola_school, build_childhood, build_football_memorabilia, build_study_desk
 from monument import build_monument
 from projects import build_arduino, build_unistays
 from road import RoadPath, build_road
 
 
+def _vignette(parent, palette, name, builder, origin, scale):
+    group = collection(name, parent)
+    builder(group, palette)
+    place_collection(group, f'{name} / posizione', origin, scale=scale)
+
+
+def _campus_projects(group, palette):
+    _vignette(group, palette, 'Dormant Access Control Unit', build_arduino, (-3.41, -1.83, 0), 0.55)
+    _vignette(group, palette, 'RE:WILD', build_rewild_detail, (-2.98, -1.15, 0), 0.90)
+    _vignette(group, palette, 'HackHub', build_hackhub_detail, (2.38, -0.63, 0), 0.72)
+
+
+def _degree_project(group, palette):
+    _vignette(group, palette, 'SEF / analisi dei flussi video', build_sef_detail, (-2.54, -0.79, 0), 0.86)
+
+
 BUILDERS = {
-    'childhood': (build_childhood, build_rewild_detail),
-    'cinema': (build_cinema, build_spazio_detail),
-    'camerino': (build_camerino, build_hackhub_detail),
+    'childhood': (build_childhood,),
+    'amandola': (build_amandola_arch, build_amandola_school, build_spazio_detail),
+    'camerino': (build_camerino_campus, build_football_memorabilia, _campus_projects),
     'unistays': (build_unistays,),
-    'arduino': (build_arduino,),
+    'graduation': (build_graduation, _degree_project),
     'nodale': (build_nodale,),
     'prenivo': (build_prenivo,),
-    'polimi': (build_polimi, build_sef_detail),
+    'polimi': (build_polimi_facade, build_study_desk),
 }
-
-
-def _place(group, name, origin, angle):
-    pivot = bpy.data.objects.new(f'{name} / posizione', None)
-    group.objects.link(pivot)
-    for item in group.all_objects:
-        if item != pivot and item.parent is None:
-            item.parent = pivot
-    pivot.location = origin
-    pivot.rotation_euler.z = angle
 
 
 def _islands(root, path, palette):
@@ -55,7 +62,8 @@ def _islands(root, path, palette):
             builder(group, palette)
         # The display faces the road and the direction from which the camera approaches.
         x = path.offset(stop.depth) + stop.side*stop.clearance
-        _place(group, stop.name, (x, stop.depth+1.32, 0.28), radians(-stop.side*30.0))
+        place_collection(group, f'{stop.name} / posizione', (x, stop.depth+1.32, 0.28),
+                         angle=radians(-stop.side*30.0))
         focuses.append((x - stop.side*0.2, stop.depth+0.60, stop.focus_height))
     return tuple(focuses)
 
@@ -126,7 +134,7 @@ def build_scene(scene):
     build_road(collection('Strada e guida', root), path, ROAD, palette)
     landmark = collection('Tempio', root)
     build_monument(landmark, palette)
-    _place(landmark, 'Tempio', MONUMENT_ORIGIN, 0)
+    place_collection(landmark, 'Tempio / posizione', MONUMENT_ORIGIN)
     build_final_fog(collection('Nebbia finale', root), MONUMENT_ORIGIN[1])
     _lighting(scene, collection('Illuminazione', root))
     x, y, z = MONUMENT_ORIGIN

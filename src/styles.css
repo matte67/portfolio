@@ -32,6 +32,9 @@
   --frame-header-inset: clamp(3rem, 9vw, 8.5rem);
   --frame-corner-size: clamp(2.5rem, 4.5vw, 4rem);
   --z-television-overlay: 85;
+  --z-site-bottom-blur: 86;
+  --z-reading-outline: 87;
+  --z-site-footer: 88;
   --z-frame-viewport: 410;
   --z-frame-corner: 420;
   --frame-line: color-mix(in srgb, var(--color-canvas) 24%, transparent);
@@ -1020,6 +1023,7 @@ svg {
 
 .site-footer {
   position: relative;
+  z-index: var(--z-site-footer);
   margin-top: 0;
   padding-block: clamp(2rem, 4vw, 3.5rem) 0;
   background: var(--color-ink);
@@ -3926,7 +3930,7 @@ svg {
   .section-orbit {
     position: fixed;
     /* Above the page blur (80), below the mobile navigation (90). */
-    z-index: 81;
+    z-index: var(--z-reading-outline);
     bottom: calc(max(env(safe-area-inset-bottom), var(--frame-gap)) + .7rem);
     left: calc(var(--frame-gap) + .55rem);
     --orbit-y-radius: 5.5em;

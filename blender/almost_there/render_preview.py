@@ -11,7 +11,11 @@ import bpy
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
-DEFAULT_OUTPUT = PROJECT_DIR / 'output' / 'scroll-route'
+sys.path.insert(0, str(PROJECT_DIR))
+
+from config import OUTPUT_REVISION
+
+DEFAULT_OUTPUT = PROJECT_DIR / 'output' / OUTPUT_REVISION
 
 
 def _stills(scene):

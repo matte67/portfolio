@@ -1,1 +1,63 @@
-{"meta":{"title":"Progetti selezionati","description":"Progetti selezionati di architettura software, computer vision, web, interattività e sistemi embedded di Matteo Vittori."},"eyebrow":"Progetti selezionati · 2025—26","headingPrefix":"I sistemi si comprendono meglio dalle loro ","headingEmphasis":"decisioni.","description":"Casi di studio tra architettura modulare, computer vision, prodotti web, interazione immersiva e sistemi embedded.","sectionLabel":"Case study dei progetti","view":"Vedi","read":"Leggi il caso di studio","searchLabel":"Cerca progetti"}
+{
+  "meta": {
+    "title": "Progetti selezionati",
+    "description": "Progetti selezionati di architettura software, computer vision, web, interattività e sistemi embedded di Matteo Vittori."
+  },
+  "start": "Scorri per esplorare",
+  "route": "Tappe del percorso",
+  "read": "Leggi il caso di studio",
+  "stops": {
+    "opening": "Partenza",
+    "childhood": "Infanzia, famiglia e calcio",
+    "amandola": "Amandola",
+    "camerino": "Università di Camerino",
+    "unistays": "UniStays",
+    "graduation": "Laurea, SEF e Londra",
+    "nodale": "Boccone, Spesino e Nodale",
+    "prenivo": "Prenivo",
+    "polimi": "Politecnico di Milano",
+    "temple": "Scriviamo insieme la prossima storia"
+  },
+  "projects": {
+    "spazio": {
+      "title": "Spazio",
+      "summary": "Una Home per Android TV progettata per il telecomando."
+    },
+    "dormant-access-control-unit": {
+      "title": "Controllo accessi",
+      "summary": "Un prototipo con sensore di prossimità e autenticazione in codice Morse."
+    },
+    "rewild": {
+      "title": "RE:WILD",
+      "summary": "Un gioco immersivo di gruppo per ripristinare ecosistemi."
+    },
+    "hackathon-management-system": {
+      "title": "HackHub",
+      "summary": "Un backend per gestire team, consegne e valutazioni negli hackathon."
+    },
+    "unistays": {
+      "title": "UniStays",
+      "summary": "Stanze e coinquilini per studenti, con ricerca su mappa e chat."
+    },
+    "sef": {
+      "title": "SEF",
+      "summary": "Una pipeline modulare di visione artificiale per estrarre e analizzare segnali."
+    },
+    "boccone": {
+      "title": "Boccone",
+      "summary": "Un ricettario condiviso che porta gli ingredienti nella lista della spesa."
+    },
+    "spesino": {
+      "title": "Spesino",
+      "summary": "Un’app per confrontare offerte, liste e tragitti per la spesa."
+    },
+    "nodale": {
+      "title": "Nodale",
+      "summary": "Un account condiviso tra Boccone e Spesino."
+    },
+    "prenivo": {
+      "title": "Prenivo",
+      "summary": "Ordini, produzione e appuntamenti per piccole attività."
+    }
+  }
+}

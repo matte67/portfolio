@@ -13,7 +13,7 @@ import { getPageCopy } from "../../application/pageCopy";
 import "./AiShowcase.css";
 
 const campaign = {
-  frame: "/media/unistays/iphone-17-frame.webp",
+  frame: "/media/unistays/iphone-6s-frame.png",
   poster: "/media/unistays/a-due-passi-poster.webp",
   video: "/media/unistays/a-due-passi.mp4",
 };
@@ -59,6 +59,7 @@ export function AiShowcase() {
       id="ai"
     >
       <div className="ai-showcase__copy">
+        <p className="eyebrow">{copy.eyebrow}</p>
         <h2 id="ai-showcase-title">{copy.title}</h2>
         <p>{copy.description}</p>
       </div>
@@ -91,7 +92,11 @@ export function AiShowcase() {
               <div className="campaign-reel">
                 <span className="campaign-reel__title">Reels</span>
                 <div className="campaign-reel__icons" aria-hidden="true">
-                  {[["heart", language === "it" ? "17,3 mila" : "17.3K"], ["comment", "108"], ["share", ""]].map(([icon, count]) => (
+                  {[
+                    ["heart", language === "it" ? "17,3 mila" : "17.3K"],
+                    ["comment", "108"],
+                    ["share", ""],
+                  ].map(([icon, count]) => (
                     <span className="campaign-reel__metric" key={icon}>
                       <img alt="" src={`/media/unistays/reel-${icon}.png`} />
                       {count}
@@ -123,10 +128,10 @@ export function AiShowcase() {
             <img
               alt=""
               className="ai-showcase__frame"
-              height={1368}
+              height={1536}
               loading="lazy"
               src={campaign.frame}
-              width={680}
+              width={1024}
             />
           </motion.div>
         </div>

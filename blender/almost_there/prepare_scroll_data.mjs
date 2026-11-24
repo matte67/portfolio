@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { readContentCatalog, supportedLocales } from "../../scripts/content-catalog.mjs";
 
 const projectRoot = fileURLToPath(new URL("../../", import.meta.url));
-const defaultTimeline = fileURLToPath(new URL("output/scroll-route/scene_timeline.json", import.meta.url));
+const defaultTimeline = fileURLToPath(new URL("output/biographical-route/scene_timeline.json", import.meta.url));
 const timelinePath = process.argv[2] ? resolve(process.argv[2]) : defaultTimeline;
 const timeline = JSON.parse(await readFile(timelinePath, "utf8"));
 const { projects } = await readContentCatalog(projectRoot);

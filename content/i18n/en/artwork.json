@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Artwork",
+    "description": "Illustrations, visual experiments and short films by Matteo Vittori."
+  },
+  "intro": "Illustrations, visual experiments and short films I make alongside my software projects.",
+  "openOriginal": "Open original",
+  "mediaError": "This preview couldn’t be loaded.",
+  "items": {
+    "almost-there": {
+      "title": "Almost There",
+      "alt": "A first-person journey past floating islands toward a temple shrouded in orange mist."
+    },
+    "monk-1": {
+      "title": "Monk · Firelight",
+      "alt": "A seated figure and its reflection outlined by orange embers in the dark."
+    },
+    "monk-2": {
+      "title": "Monk · The path",
+      "alt": "A hooded figure in orange climbs a rocky path surrounded by mist and faces."
+    },
+    "monk-3": {
+      "title": "Monk · Ensemble",
+      "alt": "A group of apes surrounds a pale figure in an orange hood against a black background."
+    },
+    "monk-4": {
+      "title": "Monk · Ensemble study",
+      "alt": "A variation of the group portrait with the figure in the orange hood at the center."
+    },
+    "finally-did-it": {
+      "title": "I finally did it",
+      "alt": "Red lettering on a crumbling wall."
+    },
+    "life": {
+      "title": "Life",
+      "alt": "A figure strains against cables in a dark, stormy landscape."
+    },
+    "unistays-assets": {
+      "title": "UniStays · 3D assets",
+      "alt": "Small houses and glossy teal shapes in a 3D composition."
+    },
+    "a-due-passi": {
+      "title": "A due passi dall’uni",
+      "alt": "A hiker with an orange backpack climbs a staircase in this short film for UniStays."
+    }
+  }
+}

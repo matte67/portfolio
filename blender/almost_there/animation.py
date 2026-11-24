@@ -6,7 +6,6 @@ from mathutils import Quaternion, Vector
 import bpy
 
 
-LOOK_LEAD = 8.6
 LOOK_WINDOW = 4.05
 FOCUS_BLEND = 0.77
 FOCUS_TURN_LIMIT = 0.31
@@ -19,7 +18,7 @@ def marker_frame(seconds, preview):
 
 def _timing(settings, duration, stops):
     keys = [(0, settings.start_depth),
-            *((stop.second, stop.depth - LOOK_LEAD) for stop in stops),
+            *((stop.second, stop.depth - stop.look_lead) for stop in stops),
             (duration, settings.end_depth)]
     slopes = [(b[1] - a[1]) / (b[0] - a[0]) for a, b in zip(keys, keys[1:])]
     carry = 1.0 - settings.stride_easing
@@ -54,7 +53,7 @@ def _pose(path, settings, seconds, timing, stops, focuses, destination):
     lead = Vector(path.point(depth + settings.look_ahead, height=0.77))
     heading = (lead - position).normalized()
     for stop, focus in zip(stops, focuses):
-        distance = depth - (stop.depth - LOOK_LEAD)
+        distance = depth - (stop.depth - stop.look_lead)
         weight = FOCUS_BLEND * exp(-0.5*(distance / LOOK_WINDOW)**2)
         # Keep the glance forward as the subject moves beside the camera.
         sightline = Vector(focus) - position

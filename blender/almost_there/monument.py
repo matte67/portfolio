@@ -1,8 +1,6 @@
 """Layered, distant architecture with an illuminated threshold."""
 
-from math import cos, pi, sin
-
-from geometry import box, curve, island, mesh, tube
+from geometry import box, island, tube
 
 
 def _gate(group, palette):
@@ -27,30 +25,8 @@ def _gate(group, palette):
              0.7, palette['beam'], sides=6, tip=2.6)
 
 
-def _crest(group, palette):
-    points = [(7.15*cos(a), 3.0+2.95*sin(a), 17.6 + 0.9*cos(2*a))
-              for a in (2*pi*i/48 for i in range(48))]
-    curve(group, 'Crest / floating ring', points, palette['gold'], thickness=0.17, closed=True)
-    for index in range(15):
-        angle = 2*pi*index/15
-        radius = 7.1
-        x, y = radius*cos(angle), 3.0+2.95*sin(angle)
-        start = 17.6 + 0.9*cos(2*angle)
-        height = 1.06 + 2.75*(0.5 + 0.5*sin(3*angle - pi/2))
-        end = (x*1.09, (y-3)*1.07+3, start+height)
-        tube(group, 'Crest / lifted blade', (x, y, start), end, 0.24, palette['haze'], tip=0.09, sides=4)
-    for side in (-1, 1):
-        for index in range(6):
-            x = side*(3.5 + index*1.34)
-            z = 14.5 + index*0.31
-            profile = [(x, 1.7, z), (x+side*1.62, 1.95, z+0.49),
-                       (x+side*1.78, 2.1, z+1.22), (x+side*0.42, 1.6, z+0.71)]
-            mesh(group, 'Crest / laurel shard', profile, ((0, 1, 2, 3),), (palette['gold'],))
-
-
 def build_monument(group, palette):
-    """Create an isolated landmark with a layered approach and abstract crest."""
+    """Create an isolated landmark with a layered approach and a flat cornice."""
     layers = (palette['haze'], palette['haze_shadow'], palette['stone'], palette['cliff'])
     island(group, 'Monument / suspended bedrock', (0, 4, -0.08), (22, 16), 10.0, layers, 920, sides=17)
     _gate(group, palette)
-    _crest(group, palette)
