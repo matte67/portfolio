@@ -3,13 +3,13 @@ locale: "en"
 translationKey: "prenivo"
 publicationStatus: "published"
 publishedAt: "2026-09-10"
-updatedAt: "2026-09-11"
+updatedAt: "2026-11-19"
 slug: "prenivo"
 index: "06"
 title: "prenivo."
 shortTitle: "prenivo."
-subtitle: "From customer request to preparation and pickup, in one workflow."
-summary: "A web app for small businesses that brings bookings, customers, the product catalogue, and production together, keeping request details available as the team organises its day."
+subtitle: "Bookings for food businesses and salons, with two ways to organise the day."
+summary: "A web app for small businesses. Bakeries and food workshops coordinate orders, preparation, and pickup. Salons and barbershops schedule services around their staff’s availability."
 year: "2026"
 status: "Released"
 disciplines: ["Product design", "Full-stack development", "UX/UI"]
@@ -17,29 +17,29 @@ role: "Product design and full-stack development"
 team: "Independent project"
 duration: "In development · 2026"
 technologies: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "Supabase", "Tailwind CSS"]
-chip: "/media/prenivo/showcase.avif"
+chip: "/media/prenivo/studio-2026.webp"
 logo: {"src": "/media/prenivo/logo.svg", "alt": "Prenivo logo."}
-hero: {"src": "/media/prenivo/studio.webp", "alt": "Prenivo on tablet and smartphone: production, booking creation, and product selection.", "position": "center"}
-metrics: [{"value": "3", "label": "Connected stages", "context": "Booking, preparation, and pickup."}, {"value": "7", "label": "Operational statuses", "context": "From pending requests to collection, including cancellations and no-shows."}, {"value": "Web", "label": "Responsive access", "context": "An interface for desktop, tablet, and smartphone."}]
+hero: {"src": "/media/prenivo/studio-2026.webp", "alt": "Pickup selection on iPhone, alongside illustrations for food workshops and salons.", "position": "center"}
+metrics: [{"value": "2", "label": "Business profiles", "context": "Production and pickup for food businesses, services and schedules for salons."}, {"value": "1", "label": "Staff member per appointment", "context": "One staff member must be able to provide every service and be free for the full appointment."}, {"value": "Web", "label": "Responsive access", "context": "An interface for desktop, tablet, and smartphone."}]
 links: [{"label": "Prenivo website", "href": "https://prenivo.it", "kind": "external"}, {"label": "App demo", "href": "https://demo.prenivo.it", "kind": "external"}]
 featured: true
 order: 3
-seo: {"title": "Prenivo", "description": "Design and development of an app for managing bookings, production, and pickups in small businesses.", "image": "/media/prenivo/studio.webp", "imageAlt": "Prenivo production and booking interfaces."}
+seo: {"title": "Prenivo", "description": "Design and development of Prenivo, an app for food orders and production as well as salon appointments.", "image": "/media/prenivo/studio-2026.webp", "imageAlt": "Prenivo on iPhone with illustrations for food businesses and salons."}
 ---
 
 ## The problem
 
 A cake ordered over the phone, a change written on paper, a colleague trying to find out what is ready. When requests are scattered across notes and conversations, reconstructing the day requires constant handovers. Products, customisations, and pickup times can lose their context.
 
-I created Prenivo to bring this information into a shared operational workflow, primarily for pastry shops, cafés, small food workshops, and businesses preparing products for collection.
+I started with the daily work of bakeries and small food workshops. Salons face a similar coordination problem, with capacity determined by how long each service takes and who is available to provide it.
 
 ## Role and contribution
 
 I worked on product design, the interface, and full-stack development of the management app, alongside its commercial presentation. The work connects the booking model to the needs of the counter and workshop: recording a request, reviewing it, preparing it, and following it through to collection.
 
-## From request to pickup
+## Food businesses · from request to pickup
 
-<figure className="project-video"><video aria-label="Prenivo app showcase video" autoPlay loop muted playsInline preload="auto" width="2520" height="1080"><source src="/media/prenivo/showcase.mp4" type="video/mp4" /></video><figcaption>A walkthrough of the Prenivo app.</figcaption></figure>
+<figure className="project-video"><video aria-label="Walkthrough of the Prenivo food workflow" autoPlay loop muted playsInline preload="metadata" poster="/media/prenivo/studio.webp" width="2520" height="1080"><source src="/media/prenivo/showcase.mp4" type="video/mp4" /></video><figcaption>A walkthrough of the food workflow.</figcaption></figure>
 
 Staff record requests received at the counter or by phone, including the customer, products, quantities, customisations, and pickup slot. When the public channel is enabled, customers can submit requests online. These remain pending until the business reviews and confirms them.
 
@@ -48,11 +48,17 @@ Each booking keeps its details and progress together. Statuses distinguish pendi
 ## Organising the day
 
 - **Operational dashboard:** status overview, upcoming pickups, and overdue items.
-- **Aggregated production:** quantities by product and category, linked to the bookings being prepared.
+- **Aggregated production:** quantities by product and category, linked to the bookings being prepared. Recipe sheets can be imported from Boccone and ingredient amounts scale with the production workload.
 - **Catalogue:** products, categories, and available options during booking creation.
 - **Availability and capacity:** opening hours, pickup slots, and warnings to assess the daily workload.
 - **Customers and team:** reusable customer details and access with roles and permissions.
 - **Analysis:** booking and product trends; financial figures describe order values and estimates.
+
+## Salons · services and schedules
+
+For salons, the selected services determine appointment length. Prenivo uses shifts, service eligibility, and existing appointments to find times when one staff member can cover the whole booking. Customers can choose a person or let Prenivo assign one.
+
+<EditorialFigure src="/media/prenivo/salon-calendar.webp" alt="Prenivo’s calendar for viewing and organising salon appointments." caption="The appointment calendar in the salon profile." />
 
 ## Design decisions
 
@@ -60,19 +66,14 @@ Separating requests from confirmations gives the business control over the work 
 
 The interface adapts to its context: a computer for a broad overview, a tablet in the workshop, and a smartphone for checking or entering requests. Product selection highlights categories and options with controls suited to touch interaction.
 
-<ProjectGallery
-  caption="Product selection while creating a booking in Prenivo."
-  items={[{ src: "/media/prenivo/product-picker.avif", alt: "Desktop product picker showing the Crostate category, variants, prices, and confirmation button." }]}
-/>
-
 ## Architecture
 
-The management app uses Next.js, React, and TypeScript, with PostgreSQL, Drizzle ORM, and Supabase. Its structure separates domain rules, use cases, data access, and presentation. Shared components keep fields, pickers, and statuses consistent across views.
+The app uses Next.js, React, and TypeScript with PostgreSQL, Drizzle ORM, and Supabase. The business profile determines workflow statuses, availability rules, and views. Staff and public bookings use the same scheduling logic, with a server-side availability check at save time.
 
 The product website is a separate project: it explains the features and presents the product without requiring access to a business’s operational data.
 
 ## Project status
 
-Prenivo is live at [prenivo.it](https://prenivo.it), and the app demo is available at [demo.prenivo.it](https://demo.prenivo.it). The product continues to evolve: extending it to other sectors requires dedicated workflows, while the use case described here covers product bookings, preparation, and pickups.
+The [Prenivo website](https://prenivo.it) and [demo](https://demo.prenivo.it) introduce the product. The features described here reflect development on the food and salon profiles.
 
-The design outcome is a continuous workflow between counter and workshop. Its impact on time, errors, and organisation remains to be measured in real-world use.
+Its impact on time, errors, and organisation remains to be measured in real-world use.

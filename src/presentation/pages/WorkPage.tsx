@@ -1,9 +1,10 @@
 import { projectCatalog } from "../../app/dependencies";
+import { projectYears } from "../../application/editorialSearch";
 import { useLanguage } from "../../application/i18n";
 import { getPageCopy } from "../../application/pageCopy";
 import { DocumentMeta } from "../components/DocumentMeta";
 import { DecryptedText } from "../effects/DecryptedText";
-import { EditorialIndex, type EditorialIndexItem } from "../editorial/EditorialIndex";
+import { SearchableEditorialIndex, type SearchableEditorialItem } from "../editorial/SearchableEditorialIndex";
 import { ProjectLogo } from "../project/ProjectLogo";
 import { PlaceholderVisual } from "../visuals/PlaceholderVisual";
 
@@ -11,7 +12,7 @@ export function WorkPage() {
   const { language, toLocalizedPath } = useLanguage();
   const copy = getPageCopy(language, "work");
   const projects = projectCatalog.listProjects(language);
-  const items: EditorialIndexItem[] = projects.map(({ metadata }) => ({
+  const items: SearchableEditorialItem[] = projects.map(({ metadata }) => ({
     ariaLabel: `${copy.view} ${metadata.title}`,
     brand: metadata.logo ? <ProjectLogo decorative logo={metadata.logo} /> : undefined,
     eyebrow: `${metadata.index} · ${metadata.year}`,
@@ -22,6 +23,12 @@ export function WorkPage() {
       src: metadata.chip,
     },
     metadata: [metadata.role, metadata.disciplines.join(" · ")],
+    search: {
+      featured: metadata.featured,
+      tags: metadata.disciplines,
+      terms: [metadata.title, metadata.subtitle, metadata.summary, metadata.year, ...metadata.technologies],
+      years: projectYears(metadata.year),
+    },
     summary: metadata.summary,
     title: metadata.title,
   }));
@@ -45,11 +52,13 @@ export function WorkPage() {
         </h1>
         <p className="pt-4">{copy.description}</p>
       </header>
-      <EditorialIndex
+      <SearchableEditorialIndex
         items={items}
         mode="roller"
         readLabel={copy.read}
+        searchLabel={copy.searchLabel}
         sectionLabel={copy.sectionLabel}
+        showFeaturedFilter
       />
     </>
   );

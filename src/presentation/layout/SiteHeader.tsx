@@ -26,6 +26,7 @@ export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
     [copy.navigation.articles, toLocalizedPath("/articles")],
     [copy.navigation.thesis, toLocalizedPath("/thesis")],
     [copy.navigation.about, toLocalizedPath("/about")],
+    [copy.navigation.contact, toLocalizedPath("/contact")],
   ] as const;
   const [isOpen, setIsOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -216,7 +217,7 @@ export function SiteHeader({ isMerged, isVisible }: SiteHeaderProps) {
               href="/documents/matteo-vittori-cv.pdf"
               tabIndex={isOpen ? 0 : -1}
             >
-              <span>05</span>CV <ArrowMark />
+              <span>0{primaryNavigation.length + 1}</span>CV <ArrowMark />
             </a>
           </nav>
           <div className="mobile-navigation__contact page-shell">

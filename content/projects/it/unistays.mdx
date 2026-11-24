@@ -3,13 +3,13 @@ locale: "it"
 translationKey: "unistays"
 publicationStatus: "published"
 publishedAt: "2026-07-17"
-updatedAt: "2026-07-20"
+updatedAt: "2026-11-19"
 slug: "unistays"
 index: "02"
 title: "UniStays"
 shortTitle: "UniStays"
-subtitle: "La ricerca di alloggi per studenti organizzata intorno a fiducia, compatibilità e singole stanze."
-summary: "Un prodotto web funzionante per studenti, host e moderatori, che unisce ricerca su mappa, filtri avanzati, preferiti, chat contestuale, gestione degli annunci e moderazione orientata alla fiducia."
+subtitle: "Trovare una stanza e le persone con cui condividerla."
+summary: "Una piattaforma per gli alloggi studenteschi che unisce ricerca per stanza su mappa, scoperta dei coinquilini e inviti in chat. I locatori gestiscono annunci e occupazione dalla propria dashboard."
 year: "2024—26"
 status: "Prototype"
 disciplines:
@@ -18,7 +18,7 @@ disciplines:
   - "UX design"
 role: "Product design e sviluppo full-stack"
 team: "Progetto indipendente"
-duration: "Dal concept alla beta privata · 2025—26"
+duration: "Dal concept alla beta · 2024—26"
 technologies:
   - "React"
   - "JavaScript"
@@ -26,47 +26,37 @@ technologies:
   - "Google Maps"
   - "Clerk"
   - "GA4"
-chip: "/media/unistays/showcase.avif"
+chip: "/media/unistays/studio-2026.webp"
 logo:
   src: "/media/unistays/logo.svg"
   alt: "Logo UniStays."
 hero:
-  asMockupAnimation: true
-  mockupAnimationId: "2b9579f9-2ba7-4ed5-8f64-d42af329c34f"
-  triggerLoop: true
-  shakeIntensity: 5
-  shakeZ: 5
-  shakeAngle: 55
-  shakeDuration: 900
-  src: "/media/unistays/showcase.avif"
-  alt: "Pagina di dettaglio di un appartamento UniStays mostrata nello schermo di un MacBook."
+  src: "/media/unistays/studio-2026.webp"
+  alt: "Tre schermate UniStays mostrano la ricerca a Camerino, una camera singola e un profilo coinquilino."
   position: "center"
 metrics:
-  - value: "3"
-    label: "Attori del prodotto"
-    context: "Studenti, host o proprietari e amministratori della piattaforma."
-  - value: "Room-first"
-    label: "Modello degli annunci"
-    context: "Disponibilità e compatibilità vengono gestite a livello della singola stanza."
-  - value: "Contestuale"
-    label: "Comunicazione"
-    context: "Ogni chat resta collegata alla stanza e all’appartamento a cui si riferisce."
+  - value: "Stanza"
+    label: "Unità di ricerca"
+    context: "Ogni stanza ha il proprio canone, periodo disponibile e capienza."
+  - value: "Like reciproco"
+    label: "Scoperta dei coinquilini"
+    context: "La chat si apre quando entrambe le persone esprimono interesse."
+  - value: "A4"
+    label: "Locandina per i locatori"
+    context: "La dashboard genera un PDF con QR code che rimanda all’annuncio."
 links:
-  - label: "Prodotto online"
+  - label: "Anteprima online"
     href: "https://uni-stays.netlify.app/"
     kind: "demo"
   - label: "Repository privato"
     kind: "code"
-  - label: "Pitch"
-    href: "/documents/unistays-pitch.pdf"
-    kind: "document"
 featured: true
 order: 2
 seo:
   title: "UniStays"
-  description: "Un prodotto per gli alloggi studenteschi basato sulla ricerca per stanza, la comunicazione contestuale, la fiducia e la compatibilità."
-  image: "/media/unistays/showcase.avif"
-  imageAlt: "Esperienza UniStays di ricerca e dettaglio degli appartamenti mostrata in un mockup desktop."
+  description: "UniStays collega ricerca di stanze su mappa, scoperta dei coinquilini, inviti in chat e gestione degli annunci."
+  image: "/media/unistays/studio-2026.webp"
+  imageAlt: "Ricerca, scheda della stanza e profilo coinquilino su UniStays."
 ---
 
 ## Il problema
@@ -77,7 +67,17 @@ UniStays ripensa l’unità di ricerca a partire dalla stanza e dal suo contesto
 
 ## Ruolo e contributo
 
-Il progetto è passato dall’idea a un prodotto funzionante. Dovendo curare UI/UX, frontend e backend JavaScript, integrazioni esterne, analytics, chat in tempo reale e gestione degli annunci.
+Ho progettato e sviluppato UniStays, dalla ricerca geografica alla gestione degli annunci, curando anche l’identità visiva, l’interfaccia, la chat in tempo reale e le integrazioni.
+
+## Cercare una stanza o un coinquilino
+
+La ricerca alloggi parte dalla mappa e filtra a livello di stanza. La sezione Coinquilini trova persone con budget e periodi compatibili intorno alla destinazione scelta. Chi attiva la visibilità in mappa condivide una zona approssimata. Il Like può includere un messaggio che viene consegnato se l’interesse è reciproco.
+
+## Dalla chat alla gestione dell’annuncio
+
+Il locatore può inviare dalla chat un invito per una stanza, con canone, periodo e scadenza. Quando lo studente accetta, il sistema ricontrolla disponibilità e capienza e registra l’assegnazione in un’unica transazione.
+
+La dashboard permette di aggiornare gli annunci e verificare l’occupazione delle stanze, consultare l’andamento del singolo annuncio e generare una locandina A4 con QR code.
 
 ## Architettura del prodotto
 
@@ -96,10 +96,10 @@ Le funzioni orientate alla fiducia aggiungono passaggi alla pubblicazione degli 
 
 ## Risultato
 
-Il risultato è una beta privata progettata e sviluppata in autonomia, che comprende ricerca, filtri, mappe, preferiti, chat, gestione degli annunci da parte degli host, moderazione e analytics. L’attuale deploy Netlify è una preview e non la pubblicazione definitiva. Il prodotto dimostra ampiezza funzionale, ma necessita ancora di validazione sul campo prima di formulare conclusioni sulla qualità degli abbinamenti o sulla scala del marketplace.
+L’anteprima online mostra la beta. I flussi più recenti descritti qui appartengono alla versione di sviluppo. La qualità degli abbinamenti resta da valutare con studenti e locatori sul campo.
 
 <ProjectGallery
-  caption="Viste responsive del prodotto UniStays su desktop, tablet e mobile."
+  caption="Prime iterazioni dell’interfaccia UniStays su desktop, tablet e mobile."
   items={[
     {
       src: "/media/unistays/ipad.avif",

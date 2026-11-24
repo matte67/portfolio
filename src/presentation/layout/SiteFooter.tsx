@@ -15,12 +15,14 @@ export function SiteFooter() {
       <FooterMergeCorner side="left" />
       <FooterMergeCorner side="right" />
       <div className="page-shell">
-
         <div className="site-footer__grid">
           <div className="site-footer__intro">
             <p className="eyebrow">{copy.eyebrow}</p>
             <h2>{copy.title}</h2>
-            <a className="footer-email" href="mailto:matteo01.vittori@icloud.com">
+            <a
+              className="footer-email"
+              href="mailto:matteo01.vittori@icloud.com"
+            >
               <FontAwesomeIcon aria-hidden="true" icon={faEnvelope} />
               <span>matteo01.vittori@icloud.com</span>
               <ArrowMark />
@@ -30,22 +32,54 @@ export function SiteFooter() {
           <nav className="site-footer__links" aria-label={copy.linksLabel}>
             <p>{copy.explore}</p>
             <ul>
-              <li><SmartLink href="/documents/matteo-vittori-cv.pdf"><span>CV</span><FontAwesomeIcon aria-hidden="true" icon={faFileLines} /></SmartLink></li>
-              <li><SmartLink href="https://github.com/matte67"><span>GitHub</span><FontAwesomeIcon aria-hidden="true" icon={faGithub} /></SmartLink></li>
+              <li>
+                <SmartLink href="/contact">
+                  <span>{language === "it" ? "Contattami" : "Contact me"}</span>
+                  <ArrowMark />
+                </SmartLink>
+              </li>
+              <li>
+                <SmartLink href="/documents/matteo-vittori-cv.pdf">
+                  <span>CV</span>
+                  <FontAwesomeIcon aria-hidden="true" icon={faFileLines} />
+                </SmartLink>
+              </li>
+              <li>
+                <SmartLink href="https://github.com/matte67">
+                  <span>GitHub</span>
+                  <FontAwesomeIcon aria-hidden="true" icon={faGithub} />
+                </SmartLink>
+              </li>
             </ul>
           </nav>
 
           <div className="site-footer__meta">
             <p>{copy.details}</p>
             <dl>
-              <div><dt>{copy.role}</dt><dd>{copy.roleValue}</dd></div>
-              <div><dt>{copy.based}</dt><dd>Camerino, Italy</dd></div>
-              <div><dt>{copy.timezone}</dt><dd>CET / CEST</dd></div>
+              <div>
+                <dt>{copy.role}</dt>
+                <dd>{copy.roleValue}</dd>
+              </div>
+              <div>
+                <dt>{copy.based}</dt>
+                <dd>{language === "it" ? "Milano, Italia" : "Milan, Italy"}</dd>
+              </div>
+              <div>
+                <dt>{copy.timezone}</dt>
+                <dd>CET / CEST</dd>
+              </div>
             </dl>
           </div>
         </div>
-
-        <div className="site-footer__bottom">
+      </div>
+      <div className="site-footer__image">
+        <img
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          src="/global/footer-portrait.png"
+        />
+        <div className="site-footer__bottom page-shell">
           <span>© {new Date().getFullYear()} Matteo Vittori</span>
           <span>{copy.signature}</span>
         </div>

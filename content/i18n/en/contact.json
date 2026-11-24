@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "Contact me",
+    "description": "Get in touch about a software or creative project."
+  },
+  "intro": "Tell me what you have in mind, who it’s for, and when you’d like to launch.",
+  "name": "Your name",
+  "service": "Project type",
+  "services": [
+    "Website",
+    "App or platform",
+    "Automation and AI",
+    "Reel or ad",
+    "Video editing",
+    "Graphics or voiceover",
+    "Collaboration or other"
+  ],
+  "details": "Your project",
+  "submit": "Open email draft",
+  "headingPrefix": "What should we make",
+  "headingEmphasis": "together?"
+}

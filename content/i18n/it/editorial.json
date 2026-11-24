@@ -1,4 +1,18 @@
 {
+  "search": {
+    "placeholder": "Cerca…",
+    "clear": "Svuota la ricerca",
+    "filters": "Filtri",
+    "featured": "Solo in evidenza",
+    "tag": "Tag",
+    "allTags": "Tutti i tag",
+    "year": "Anno",
+    "allYears": "Tutti gli anni",
+    "reset": "Azzera i filtri",
+    "results": "Risultati trovati: {count}",
+    "noResults": "Nessun risultato.",
+    "tryAgain": "Prova un’altra ricerca o modifica i filtri."
+  },
   "accessPoints": {
     "eyebrow": "Un solo core",
     "title": "Scegli l’interfaccia, conserva il modello",

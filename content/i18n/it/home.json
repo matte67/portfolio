@@ -5,5 +5,13 @@
   "email": "Scrivimi",
   "work": { "eyebrow": "01 · Progetti selezionati", "title": "Sistemi modellati da complessità differenti.", "description": "Casi di studio tra architettura software, computer vision, prodotti web, interazione immersiva e sistemi embedded.", "indexLink": "Vedi tutti i progetti" },
   "articles": { "eyebrow": "02 · Articoli recenti", "title": "Idee rese utili dai dettagli.", "description": "Note su software, programmazione assistita dall’AI e decisioni dietro sistemi facili da mantenere.", "sectionLabel": "Articoli recenti", "read": "Leggi l’articolo", "indexLink": "Leggi tutti gli articoli" },
+  "ai": {
+    "title": "Dal software agli spot, con l’AI.",
+    "description": "Uso l’AI per sviluppare app, siti e strumenti, e per produrre i contenuti che li accompagnano, dagli spot alla grafica e alle voci.",
+    "pause": "Metti in pausa lo spot",
+    "videoLabel": "A due passi dall’uni, uno spot di UniStays",
+    "play": "Riproduci lo spot di UniStays",
+    "error": "Il video non si è avviato. Riprova."
+  },
   "about": { "eyebrow": "03 · Profilo", "title": "Uno studente interessato ai confini.", "paragraphs": ["Studio Computer Science – Artificial Intelligence al Politecnico di Milano. Mi interessa creare software che bilancia architetture solide ed esperienze utente intuitive.", "Apprezzo responsabilità ben definite, compromessi espliciti, evidenze riproducibili e interfacce che rivelano il modello sottostante invece di nasconderlo."], "link": "Scopri il mio approccio" }
 }

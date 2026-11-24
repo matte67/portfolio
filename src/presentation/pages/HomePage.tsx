@@ -8,6 +8,7 @@ import { DocumentMeta } from "../components/DocumentMeta";
 import { SectionHeading } from "../components/SectionHeading";
 import { ArrowMark, DownMark } from "../components/SmartLink";
 import { DecryptedText } from "../effects/DecryptedText";
+import { AiShowcase } from "../home/AiShowcase";
 import { ThesisPreview } from "../thesis/ThesisPreview";
 import { EditorialIndex } from "../editorial/EditorialIndex";
 import { toArticleIndexItem } from "../editorial/editorialIndexMappers";
@@ -126,6 +127,8 @@ export function HomePage() {
           {copy.articles.indexLink} <ArrowMark />
         </Link>
       </section>
+
+      <AiShowcase />
 
       <section
         className="about-preview page-shell section-space"

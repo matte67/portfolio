@@ -8,6 +8,7 @@ import { FrameCorner } from "./FrameCorner";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { ChatAssistant } from "../chat/ChatAssistant";
+import { TelevisionOverlay } from "./TelevisionOverlay";
 
 const NAVIGATION_SCROLL_THRESHOLD = 24;
 const BLUR_REVEAL_DISTANCE = 120;
@@ -88,6 +89,7 @@ export function SiteLayout() {
         <SiteHeader isMerged isVisible={isHeaderVisible} />
         <div className="site-frame__surface">
           <main id="main-content">
+            <TelevisionOverlay />
             <Outlet />
           </main>
           <SiteFooter />

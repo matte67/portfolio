@@ -8,9 +8,9 @@
 }
 
 .portfolio-chat__launcher {
-  position: fixed;
-  right: max(1.15rem, calc(var(--frame-gap) + 1.9rem));
-  bottom: max(2.15rem, env(safe-area-inset-bottom));
+  position: absolute;
+  top: 0;
+  right: 0;
   display: grid;
   width: 3.75rem;
   height: 3.75rem;
@@ -24,6 +24,16 @@
   cursor: pointer;
   pointer-events: auto;
   transition: transform 220ms var(--ease-standard), background 180ms ease, box-shadow 180ms ease;
+}
+
+.portfolio-chat__sticky-slot {
+  position: sticky;
+  z-index: 120;
+  top: calc(100vh - 5.9rem);
+  width: 3.75rem;
+  height: 3.75rem;
+  margin: -3.75rem max(1.15rem, calc(var(--frame-gap) + 1.9rem)) 0 auto;
+  pointer-events: none;
 }
 
 .portfolio-chat__launcher:hover {
@@ -357,7 +367,7 @@
 .portfolio-chat__privacy details > p { position: absolute; right: 0; bottom: 1.4rem; width: min(18rem, calc(100vw - 3rem)); margin: 0; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 0.65rem; background: var(--color-surface); box-shadow: 0 0.5rem 1.6rem rgb(24 25 22 / 14%); color: var(--color-ink); font-size: 0.75rem; }
 
 @media (max-width: 36rem) {
-  .portfolio-chat__launcher { right: max(1rem, calc(var(--frame-gap) + 0.4rem)); bottom: max(1rem, env(safe-area-inset-bottom)); width: 3.5rem; height: 3.5rem; }
+  .portfolio-chat__sticky-slot { top: calc(100vh - 5rem); width: 3.5rem; height: 3.5rem; margin-right: max(1rem, calc(var(--frame-gap) + 0.4rem)); margin-top: -3.5rem; }
   .portfolio-chat__launcher img { width: 2.7rem; height: 2.7rem; }
   .portfolio-chat__panel { right: max(0.65rem, var(--frame-gap)); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 4.25rem); width: calc(100vw - 1.3rem); height: min(38rem, calc(100dvh - 7rem)); min-height: min(22rem, calc(100dvh - 7rem)); border-radius: 1.1rem; }
 }

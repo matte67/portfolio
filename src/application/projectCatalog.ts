@@ -7,6 +7,7 @@ import type { ProjectMetadata } from "../core/project";
 
 interface ProjectCatalogueOptions {
   readonly includeUnpublished?: boolean;
+  readonly featuredOrder?: readonly string[];
 }
 
 export interface ProjectCatalog<Content> {
@@ -21,6 +22,11 @@ export function createProjectCatalog<Content>(
   repository: ProjectRepository<Content>,
   options: ProjectCatalogueOptions = {},
 ): ProjectCatalog<Content> {
+  const featuredPositions = new Map(
+    options.featuredOrder?.map((slug, position) => [slug, position]),
+  );
+  const featuredPosition = (slug: string) =>
+    featuredPositions.get(slug) ?? featuredPositions.size;
   const isVisible = (metadata: ProjectMetadata) =>
     options.includeUnpublished === true || isPublicContent(metadata);
 
@@ -31,7 +37,11 @@ export function createProjectCatalog<Content>(
     listProjects,
 
     listFeaturedProjects(locale: ContentLocale) {
-      return listProjects(locale).filter(({ metadata }) => metadata.featured);
+      return listProjects(locale)
+        .filter(({ metadata }) => metadata.featured)
+        .sort((left, right) =>
+          featuredPosition(left.metadata.slug) - featuredPosition(right.metadata.slug),
+        );
     },
 
     findProject(slug: string, locale: ContentLocale) {

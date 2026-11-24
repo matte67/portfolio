@@ -88,6 +88,7 @@ export function ChatAssistant() {
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
+  const [launcherContainer, setLauncherContainer] = useState<HTMLElement | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     createMessage("assistant", copy.chat.welcome, false),
   ]);
@@ -100,6 +101,10 @@ export function ChatAssistant() {
   useEffect(() => {
     if (isOpen) requestAnimationFrame(() => textareaRef.current?.focus());
   }, [isOpen]);
+
+  useEffect(() => {
+    setLauncherContainer(document.getElementById("main-content"));
+  }, []);
 
   useEffect(() => {
     transcriptRef.current?.scrollTo({
@@ -382,24 +387,25 @@ export function ChatAssistant() {
         </section>
       )}
 
-      <button
-        aria-expanded={isOpen}
-        aria-label={isOpen ? copy.chat.close : copy.chat.launcher}
-        className={`portfolio-chat__launcher${isOpen ? " is-open" : ""}`}
-        onClick={() => setIsOpen((open) => !open)}
-        ref={launcherRef}
-        type="button"
-      >
-        {isOpen ? (
-          <FontAwesomeIcon aria-hidden="true" icon={faXmark} />
-        ) : (
-          <img
-            alt=""
-            aria-hidden="true"
-            src="/media/chat/portfolio-assistant.png"
-          />
-        )}
-      </button>
+      {launcherContainer && createPortal(
+        <div className="portfolio-chat__sticky-slot">
+          <button
+            aria-expanded={isOpen}
+            aria-label={isOpen ? copy.chat.close : copy.chat.launcher}
+            className={`portfolio-chat__launcher${isOpen ? " is-open" : ""}`}
+            onClick={() => setIsOpen((open) => !open)}
+            ref={launcherRef}
+            type="button"
+          >
+            {isOpen ? (
+              <FontAwesomeIcon aria-hidden="true" icon={faXmark} />
+            ) : (
+              <img alt="" aria-hidden="true" src="/media/chat/portfolio-assistant.png" />
+            )}
+          </button>
+        </div>,
+        launcherContainer,
+      )}
     </div>,
     document.body,
   );

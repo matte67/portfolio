@@ -23,6 +23,7 @@ async function readJson(path) {
 const [catalog, copiesByLocale] = await Promise.all([
   readContentCatalog(projectRoot),
   Promise.all(locales.map(async (locale) => [locale, {
+    contact: await readJson(`content/i18n/${locale}/contact.json`),
     about: await readJson(`content/i18n/${locale}/about.json`),
     articles: await readJson(`content/i18n/${locale}/articles.json`),
     home: await readJson(`content/i18n/${locale}/home.json`),
@@ -116,6 +117,10 @@ const allRoutes = locales.flatMap((locale) => {
       path: localePath(locale, "/thesis"), ...copy.thesis.meta, alternates: pageAlternates("/thesis"),
       image: "/media/thesis/cover.png", imageAlt: copy.thesis.hero.coverAlt, type: "article",
       kind: "page", labels, locale, priority: "0.8",
+    },
+    {
+      path: localePath(locale, "/contact"), ...copy.contact.meta, alternates: pageAlternates("/contact"),
+      kind: "page", labels, locale, priority: "0.7",
     },
     {
       path: localePath(locale, "/about"), ...copy.about.meta, alternates: pageAlternates("/about"),

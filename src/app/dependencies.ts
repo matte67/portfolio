@@ -9,6 +9,7 @@ const includeUnpublished =
 /** Composition root for content adapters and application services. */
 export const projectCatalog = createProjectCatalog(mdxProjectRepository, {
   includeUnpublished,
+  featuredOrder: ["unistays", "prenivo", "sef", "spesino", "boccone", "dormant-access-control-unit"],
 });
 
 export const articleCatalog = createArticleCatalog(mdxArticleRepository, {

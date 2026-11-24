@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
+import { ReadingOutline } from "./ReadingOutline";
+import { useLanguage } from "../../application/i18n";
 import { Link } from "react-router-dom";
 
 import type { ProjectMedia } from "../../core/project";
@@ -124,9 +126,13 @@ export function EditorialReadingLayout({
   factsLabel,
   variant,
 }: EditorialReadingLayoutProps) {
+  const body = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
   return (
     <div className={`editorial-reading-layout editorial-reading-layout--${variant} page-shell`}>
       <aside className="editorial-facts" aria-label={factsLabel}>
+        <ReadingOutline body={body} />
+        <details className="reading-facts"><summary>{language === "it" ? "Dettagli" : "Details"}</summary>
         <dl>
           {facts.map((fact) => (
             <div key={fact.label}>
@@ -135,8 +141,9 @@ export function EditorialReadingLayout({
             </div>
           ))}
         </dl>
+        </details>
       </aside>
-      <div className={["editorial-body", "editorial-reading-layout__body", bodyClassName]
+      <div ref={body} className={["editorial-body", "editorial-reading-layout__body", bodyClassName]
         .filter(Boolean).join(" ")}
       >
         {children}

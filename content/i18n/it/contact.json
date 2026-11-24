@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "Contattami",
+    "description": "Proponimi un progetto software o creativo."
+  },
+  "intro": "Raccontami cosa hai in mente, a chi serve e quando vorresti realizzarlo.",
+  "name": "Il tuo nome",
+  "service": "Tipo di progetto",
+  "services": [
+    "Sito web",
+    "App o piattaforma",
+    "Automazione e AI",
+    "Reel o spot",
+    "Montaggio video",
+    "Grafica o voce",
+    "Collaborazione o altro"
+  ],
+  "details": "Il tuo progetto",
+  "submit": "Apri la bozza email",
+  "headingPrefix": "Cosa creiamo",
+  "headingEmphasis": "insieme?"
+}

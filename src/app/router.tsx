@@ -53,6 +53,7 @@ export const router = createBrowserRouter([
       { path: "articles", lazy: loadArticlesPage },
       { path: "articles/:slug", lazy: loadArticlePage },
       { path: "thesis", lazy: loadThesisPage },
+      { path: "contact", lazy: async () => ({ Component: (await import("../presentation/pages/ContactPage")).ContactPage }) },
       { path: "about", lazy: loadAboutPage },
       { path: "*", element: <NotFoundPage /> },
         ],

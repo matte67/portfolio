@@ -1,4 +1,18 @@
 {
+  "search": {
+    "placeholder": "Search…",
+    "clear": "Clear search",
+    "filters": "Filters",
+    "featured": "Featured only",
+    "tag": "Tag",
+    "allTags": "All tags",
+    "year": "Year",
+    "allYears": "All years",
+    "reset": "Reset filters",
+    "results": "Results found: {count}",
+    "noResults": "No results found.",
+    "tryAgain": "Try a different search or change the filters."
+  },
   "accessPoints": {
     "eyebrow": "One core",
     "title": "Choose the interface, keep the model",

@@ -3,13 +3,13 @@ locale: "en"
 translationKey: "unistays"
 publicationStatus: "published"
 publishedAt: "2026-07-17"
-updatedAt: "2026-07-20"
+updatedAt: "2026-11-19"
 slug: "unistays"
 index: "02"
 title: "UniStays"
 shortTitle: "UniStays"
-subtitle: "Student housing organised around trust, compatibility, and room-level search."
-summary: "A functional web product for students, hosts, and moderators, combining map-based discovery, advanced filters, favourites, contextual chat, listing management, and trust-aware moderation."
+subtitle: "Find a room and the people to share it with."
+summary: "A student housing platform that brings together map-based room search, roommate discovery, and invitations in chat. Hosts manage listings and room occupancy from their dashboard."
 year: "2024—26"
 status: "Prototype"
 disciplines:
@@ -18,7 +18,7 @@ disciplines:
   - "UX design"
 role: "Product design & full-stack development"
 team: "Independent project"
-duration: "From concept to private beta · 2025—26"
+duration: "From concept to beta · 2024—26"
 technologies:
   - "React"
   - "JavaScript"
@@ -26,47 +26,37 @@ technologies:
   - "Google Maps"
   - "Clerk"
   - "GA4"
-chip: "/media/unistays/showcase.avif"
+chip: "/media/unistays/studio-2026.webp"
 logo:
   src: "/media/unistays/logo.svg"
   alt: "UniStays logo."
 hero:
-  asMockupAnimation: true
-  mockupAnimationId: "2b9579f9-2ba7-4ed5-8f64-d42af329c34f"
-  triggerLoop: true
-  shakeIntensity: 5
-  shakeZ: 5
-  shakeAngle: 55
-  shakeDuration: 900
-  src: "/media/unistays/showcase.avif"
-  alt: "UniStays apartment detail page displayed inside a MacBook mockup."
+  src: "/media/unistays/studio-2026.webp"
+  alt: "Three UniStays screens show a search in Camerino, a single room, and a roommate profile."
   position: "center"
 metrics:
-  - value: "3"
-    label: "Product actors"
-    context: "Students, hosts or owners, and platform administrators."
-  - value: "Room-first"
-    label: "Listing model"
-    context: "Availability and compatibility are handled at room level."
-  - value: "Contextual"
-    label: "Communication"
-    context: "Chat is linked to the relevant room and apartment."
+  - value: "Room"
+    label: "Unit of search"
+    context: "Each room has its own rent, available dates, and capacity."
+  - value: "Mutual like"
+    label: "Roommate discovery"
+    context: "A chat opens when both people express interest."
+  - value: "A4"
+    label: "Printable listing flyer"
+    context: "The host dashboard generates a PDF with a QR code that opens the listing."
 links:
-  - label: "Live product"
+  - label: "Online preview"
     href: "https://uni-stays.netlify.app/"
     kind: "demo"
   - label: "Private repository"
     kind: "code"
-  - label: "Pitch"
-    href: "/documents/unistays-pitch.pdf"
-    kind: "document"
 featured: true
 order: 2
 seo:
   title: "UniStays"
-  description: "A student-housing product built around room-level discovery, contextual communication, trust, and compatibility."
-  image: "/media/unistays/showcase.avif"
-  imageAlt: "UniStays apartment discovery and detail experience displayed in a desktop mockup."
+  description: "UniStays connects map-based room search, roommate discovery, invitations in chat, and listing management."
+  image: "/media/unistays/studio-2026.webp"
+  imageAlt: "Search, room listing, and roommate profile in UniStays."
 ---
 
 ## The problem
@@ -77,7 +67,17 @@ UniStays reframes the unit of discovery around the room and its human context. S
 
 ## Role and contribution
 
-The project moved from idea to a functioning product with the responsability for UI/UX, the JavaScript frontend and backend work, external integrations, analytics, real-time chat, and listing management.
+I designed and developed UniStays, from geographic search to listing management. I also worked on the visual identity, interface, real-time chat, and external integrations.
+
+## Finding a room or a roommate
+
+Housing search starts on the map and filters individual rooms. Roommate Discovery finds people with compatible budgets and dates around a chosen destination. People who opt in to appear on the map share an approximate area. A like can include a message that is delivered when interest is mutual.
+
+## From chat to listing management
+
+Hosts can send a room invitation directly in chat with a rent, a date range, and an expiry. When the student accepts, the system rechecks availability and capacity and records the assignment in a single transaction.
+
+The host dashboard brings together listing edits, room occupancy, per-listing analytics, and a printable A4 flyer with a QR code.
 
 ## Product architecture
 
@@ -96,10 +96,10 @@ Trust features add friction to listing publication, but reduce uncertainty for s
 
 ## Outcome
 
-The result is an independently designed and developed private beta spanning search, filters, maps, favourites, chat, host listing management, moderation, and analytics. The current Netlify deployment is a preview rather than the final public release. The product demonstrates breadth, but still needs real-world validation before claims about matching quality or marketplace scale can be made.
+The online preview shows the beta. The latest flows described here are part of the development build. Matching quality still needs to be evaluated with students and hosts in the field.
 
 <ProjectGallery
-  caption="Responsive UniStays product views across desktop, tablet, and mobile."
+  caption="Early iterations of the UniStays interface on desktop, tablet, and mobile."
   items={[
     {
       src: "/media/unistays/ipad.avif",
