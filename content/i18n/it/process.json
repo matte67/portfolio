@@ -1,0 +1,43 @@
+{
+  "chapters": [
+    {
+      "title": "Dall’idea al primo sketch",
+      "text": "Ho tradotto l’idea in una mappa: un sentiero in prima persona, tappe da scoprire ai lati e un obiettivo che sembra vicino anche quando il percorso è ancora lungo."
+    },
+    {
+      "title": "Mettere la camera sulla strada",
+      "text": "In Blender ho iniziato con forme semplici per verificare distanze, scala e inquadrature. Poi ho rivisto percorso e isole, alternato i punti di vista e aggiunto una leggera inclinazione nelle curve."
+    },
+    {
+      "title": "Dalla bozza alla resa realistica",
+      "text": "Le foto reali hanno guidato le forme di Amandola, Camerino, Londra e del Politecnico. Ho tenuto le inquadrature di Blender come guida per la pietra, la luce da sinistra e la nebbia arancione."
+    },
+    {
+      "title": "Far combaciare i fotogrammi",
+      "text": "Ho ripulito le dieci immagini chiave a ritroso, partendo dal tempio finale. Così il tempio, il sentiero e gli edifici restano riconoscibili anche nelle inquadrature più lontane."
+    },
+    {
+      "title": "Una sola generazione riuscita",
+      "text": "Ho consegnato a Seedance 2.5 Video Edit la guida animata di Blender e i dieci frame approvati insieme. La prima generazione completata ha unito tutte le tappe in una sola ripresa, senza rigenerare singole clip."
+    }
+  ],
+  "versions": [
+    "Primo modello",
+    "Prima persona",
+    "Percorso biografico",
+    "Prima resa realistica",
+    "Fotogramma approvato"
+  ],
+  "filmLabels": [
+    "Guida Blender",
+    "Video finale"
+  ],
+  "work": "Percorri le isole in Work",
+  "travel": "Percorri la strada",
+  "comparison": {
+    "split": "Divisore tra Blender e video finale",
+    "play": "Riproduci entrambi i video",
+    "pause": "Metti in pausa entrambi i video"
+  },
+  "sketchAlt": "Schizzo originale di una strada che attraversa due isole e raggiunge un tempio."
+}

@@ -89,6 +89,7 @@ export function ChatAssistant() {
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
   const [launcherContainer, setLauncherContainer] = useState<HTMLElement | null>(null);
+  const [footerVisible, setFooterVisible] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     createMessage("assistant", copy.chat.welcome, false),
   ]);
@@ -103,7 +104,16 @@ export function ChatAssistant() {
   }, [isOpen]);
 
   useEffect(() => {
-    setLauncherContainer(document.getElementById("main-content"));
+    const footer = document.querySelector(".site-footer");
+    const frame = requestAnimationFrame(() => setLauncherContainer(document.getElementById("main-content")));
+    const observer = new IntersectionObserver(([entry]) => {
+      setFooterVisible(entry.isIntersecting);
+    });
+    if (footer) observer.observe(footer);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -388,7 +398,7 @@ export function ChatAssistant() {
       )}
 
       {launcherContainer && createPortal(
-        <div className="portfolio-chat__sticky-slot">
+        <div className="portfolio-chat__sticky-slot" data-footer-visible={footerVisible}>
           <button
             aria-expanded={isOpen}
             aria-label={isOpen ? copy.chat.close : copy.chat.launcher}

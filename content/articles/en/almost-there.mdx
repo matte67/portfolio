@@ -1,0 +1,22 @@
+---
+locale: "en"
+translationKey: "almost-there"
+publicationStatus: "published"
+publishedAt: "2026-11-24"
+slug: "almost-there"
+title: "Making Almost There"
+summary: "I wanted to tell my story as a road suspended in the air. Each island holds a memory or a project. A temple stays visible in the distance, beyond the mist."
+categories: ["Design", "Creative process"]
+tags: ["Blender", "Visual storytelling"]
+hero: {"src": "/media/work/temple.webp", "alt": "A temple rises above orange mist.", "position": "center"}
+seo: {"title": "Making Almost There", "description": "From the first sketch to the finished film: my creative process for Almost There, using Blender, real references and photorealistic frames."}
+---
+
+import copy from "../../i18n/en/process.json";
+
+{copy.chapters.map((chapter) => (
+  <section key={chapter.title}>
+    <h2>{chapter.title}</h2>
+    <p>{chapter.text}</p>
+  </section>
+))}

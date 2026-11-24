@@ -44,6 +44,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/:language/process/almost-there"
+  to = "/:language/articles/almost-there/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

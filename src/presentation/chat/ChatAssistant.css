@@ -36,6 +36,32 @@
   pointer-events: none;
 }
 
+.site-frame:not([data-cinematic-work]) .portfolio-chat__sticky-slot {
+  position: fixed;
+  inset: auto max(1.15rem, calc(var(--frame-gap) + 1.9rem)) 2.15rem auto;
+  margin: 0;
+  transition: transform 300ms var(--ease-standard), visibility 0s;
+}
+
+.site-frame:not([data-cinematic-work]) .portfolio-chat__sticky-slot[data-footer-visible="true"] {
+  transform: translateY(calc(100% + 2.75rem));
+  visibility: hidden;
+  transition-delay: 0s, 300ms;
+}
+
+@media (max-width: 48rem) {
+  .site-frame:not([data-cinematic-work]) .portfolio-chat__sticky-slot {
+    inset: auto max(1rem, calc(var(--frame-gap) + .4rem)) 1.5rem auto;
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-frame:not([data-cinematic-work]) .portfolio-chat__sticky-slot[data-footer-visible] {
+    transition: none;
+  }
+}
+
 .portfolio-chat__launcher:hover {
   transform: translateY(-2px);
   background: #252621;

@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { articleCatalog } from "../../app/dependencies";
@@ -13,6 +13,8 @@ import {
   type EditorialFact,
 } from "../editorial/EditorialPageStructure";
 import { editorialMdxComponents } from "../editorial/mdxComponents";
+
+const ProcessArticle = lazy(() => import("./ProcessPage"));
 
 export function ArticlePage() {
   const { language, toLocalizedPath } = useLanguage();
@@ -34,6 +36,14 @@ export function ArticlePage() {
   }
 
   const { metadata, content: Content } = document;
+  if (metadata.translationKey === "almost-there") {
+    return (
+      <Suspense fallback={<p aria-busy="true">{copy.loadingContent}</p>}>
+        <ProcessArticle metadata={metadata} />
+      </Suspense>
+    );
+  }
+
   const publishedDate = formatPublicationDate(metadata.publishedAt, language);
   const updatedDate = formatPublicationDate(metadata.updatedAt, language);
   const facts: EditorialFact[] = [

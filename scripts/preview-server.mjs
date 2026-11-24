@@ -63,6 +63,9 @@ async function resolveRequestPath(pathname) {
 function legacyRedirect(pathname) {
   if (pathname === "/") return "/en/";
 
+  const processArticle = pathname.match(/^\/(en|it)\/process\/almost-there\/?$/);
+  if (processArticle) return `/${processArticle[1]}/articles/almost-there/`;
+
   const match = pathname.match(/^\/(work|articles|thesis|about)(?:\/(.*))?\/?$/);
   if (!match) return undefined;
 

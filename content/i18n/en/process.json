@@ -1,0 +1,43 @@
+{
+  "chapters": [
+    {
+      "title": "From idea to first sketch",
+      "text": "I mapped out a first-person path with stops on either side and a destination that feels close even when there’s a long way to go."
+    },
+    {
+      "title": "Putting the camera on the road",
+      "text": "I started with simple Blender geometry to check distance, scale and framing. Then I revised the road and islands, alternated the viewpoints and added a slight camera bank on turns."
+    },
+    {
+      "title": "From blockout to photorealism",
+      "text": "Real photographs guided the shapes of Amandola, Camerino, London and Politecnico. I kept the Blender framing as a guide while developing the stone, sunlight from the left and orange mist."
+    },
+    {
+      "title": "Making the frames agree",
+      "text": "I refined ten keyframes in reverse order, starting with the final temple. That kept the temple, path and buildings recognizable even in the most distant views."
+    },
+    {
+      "title": "One completed generation",
+      "text": "I gave Seedance 2.5 Video Edit the Blender camera guide and all ten approved frames together. After a provider error with Kling, the first completed generation joined every stop in one take without regenerating individual clips."
+    }
+  ],
+  "versions": [
+    "First model",
+    "First person",
+    "Biographical route",
+    "First realistic pass",
+    "Approved frame"
+  ],
+  "filmLabels": [
+    "Blender guide",
+    "Final film"
+  ],
+  "work": "Follow the islands in Work",
+  "travel": "Move along the path",
+  "comparison": {
+    "split": "Blender and final film divider",
+    "play": "Play both videos",
+    "pause": "Pause both videos"
+  },
+  "sketchAlt": "Original sketch of a path passing two islands and ending at a temple."
+}

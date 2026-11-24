@@ -1,0 +1,22 @@
+---
+locale: "it"
+translationKey: "almost-there"
+publicationStatus: "published"
+publishedAt: "2026-11-24"
+slug: "almost-there"
+title: "Come ho creato Almost There"
+summary: "Volevo raccontare il mio percorso come una strada sospesa. Ogni isola custodisce un ricordo o un progetto. Il tempio è un obiettivo che sembra vicino anche quando il percorso è ancora lungo."
+categories: ["Design", "Processo creativo"]
+tags: ["Blender", "Visual storytelling"]
+hero: {"src": "/media/work/temple.webp", "alt": "Un tempio emerge dalla nebbia arancione.", "position": "center"}
+seo: {"title": "Come ho creato Almost There", "description": "Dallo sketch al film finale: il mio processo creativo per Almost There, tra Blender, riferimenti reali e fotogrammi realistici."}
+---
+
+import copy from "../../i18n/it/process.json";
+
+{copy.chapters.map((chapter) => (
+  <section key={chapter.title}>
+    <h2>{chapter.title}</h2>
+    <p>{chapter.text}</p>
+  </section>
+))}

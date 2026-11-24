@@ -6,7 +6,7 @@ import { useLanguage } from "../../application/i18n";
 import { getPageCopy } from "../../application/pageCopy";
 import { DocumentMeta } from "../components/DocumentMeta";
 import { SectionHeading } from "../components/SectionHeading";
-import { ArrowMark, DownMark } from "../components/SmartLink";
+import { ArrowMark } from "../components/SmartLink";
 import { DecryptedText } from "../effects/DecryptedText";
 import { AiShowcase } from "../home/AiShowcase";
 import { ThesisPreview } from "../thesis/ThesisPreview";

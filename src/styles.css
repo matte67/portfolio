@@ -1510,6 +1510,14 @@ svg {
   content: "";
 }
 
+.home-articles .editorial-card__media {
+  overflow: hidden;
+}
+
+.home-articles .editorial-card__media :is(.editorial-picture, .editorial-image) {
+  border-radius: inherit;
+}
+
 .editorial-picture {
   display: block;
 }

@@ -296,15 +296,18 @@ test("UniStays renders the animated mockup player block", async ({ page }) => {
   await expectNoHorizontalOverflow(page);
 });
 
-test("articles expose the published editorial card", async ({ page }) => {
+test("Almost There appears in the editorial index and opens as an article", async ({ page }) => {
   await page.goto("/en/articles");
 
   await expect(page.getByRole("heading", { level: 1, name: "Ideas made useful through detail." })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2, name: "The next programming interface is intent" })).toBeVisible();
-  await expect(page.locator(".editorial-card__media img")).toHaveAttribute(
-    "src",
-    "/media/articles/ai-goal-oriented-programming/ai-me-handshake.avif",
-  );
+  await page.getByRole("heading", { level: 2, name: "Making Almost There" }).getByRole("link").click();
+  await expect(page).toHaveURL(/\/en\/articles\/almost-there\/?$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Making Almost There" })).toBeVisible();
+  await expect(page.locator('meta[property="og:type"]')).toHaveAttribute("content", "article");
+  const divider = page.getByRole("slider", { name: "Blender and final film divider" });
+  await expect(divider).toHaveValue("50");
+  await divider.press("End");
+  await expect(divider).toHaveValue("100");
 });
 
 test("Work scrubs the film beneath the site frame and reveals case studies at their islands", async ({ page }) => {

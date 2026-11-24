@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter, redirect } from "react-router-dom";
 
 import { LanguageRoute, LegacyRouteRedirect } from "./LanguageRoute";
 import { LanguageProvider } from "../application/i18n";
@@ -57,6 +57,7 @@ export const router = createBrowserRouter([
       { path: "articles", lazy: loadArticlesPage },
       { path: "articles/:slug", lazy: loadArticlePage },
       { path: "artwork", lazy: loadArtworkPage },
+      { path: "process/almost-there", loader: ({ params }) => redirect(`/${params.language}/articles/almost-there/`) },
       { path: "thesis", lazy: loadThesisPage },
       { path: "contact", lazy: async () => ({ Component: (await import("../presentation/pages/ContactPage")).ContactPage }) },
       { path: "about", lazy: loadAboutPage },
